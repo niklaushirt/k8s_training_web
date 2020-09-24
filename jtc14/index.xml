@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>JTC14 Kubernetes Ansible Operators on Kubernetes Training</title>
-    <link>http://niklaushirt.github.io/jtc14/</link>
+    <link>https://niklaushirt.github.io/k8s_training_web/jtc14/</link>
     <description>Recent content in JTC14 Kubernetes Ansible Operators on Kubernetes Training</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Wed, 23 Sep 2020 09:12:06 +0200</lastBuildDate>
     
-	<atom:link href="http://niklaushirt.github.io/jtc14/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://niklaushirt.github.io/k8s_training_web/jtc14/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Lab 0: Prepare the Lab environment</title>
-      <link>http://niklaushirt.github.io/jtc14/lab0/</link>
+      <link>https://niklaushirt.github.io/k8s_training_web/jtc14/lab0/</link>
       <pubDate>Wed, 23 Sep 2020 09:12:06 +0200</pubDate>
       
-      <guid>http://niklaushirt.github.io/jtc14/lab0/</guid>
+      <guid>https://niklaushirt.github.io/k8s_training_web/jtc14/lab0/</guid>
       <description>Prerequisites Using the provided Lab VM Using the provided Lab VM is the easiest way to get started with the Labs for the training:
  Download the Lab VM Install a Hypervisor on your PC (VMWare, VirtualBox, KVM, &amp;hellip;) Start the VM Test that it works in your setting  You can find detailed instructions here: https://github.com/niklaushirt/training
 Install the Operator SDK
@@ -25,10 +25,10 @@ RELEASE_VERSION=v0.19.0 curl -LO https://github.com/operator-framework/operator-
     
     <item>
       <title>Lab 1: Kubernetes Operators</title>
-      <link>http://niklaushirt.github.io/jtc14/lab1/</link>
+      <link>https://niklaushirt.github.io/k8s_training_web/jtc14/lab1/</link>
       <pubDate>Wed, 23 Sep 2020 09:12:06 +0200</pubDate>
       
-      <guid>http://niklaushirt.github.io/jtc14/lab1/</guid>
+      <guid>https://niklaushirt.github.io/k8s_training_web/jtc14/lab1/</guid>
       <description>In this Lab you will learn about Kubernetes Operator basics and create your first Ansible based Operator.
 The Operator Framework is an open source toolkit to manage Kubernetes native applications, called Operators, in an effective, automated, and scalable way.
   Operators are a design pattern made public in a 2016 CoreOS blog post.
@@ -37,10 +37,10 @@ The Operator Framework is an open source toolkit to manage Kubernetes native app
     
     <item>
       <title>Lab 2: Create the Lab Operator Project</title>
-      <link>http://niklaushirt.github.io/jtc14/lab2/</link>
+      <link>https://niklaushirt.github.io/k8s_training_web/jtc14/lab2/</link>
       <pubDate>Wed, 23 Sep 2020 09:12:06 +0200</pubDate>
       
-      <guid>http://niklaushirt.github.io/jtc14/lab2/</guid>
+      <guid>https://niklaushirt.github.io/k8s_training_web/jtc14/lab2/</guid>
       <description>Create the Lab Operator Project In this part of the lab we will create a demo Ansible operator and deploy it to our Cluster.
   Create the ansible-operator-frontend directory
 cd mkdir ansible-operator cd ~/ansible-operator ``
@@ -50,10 +50,10 @@ operator-sdk new ansible-operator-frontend --type=ansible --api-version=ansiblel
     
     <item>
       <title>Lab 3: Deploy the Lab Operator</title>
-      <link>http://niklaushirt.github.io/jtc14/lab3/</link>
+      <link>https://niklaushirt.github.io/k8s_training_web/jtc14/lab3/</link>
       <pubDate>Wed, 23 Sep 2020 09:12:06 +0200</pubDate>
       
-      <guid>http://niklaushirt.github.io/jtc14/lab3/</guid>
+      <guid>https://niklaushirt.github.io/k8s_training_web/jtc14/lab3/</guid>
       <description>Deploy the Custom Resource   Deploy the ansible-operator-frontend Custom Resource
 kubectl create -f ~/ansible-operator/ansible-operator-frontend/deploy/crds/ansiblelab.ibm.com_v1beta1_myansiblelabdemo_cr.yaml &amp;gt; MyAnsibleLabDemo.ansiblelab.ibm.com/example-MyAnsibleLabDemo created ``
 From the resource that we defined earlier:
@@ -64,10 +64,10 @@ kubectl get pods &amp;gt; NAME READY STATUS RESTARTS AGE &amp;gt; ansible-operat
     
     <item>
       <title>Lab 4: Cleanup</title>
-      <link>http://niklaushirt.github.io/jtc14/lab4/</link>
+      <link>https://niklaushirt.github.io/k8s_training_web/jtc14/lab4/</link>
       <pubDate>Wed, 23 Sep 2020 09:12:06 +0200</pubDate>
       
-      <guid>http://niklaushirt.github.io/jtc14/lab4/</guid>
+      <guid>https://niklaushirt.github.io/k8s_training_web/jtc14/lab4/</guid>
       <description>Cleanup Delete the ansible-operator-frontend Resources
 kubectl delete -f ~/ansible-operator/ansible-operator-frontend/deploy/crds/ansiblelab.ibm.com_myansiblelabdemos_crd.yaml kubectl delete -f ~/ansible-operator/ansible-operator-frontend/deploy/service_account.yaml kubectl delete -f ~/ansible-operator/ansible-operator-frontend/deploy/role.yaml kubectl delete -f ~/ansible-operator/ansible-operator-frontend/deploy/role_binding.yaml kubectl delete -f ~/ansible-operator/ansible-operator-frontend/deploy/operator.yaml kubectl delete -f ~/ansible-operator/ansible-operator-frontend/deploy/crds/ansiblelab.ibm.com_v1beta1_myansiblelabdemo_cr.yaml kubectl delete service -n default k8sdemoansible-service **Congratulations!!! This concludes Lab 2 on Kubernetes Ansible Operators **</description>
     </item>
