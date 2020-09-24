@@ -403,7 +403,7 @@
 <h2 id="introduction">Introduction</h2>
 <p>As you know a <code>Pod</code> is mortal, meaning it can be destroyed by Kubernetes anytime, and with it it&rsquo;s local data, memory, etc. So  it&rsquo;s perfect for stateless applications. Of course, in the real world we need a way to store our data, and we need this data to be persistent in time.
 You have alread had a first contact with PersistentVolumes in JTC02, but now let&rsquo;s have a closer look on how how can we dynamically create PersistentVolumes and deploy a Wordpress/MySQL Application with dynamic persistent storage.</p>
-<p><img src="../images/pvc1.png" alt="PVC"></p>
+<p><img src="../../../images/pvc1.png" alt="PVC"></p>
 <h3 id="persistent-volumes---refresher">Persistent Volumes - Refresher</h3>
 <p>As stated above, the state of a <code>Pod</code> is destroyed with it, so it&rsquo;s lost. For a database we need to be able to  keep the  data between restarts of the <code>Pods</code>.</p>
 <p>That&rsquo;s where the <code>PersistentVolume</code> comes in.</p>

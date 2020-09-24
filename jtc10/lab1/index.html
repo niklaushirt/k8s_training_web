@@ -414,7 +414,7 @@
 <p>In the first part of this journey we show how we can deploy the sample <a href="https://istio.io/docs/samples/bookinfo.html">BookInfo</a> application and inject sidecars to get the Istio features mentioned above, and walk through the key ones. The BookInfo is a simple application that is composed of four microservices, written in different languages for each of its microservices namely Python, Java, Ruby, and Node.js. The application does not use a database, and stores everything in local filesystem.</p>
 <p>Also since Istio tightly controls traffic routing to provide above mentioned benefits, it introduces some drawbacks. Outgoing traffic to external services outside the Istio data plane can only be enabled by specialized configuration, based on the protocol used to connect to the external service.</p>
 <p>In the <a href="#part-b-modify-sample-application-to-use-an-external-datasource-deploy-the-application-and-istio-envoys-with-egress-traffic-enabled">second part</a> of the journey we focus on how Istio can be configured to allow applications to connect to external services. For that we modify the sample BookInfo application to use an external database and then use it as a base to show Istio configuration for enabling egress traffic.</p>
-<p><img src="../images/istio-architecture.png" alt="istio-architecture"></p>
+<p><img src="../../../images/istio-architecture.png" alt="istio-architecture"></p>
 <h2 id="included-components">Included Components</h2>
 <ul>
 <li><a href="https://istio.io/">Istio</a></li>

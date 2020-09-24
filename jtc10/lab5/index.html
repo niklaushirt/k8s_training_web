@@ -413,7 +413,7 @@
 <hr>
 <h2 id="the-bookinfo-application">The Bookinfo Application</h2>
 <p>In this section, Istio will be configured to dynamically modify the network traffic between some of the components of our application. In this case we have 2 versions of the “reviews” component (v1 and v2) but we don’t want to replace review-v1 with review-v2 immediately. In most cases, when components are upgraded it’s useful to deploy the new version but only have a small subset of network traffic routed to it so that it can be tested before the old version is removed. This is often referred to as “canary testing”.</p>
-<p><img src="../images/bookinfo.png" alt="kiali"></p>
+<p><img src="../../../images/bookinfo.png" alt="kiali"></p>
 <p>There are multiple ways in which we can control this routing. It can be based on which user or type of device that is accessing it, or a certain percentage of the traffic can be configured to flow to one version.</p>
 <p>This step shows you how to configure where you want your service requests to go based on weights and HTTP Headers. You would need to be in the root directory of the Istio release you have downloaded on the Prerequisites section.</p>
 <hr>
@@ -448,7 +448,7 @@
         <span style="color:#66d9ef">subset</span>: v1
 </code></pre></div><p>Observe in the Kiali Dashboard. After a short while you should see that all traffic is going to V1.</p>
 <p><strong>This may take some time to settle!</strong></p>
-<p><img src="../images/traffic1.png" alt=""></p>
+<p><img src="../../../images/traffic1.png" alt=""></p>
 <p><strong>After the deployment of v2:</strong></p>
 <p>Route 100% of the traffic to the <code>version: v2</code> of the <strong>reviews microservices</strong></p>
 <p>This will direct/switch all incoming traffic to version v2 of the reviews microservice. Run:</p>
@@ -470,7 +470,7 @@
         <span style="color:#66d9ef">subset</span>: v2
 
 </code></pre></div><p>Observe in the Kiali Dashboard. After a short wile you should see that all traffic is going to V2.</p>
-<p><img src="../images/traffic2.png" alt=""></p>
+<p><img src="../../../images/traffic2.png" alt=""></p>
 <hr>
 <h2 id="canary-deployment">Canary deployment</h2>
 <p>In <code>Canary Deployments</code>, newer versions of services are incrementally rolled out to users to minimize the risk and impact of any bugs introduced by the newer version. To begin incrementally routing traffic to the newer version of the guestbook service, modify the original <code>VirtualService</code> rule.</p>
@@ -498,21 +498,21 @@
         <span style="color:#66d9ef">subset</span>: v2
       <span style="color:#66d9ef">weight</span>: <span style="color:#ae81ff">20</span>
 </code></pre></div><p>Observe in the Kiali Dashboard. After a short wile you should see that 80% of the traffic is going to V1 and 80% of the traffic is going to V2.</p>
-<p><img src="../images/traffic3.png" alt=""></p>
+<p><img src="../../../images/traffic3.png" alt=""></p>
 <hr>
 <h2 id="navigating-kiali">Navigating Kiali</h2>
 <p>Go back to the Kiali Dashboard and select the <code>reviews</code> service in the graph.</p>
-<p><img src="../images/traffic31.png" alt=""></p>
+<p><img src="../../../images/traffic31.png" alt=""></p>
 <p>To the right you can observe specific metrics for this service.
 Then open the <code>reviews</code> service overview:</p>
-<p><img src="../images/traffic32.png" alt=""></p>
+<p><img src="../../../images/traffic32.png" alt=""></p>
 <p>In this view you can get details about the service, like averall Health, assigned <code>Workloads</code> and much more.</p>
-<p><img src="../images/traffic33.png" alt=""></p>
+<p><img src="../../../images/traffic33.png" alt=""></p>
 <p><strong>Feel free to browse some more to get familiar with the interface.</strong></p>
 <p>Now open the <code>reviews</code> service details by selecting the <code>Virtual Services</code> tab and selecting <code>reviews</code>.</p>
-<p><img src="../images/traffic34.png" alt=""></p>
+<p><img src="../../../images/traffic34.png" alt=""></p>
 <p>Here you get more detailed information about the service, like the weight distribution:</p>
-<p><img src="../images/traffic35.png" alt=""></p>
+<p><img src="../../../images/traffic35.png" alt=""></p>
 <hr>
 <h2 id="gradual-rollout">Gradual Rollout</h2>
 <p>In order to gradually roll out a new release we have to change the weight distribution.</p>
@@ -521,9 +521,9 @@ Then open the <code>reviews</code> service overview:</p>
 <li>Modify the weight to 20%/80%</li>
 <li>Click <code>Save</code></li>
 </ul>
-<p><img src="../images/traffic36.png" alt=""></p>
+<p><img src="../../../images/traffic36.png" alt=""></p>
 <p>Observe in the Kiali Dashboard. After a short wile you should see that about 20% of the traffic is going to V1 and 90% of the traffic is going to V2.</p>
-<p><img src="../images/traffic37.png" alt=""></p>
+<p><img src="../../../images/traffic37.png" alt=""></p>
 <p><strong>Note:</strong> The sum of the weights must be equal to 100%</p>
 <hr>
 <h2 id="traffic-steering--dark-launch">Traffic Steering / Dark Launch</h2>
@@ -554,10 +554,10 @@ Then open the <code>reviews</code> service overview:</p>
         <span style="color:#66d9ef">subset</span>: v2
 </code></pre></div><p>Go to the Bookinfo Application in your Browser.</p>
 <p><strong>Refresh several times</strong> - You should see only black stars, meaning that you are using V2.</p>
-<p><img src="../images/traffic4.png" alt=""></p>
+<p><img src="../../../images/traffic4.png" alt=""></p>
 <p>Now login to the Web Application as user jason with password jason and <strong>refresh several times</strong>. You should see only red stars, meaning that you are using V3.</p>
 <p>Observe in the Kiali Dashboard. After a short wile you should see that a small percentage of traffic is going to V3, which corresponds to your page refreshes.</p>
-<p><img src="../images/traffic5.png" alt=""></p>
+<p><img src="../../../images/traffic5.png" alt=""></p>
 
 
     

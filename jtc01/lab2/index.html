@@ -400,7 +400,7 @@
 <h1>Lab 2: Docker Basics</h1>
 
 <h2 id="create-your-first-image">Create your first Image</h2>
-<p><img src="../images/docker_arch1.png" alt="K8s CNI"></p>
+<p><img src="../../../images/docker_arch1.png" alt="K8s CNI"></p>
 <p>Let&rsquo;s create our first image (the <code>k8sdemo-backend</code> image) from this <code>Dockerfile</code>:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">FROM node:<span style="color:#ae81ff">8</span>-stretch
 
@@ -445,7 +445,7 @@ docker build -t k8sdemo-backend:lab .
 &gt; Successfully tagged k8sdemo-backend:lab
 
 </code></pre></div><h2 id="run-your-first-image">Run your first Image</h2>
-<p><img src="../images/docker_arch2.png" alt="K8s CNI"></p>
+<p><img src="../../../images/docker_arch2.png" alt="K8s CNI"></p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">docker run --rm --name k8sdemo-backend -p 3001:3000 k8sdemo-backend:lab
 
 &gt; test@0.0.0 start /app
@@ -475,16 +475,16 @@ docker build -t k8sdemo-backend:lab .
 </li>
 <li>
 <p>Select <code>local</code> for our Endpoint</p>
-<p><img src="../images/docker1.png" alt="K8s CNI"></p>
+<p><img src="../../../images/docker1.png" alt="K8s CNI"></p>
 <p>Now you get an overview of your local Docker instance.</p>
 </li>
 <li>
 <p>Select <code>Containers</code></p>
-<p><img src="../images/docker4.png" alt="K8s CNI"></p>
+<p><img src="../../../images/docker4.png" alt="K8s CNI"></p>
 </li>
 <li>
 <p>You get a list of all running containers and you can see our <code>k8sdemo-backend</code> container running.</p>
-<p><img src="../images/docker3.png" alt="K8s CNI"></p>
+<p><img src="../../../images/docker3.png" alt="K8s CNI"></p>
 </li>
 <li>
 <p>Click on the PublishedPorts 3001:3000 to open the backend web interface.</p>
@@ -583,7 +583,7 @@ docker build -t k8sdemo:lab .
 <ol start="3">
 <li>
 <p>Go back to Portainer and refresh the browser</p>
-<p><img src="../images/docker5.png" alt="K8s CNI"></p>
+<p><img src="../../../images/docker5.png" alt="K8s CNI"></p>
 </li>
 <li>
 <p>Click on the PublishedPorts 3000:3000 for <code>k8sdemo</code> to open the web interface.</p>
@@ -605,7 +605,7 @@ Error: getaddrinfo ENOTFOUND k8sdemo-backend k8sdemo-backend:80
 <li>Stop the container by hitting <code>CTRL-C</code> in the terminal</li>
 </ol>
 <h2 id="push-the-frontend-image-to-the-registry">Push the frontend Image to the registry</h2>
-<p><img src="../images/docker_arch3.png" alt="K8s CNI"></p>
+<p><img src="../../../images/docker_arch3.png" alt="K8s CNI"></p>
 <ol>
 <li>
 <p>Let&rsquo;s tag the image with the address of the local Docker registry (localhost:5000).</p>

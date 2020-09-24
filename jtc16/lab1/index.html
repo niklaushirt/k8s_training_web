@@ -418,7 +418,7 @@ For example you may want to restrict external inbound or outbound traffic to cer
 <p>For this lab we&rsquo;ll use a network policy to restrict traffic between pods.
 Let&rsquo;s say that we want to limit access to the <code>k8sdemo-backend</code> server to just expose the <code>k8sdemo</code> application.
 First we can observe that the <code>k8sdemo-backend</code> server is open to any pod by spinning up a Linux shell.</p>
-<p><img src="../images/np1.png" alt="K8s CNI"></p>
+<p><img src="../../../images/np1.png" alt="K8s CNI"></p>
 <h2 id="network-policies-first-steps">Network Policies First Steps</h2>
 <hr>
 <p>First let&rsquo;s create a <code>Pod</code> that will assist you in testing the reachability of the different elements.</p>
@@ -456,7 +456,7 @@ First we can observe that the <code>k8sdemo-backend</code> server is open to any
 </code></pre></div><p>``</p>
 </li>
 </ol>
-<p><img src="../images/np2.png" alt="K8s CNI"></p>
+<p><img src="../../../images/np2.png" alt="K8s CNI"></p>
 <h2 id="control-incoming-traffic">Control incoming traffic</h2>
 <p>Now let&rsquo;s create the first <code>NetworkPolicy</code> that simply blocks all traffic coming into all pods.</p>
 <ol>
@@ -503,7 +503,7 @@ Trying to reach backend &hellip;.</strong></p>
 </li>
 </ol>
 <p>We have just blocked all traffic coming into the pods, but not the outgoing.</p>
-<p><img src="../images/np3.png" alt="K8s CNI"></p>
+<p><img src="../../../images/np3.png" alt="K8s CNI"></p>
 <h3 id="clean-up">Clean-up</h3>
 <p>Delete the <code>NetworkPolicy</code> in order to go back to normal.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl delete NetworkPolicy -n default default-deny-ingress
@@ -550,7 +550,7 @@ Trying to reach backend &hellip;.</strong></p>
 </li>
 </ol>
 <p>We have just blocked all traffic going out of the pods, but not the incoming.</p>
-<p><img src="../images/np4.png" alt="K8s CNI"></p>
+<p><img src="../../../images/np4.png" alt="K8s CNI"></p>
 <h3 id="clean-up-1">Clean-up</h3>
 <p>Delete the <code>NetworkPolicy</code> in order to go back to normal.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl delete NetworkPolicy -n default default-deny-egress
@@ -610,7 +610,7 @@ The IP Address is
 </li>
 </ol>
 <p>We have just blocked all traffic going to <code>k8sdemo-backend</code>, except the one coming from <code>k8sdemo</code> thus isolating and securing the communication.</p>
-<p><img src="../images/np5.png" alt="K8s CNI"></p>
+<p><img src="../../../images/np5.png" alt="K8s CNI"></p>
 <p>In this Lab we have seen how NetworkPolicies enable us to isolate and control access to and from Pods in the Cluster.</p>
 <h3 id="clean-up-2">Clean-up</h3>
 <p>Delete the <code>NetworkPolicy</code> in order to go back to normal.</p>

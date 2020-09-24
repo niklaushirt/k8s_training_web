@@ -406,13 +406,13 @@
 <p>Let&rsquo;s examine the RBAC for the default Namespace:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">rakkess -n default
 </code></pre></div><p>``</p>
-<p><img src="../images/rbac1.png" alt=""></p>
+<p><img src="../../../images/rbac1.png" alt=""></p>
 </li>
 <li>
 <p>And now the RBAC for the ServiceAccount that we have created earlier:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">rakkess --sa service-account-1 -n default
 </code></pre></div><p>``</p>
-<p><img src="../images/rbac2.png" alt=""></p>
+<p><img src="../../../images/rbac2.png" alt=""></p>
 <p>We can see that the <code>ServcieAccount</code> has the rights to list <code>Services</code> and to create <code>ConfigMaps</code>.
 This corresponds to the <code>api-role</code> <code>Role</code> that we have defined earlier:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">...
@@ -429,7 +429,7 @@ This corresponds to the <code>api-role</code> <code>Role</code> that we have def
 </ol>
 <h2 id="rbac-view">rbac-view</h2>
 <p>Polaris runs a variety of checks to ensure that Kubernetes pods and controllers are configured using best practices, helping you avoid problems in the future.</p>
-<p><img src="../images/rbac3.png" alt=""></p>
+<p><img src="../../../images/rbac3.png" alt=""></p>
 <p>You can get more details <a href="https://github.com/jasonrichardsmith/rbac-view">here</a>.</p>
 <ol>
 <li>
@@ -487,17 +487,17 @@ sudo mv -i ./bin/linux/rbac-view /usr/local/bin/rbac-view
 <li>
 <p>Enter <code>cluster</code> in the <code>SearchRoles</code> field and examine the <code>cluster-admin</code> <code>Role</code>.
 The <code>*</code> means that it has all access rights to all ressources with all verbs.</p>
-<p><img src="../images/rbac5.png" alt=""></p>
+<p><img src="../../../images/rbac5.png" alt=""></p>
 </li>
 <li>
 <p>Switch to the Roles tab and enter <code>api-role</code> in the <code>SearchRoles</code> field and examine it.
 We can see the access rights previously discussed, notably <code>get</code> and <code>list</code> rights to <code>Services</code>.</p>
-<p><img src="../images/rbac6.png" alt=""></p>
+<p><img src="../../../images/rbac6.png" alt=""></p>
 </li>
 <li>
 <p>When you click on the Subjects button you will get the list of Subjects for this <code>Role</code>.
 In this cas we can see the <code>ServiceAccount</code> <code>service-account-1</code> that is a subject of the Role.</p>
-<p><img src="../images/rbac7.png" alt=""></p>
+<p><img src="../../../images/rbac7.png" alt=""></p>
 </li>
 </ol>
 <hr>

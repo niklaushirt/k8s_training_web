@@ -409,7 +409,7 @@ They can contain utilities or setup scripts not present in an app image.</p>
 <li>
 <p>Init containers support all the fields and features of app containers, including resource limits, volumes, and security settings,
 however they do not support lifecycle, livenessProbe, readinessProbe, or startupProbe for obvious reasons.</p>
-<p><img src="../images/init0.png" alt=""></p>
+<p><img src="../../../images/init0.png" alt=""></p>
 </li>
 </ul>
 <h2 id="init-containers-applied">Init Containers Applied</h2>
@@ -551,27 +551,27 @@ however they do not support lifecycle, livenessProbe, readinessProbe, or startup
 <ol>
 <li>
 <p>Start <code>k9s</code> and select the nginx-demo-init Pod and hit enter</p>
-<p><img src="../images/init1.png" alt=""></p>
+<p><img src="../../../images/init1.png" alt=""></p>
 </li>
 <li>
 <p>Select the install Container and hit enter</p>
-<p><img src="../images/init2.png" alt=""></p>
+<p><img src="../../../images/init2.png" alt=""></p>
 </li>
 <li>
 <p>You can see that the shell command has downloaded the html code into the work-dir volume.</p>
-<p><img src="../images/init3.png" alt=""></p>
+<p><img src="../../../images/init3.png" alt=""></p>
 </li>
 <li>
 <p>Hit <code>ESC</code> to go back and select the nginx Container and hit enter</p>
-<p><img src="../images/init5.png" alt=""></p>
+<p><img src="../../../images/init5.png" alt=""></p>
 </li>
 <li>
 <p>Nginx is serving the index.html page from the work-dir volume.</p>
-<p><img src="../images/init4.png" alt=""></p>
+<p><img src="../../../images/init4.png" alt=""></p>
 </li>
 <li>
 <p>If you go back with <code>ESC</code> you can also have a look at how the two other containers have slept ;-)</p>
-<p><img src="../images/init5.png" alt=""></p>
+<p><img src="../../../images/init5.png" alt=""></p>
 </li>
 <li>
 <p>Quit k9s by hitting <code>Ctrl-C </code>several times</p>

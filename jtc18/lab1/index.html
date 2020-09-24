@@ -511,18 +511,18 @@ that check for more elaboreate scenarios, like:</p>
 <ol>
 <li>
 <p>Run <code>k9s</code>, select the open-liberty Pod and hit <code>d</code> for Describe</p>
-<p><img src="../images/probe1.png" alt=""></p>
+<p><img src="../../../images/probe1.png" alt=""></p>
 </li>
 <li>
 <p>You can see that both probes (readiness and liveness) have been triggered.</p>
 <p>The readiness probe checks immediately and allows for only one error before triggering.
 The liveness probe checks after 5 seconds and allows for only one error before triggering.</p>
-<p><img src="../images/probe4.png" alt=""></p>
+<p><img src="../../../images/probe4.png" alt=""></p>
 </li>
 <li>
 <p>Run <code>k9s</code>
 After a while you will see the number of restarts going up and the dreaded <code>CrashLoopBackOff</code> Status</p>
-<p><img src="../images/probe3.png" alt=""></p>
+<p><img src="../../../images/probe3.png" alt=""></p>
 </li>
 </ol>
 <h2 id="adapt-probe-values">Adapt Probe values</h2>
@@ -570,22 +570,22 @@ After a while you will see the number of restarts going up and the dreaded <code
 <ol>
 <li>
 <p>Run <code>k9s</code>, select the new open-liberty Pod and hit <code>d</code> for Describe (the one that says Running)</p>
-<p><img src="../images/probe5.png" alt=""></p>
+<p><img src="../../../images/probe5.png" alt=""></p>
 </li>
 <li>
 <p>You can see that no probe (readiness and liveness) has been triggered.</p>
-<p><img src="../images/probe7.png" alt=""></p>
+<p><img src="../../../images/probe7.png" alt=""></p>
 </li>
 <li>
 <p>Hit <code>ESC</code> to go back and you can see that while Kubernetes waits for the new Pod to become available, the old one is kept in place</p>
 <p>Here we have to wait for the 30 seconds (initialDelaySeconds=30) until the Pod becomes ready, even if it would be able to already accept requests.
 So it is very important to finely tune this parameter in order to avoid to much startup-lag.</p>
-<p><img src="../images/probe5.png" alt=""></p>
+<p><img src="../../../images/probe5.png" alt=""></p>
 </li>
 <li>
 <p>Once the new Pod is ready, the old one is being terminated
 This mechanism ensures, that existing deployments get deleted only when the new one can take over.</p>
-<p><img src="../images/probe6.png" alt=""></p>
+<p><img src="../../../images/probe6.png" alt=""></p>
 </li>
 </ol>
 <blockquote>

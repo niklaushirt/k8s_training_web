@@ -395,7 +395,7 @@
 <h1>Lab 3: Deploy BookInfo application </h1>
 
 <p>In this part, we will be using the sample BookInfo Application that comes as default with Istio code base. As mentioned above, the application that is composed of four microservices, written in different languages for each of its microservices namely Python, Java, Ruby, and Node.js. The default application doesn&rsquo;t use a database and all the microservices store their data in the local file system.</p>
-<p><img src="../images/bookinfo.png" alt="kiali"></p>
+<p><img src="../../../images/bookinfo.png" alt="kiali"></p>
 <p>Envoys are deployed as sidecars on each microservice. Injecting Envoy into your microservice means that the Envoy sidecar would manage the ingoing and outgoing calls for the service. To inject an Envoy sidecar to an existing microservice configuration, do:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl apply -f ~/training/istio/samples/bookinfo/platform/kube/bookinfo.yaml
 
@@ -430,11 +430,11 @@
 </li>
 <li>
 <p>Open the webpage</p>
-<p><img src="../images/vm.png" alt=""> <strong>Training VM</strong></p>
+<p><img src="../../../images/vm.png" alt=""> <strong>Training VM</strong></p>
 <p>If you are using the training VM, you can open the webpage directly by typing:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">firefox --new-tab http://<span style="color:#66d9ef">$(</span>minikube ip<span style="color:#66d9ef">)</span>:30762/productpage
 </code></pre></div><hr>
-<p><img src="../images/cloud.png" alt=""> <strong>Cloud/Standalone</strong></p>
+<p><img src="../../../images/cloud.png" alt=""> <strong>Cloud/Standalone</strong></p>
 <p>If you are <strong>NOT</strong> using the training VM, you can open the webpage by forwarding a local port to the service in your Cluster.</p>
 <p>Execute this in a separate Terminal Window/Tab in order to be able to access the web page:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl port-forward --namespace istio-system <span style="color:#66d9ef">$(</span>kubectl get po -n istio-system | grep istio-ingressgateway| <span style="color:#ae81ff">\a</span>wk <span style="color:#e6db74">&#39;{print $1;}&#39;</span><span style="color:#66d9ef">)</span> 8080:8080 
@@ -443,11 +443,11 @@
 </ol>
 <p>If you refresh the page multiple times, you&rsquo;ll see that the <em>reviews</em> section of the page changes. That&rsquo;s because there are 3 versions of <strong>reviews</strong><em>(reviews-v1, reviews-v2, reviews-v3)</em> deployment for our <strong>reviews</strong> service. Istio’s load-balancer is using a round-robin algorithm to iterate through the 3 instances of this service</p>
 <h5 id="v1---no-ratings">V1 - No ratings</h5>
-<p><img src="../images/none.png" alt="productpage"></p>
+<p><img src="../../../images/none.png" alt="productpage"></p>
 <h5 id="v2---ratings-with-black-stars">V2 - Ratings with black stars</h5>
-<p><img src="../images/black.png" alt="productpage"></p>
+<p><img src="../../../images/black.png" alt="productpage"></p>
 <h5 id="v3--ratings-with-red-stars">V3- Ratings with red stars</h5>
-<p><img src="../images/red.png" alt="productpage"></p>
+<p><img src="../../../images/red.png" alt="productpage"></p>
 <h2 id="sidecar-injection">Sidecar injection</h2>
 <p>In Kubernetes, a sidecar is a utility container in the pod, and its purpose is to support the main container. For Istio to work, Envoy proxies must be deployed as sidecars to each pod of the deployment. There are two ways of injecting the Istio sidecar into a pod: manually using the istioctl CLI tool or automatically using the Istio Initializer. In this exercise, we will use the manual injection. Manual injection modifies the controller configuration, e.g. deployment. It does this by modifying the pod template spec such that all pods for that deployment are created with the injected sidecar.</p>
 

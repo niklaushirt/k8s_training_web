@@ -440,12 +440,12 @@ The <code>k8sdemo</code> application listens on port 3000.</p>
 </code></pre></div><ol start="5">
 <li>
 <p>Open the application in your Browser</p>
-<p><img src="../images/vm.png" alt=""> <strong>Training VM</strong></p>
+<p><img src="../../../images/vm.png" alt=""> <strong>Training VM</strong></p>
 <p>If you are using the training VM, you can open the webpage directly by typing:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">minikube service k8sdemoansible-service
 </code></pre></div><p>where k8sdemo-service is the name of the exposed kubernetes service.</p>
 <hr>
-<p><img src="../images/cloud.png" alt=""> <strong>Cloud/Standalone</strong></p>
+<p><img src="../../../images/cloud.png" alt=""> <strong>Cloud/Standalone</strong></p>
 <p>If you are <strong>NOT</strong> using the training VM, you can open the webpage by forwarding a local port to the service in your Cluster.</p>
 <p>Execute this in a separate Terminal Window/Tab in order to be able to access the web page:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl port-forward --namespace default <span style="color:#66d9ef">$(</span>kubectl get po -n default -l app<span style="color:#f92672">=</span>k8sdemo | grep k8sdemo| <span style="color:#ae81ff">\a</span>wk <span style="color:#e6db74">&#39;{print $1;}&#39;</span><span style="color:#66d9ef">)</span> 3000:3000 

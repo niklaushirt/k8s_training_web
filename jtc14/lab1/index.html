@@ -407,7 +407,7 @@ Previously this knowledge only resided in the minds of administrators, various c
 <p>Operators implement and <strong>automate common Day-1</strong> (installation, configuration, etc) <strong>and Day-2</strong> (re-configuration, update, backup, failover, restore, etc.) <strong>activities</strong> in a piece of software running inside your Kubernetes cluster, by integrating natively with Kubernetes concepts and APIs.</p>
 </li>
 </ul>
-<p><img src="../images/op1.png" alt=""></p>
+<p><img src="../../../images/op1.png" alt=""></p>
 <p>Operators extend Kubernetes by allowing you to define a <strong>Custom Controller</strong> to watch your application and perform custom tasks based on its state (a perfect fit to automate maintenance of the stateful application we described above).</p>
 <p>The application you want to watch is defined in Kubernetes as a new object: a <strong>Custom Resource</strong> (CR) that has its own yaml spec and object type (in K8s, a kind) that is understood by the API server.</p>
 <p>That way, you can define any specific criteria in the custom spec to watch out for, and reconcile the instance when it doesn’t match the spec. The way an operator’s controller reconciles against a spec is very similar to native Kubernetes’ controllers, though it is using mostly custom components.</p>

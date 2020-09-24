@@ -395,7 +395,7 @@
 <h2 id="polaris">Polaris</h2>
 <p>Polaris runs a variety of checks to ensure that Kubernetes pods and controllers are configured using best practices, helping you avoid problems in the future.</p>
 <p>You can get more details <a href="https://github.com/FairwindsOps/polaris">here</a>.</p>
-<p><img src="../images/polaris-logo.png" alt=""></p>
+<p><img src="../../../images/polaris-logo.png" alt=""></p>
 <ol>
 <li>
 <p>Install Polaris Dashboard by running:</p>
@@ -428,11 +428,11 @@
 <li>
 <p>The Polaris Dashboard is now running in your cluster, and exposed to the internet.
 You can open it by typing:</p>
-<p><img src="../images/vm.png" alt=""> <strong>Training VM</strong></p>
+<p><img src="../../../images/vm.png" alt=""> <strong>Training VM</strong></p>
 <p>If you are using the training VM, you can open Polaris directly by typing:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">minikube service polaris-dashboard-service -n polaris
 </code></pre></div><hr>
-<p><img src="../images/cloud.png" alt=""> <strong>Cloud/Standalone</strong></p>
+<p><img src="../../../images/cloud.png" alt=""> <strong>Cloud/Standalone</strong></p>
 <p>If you are <strong>NOT</strong> using the training VM, you can open the webpage by forwarding a local port to the service in your Cluster.</p>
 <p>Execute this in a separate Terminal Window/Tab in order to be able to access the web page:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl port-forward --namespace polaris <span style="color:#66d9ef">$(</span>kubectl get po -n polaris | grep polaris-dashboard | <span style="color:#ae81ff">\a</span>wk <span style="color:#e6db74">&#39;{print $1;}&#39;</span><span style="color:#66d9ef">)</span> 8080:8080 
@@ -440,7 +440,7 @@ You can open it by typing:</p>
 </li>
 <li>
 <p>Look around the Dashboard to get familiar with the checks.</p>
-<p><img src="../images/sec1.png" alt=""></p>
+<p><img src="../../../images/sec1.png" alt=""></p>
 </li>
 <li>
 <p>Let&rsquo;s deploy a version of <code>k8sdemo</code> that has some more problems by running:</p>
@@ -452,7 +452,7 @@ You can open it by typing:</p>
 <p>Check out the dashboard for the <code>k8sdemo-nok</code> application and you will find that there are a lot more warnings for this deployment.</p>
 </li>
 </ol>
-<p><img src="../images/sec2.png" alt=""></p>
+<p><img src="../../../images/sec2.png" alt=""></p>
 <ol start="8">
 <li>
 <p>Clean-up by running:</p>
@@ -468,13 +468,13 @@ kubectl delete -f ~/training/tools/polaris.yaml
 <p><strong>IMPORTANT!!! You should NOT run kube-hunter on a Kubernetes cluster you don&rsquo;t own!</strong></p>
 </blockquote>
 <p>You can get more details <a href="https://github.com/aquasecurity/kube-hunter">here</a>.</p>
-<p><img src="../images/vm.png" alt=""> <strong>Training VM</strong></p>
+<p><img src="../../../images/vm.png" alt=""> <strong>Training VM</strong></p>
 <blockquote>
 <p>If you are using the training VM, <code>kubehunter</code> has already been installed in your environment.</p>
 </blockquote>
-<p><img src="../images/cloud.png" alt=""> <strong>Cloud/Standalone</strong></p>
+<p><img src="../../../images/cloud.png" alt=""> <strong>Cloud/Standalone</strong></p>
 <blockquote>
-<p><img src="../images/important.png" alt=""> If you are <strong>NOT</strong> using the training VM, you have to install <code>kubehunter</code> as described here:
+<p><img src="../../../images/important.png" alt=""> If you are <strong>NOT</strong> using the training VM, you have to install <code>kubehunter</code> as described here:
 <a href="https://github.com/aquasecurity/kube-hunter#deployment">https://github.com/aquasecurity/kube-hunter#deployment</a></p>
 </blockquote>
 <ol>
@@ -586,13 +586,13 @@ or</p>
 </code></pre><p>This should (hopefully!) not be the case in your clusters and in this case could be remediated by launching <code>minikube</code> with the option <code>--extra-config=apiserver.anonymous-auth=false</code></p>
 <h2 id="kubesec">kubesec</h2>
 <p><a href="https://kubesec.io/">kubesec</a> is a utility that performs security risk analysis for Kubernetes resources and tells you what you should change in order to improve the security of those pods. It also gives you a score that you can use to create a minimum standard. The score incorporates a great number of Kubernetes best practices.</p>
-<p><img src="../images/vm.png" alt=""> <strong>Training VM</strong></p>
+<p><img src="../../../images/vm.png" alt=""> <strong>Training VM</strong></p>
 <blockquote>
 <p>If you are using the training VM, <code>KubeSec</code> has already been installed in your environment.</p>
 </blockquote>
-<p><img src="../images/cloud.png" alt=""> <strong>Cloud/Standalone</strong></p>
+<p><img src="../../../images/cloud.png" alt=""> <strong>Cloud/Standalone</strong></p>
 <blockquote>
-<p><img src="../images/important.png" alt=""> If you are <strong>NOT</strong> using the training VM, you have to install <code>KubeSec</code> as described here:
+<p><img src="../../../images/important.png" alt=""> If you are <strong>NOT</strong> using the training VM, you have to install <code>KubeSec</code> as described here:
 <a href="https://github.com/controlplaneio/kubesec/releases">https://github.com/controlplaneio/kubesec/releases</a></p>
 </blockquote>
 <ol start="2">
@@ -690,13 +690,13 @@ or</p>
 KubeSec can run in different ways (commandline, Docker container and even as a Kubernetes admission hook) in order to facilitate that integration.</p>
 <h2 id="conftest">conftest</h2>
 <p><a href="https://github.com/instrumenta/conftest">conftest</a> is a utility to help you write tests against structured configuration data. For instance you could write tests for your Kubernetes configurations, or Tekton pipeline definitions, Terraform code, Serverless configs or any other structured data.</p>
-<p><img src="../images/vm.png" alt=""> <strong>Training VM</strong></p>
+<p><img src="../../../images/vm.png" alt=""> <strong>Training VM</strong></p>
 <blockquote>
 <p>If you are using the training VM, <code>ConfTest </code> has already been installed in your environment.</p>
 </blockquote>
-<p><img src="../images/cloud.png" alt=""> <strong>Cloud/Standalone</strong></p>
+<p><img src="../../../images/cloud.png" alt=""> <strong>Cloud/Standalone</strong></p>
 <blockquote>
-<p><img src="../images/important.png" alt=""> If you are <strong>NOT</strong> using the training VM, you have to install <code>ConfTest </code> as described here:
+<p><img src="../../../images/important.png" alt=""> If you are <strong>NOT</strong> using the training VM, you have to install <code>ConfTest </code> as described here:
 <a href="https://www.conftest.dev/install/">https://www.conftest.dev/install/</a></p>
 </blockquote>
 <ol start="2">

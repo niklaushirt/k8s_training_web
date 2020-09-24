@@ -452,11 +452,11 @@ cd ~/ansible-operator
 <ol>
 <li>
 <p>Add the <code>deployment.image</code> field to the Custom Resource</p>
-<p><img src="../images/vm.png" alt=""> <strong>Training VM</strong></p>
+<p><img src="../../../images/vm.png" alt=""> <strong>Training VM</strong></p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">gedit ~/ansible-operator/ansible-operator-frontend/deploy/crds/ansiblelab.ibm.com_v1beta1_myansiblelabdemo_cr.yaml &amp;
 
 </code></pre></div><p>``</p>
-<p><img src="../images/cloud.png" alt=""> <strong>Cloud/Standalone</strong></p>
+<p><img src="../../../images/cloud.png" alt=""> <strong>Cloud/Standalone</strong></p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">nano ~/ansible-operator/ansible-operator-frontend/deploy/crds/ansiblelab.ibm.com_v1beta1_myansiblelabdemo_cr.yaml
 </code></pre></div><p>``</p>
 <p>Add the last two lines from the following at the end of the file and save to make it look the same</p>
@@ -484,10 +484,10 @@ For defining our deployment we will use the k8s module of Ansible.</p>
 <ol>
 <li>
 <p>Edit the <code>ansible-operator-frontend</code> Controller</p>
-<p><img src="../images/vm.png" alt=""> <strong>Training VM</strong></p>
+<p><img src="../../../images/vm.png" alt=""> <strong>Training VM</strong></p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">gedit ~/ansible-operator/ansible-operator-frontend/roles/myansiblelabdemo/tasks/main.yml &amp;
 </code></pre></div><p>``</p>
-<p><img src="../images/cloud.png" alt=""> <strong>Cloud/Standalone</strong></p>
+<p><img src="../../../images/cloud.png" alt=""> <strong>Cloud/Standalone</strong></p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">nano ~/ansible-operator/ansible-operator-frontend/roles/myansiblelabdemo/tasks/main.yml	<span style="color:#e6db74">```</span>
 
 </code></pre></div></li>
@@ -578,7 +578,7 @@ For defining our deployment we will use the k8s module of Ansible.</p>
 </li>
 <li>
 <p>And push the Operator container to the local registry</p>
-<p><img src="../images/vm.png" alt=""> <strong>Training VM</strong></p>
+<p><img src="../../../images/vm.png" alt=""> <strong>Training VM</strong></p>
 <p>First execute this in a separate Terminal Window/Tab in order to be able to access the private registry:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"></code></pre></div></li>
 </ol>
@@ -587,9 +587,9 @@ For defining our deployment we will use the k8s module of Ansible.</p>
 &gt; Forwarding from [::1]:5000 -&gt; 5000
 </code></pre>
 <pre><code>
- ![](../images/cloud.png) **Cloud/Standalone**
+ ![](../../../images/cloud.png) **Cloud/Standalone**
  
- ![](../images/important.png) **Cloud/Standalone** This does probably not work if you are using a standalone or cloud environment.
+ ![](../../../images/important.png) **Cloud/Standalone** This does probably not work if you are using a standalone or cloud environment.
  You can ignore this as we will be using a version already provided on Docker hub.
 
 
@@ -597,15 +597,15 @@ For defining our deployment we will use the k8s module of Ansible.</p>
 
 5. And then push the image:
 
- ![](../images/vm.png) **Training VM**
+ ![](../../../images/vm.png) **Training VM**
  
  ```bash
  docker push localhost:5000/ansible-operator-frontend:ansible
  ```
 
- ![](../images/cloud.png) **Cloud/Standalone**
+ ![](../../../images/cloud.png) **Cloud/Standalone**
  
- ![](../images/important.png) **Cloud/Standalone** This does probably not work if you are using a standalone or cloud environment.
+ ![](../../../images/important.png) **Cloud/Standalone** This does probably not work if you are using a standalone or cloud environment.
  You can ignore this as we will be using a version already provided on Docker hub.
 
 
