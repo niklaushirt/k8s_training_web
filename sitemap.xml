@@ -93,16 +93,6 @@
   </url>
   
   <url>
-    <loc>https://niklaushirt.github.io/k8s_training_web/jtc18/</loc>
-    <lastmod>2020-09-23T09:12:06+02:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://niklaushirt.github.io/k8s_training_web/jtc19/</loc>
-    <lastmod>2020-09-23T09:12:06+02:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://niklaushirt.github.io/k8s_training_web/jtc10/lab10/</loc>
     <lastmod>2020-09-23T09:12:06+02:00</lastmod>
   </url>
@@ -138,22 +128,12 @@
   </url>
   
   <url>
-    <loc>https://niklaushirt.github.io/k8s_training_web/jtc18/lab1/</loc>
-    <lastmod>2020-09-23T09:12:06+02:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://niklaushirt.github.io/k8s_training_web/jtc16/lab1/</loc>
     <lastmod>2020-09-23T09:12:06+02:00</lastmod>
   </url>
   
   <url>
     <loc>https://niklaushirt.github.io/k8s_training_web/jtc17/lab1/</loc>
-    <lastmod>2020-09-23T09:12:06+02:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://niklaushirt.github.io/k8s_training_web/jtc19/lab1/</loc>
     <lastmod>2020-09-23T09:12:06+02:00</lastmod>
   </url>
   
@@ -169,11 +149,6 @@
   
   <url>
     <loc>https://niklaushirt.github.io/k8s_training_web/jtc01/lab2/</loc>
-    <lastmod>2020-09-23T09:12:06+02:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://niklaushirt.github.io/k8s_training_web/jtc18/lab2/</loc>
     <lastmod>2020-09-23T09:12:06+02:00</lastmod>
   </url>
   
@@ -203,11 +178,6 @@
   </url>
   
   <url>
-    <loc>https://niklaushirt.github.io/k8s_training_web/jtc18/lab3/</loc>
-    <lastmod>2020-09-23T09:12:06+02:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://niklaushirt.github.io/k8s_training_web/jtc17/lab3/</loc>
     <lastmod>2020-09-23T09:12:06+02:00</lastmod>
   </url>
@@ -223,27 +193,12 @@
   </url>
   
   <url>
-    <loc>https://niklaushirt.github.io/k8s_training_web/jtc18/lab4/</loc>
-    <lastmod>2020-09-23T09:12:06+02:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://niklaushirt.github.io/k8s_training_web/jtc17/lab4/</loc>
     <lastmod>2020-09-23T09:12:06+02:00</lastmod>
   </url>
   
   <url>
     <loc>https://niklaushirt.github.io/k8s_training_web/jtc02/lab4/</loc>
-    <lastmod>2020-09-23T09:12:06+02:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://niklaushirt.github.io/k8s_training_web/jtc18/lab5/</loc>
-    <lastmod>2020-09-23T09:12:06+02:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://niklaushirt.github.io/k8s_training_web/jtc19/lab5/</loc>
     <lastmod>2020-09-23T09:12:06+02:00</lastmod>
   </url>
   
