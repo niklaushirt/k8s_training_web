@@ -54,10 +54,9 @@ Copy   operator-sdk new ansible-operator-frontend --type=ansible --api-version=a
       
       <guid>https://niklaushirt.github.io/k8s_training_web/jtc14/lab3/</guid>
       <description>Deploy the Custom Resource   Deploy the ansible-operator-frontend Custom Resource
-Copy   kubectl create -f ~/ansible-operator/ansible-operator-frontend/deploy/crds/ansiblelab.ibm.com_v1beta1_myansiblelabdemo_cr.yaml    &amp;gt; MyAnsibleLabDemo.ansiblelab.ibm.com/example-MyAnsibleLabDemo created ``
-From the resource that we defined earlier:
+Copy   kubectl create -f ~/ansible-operator/ansible-operator-frontend/deploy/crds/ansiblelab.ibm.com_v1beta1_myansiblelabdemo_cr.yaml    &amp;gt; MyAnsibleLabDemo.ansiblelab.ibm.com/example-MyAnsibleLabDemo created From the resource that we defined earlier:
 Copy   apiVersion: ansiblelab.ibm.com/v1beta1 kind: MyAnsibleLabDemo metadata: name: example-MyAnsibleLabDemo spec: # Add fields here size: 3 demo: image: niklaushirt/k8sdemo:1.0.0      Check that the CustomResource is running
-Copy   kubectl get pods    &amp;gt; NAME READY STATUS RESTARTS AGE &amp;gt; ansible-operator-frontend-fd78bcf5-zxgws 2/2 Running 0 3m11s &amp;gt; k8sdemo-7fc8554dff-2krkz 1/1 Running 0 45s ``</description>
+Copy   kubectl get pods    &amp;gt; NAME READY STATUS RESTARTS AGE &amp;gt; ansible-operator-frontend-fd78bcf5-zxgws 2/2 Running 0 3m11s &amp;gt; k8sdemo-7fc8554dff-2krkz 1/1 Running 0 45s   Check the version of the deployed Image</description>
     </item>
     
     <item>

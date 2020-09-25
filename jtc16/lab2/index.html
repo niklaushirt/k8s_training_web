@@ -435,8 +435,7 @@ kubectl apply -f ~/training/tools/polaris.yaml
 &gt; clusterrolebinding.rbac.authorization.k8s.io/polaris-dashboard created
 &gt; service/polaris-dashboard created
 &gt; deployment.apps/polaris-dashboard created
-</code></pre></div><p>``</p>
-</li>
+</code></pre></div></li>
 <li>
 <p>Wait until the pod si running:</p>
 
@@ -470,8 +469,7 @@ kubectl get pods -n polaris
 
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext">&gt; NAME                                 READY     STATUS    RESTARTS   AGE
 &gt; polaris-dashboard-69f5bc4b5d-8jz24   1/1       Running   0          66s
-</code></pre></div><p>``</p>
-</li>
+</code></pre></div></li>
 <li>
 <p>Once the status reads <code>Running</code>, we need to expose the Dashboard as a service so we can access it:</p>
 
@@ -504,8 +502,7 @@ kubectl expose deployment polaris-dashboard -n polaris --name polaris-dashboard-
 
 
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext">&gt; service/polaris-dashboard-service exposed
-</code></pre></div><p>``</p>
-</li>
+</code></pre></div></li>
 <li>
 <p>The Polaris Dashboard is now running in your cluster, and exposed to the internet.
 You can open it by typing:</p>
@@ -724,8 +721,7 @@ kubectl delete -f ~/training/tools/polaris.yaml
 &gt;   Checks if the kubectl client is vulnerable to specific important CVEs
 ...
 
-</code></pre></div><p>``</p>
-</li>
+</code></pre></div></li>
 <li>
 <p>Let&rsquo;s examine the list of passive test (non intrusive, aka that do not change the cluster state) that kube-hunter runs:</p>
 
@@ -779,8 +775,7 @@ kubectl delete -f ~/training/tools/polaris.yaml
 &gt;   Executes uname inside of a random container
 &gt; 
 ...
-</code></pre></div><p>``</p>
-</li>
+</code></pre></div></li>
 <li>
 <p>Get the Cluster IP (MY-CLUSTER-IP)</p>
 <p>Use the adequate method for this:</p>
@@ -890,8 +885,7 @@ ibmcloud ks worker ls --cluster mycluster-free
 &gt; |   service: Kubelet API (readonly)
 &gt; |_  location: localhost:10255
 ...
-</code></pre></div><p>``</p>
-</li>
+</code></pre></div></li>
 </ol>
 <p><strong>Findings</strong></p>
 <p>You should get no findings, meaning that the Minikube instance has been correctly configured.</p>
@@ -1196,8 +1190,7 @@ conftest test -p ~/training/conftest/src/examples/kubernetes/policy ~/training/d
 &gt; FAIL - /home/training/training/deployment/demoapp.yaml - Deployment k8sdemo must provide app/release labels for pod selectors
 &gt; FAIL - /home/training/training/deployment/demoapp.yaml - k8sdemo must include Kubernetes recommended labels: https://kubernetes.io/docs/concepts/overview/working-with-objects/common-labels/#labels 
 
-</code></pre></div><p>``</p>
-</li>
+</code></pre></div></li>
 <li>
 <p>Launch a test against all the files for the demo application</p>
 <p>The output format here is set to TAP (<a href="https://testanything.org/">Test Anything Protocol</a>)</p>
@@ -1248,8 +1241,7 @@ conftest test -p ~/training/conftest/src/examples/kubernetes/policy --output<spa
 &gt; 1..1
 &gt; # Warnings
 &gt; not ok 1 - /home/training/training/deployment/demoapp-backend-service.yaml - Found service k8sdemo-backend-service but services are not allowed
-</code></pre></div><p>``</p>
-</li>
+</code></pre></div></li>
 <li>
 <p>Launch a test against sample Dockerfile</p>
 <p>The output format here is set to JSON.</p>

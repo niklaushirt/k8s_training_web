@@ -31,7 +31,7 @@ The following network traffic is allowed by default:
       <description>Polaris Polaris runs a variety of checks to ensure that Kubernetes pods and controllers are configured using best practices, helping you avoid problems in the future.
 You can get more details here.
   Install Polaris Dashboard by running:
-Copy   kubectl apply -f ~/training/tools/polaris.yaml    &amp;gt; namespace/polaris created &amp;gt; configmap/polaris created &amp;gt; serviceaccount/polaris-dashboard created &amp;gt; clusterrole.rbac.authorization.k8s.io/polaris-dashboard created &amp;gt; clusterrolebinding.rbac.authorization.k8s.io/polaris-dashboard created &amp;gt; service/polaris-dashboard created &amp;gt; deployment.apps/polaris-dashboard created ``</description>
+Copy   kubectl apply -f ~/training/tools/polaris.yaml    &amp;gt; namespace/polaris created &amp;gt; configmap/polaris created &amp;gt; serviceaccount/polaris-dashboard created &amp;gt; clusterrole.rbac.authorization.k8s.io/polaris-dashboard created &amp;gt; clusterrolebinding.rbac.authorization.k8s.io/polaris-dashboard created &amp;gt; service/polaris-dashboard created &amp;gt; deployment.apps/polaris-dashboard created   Wait until the pod si running:</description>
     </item>
     
   </channel>

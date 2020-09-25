@@ -440,8 +440,7 @@ sudo apt install nfs-kernel-server -y
 &gt; Processing triggers for systemd (245.4-4ubuntu3) ...
 &gt; Processing triggers for man-db (2.9.1-1) ...
 &gt; Processing triggers for libc-bin (2.31-0ubuntu9) ...
-</code></pre></div><p>``</p>
-</li>
+</code></pre></div></li>
 <li>
 <p>Create the directory for NFS storage</p>
 
@@ -549,8 +548,7 @@ minikube ssh <span style="color:#e6db74">&#34;sudo apt update &amp;&amp; sudo ap
 &gt; running python post-rtupdate hooks for python3.7...
 &gt; Processing triggers for libc-bin (2.30-0ubuntu2) ...
 &gt; Processing triggers for systemd (242-7ubuntu3.7) ...
-</code></pre></div><p>``</p>
-</li>
+</code></pre></div></li>
 <li>
 <p>Make sure the minikube VM can access the NFS server on the host VM</p>
 
@@ -583,8 +581,7 @@ minikube ssh <span style="color:#e6db74">&#34;echo &#39;192.168.122.1   ubuntu&#
 
 
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext">&gt; 192.168.122.1   ubuntu
-</code></pre></div><p>``</p>
-</li>
+</code></pre></div></li>
 </ol>
 <h2 id="create-the-dynamic-provisioner">Create the dynamic provisioner</h2>
 <p>For this Lab we use the nfs-client dynamic provisioner from the kubernetes-incubator external-storage repository.</p>
@@ -632,8 +629,7 @@ kubectl apply -f ~/training/volumes/nfs-provisioner.yaml
 &gt; deployment.apps/release-name-nfs-client-provisioner created
 
 ...
-</code></pre></div><p>``</p>
-</li>
+</code></pre></div></li>
 <li>
 <p>Wait for the Pod to be in Ready state</p>
 
@@ -668,8 +664,7 @@ kubectl get pods
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext">&gt; NAME                                                   READY   STATUS    RESTARTS   AGE
 &gt; release-name-nfs-client-provisioner-59d648ddbf-gsv5w   1/1     Running   0          40m
 ...
-</code></pre></div><p>``</p>
-</li>
+</code></pre></div></li>
 <li>
 <p>Create a test PVC</p>
 
@@ -742,8 +737,7 @@ kubectl apply -f training/volumes/nfs-claim.yaml
 
 
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext">&gt; persistentvolumeclaim/test-claim created
-</code></pre></div><p>``</p>
-</li>
+</code></pre></div></li>
 <li>
 <p>Check that the PVC is bound</p>
 
@@ -777,8 +771,7 @@ kubectl get pvc
 
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext">&gt; NAME             STATUS   VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS   AGE
 &gt; test-claim       Bound    pvc-bc0a9cbf-69f0-4461-8ccb-bc5e48cb3201   1Mi        RWX            nfs-client     22s
-</code></pre></div><p>``</p>
-</li>
+</code></pre></div></li>
 </ol>
 <h2 id="create-the-application">Create the application</h2>
 <ol>
@@ -816,8 +809,7 @@ kubectl apply -f training/volumes/nfs-wordpress.yaml
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext">&gt; service/wordpress created
 &gt; persistentvolumeclaim/wp-pv-claim created
 &gt; deployment.apps/wordpress created
-</code></pre></div><p>``</p>
-</li>
+</code></pre></div></li>
 <li>
 <p>Create the MySQL deployment</p>
 
@@ -852,8 +844,7 @@ kubectl apply -f training/volumes/nfs-mysql.yaml
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext">&gt; service/wordpress-mysql created
 &gt; persistentvolumeclaim/mysql-pv-claim created
 &gt; deployment.apps/wordpress-mysql created
-</code></pre></div><p>``</p>
-</li>
+</code></pre></div></li>
 <li>
 <p>Wait for the Pods to be in Ready state</p>
 
@@ -890,8 +881,7 @@ kubectl get pods
 &gt; wordpress-mysql-b9ddd6d4c-vjdhd                        1/1     Running   0          30m
 
 ...
-</code></pre></div><p>``</p>
-</li>
+</code></pre></div></li>
 <li>
 <p>Check that the PVC is bound</p>
 
@@ -927,8 +917,7 @@ kubectl get pvc
 &gt; mysql-pv-claim   Bound    pvc-fdd7df13-57b3-4661-b9c9-c27c63e2902e   20Gi       RWO            nfs-client     31m
 &gt; wp-pv-claim      Bound    pvc-d80af17a-b0d8-4970-b521-a19400e18d0f   20Gi       RWO            nfs-client     32m
 ...
-</code></pre></div><p>``</p>
-</li>
+</code></pre></div></li>
 <li>
 <p>Open the app in Firefox</p>
 

@@ -705,8 +705,7 @@ kubectl create -f ~/training/rbac/service-accounts-role.yaml
 
 
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext">&gt; role.rbac.authorization.k8s.io/api-role configured
-</code></pre></div><p>``</p>
-</li>
+</code></pre></div></li>
 <li>
 <p>Now lets bind the Role to the <code>ServiceAccount</code> <code>service-account-1</code></p>
 
@@ -782,8 +781,7 @@ kubectl create -f ~/training/rbac/service-accounts-role-binding.yaml
 
 
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext">&gt; rolebinding.rbac.authorization.k8s.io/service-account-rolebinding created
-</code></pre></div><p>``</p>
-<p>Now the <code>ServiceAccount</code> <code>service-account-1</code> should have the rights to list the <code>Services</code>.</p>
+</code></pre></div><p>Now the <code>ServiceAccount</code> <code>service-account-1</code> should have the rights to list the <code>Services</code>.</p>
 </li>
 </ol>
 <h3 id="test-access-1">Test Access</h3>

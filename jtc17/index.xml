@@ -20,7 +20,7 @@
       <description>Open a Terminal window by clicking on the Termnial icon in the left sidebar - we will use this extensively later as well
   Start the demo application
 Copy   kubectl create -f ~/training/deployment/demoapp.yaml kubectl create -f ~/training/deployment/demoapp-service.yaml kubectl create -f ~/training/deployment/demoapp-backend.yaml kubectl create -f ~/training/deployment/demoapp-backend-service.yaml      Wait for the demo application to be available (the status must be 1/1)
-Copy   kubectl get pods    &amp;gt; NAME READY STATUS RESTARTS AGE &amp;gt; k8sdemo-backend-5b779f567f-2rbgj 1/1 Running 0 21s &amp;gt; k8sdemo-backend-5b779f567f-p6j76 1/1 Running 0 21s &amp;gt; k8sdemo-bd6bbd548-jcb6r 1/1 Running 0 21s ``</description>
+Copy   kubectl get pods    &amp;gt; NAME READY STATUS RESTARTS AGE &amp;gt; k8sdemo-backend-5b779f567f-2rbgj 1/1 Running 0 21s &amp;gt; k8sdemo-backend-5b779f567f-p6j76 1/1 Running 0 21s &amp;gt; k8sdemo-bd6bbd548-jcb6r 1/1 Running 0 21s   Open the demo application in the browser</description>
     </item>
     
     <item>

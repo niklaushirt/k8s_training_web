@@ -573,8 +573,7 @@ openssl genrsa -out demo.key <span style="color:#ae81ff">2048</span>
 
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext">&gt; Generating RSA private key, 2048 bit long modulus (2 primes)
 ...
-</code></pre></div><p>``</p>
-<p>The private key file <code>demo.key</code> has been created:</p>
+</code></pre></div><p>The private key file <code>demo.key</code> has been created:</p>
 
 
 
@@ -605,8 +604,7 @@ ls
 
 
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext">&gt; demo.key
-</code></pre></div><p>``</p>
-</li>
+</code></pre></div></li>
 <li>
 <p>Create a certificate sign request <code>demo.csr</code> using the private key you just created (<code>demo.key</code> in this example). Make sure you specify your username and group in the <em>-subj</em> section (CN is for the username and O for the group). As previously mentioned, we will use <code>demo</code> as the name and <code>demogroup</code> as the group</p>
 
@@ -669,8 +667,7 @@ ls
 
 
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext">&gt; demo.csr  demo.key
-</code></pre></div><p>``</p>
-</li>
+</code></pre></div></li>
 <li>
 <p>We will use the Kubernetes cluster certificate authority (CA) for approving the request and generating the necessary certificate to access the cluster API.</p>
 <p>Its location usually is <code>/etc/kubernetes/pki/</code>.
@@ -715,8 +712,7 @@ openssl x509 -req -in demo.csr -CA ~/.minikube/ca.crt -CAkey ~/.minikube/ca.key 
 &gt; Signature ok
 &gt; subject=CN = demo, O = demogroup
 &gt; Getting CA Private Key
-</code></pre></div><p>``</p>
-<p>The final certificate <code>demo.crt</code> has been created:</p>
+</code></pre></div><p>The final certificate <code>demo.crt</code> has been created:</p>
 
 
 
@@ -747,8 +743,7 @@ ls
 
 
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext">&gt; demo.crt  demo.csr  demo.key
-</code></pre></div><p>``</p>
-</li>
+</code></pre></div></li>
 <li>
 <p>In a real world example you would now save both <code>demo.crt</code> and <code>demo.key</code> in a safe location.</p>
 </li>
@@ -788,8 +783,7 @@ kubectl config set-credentials demo --client-certificate<span style="color:#f926
 
 
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext">&gt; User &#34;demo&#34; set.
-</code></pre></div><p>``</p>
-</li>
+</code></pre></div></li>
 <li>
 <p>Create context</p>
 
@@ -822,8 +816,7 @@ kubectl config set-context demo-context --cluster<span style="color:#f92672">=</
 
 
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext">&gt; Context &#34;demo-context&#34; created.
-</code></pre></div><p>``</p>
-<p><img src="../../../images/cloud.png" alt=""> <strong>Cloud/Standalone</strong></p>
+</code></pre></div><p><img src="../../../images/cloud.png" alt=""> <strong>Cloud/Standalone</strong></p>
 <blockquote>
 <p>If you are <strong>NOT</strong> using the training VM, you have to use your own cluster name instead of <code>--cluster=minikube</code>
 You should be able to get it with <code>kubectl config current-context</code>.</p>

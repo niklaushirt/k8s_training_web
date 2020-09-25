@@ -469,8 +469,7 @@ kubectl apply -f ~/training/istio/samples/bookinfo/networking/virtual-service-al
 
 
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext">    &gt; virtualservice.networking.istio.io/reviews configured
-</code></pre></div><p>``</p>
-</li>
+</code></pre></div></li>
 <li>
 <p>Create a Virtual Service that sends all traffic to v1 and mirrors it to v2 of the <code>reviews</code> service</p>
 
@@ -548,8 +547,7 @@ kubectl apply -f ~/training/istio/samples/bookinfo/networking/virtual-service-mi
 
 
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext">    &gt; virtualservice.networking.istio.io/reviews configured
-</code></pre></div><p>``</p>
-<p>After a short while you should see traffic starting to flow from <code>reviews</code> (v2) to <code>ratings</code>, because <code>reviews</code> (v2) is receiving the mirrored traffic.</p>
+</code></pre></div><p>After a short while you should see traffic starting to flow from <code>reviews</code> (v2) to <code>ratings</code>, because <code>reviews</code> (v2) is receiving the mirrored traffic.</p>
 </li>
 </ol>
 <p><img src="../../../images/istio0.png" alt=""></p>

@@ -521,8 +521,7 @@ curl $INGRESS_HOST/productpage -s -o /dev/null -w <span style="color:#e6db74">&#
 
 
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext">&gt; 200
-</code></pre></div><p>``</p>
-<p>You should get an HTTP Code 200 - which means that the access is working.
+</code></pre></div><p>You should get an HTTP Code 200 - which means that the access is working.
 You can also try to refresh the productpage, it should load perfectly.</p>
 </li>
 <li>
@@ -570,8 +569,7 @@ kubectl apply -f - <span style="color:#e6db74">&lt;&lt;EOF
 
 
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext">&gt; requestauthentication.security.istio.io/jwt-example created
-</code></pre></div><p>``</p>
-<p>Here we create the RequestAuthentication Object based on the test/demo tokens provided by Istio: <a href="https://raw.githubusercontent.com/istio/istio/release-1.6/security/tools/jwt/samples/jwks.json">https://raw.githubusercontent.com/istio/istio/release-1.6/security/tools/jwt/samples/</a>.</p>
+</code></pre></div><p>Here we create the RequestAuthentication Object based on the test/demo tokens provided by Istio: <a href="https://raw.githubusercontent.com/istio/istio/release-1.6/security/tools/jwt/samples/jwks.json">https://raw.githubusercontent.com/istio/istio/release-1.6/security/tools/jwt/samples/</a>.</p>
 <p>The JSON Web Key Set (JWKS) is a set of keys which contains the public keys used to verify any JSON Web Token (JWT).</p>
 </li>
 <li>
@@ -606,8 +604,7 @@ curl $INGRESS_HOST/productpage -s -o /dev/null -w <span style="color:#e6db74">&#
 
 
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext">&gt; 200
-</code></pre></div><p>``</p>
-<p>You should still get an HTTP Code 200 - which means that the access is working, because requests that carry no token, are accepted by default.</p>
+</code></pre></div><p>You should still get an HTTP Code 200 - which means that the access is working, because requests that carry no token, are accepted by default.</p>
 </li>
 <li>
 <p>However trying to access the productpage with an invalid token should not work:</p>
@@ -641,8 +638,7 @@ curl --header <span style="color:#e6db74">&#34;Authorization: Bearer my-invalid-
 
 
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext">&gt; 401
-</code></pre></div><p>``</p>
-<p>You should get an HTTP Code 401 (Unauthorized) - which means that the access is blocked if you use an invalid token.</p>
+</code></pre></div><p>You should get an HTTP Code 401 (Unauthorized) - which means that the access is blocked if you use an invalid token.</p>
 </li>
 </ol>
 <h2 id="autorisation-policy">Autorisation Policy</h2>
@@ -696,8 +692,7 @@ kubectl apply -f - <span style="color:#e6db74">&lt;&lt;EOF
 
 
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext">&gt; authorizationpolicy.security.istio.io/frontend-ingress created
-</code></pre></div><p>``</p>
-</li>
+</code></pre></div></li>
 <li>
 <p>Try to access the productpage again:</p>
 
@@ -730,8 +725,7 @@ curl $INGRESS_HOST/productpage -s -o /dev/null -w <span style="color:#e6db74">&#
 
 
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext">&gt; 403
-</code></pre></div><p>``</p>
-<p>You should get an HTTP Code 403 (Forbidden) - which means that the access is now blocked if you provide no token.</p>
+</code></pre></div><p>You should get an HTTP Code 403 (Forbidden) - which means that the access is now blocked if you provide no token.</p>
 </li>
 </ol>
 <h2 id="autorisation-with-jwt">Autorisation with JWT</h2>
@@ -905,8 +899,7 @@ curl --header <span style="color:#e6db74">&#34;Authorization: Bearer </span>$TOK
 
 
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext">&gt; 200
-</code></pre></div><p>``</p>
-</li>
+</code></pre></div></li>
 </ol>
 <p>You should get an HTTP Code 200 - which means that the access is working, because our JWT token has been validated againts the JWKS.</p>
 <ol start="5">
@@ -952,8 +945,7 @@ TOKEN<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>./
 &gt; 401
 &gt; 401
 ...
-</code></pre></div><p>``</p>
-<p>You should get an HTTP Code 200 for about 5 seconds until the token expires, after which you will get a 401 error.</p>
+</code></pre></div><p>You should get an HTTP Code 200 for about 5 seconds until the token expires, after which you will get a 401 error.</p>
 </li>
 </ol>
 <blockquote>

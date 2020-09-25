@@ -456,8 +456,7 @@ kubectl run -it --rm --restart<span style="color:#f92672">=</span>Never alpine -
 
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext">&gt; If you don&#39;t see a command prompt, try pressing enter.
 &gt; / # 
-</code></pre></div><p>``</p>
-</li>
+</code></pre></div></li>
 <li>
 <p>Now from <strong>inside</strong> the Pod run the following commands.</p>
 </li>
@@ -494,8 +493,7 @@ alpine~&gt; wget -O-  k8sdemo-backend-service.default.svc:3000
 
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext">&gt; Connecting to k8sdemo-backend-service.default.svc:3000 (10.103.242.14:3000)
 &gt; K8s Demo Backend                   100% |**************************************************************|   197  0:00:00 ETA
-</code></pre></div><p>``</p>
-<p>You should get the HTML response from the backend server.</p>
+</code></pre></div><p>You should get the HTML response from the backend server.</p>
 </li>
 <li>
 <p>And you should be able to ping external adresses  (45.55.44.56 is Google)</p>
@@ -532,8 +530,7 @@ alpine~&gt; ping 45.55.44.56
 &gt; 64 bytes from 45.55.44.56: seq=0 ttl=59 time=133.476 ms
 &gt; 64 bytes from 45.55.44.56: seq=1 ttl=59 time=136.036 ms
 &gt; 64 bytes from 45.55.44.56: seq=2 ttl=59 time=125.471 ms
-</code></pre></div><p>``</p>
-</li>
+</code></pre></div></li>
 </ol>
 <p><img src="../../../images/np2.png" alt="K8s CNI"></p>
 <h2 id="control-incoming-traffic">Control incoming traffic</h2>
@@ -642,8 +639,7 @@ alpine~&gt; wget -O-  k8sdemo-backend-service.default.svc:3000
 
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext">&gt; Connecting to k8sdemo-backend-service.default.svc:3000 (10.103.242.14:3000)
 ...
-</code></pre></div><p>``</p>
-<p>You should get no response from <code>k8sdemo-backend</code>.</p>
+</code></pre></div><p>You should get no response from <code>k8sdemo-backend</code>.</p>
 </li>
 <li>
 <p>But you should still be able to ping external adresses</p>
@@ -680,8 +676,7 @@ alpine~&gt; ping 45.55.44.56
 &gt; 64 bytes from 45.55.44.56: seq=0 ttl=59 time=133.476 ms
 &gt; 64 bytes from 45.55.44.56: seq=1 ttl=59 time=136.036 ms
 &gt; 64 bytes from 45.55.44.56: seq=2 ttl=59 time=125.471 ms
-</code></pre></div><p>``</p>
-</li>
+</code></pre></div></li>
 <li>
 <p>Reload the web application. It load but the backend remains unreachable</p>
 <p><strong>Testing DEMO_API
@@ -828,8 +823,7 @@ alpine~&gt; wget -O-  k8sdemo-backend-service.default.svc:3000
 
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext">&gt; Connecting to k8sdemo-backend-service.default.svc:3000 (10.103.242.14:3000)
 ...
-</code></pre></div><p>``</p>
-<p>You should get no response from the <code>k8sdemo-backend</code> as the web frontend <code>k8sdemo</code> outgoing traffic is blocked.</p>
+</code></pre></div><p>You should get no response from the <code>k8sdemo-backend</code> as the web frontend <code>k8sdemo</code> outgoing traffic is blocked.</p>
 </li>
 <li>
 <p>And you should not be able to ping external adresses as the <code>alpine</code> pod outgoing traffic is blocked.</p>
@@ -863,17 +857,13 @@ alpine~&gt; ping 45.55.44.56
 
 
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext">...
-</code></pre></div><p>``</p>
-</li>
+</code></pre></div></li>
 <li>
 <p>Reload the web application. It should load again, but still with the error from the backend:</p>
-<pre><code> ```plaintext
- **Testing DEMO_API
- STATUS: ERROR	
- Trying to reach backend ....**
- ```	
-</code></pre>
-</li>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext">**Testing DEMO_API
+STATUS: ERROR	
+Trying to reach backend ....**
+</code></pre></div></li>
 </ol>
 <p>We have just blocked all traffic going out of the pods, but not the incoming.</p>
 <p><img src="../../../images/np4.png" alt="K8s CNI"></p>
@@ -1021,7 +1011,7 @@ wget -O-  k8sdemo-backend-service.default.svc:3000
 
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext">&gt; Connecting to k8sdemo-backend-service.default.svc:3000 (10.103.242.14:3000)
 ...
-</code></pre></div><p>``</p>
+</code></pre></div><p>`</p>
 <p>You should get no response from <code>k8sdemo-backend</code> as only <code>k8sdemo</code> is allowed to access it.</p>
 </li>
 <li>
@@ -1059,8 +1049,7 @@ ping 45.55.44.56
 &gt; 64 bytes from 45.55.44.56: seq=0 ttl=59 time=143.152 ms
 &gt; 64 bytes from 45.55.44.56: seq=1 ttl=59 time=120.875 ms
 &gt; 64 bytes from 45.55.44.56: seq=2 ttl=59 time=130.981 ms
-</code></pre></div><p>``</p>
-</li>
+</code></pre></div></li>
 <li>
 <p>Reload the web application. It should load, without error from the backend:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext">**Testing DEMO_API
@@ -1069,8 +1058,7 @@ Message from the Backend
 &lt;Some Message&gt;
 The IP Address is
 &lt;IP_ADDRESS&gt;**
-</code></pre></div><p>``</p>
-</li>
+</code></pre></div></li>
 </ol>
 <p>We have just blocked all traffic going to <code>k8sdemo-backend</code>, except the one coming from <code>k8sdemo</code> thus isolating and securing the communication.</p>
 <p><img src="../../../images/np5.png" alt="K8s CNI"></p>

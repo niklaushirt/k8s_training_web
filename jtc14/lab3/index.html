@@ -424,8 +424,7 @@ kubectl create -f  ~/ansible-operator/ansible-operator-frontend/deploy/crds/ansi
 
 
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext">&gt; MyAnsibleLabDemo.ansiblelab.ibm.com/example-MyAnsibleLabDemo created
-</code></pre></div><p>``</p>
-<p>From the resource that we defined earlier:</p>
+</code></pre></div><p>From the resource that we defined earlier:</p>
 
 
 
@@ -499,8 +498,7 @@ kubectl get pods
 &gt; ansible-operator-frontend-fd78bcf5-zxgws     2/2     Running   0          3m11s
 &gt; k8sdemo-7fc8554dff-2krkz                     1/1     Running   0          45s
 
-</code></pre></div><p>``</p>
-</li>
+</code></pre></div></li>
 <li>
 <p>Check the version of the deployed Image</p>
 
@@ -533,8 +531,7 @@ kubectl describe deployment k8sdemo | grep Image
 
 
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext">&gt; Image:      niklaushirt/k8sdemo:1.0.0
-</code></pre></div><p>``</p>
-</li>
+</code></pre></div></li>
 <li>
 <p>Once the status reads <code>Running</code>, we need to expose that deployment as a service so we can access it through the IP of the worker nodes.
 The <code>k8sdemo</code> application listens on port 3000.</p>
@@ -569,8 +566,7 @@ kubectl expose deployment k8sdemo --name k8sdemoansible-service -n default --typ
 
 
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext">&gt; service &#34;k8sdemoansible-service&#34; exposed
-</code></pre></div><p>``</p>
-</li>
+</code></pre></div></li>
 <li>
 <p>Open the application in your Browser</p>
 <p><img src="../../../images/vm.png" alt=""> <strong>Training VM</strong></p>
@@ -675,8 +671,7 @@ kubectl get pods
 &gt; ansible-operator-frontend-fd78bcf5-zxgws   2/2     Running   0          87s
 &gt; k8sdemo-7c5f4f5895-g7ft7                   1/1     Running   0          2s
 
-</code></pre></div><p>``</p>
-</li>
+</code></pre></div></li>
 <li>
 <p>Get the log of the Operator Pod</p>
 
@@ -715,14 +710,12 @@ kubectl logs -c operator ansible-operator-frontend-fd78bcf5-zxgws
 &gt; {&#34;level&#34;:&#34;info&#34;,&#34;ts&#34;:1593618338.5881243,&#34;logger&#34;:&#34;kubebuilder.controller&#34;,&#34;msg&#34;:&#34;Starting workers&#34;,&#34;controller&#34;:&#34;myansiblelabdemo-controller&#34;,&#34;worker count&#34;:1}
 &gt; {&#34;level&#34;:&#34;info&#34;,&#34;ts&#34;:1593618669.4742577,&#34;logger&#34;:&#34;logging_event_handler&#34;,&#34;msg&#34;:&#34;[playbook task]&#34;,&#34;name&#34;:&#34;example-myansiblelabdemo&#34;,&#34;namespace&#34;:&#34;default&#34;,&#34;gvk&#34;:&#34;ansiblelab.ibm.com/v1beta1, Kind=MyAnsibleLabDemo&#34;,&#34;event_type&#34;:&#34;playbook_on_task_start&#34;,&#34;job&#34;:&#34;6354677430737639809&#34;,&#34;EventData.Name&#34;:&#34;Gathering Facts&#34;}
 ...
-</code></pre></div><p>``</p>
-<p>And that it has executed the Ansible Playbook to create it</p>
+</code></pre></div><p>And that it has executed the Ansible Playbook to create it</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext">&gt; {&#34;level&#34;:&#34;info&#34;,&#34;ts&#34;:1593618737.0413835,&#34;logger&#34;:&#34;logging_event_handler&#34;,&#34;msg&#34;:&#34;[playbook task]&#34;,&#34;name&#34;:&#34;example-myansiblelabdemo&#34;,&#34;namespace&#34;:&#34;default&#34;,&#34;gvk&#34;:&#34;ansiblelab.ibm.com/v1beta1, Kind=MyAnsibleLabDemo&#34;,&#34;event_type&#34;:&#34;playbook_on_task_start&#34;,&#34;job&#34;:&#34;520010200565329963&#34;,&#34;EventData.Name&#34;:&#34;myansiblelabdemo : Create the k8sdemo deployment&#34;}
 &gt; {&#34;level&#34;:&#34;info&#34;,&#34;ts&#34;:1593618737.89282,&#34;logger&#34;:&#34;logging_event_handler&#34;,&#34;msg&#34;:&#34;[playbook task]&#34;,&#34;name&#34;:&#34;example-myansiblelabdemo&#34;,&#34;namespace&#34;:&#34;default&#34;,&#34;gvk&#34;:&#34;ansiblelab.ibm.com/v1beta1, Kind=MyAnsibleLabDemo&#34;,&#34;event_type&#34;:&#34;playbook_on_task_start&#34;,&#34;job&#34;:&#34;520010200565329963&#34;,&#34;EventData.Name&#34;:&#34;myansiblelabdemo : Create the k8sdemo service&#34;}
 &gt; {&#34;level&#34;:&#34;info&#34;,&#34;ts&#34;:1593618738.7778618,&#34;logger&#34;:&#34;runner&#34;,&#34;msg&#34;:&#34;Ansible-runner exited successfully&#34;,&#34;job&#34;:&#34;520010200565329963&#34;,&#34;name&#34;:&#34;example-myansiblelabdemo&#34;,&#34;namespace&#34;:&#34;default&#34;}
 
-</code></pre></div><p>``</p>
-</li>
+</code></pre></div></li>
 </ol>
 <h2 id="update-the-custom-resource">Update the Custom Resource</h2>
 <p>We now proceed to modifying the Custom Resource that we have created in order to demonstrate how the Operator is able to update an existing deployment based on modifications done to the Custom Resource.</p>
@@ -898,8 +891,7 @@ kubectl describe deployment k8sdemo | grep Image
 
 
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext">&gt; Image:      niklaushirt/k8sdemo:1.0.1
-</code></pre></div><p>``</p>
-</li>
+</code></pre></div></li>
 <li>
 <p>And if you reload the browser you should see some nice orange peppers&hellip;.</p>
 </li>

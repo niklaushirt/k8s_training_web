@@ -472,8 +472,7 @@ operator-sdk new ansible-operator-frontend --type<span style="color:#f92672">=</
 &gt; INFO[0000] Created deploy/role_binding.yaml             
 &gt; INFO[0000] Created deploy/crds/lab_v1beta1_MyAnsibleLabDemo_crd.yaml       
 ...
-</code></pre></div><p>``</p>
-<blockquote>
+</code></pre></div><blockquote>
 <p>You can ignore the errors concerning git</p>
 </blockquote>
 </li>
@@ -551,8 +550,7 @@ ll <span style="color:#75715e"># same as &#34;ls&#34; but in list form</span>
 &gt; drwxr-x--- 3 training training 4096 Jul  1 17:29 roles/
 &gt; -rw-r--r-- 1 training training  140 Jul  1 17:29 .travis.yml
 &gt; -rw-r--r-- 1 training training  121 Jul  1 17:29 watches.yaml
-</code></pre></div><p>``</p>
-</li>
+</code></pre></div></li>
 </ol>
 <h2 id="create-the-lab-operator-api">Create the Lab Operator API</h2>
 <p>With the above, the API has already been created (unlike for GO operators) and added to the new Custom Resource (CR), with APIVersion <code>ansiblelab.ibm.com/v1beta1</code> and Kind <code>MyAnsibleLabDemo</code>.</p>
@@ -868,8 +866,7 @@ operator-sdk build localhost:5000/ansible-operator-frontend:ansible
 &gt; Successfully built 0ad354c77a7a
 &gt; Successfully tagged localhost:5000/ansible-operator-frontend:ansible
 &gt; INFO[0001] Operator build complete.  
-</code></pre></div><p>``</p>
-<p>Where <code>localhost:5000/ansible-operator-frontend:ansible</code> is the name of the Docker image to be created.</p>
+</code></pre></div><p>Where <code>localhost:5000/ansible-operator-frontend:ansible</code> is the name of the Docker image to be created.</p>
 </li>
 <li>
 <p>And push the Operator container to the local registry</p>
@@ -906,8 +903,7 @@ kubectl port-forward --namespace kube-system <span style="color:#66d9ef">$(</spa
 
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext">&gt; Forwarding from 127.0.0.1:5000 -&gt; 5000
 &gt; Forwarding from [::1]:5000 -&gt; 5000
-</code></pre></div><p>``</p>
-<p><img src="../../../images/cloud.png" alt=""> <strong>Cloud/Standalone</strong></p>
+</code></pre></div><p><img src="../../../images/cloud.png" alt=""> <strong>Cloud/Standalone</strong></p>
 <p><img src="../../../images/important.png" alt=""> <strong>Cloud/Standalone</strong> This does probably not work if you are using a standalone or cloud environment.
 You can ignore this as we will be using a version already provided on Docker hub.</p>
 </li>
@@ -1104,8 +1100,7 @@ kubectl apply -f  ~/ansible-operator/ansible-operator-frontend/deploy/crds/ansib
 
 
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext">&gt; customresourcedefinition.apiextensions.k8s.io/MyAnsibleLabDemos.ansiblelab.ibm.com created
-</code></pre></div><p>``</p>
-</li>
+</code></pre></div></li>
 <li>
 <p>Create  the <code>ansible-operator-frontend</code> Service Account</p>
 
@@ -1143,8 +1138,7 @@ kubectl apply -f  ~/ansible-operator/ansible-operator-frontend/deploy/role_bindi
 &gt; role.rbac.authorization.k8s.io/ansible-operator-frontend created
 &gt; rolebinding.rbac.authorization.k8s.io/ansible-operator-frontend created
 
-</code></pre></div><p>``</p>
-</li>
+</code></pre></div></li>
 <li>
 <p>Create  the <code>ansible-operator-frontend</code> Operator</p>
 
@@ -1178,8 +1172,7 @@ kubectl apply -f  ~/ansible-operator/ansible-operator-frontend/deploy/operator.y
 
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext">&gt; deployment.apps/ansible-operator-frontend created
 
-</code></pre></div><p>``</p>
-</li>
+</code></pre></div></li>
 <li>
 <p>Check and wait for the Operator to be running</p>
 
@@ -1213,8 +1206,7 @@ kubectl get pods
 
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext">&gt; NAME                                       READY   STATUS    RESTARTS   AGE
 &gt; ansible-operator-frontend-fd78bcf5-zxgws   1/1     Running   0          43m
-</code></pre></div><p>``</p>
-</li>
+</code></pre></div></li>
 <li>
 <p>Get the log of the Operator Pod (use the Pod name from the previous step)</p>
 
@@ -1260,8 +1252,7 @@ kubectl logs -c operator ansible-operator-frontend-fd78bcf5-zxgws
 &gt; {&#34;level&#34;:&#34;info&#34;,&#34;ts&#34;:1593618338.487868,&#34;logger&#34;:&#34;kubebuilder.controller&#34;,&#34;msg&#34;:&#34;Starting Controller&#34;,&#34;controller&#34;:&#34;myansiblelabdemo-controller&#34;}
 &gt; {&#34;level&#34;:&#34;info&#34;,&#34;ts&#34;:1593618338.5881243,&#34;logger&#34;:&#34;kubebuilder.controller&#34;,&#34;msg&#34;:&#34;Starting workers&#34;,&#34;controller&#34;:&#34;myansiblelabdemo-controller&#34;,&#34;worker count&#34;:1}
 
-</code></pre></div><p>``</p>
-<p>This means that the Operator is working and ready.</p>
+</code></pre></div><p>This means that the Operator is working and ready.</p>
 </li>
 </ol>
 <blockquote>

@@ -51,10 +51,8 @@ Copy   docker top k8sdemo    &amp;gt; UID PID PPID C STIME TTY TIME CMD &amp;gt;
       <guid>https://niklaushirt.github.io/k8s_training_web/jtc01/lab4/</guid>
       <description>To conclude this Lab we have to clean up the containers that we have created
   Terminate the frontend
-Copy   docker kill k8sdemo    &amp;gt; k8sdemo ``
-  And Terminate the backend
-Copy   docker kill k8sdemo-backend    &amp;gt; k8sdemo-backend ``
-  Verify that the two containers have been terminated
+Copy   docker kill k8sdemo    &amp;gt; k8sdemo   And Terminate the backend
+Copy   docker kill k8sdemo-backend    &amp;gt; k8sdemo-backend   Verify that the two containers have been terminated
 Copy   docker ps | grep k8sdemo    This command must return no result.</description>
     </item>
     

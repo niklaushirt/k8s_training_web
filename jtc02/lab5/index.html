@@ -491,8 +491,7 @@ kubectl apply -f ~/training/volumes/1-simple-mysql-pv.yaml
 
 
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext">&gt; persistentvolume/mysql-pv-volume created 
-</code></pre></div><p>``</p>
-</li>
+</code></pre></div></li>
 <li>
 <p>Check that the Volume has been created</p>
 
@@ -526,8 +525,7 @@ kubectl get pv
 
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext">&gt; NAME              CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS      CLAIM   STORAGECLASS   REASON   AGE
 &gt; mysql-pv-volume   1Gi        RWO            Retain           Available                                   4s
-</code></pre></div><p>``</p>
-</li>
+</code></pre></div></li>
 </ol>
 <h2 id="persistentvolumeclaims">PersistentVolumeClaims</h2>
 <p>Now that we have a storage, we need to claim it, make it available for our <code>Pods</code>. So we need a <code>PersistentVolumeClaim</code>. It is a request for storage by a user. It is similar to a pod. Pods consume node resources and <code>PersistentVolumeClaim</code> consume <code>PersistentVolume</code> resources.</p>
@@ -604,8 +602,7 @@ kubectl apply -f ~/training/volumes/2-simple-mysql-pvc.yaml
 
 
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext">&gt; persistentvolumeclaim/mysql-pv-claim created
-</code></pre></div><p>``</p>
-</li>
+</code></pre></div></li>
 <li>
 <p>Check that the Volume has been created. Make sure that the STATUS reads Bound!</p>
 
@@ -639,8 +636,7 @@ kubectl get pvc
 
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext">&gt; NAME             STATUS   VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS   AGE
 &gt; mysql-pv-claim   Bound    pvc-918d5a94-06c7-11ea-80af-080027c4f0ca   1Gi        RWO            standard       5s
-</code></pre></div><p>``</p>
-</li>
+</code></pre></div></li>
 </ol>
 <h2 id="create-the-stateful-deployment">Create the stateful deployment</h2>
 <p>Now let&rsquo;s create the stateful <code>deployment</code> for mysql.</p>
@@ -765,8 +761,7 @@ kubectl apply -f ~/training/volumes/3-simple-mysql-deployment.yaml
 
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext">&gt; deployment.apps/mysql created
 &gt; service/mysql created
-</code></pre></div><p>``</p>
-</li>
+</code></pre></div></li>
 <li>
 <p>Verify that the <code>Deployment</code> has been created and is running  (READY must be 1/1)</p>
 
@@ -800,8 +795,7 @@ kubectl get deployment
 
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext">&gt; NAME    READY   UP-TO-DATE   AVAILABLE   AGE
 &gt; mysql   0/1     1            0           8s
-</code></pre></div><p>``</p>
-</li>
+</code></pre></div></li>
 </ol>
 <h2 id="access-the-mysql-database">Access the mysql database</h2>
 <ol>
@@ -839,8 +833,7 @@ kubectl run -it --rm --image<span style="color:#f92672">=</span>mysql:5.6 --rest
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext">If you don&#39;t see a command prompt, try pressing enter.
 
 mysql&gt; 
-</code></pre></div><p>``</p>
-</li>
+</code></pre></div></li>
 <li>
 <p>Create a new database in mysql:</p>
 
@@ -873,8 +866,7 @@ mysql&gt; CREATE DATABASE testing;
 
 
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext">&gt; Query OK, 1 row affected (0.01 sec)
-</code></pre></div><p>``</p>
-</li>
+</code></pre></div></li>
 <li>
 <p>Check that it has been created</p>
 
@@ -915,8 +907,7 @@ mysql&gt; show databases;
 &gt; | testing            |
 &gt; +--------------------+
 &gt; 4 rows in set (0.00 sec)
-</code></pre></div><p>``</p>
-</li>
+</code></pre></div></li>
 <li>
 <p>Exit the mysql client</p>
 
@@ -950,8 +941,7 @@ mysql&gt; exit
 
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext">    &gt; Bye
     &gt; pod &#34;mysql-client&#34; deleted
-</code></pre></div><p>``</p>
-</li>
+</code></pre></div></li>
 <li>
 <p>Get the list of Pods</p>
 
@@ -985,8 +975,7 @@ kubectl get pods
 
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext">&gt; NAME                     READY   STATUS    RESTARTS   AGE
 &gt; mysql-7b9b7999d8-v4r5l   1/1     Running   0          4m26s
-</code></pre></div><p>``</p>
-</li>
+</code></pre></div></li>
 <li>
 <p>Delete the Pod (you&rsquo;ll have to use the name of your Pod, which is dynamic)</p>
 
@@ -1019,8 +1008,7 @@ kubectl delete pod mysql-7b9b7999d8-v4r5l
 
 
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext">&gt; pod &#34;mysql-7b9b7999d8-v4r5l&#34; deleted
-</code></pre></div><p>``</p>
-</li>
+</code></pre></div></li>
 <li>
 <p>A new Pod has been spun up</p>
 
@@ -1054,8 +1042,7 @@ kubectl get pods
 
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext">&gt; NAME                     READY   STATUS    RESTARTS   AGE
 &gt; mysql-7b9b7999d8-vqln7   1/1     Running   0          18s
-</code></pre></div><p>``</p>
-</li>
+</code></pre></div></li>
 <li>
 <p>Recreate a mysql client</p>
 
@@ -1090,8 +1077,7 @@ kubectl run -it --rm --image<span style="color:#f92672">=</span>mysql:5.6 --rest
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext">If you don&#39;t see a command prompt, try pressing enter.
 
 mysql&gt; 
-</code></pre></div><p>``</p>
-</li>
+</code></pre></div></li>
 <li>
 <p>Verify that the database testing is still there because it has been persisted in the PV through the PVC.</p>
 
@@ -1132,8 +1118,7 @@ mysql&gt; show databases;
 &gt; | testing            |
 &gt; +--------------------+
 &gt; 4 rows in set (0.00 sec)
-</code></pre></div><p>``</p>
-</li>
+</code></pre></div></li>
 <li>
 <p>Exit the mysql client</p>
 
@@ -1167,8 +1152,7 @@ mysql&gt; exit
 
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext">    &gt; Bye
     &gt; pod &#34;mysql-client&#34; deleted
-</code></pre></div><p>``</p>
-</li>
+</code></pre></div></li>
 </ol>
 <h2 id="conclusion">Conclusion</h2>
 <ul>

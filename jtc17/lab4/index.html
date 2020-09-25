@@ -511,8 +511,7 @@ kubectl create secret generic clairsecret --from-file<span style="color:#f92672"
 
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext">&gt; from-file=./config.yaml
 &gt; secret/clairsecret created
-</code></pre></div><p>``</p>
-</li>
+</code></pre></div></li>
 <li>
 <p>Deploy Clair</p>
 
@@ -548,8 +547,7 @@ kubectl create -f clair-kubernetes.yaml
 &gt; replicationcontroller/clair created
 &gt; replicationcontroller/clair-postgres created
 &gt; service/postgres created
-</code></pre></div><p>``</p>
-</li>
+</code></pre></div></li>
 <li>
 <p>Wait for Clair to be running (Ready is 1/1)</p>
 
@@ -584,8 +582,7 @@ kubectl get pods
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext">&gt; NAME                   READY   STATUS              RESTARTS   AGE
 &gt; clair-jcb6r            1/1     Running             0          17s
 &gt; clair-postgres-2rbgj   1/1     Running             0          17s
-</code></pre></div><p>``</p>
-</li>
+</code></pre></div></li>
 </ol>
 <h2 id="use-klar-to-scan-an-image">Use Klar to scan an Image</h2>
 <p>Klar is a simple tool to analyze images stored in a private or public Docker registry for security vulnerabilities using Clair.
@@ -703,8 +700,7 @@ CLAIR_ADDR<span style="color:#f92672">=</span>&lt;MY-CLUSTER-IP&gt;:30060 FORMAT
 &gt; Negligible: 284
 &gt; Low: 135
 &gt; Medium: 2
-</code></pre></div><p>``</p>
-<p>We define several things here:</p>
+</code></pre></div><p>We define several things here:</p>
 <ul>
 <li><code>CLAIR_ADDR </code>: the address of the Clair server</li>
 <li><code>FORMAT_OUTPUT </code>: the format for the output (table in this example)</li>
@@ -775,8 +771,7 @@ CLAIR_ADDR<span style="color:#f92672">=</span>&lt;MY-CLUSTER-IP&gt;:30060 FORMAT
 &gt; |          |               |             |                |         | function.                      |                                                           	&gt; |
 &gt; +----------+---------------+-------------+----------------+---------+--------------------------------	&gt; +-----------------------------------------------------------+
 
-</code></pre></div><p>``</p>
-</li>
+</code></pre></div></li>
 </ol>
 <p>The output shows the detail for the two vulnerabilities with Medum severity.</p>
 <p>You can also output the result to JSON Format to be reused in a CI/CD tool.</p>
