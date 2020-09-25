@@ -416,55 +416,190 @@ however they do not support lifecycle, livenessProbe, readinessProbe, or startup
 <ol>
 <li>
 <p>Run a standard nginx container</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">apiVersion</span>: apps/v1
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_f86d2e7da8">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_f86d2e7da8">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"> 
+<span style="color:#66d9ef">apiVersion</span>: apps/v1
 <span style="color:#66d9ef">kind</span>: Deployment
 <span style="color:#66d9ef">metadata</span>:
-  <span style="color:#66d9ef">name</span>: nginx-demo
-  <span style="color:#66d9ef">namespace</span>: default
-  <span style="color:#66d9ef">labels</span>:
-    <span style="color:#66d9ef">app</span>: nginx-demo
+	<span style="color:#66d9ef">name</span>: nginx-demo
+	<span style="color:#66d9ef">namespace</span>: default
+	<span style="color:#66d9ef">labels</span>:
+		<span style="color:#66d9ef">app</span>: nginx-demo
 <span style="color:#66d9ef">spec</span>:
-  <span style="color:#66d9ef">selector</span>:
-    <span style="color:#66d9ef">matchLabels</span>:
-      <span style="color:#66d9ef">app</span>: nginx-demo
-  <span style="color:#66d9ef">replicas</span>: <span style="color:#ae81ff">1</span>
-  <span style="color:#66d9ef">template</span>:
-    <span style="color:#66d9ef">metadata</span>:
-      <span style="color:#66d9ef">labels</span>:
-        <span style="color:#66d9ef">app</span>: nginx-demo
-    <span style="color:#66d9ef">spec</span>:
-      <span style="color:#66d9ef">containers</span>:
-      - <span style="color:#66d9ef">name</span>: nginx
-        <span style="color:#66d9ef">image</span>: nginx
-        <span style="color:#66d9ef">imagePullPolicy</span>: IfNotPresent 
-        <span style="color:#66d9ef">ports</span>:
-        - <span style="color:#66d9ef">containerPort</span>: <span style="color:#ae81ff">80</span>
-</code></pre></div><p>``</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl apply -f ./training/initContainers/container.yaml
-</code></pre></div><p>``</p>
+	<span style="color:#66d9ef">selector</span>:
+		<span style="color:#66d9ef">matchLabels</span>:
+			<span style="color:#66d9ef">app</span>: nginx-demo
+	<span style="color:#66d9ef">replicas</span>: <span style="color:#ae81ff">1</span>
+	<span style="color:#66d9ef">template</span>:
+		<span style="color:#66d9ef">metadata</span>:
+			<span style="color:#66d9ef">labels</span>:
+				<span style="color:#66d9ef">app</span>: nginx-demo
+		<span style="color:#66d9ef">spec</span>:
+			<span style="color:#66d9ef">containers</span>:
+			- <span style="color:#66d9ef">name</span>: nginx
+				<span style="color:#66d9ef">image</span>: nginx
+				<span style="color:#66d9ef">imagePullPolicy</span>: IfNotPresent 
+				<span style="color:#66d9ef">ports</span>:
+				- <span style="color:#66d9ef">containerPort</span>: <span style="color:#ae81ff">80</span>
+	
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_67862ad0c5">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_67862ad0c5">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> 
+kubectl apply -f ./training/initContainers/container.yaml
+	
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
 </li>
 <li>
 <p>Expose it with a service</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"> <span style="color:#66d9ef">apiVersion</span>: v1
- <span style="color:#66d9ef">kind</span>: Service
- <span style="color:#66d9ef">metadata</span>:
-   <span style="color:#66d9ef">name</span>: nginx-demo-service
- <span style="color:#66d9ef">spec</span>:
-   <span style="color:#66d9ef">selector</span>:
-     <span style="color:#66d9ef">app</span>: nginx-demo
-   <span style="color:#66d9ef">ports</span>:
-     - <span style="color:#66d9ef">protocol</span>: TCP
-       <span style="color:#66d9ef">port</span>: <span style="color:#ae81ff">8000</span>
-       <span style="color:#66d9ef">targetPort</span>: <span style="color:#ae81ff">80</span>
-   <span style="color:#66d9ef">type</span>: NodePort
-</code></pre></div><p>``</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl apply -f ./training/initContainers/service.yaml
-</code></pre></div><p>``</p>
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_cc687f0ff6">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_cc687f0ff6">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"> 
+<span style="color:#66d9ef">apiVersion</span>: v1
+<span style="color:#66d9ef">kind</span>: Service
+<span style="color:#66d9ef">metadata</span>:
+	<span style="color:#66d9ef">name</span>: nginx-demo-service
+<span style="color:#66d9ef">spec</span>:
+	<span style="color:#66d9ef">selector</span>:
+		<span style="color:#66d9ef">app</span>: nginx-demo
+	<span style="color:#66d9ef">ports</span>:
+		- <span style="color:#66d9ef">protocol</span>: TCP
+			<span style="color:#66d9ef">port</span>: <span style="color:#ae81ff">8000</span>
+			<span style="color:#66d9ef">targetPort</span>: <span style="color:#ae81ff">80</span>
+	<span style="color:#66d9ef">type</span>: NodePort
+	
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_eeb7702c9c">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_eeb7702c9c">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> 
+kubectl apply -f ./training/initContainers/service.yaml
+	
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
 </li>
 <li>
 <p>Open the deployment in Firefox</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">minikube service nginx-demo-service
-</code></pre></div><p>``</p>
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_51b3e9b740">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_51b3e9b740">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> 
+minikube service nginx-demo-service
+	
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
 <p>You should see the default nginx welcome page.</p>
 </li>
 </ol>
@@ -472,74 +607,128 @@ however they do not support lifecycle, livenessProbe, readinessProbe, or startup
 <ol start="4">
 <li>
 <p>Update the deployment with the init container</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">apiVersion</span>: apps/v1
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_c5e48f2124">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_c5e48f2124">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"> 
+<span style="color:#66d9ef">apiVersion</span>: apps/v1
 <span style="color:#66d9ef">kind</span>: Deployment
 <span style="color:#66d9ef">metadata</span>:
-  <span style="color:#66d9ef">name</span>: nginx-demo-init
-  <span style="color:#66d9ef">namespace</span>: default
-  <span style="color:#66d9ef">labels</span>:
-    <span style="color:#66d9ef">app</span>: nginx-demo
+	<span style="color:#66d9ef">name</span>: nginx-demo-init
+	<span style="color:#66d9ef">namespace</span>: default
+	<span style="color:#66d9ef">labels</span>:
+		<span style="color:#66d9ef">app</span>: nginx-demo
 <span style="color:#66d9ef">spec</span>:
-  <span style="color:#66d9ef">selector</span>:
-    <span style="color:#66d9ef">matchLabels</span>:
-      <span style="color:#66d9ef">app</span>: nginx-demo
-  <span style="color:#66d9ef">replicas</span>: <span style="color:#ae81ff">1</span>
-  <span style="color:#66d9ef">template</span>:
-    <span style="color:#66d9ef">metadata</span>:
-      <span style="color:#66d9ef">labels</span>:
-        <span style="color:#66d9ef">app</span>: nginx-demo
-    <span style="color:#66d9ef">spec</span>:
-      <span style="color:#66d9ef">containers</span>:
-      - <span style="color:#66d9ef">name</span>: nginx
-        <span style="color:#66d9ef">image</span>: nginx
-        <span style="color:#66d9ef">imagePullPolicy</span>: IfNotPresent 
-        <span style="color:#66d9ef">ports</span>:
-        - <span style="color:#66d9ef">containerPort</span>: <span style="color:#ae81ff">80</span>
-          
-       --&gt; Volume mapped into the nginx pod
-        <span style="color:#66d9ef">volumeMounts</span>:
-        - <span style="color:#66d9ef">name</span>: workdir
-          <span style="color:#66d9ef">mountPath</span>: /usr/share/nginx/html
-             
-      --&gt; This container is run during pod initialization
-      <span style="color:#66d9ef">initContainers</span>:
+	<span style="color:#66d9ef">selector</span>:
+		<span style="color:#66d9ef">matchLabels</span>:
+			<span style="color:#66d9ef">app</span>: nginx-demo
+	<span style="color:#66d9ef">replicas</span>: <span style="color:#ae81ff">1</span>
+	<span style="color:#66d9ef">template</span>:
+		<span style="color:#66d9ef">metadata</span>:
+			<span style="color:#66d9ef">labels</span>:
+				<span style="color:#66d9ef">app</span>: nginx-demo
+		<span style="color:#66d9ef">spec</span>:
+			<span style="color:#66d9ef">containers</span>:
+			- <span style="color:#66d9ef">name</span>: nginx
+				<span style="color:#66d9ef">image</span>: nginx
+				<span style="color:#66d9ef">imagePullPolicy</span>: IfNotPresent 
+				<span style="color:#66d9ef">ports</span>:
+				- <span style="color:#66d9ef">containerPort</span>: <span style="color:#ae81ff">80</span>
+				
+			<span style="color:#75715e">#Volume mapped into the nginx pod</span>
+			<span style="color:#66d9ef">volumeMounts</span>:
+			- <span style="color:#66d9ef">name</span>: workdir
+				<span style="color:#66d9ef">mountPath</span>: /usr/share/nginx/html
+				
+		<span style="color:#75715e">#This container is run during pod initialization</span>
+		<span style="color:#66d9ef">initContainers</span>:
 
-      --&gt; Sleep for <span style="color:#ae81ff">2</span> Seconds
-      - <span style="color:#66d9ef">name</span>: sleep<span style="color:#ae81ff">-1</span>
-        <span style="color:#66d9ef">image</span>: busybox
-        <span style="color:#66d9ef">imagePullPolicy</span>: IfNotPresent
-        <span style="color:#66d9ef">command</span>: [<span style="color:#e6db74">&#39;sh&#39;</span>, <span style="color:#e6db74">&#39;-c&#39;</span>, <span style="color:#e6db74">&#39;echo sleep-1 start; sleep 2;echo sleep-1 complete;&#39;</span>]
-         
-      --&gt; Sleep again for <span style="color:#ae81ff">2</span> Seconds
-      - <span style="color:#66d9ef">name</span>: sleep<span style="color:#ae81ff">-2</span>
-        <span style="color:#66d9ef">image</span>: busybox
-        <span style="color:#66d9ef">imagePullPolicy</span>: IfNotPresent
-        <span style="color:#66d9ef">command</span>: [<span style="color:#e6db74">&#39;sh&#39;</span>, <span style="color:#e6db74">&#39;-c&#39;</span>, <span style="color:#e6db74">&#39;echo sleep-2 start; sleep 2;echo sleep-2 complete;&#39;</span>]
-      - <span style="color:#66d9ef">name</span>: install
-        <span style="color:#66d9ef">image</span>: busybox
-           
-      --&gt; Download index.html and store into work-dir
-        <span style="color:#66d9ef">command</span>:
-        - wget
-        - <span style="color:#e6db74">&#34;-O&#34;</span>
-        - <span style="color:#e6db74">&#34;/work-dir/index.html&#34;</span>
-        - http://kubernetes.io
-        <span style="color:#66d9ef">volumeMounts</span>:
-        - <span style="color:#66d9ef">name</span>: workdir
-          <span style="color:#66d9ef">mountPath</span>: <span style="color:#e6db74">&#34;/work-dir&#34;</span>
-      <span style="color:#66d9ef">dnsPolicy</span>: Default
-      <span style="color:#66d9ef">volumes</span>:
-      - <span style="color:#66d9ef">name</span>: workdir
-        <span style="color:#66d9ef">emptyDir</span>: {}
-</code></pre></div><p>``</p>
+		<span style="color:#75715e">#Sleep for 2 Seconds</span>
+		- <span style="color:#66d9ef">name</span>: sleep<span style="color:#ae81ff">-1</span>
+			<span style="color:#66d9ef">image</span>: busybox
+			<span style="color:#66d9ef">imagePullPolicy</span>: IfNotPresent
+			<span style="color:#66d9ef">command</span>: [<span style="color:#e6db74">&#39;sh&#39;</span>, <span style="color:#e6db74">&#39;-c&#39;</span>, <span style="color:#e6db74">&#39;echo sleep-1 start; sleep 2;echo sleep-1 complete;&#39;</span>]
+		
+		<span style="color:#75715e">#Sleep again for 2 Seconds</span>
+		- <span style="color:#66d9ef">name</span>: sleep<span style="color:#ae81ff">-2</span>
+			<span style="color:#66d9ef">image</span>: busybox
+			<span style="color:#66d9ef">imagePullPolicy</span>: IfNotPresent
+			<span style="color:#66d9ef">command</span>: [<span style="color:#e6db74">&#39;sh&#39;</span>, <span style="color:#e6db74">&#39;-c&#39;</span>, <span style="color:#e6db74">&#39;echo sleep-2 start; sleep 2;echo sleep-2 complete;&#39;</span>]
+		- <span style="color:#66d9ef">name</span>: install
+			<span style="color:#66d9ef">image</span>: busybox
+			
+		<span style="color:#75715e">#Download index.html and store into work-dir</span>
+			<span style="color:#66d9ef">command</span>:
+			- wget
+			- <span style="color:#e6db74">&#34;-O&#34;</span>
+			- <span style="color:#e6db74">&#34;/work-dir/index.html&#34;</span>
+			- http://kubernetes.io
+			<span style="color:#66d9ef">volumeMounts</span>:
+			- <span style="color:#66d9ef">name</span>: workdir
+				<span style="color:#66d9ef">mountPath</span>: <span style="color:#e6db74">&#34;/work-dir&#34;</span>
+		<span style="color:#66d9ef">dnsPolicy</span>: Default
+		<span style="color:#66d9ef">volumes</span>:
+		- <span style="color:#66d9ef">name</span>: workdir
+			<span style="color:#66d9ef">emptyDir</span>: {}
+	
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
 <p>To initialize nginx with some content:</p>
 <ul>
 <li>We create a local volume (work-dir)</li>
 <li>This volume is mapped into the nginx container path (/usr/share/nginx/html) where nginx serves static HTML content from</li>
 <li>An init container (install) that downloads the index.html file from the official Kubernetes webpage and stores it into the volume</li>
 </ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl apply -f ./training/initContainers/init-container.yaml
-</code></pre></div><p>`</p>
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_e256081192">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_e256081192">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> 
+kubectl apply -f ./training/initContainers/init-container.yaml
+	
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
 </li>
 <li>
 <p>Refresh the page in Firefox</p>
@@ -578,7 +767,7 @@ however they do not support lifecycle, livenessProbe, readinessProbe, or startup
 </li>
 </ol>
 <blockquote>
-<h1 id="congratulations-this-concludes-the-lab-on-init-containers">Congratulations!!! This concludes the Lab on Init Containers</h1>
+<p>Congratulations!!! This concludes the Lab</p>
 </blockquote>
 
 
@@ -589,10 +778,8 @@ however they do not support lifecycle, livenessProbe, readinessProbe, or startup
                     <div class="row"><div class="position-relative mx-auto col-lg-9">
                           <div class="bg-primary overflow-hidden p-3 mt-5 shadow">
 
-    <h4 class="text-white text-center">Read more</h4>
 
-    <div class="d-flex justify-content-center"><a class="p-1 mr-3 d-inline-block text-white" href="/k8s_training_web/jtc18/lab1/" title="Lab 1: Liveness and Readiness Probes"><i class="fas fa-chevron-left p-1"></i>Lab 1: Liveness and Readiness Probes</a>
-        <a class="p-1 ml-3 d-inline-block text-white text-right" href="/k8s_training_web/jtc18/lab3/" title="Lab 3: Persistent Volumes">Lab 3: Persistent Volumes<i class="fas fa-chevron-right p-1"></i></a>
+    <div class="d-flex justify-content-center"><a class="p-1 ml-3 d-inline-block text-white text-right" href="/k8s_training_web/jtc18/lab3/" title="Lab 3: Persistent Volumes">Lab 3: Persistent Volumes<i class="fas fa-chevron-right p-1"></i></a>
     </div>
 </div>
 

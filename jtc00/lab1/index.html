@@ -495,8 +495,35 @@ If you have Docker Desktop running please shut it down first, we&rsquo;ll use Do
 </li>
 <li>
 <p>Execute the following commands to initialize your Training Environment</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">./welcome.sh
-</code></pre></div><p>``</p>
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_dc70affa22">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_dc70affa22">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> 
+./welcome.sh
+	
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
 <p>This will</p>
 <ul>
 <li>pull the latest example code from my GitHub repository</li>
@@ -515,7 +542,7 @@ If you have Docker Desktop running please shut it down first, we&rsquo;ll use Do
 </blockquote>
 <h2 id="using-your-own-environment">Using your own environment</h2>
 <p>These are two methods to perform the Labs without downloading and starting the VM.</p>
-<p><img src="./images/important.png" alt=""> This is <strong><code>untested</code></strong> and I cannot guarantee that all the Labs will be working 100%.</p>
+<p><img src="../../../images/important.png" alt=""> This is <strong><code>untested</code></strong> and I cannot guarantee that all the Labs will be working 100%.</p>
 <h3 id="standalone-installation">Standalone installation</h3>
 <p>For installation on your local PC</p>
 <h4 id="1-install-the-prerequisites">1) Install the prerequisites</h4>
@@ -542,13 +569,67 @@ This is <strong><code>untested</code></strong> and I cannot guarantee that all t
 </li>
 <li>
 <p>Get the Cluster IP (MY-CLUSTER-IP)</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">minikube ip
-</code></pre></div><p>``</p>
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_0e136ce986">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_0e136ce986">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> 
+minikube ip
+	
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
 </li>
 <li>
 <p>You can access the PTE via</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">http://&lt;MY-CLUSTER-IP&gt;:31222
-</code></pre></div><p>``</p>
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_878f8cf495">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_878f8cf495">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> 
+http://&lt;MY-CLUSTER-IP&gt;:31222
+	
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
 </li>
 </ol>
 <h3 id="cloud-installation">Cloud Installation</h3>
@@ -583,9 +664,36 @@ This is <strong><code>untested</code></strong> and I cannot guarantee that all t
 </li>
 <li>
 <p>Run the following</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl get nodes                                                                                                                           
-       
-&gt; NAME           STATUS   ROLES    AGE   VERSION
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_a2a5c258d3">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_a2a5c258d3">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> 
+kubectl get nodes                                                                                                                           
+		
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext">&gt; NAME           STATUS   ROLES    AGE   VERSION
 &gt; w.x.y.z.       Ready    &lt;none&gt;   24d   v1.17.6+IKS
 </code></pre></div><p>``</p>
 </li>
@@ -619,14 +727,68 @@ This is <strong>untested</strong> and I cannot guarantee that all the Labs will 
 <li>
 <p>Get the Cluster IP (MY-CLUSTER-IP)</p>
 <p>IBM Cloud Kubernetes Service</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ibmcloud ks worker ls --cluster mycluster-free
-</code></pre></div><p>``</p>
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_0bdfeb1144">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_0bdfeb1144">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> 
+ibmcloud ks worker ls --cluster mycluster-free
+	
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
 <p>Or any other means for other clouds.</p>
 </li>
 <li>
 <p>You can access the PTE via</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">http://&lt;MY-CLUSTER-IP&gt;:31222
-</code></pre></div><p>``</p>
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_878f8cf495">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_878f8cf495">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> 
+http://&lt;MY-CLUSTER-IP&gt;:31222
+	
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
 </li>
 </ol>
 <h2 id="troubleshooting">Troubleshooting</h2>
@@ -654,10 +816,8 @@ This is <strong>untested</strong> and I cannot guarantee that all the Labs will 
                     <div class="row"><div class="position-relative mx-auto col-lg-9">
                           <div class="bg-primary overflow-hidden p-3 mt-5 shadow">
 
-    <h4 class="text-white text-center">Read more</h4>
 
-    <div class="d-flex justify-content-center"><a class="p-1 mr-3 d-inline-block text-white" href="/k8s_training_web/jtc00/" title="Introduction"><i class="fas fa-chevron-left p-1"></i>Introduction</a>
-        <a class="p-1 ml-3 d-inline-block text-white text-right" href="/k8s_training_web/jtc00/lab2/" title="Lab Information and Semantics">Lab Information and Semantics<i class="fas fa-chevron-right p-1"></i></a>
+    <div class="d-flex justify-content-center"><a class="p-1 ml-3 d-inline-block text-white text-right" href="/k8s_training_web/jtc00/lab2/" title="Lab Information and Semantics">Lab Information and Semantics<i class="fas fa-chevron-right p-1"></i></a>
     </div>
 </div>
 

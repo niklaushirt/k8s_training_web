@@ -402,8 +402,35 @@
 <ol start="2">
 <li>
 <p>Open the Grafana Dashboard</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">istioctl dashboard grafana &gt; /dev/null &amp;
-</code></pre></div><p>``</p>
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_b97c57f354">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_b97c57f354">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> 
+istioctl dashboard grafana &gt; /dev/null &amp;
+	
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
 <blockquote>
 <p>Just hit enter a few times to get back the prompt if neeed.</p>
 </blockquote>
@@ -422,19 +449,48 @@
 <p><a href="https://istio.io/docs/tasks/telemetry/logs/">Collecting Logs on Istio</a></p>
 <h2 id="collect-request-traces-using-jaeger">Collect request traces using Jaeger</h2>
 <p>Jaeger is a distributed tracing tool that is available with Istio.</p>
-<ol start="2">
-<li>Access the Jaeger Dashboard</li>
-</ol>
-<pre><code>```bash
-istioctl dashboard jaeger &gt; /dev/null &amp;
-```
+<ol>
+<li>
+<p>Access the Jaeger Dashboard</p>
 
-&gt; Just hit enter a few times to get back the prompt if neeed.
-&gt; 
-</code></pre>
-<ol start="3">
-<li>Select <code>productpage.default</code> in the left hand <code>Service</code> dropdown</li>
-<li>Click <code>Find Traces</code></li>
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_26204e9754">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_26204e9754">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> 
+istioctl dashboard jaeger &gt; /dev/null &amp;
+	
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
+<blockquote>
+<p>Just hit enter a few times to get back the prompt if neeed.</p>
+</blockquote>
+</li>
+<li>
+<p>Select <code>productpage.default</code> in the left hand <code>Service</code> dropdown</p>
+</li>
+<li>
+<p>Click <code>Find Traces</code></p>
+</li>
 </ol>
 <p>Your dashboard should look something like this:</p>
 <p><img src="../../../images/jaeger1.png" alt="jaeger"></p>
@@ -443,6 +499,9 @@ istioctl dashboard jaeger &gt; /dev/null &amp;
 </ol>
 <p><img src="../../../images/jaeger3.png" alt="jaeger"></p>
 <p><a href="https://istio.io/docs/tasks/telemetry/distributed-tracing/">Jaeger Tracing on Istio</a></p>
+<blockquote>
+<p>Congratulations!!! This concludes the Lab</p>
+</blockquote>
 
 
     
@@ -452,10 +511,8 @@ istioctl dashboard jaeger &gt; /dev/null &amp;
                     <div class="row"><div class="position-relative mx-auto col-lg-9">
                           <div class="bg-primary overflow-hidden p-3 mt-5 shadow">
 
-    <h4 class="text-white text-center">Read more</h4>
 
-    <div class="d-flex justify-content-center"><a class="p-1 mr-3 d-inline-block text-white" href="/k8s_training_web/jtc10/lab5/" title="Lab 5: Traffic flow management"><i class="fas fa-chevron-left p-1"></i>Lab 5: Traffic flow management</a>
-        <a class="p-1 ml-3 d-inline-block text-white text-right" href="/k8s_training_web/jtc10/lab7/" title="Lab 7: End-user authentication">Lab 7: End-user authentication<i class="fas fa-chevron-right p-1"></i></a>
+    <div class="d-flex justify-content-center"><a class="p-1 ml-3 d-inline-block text-white text-right" href="/k8s_training_web/jtc10/lab7/" title="Lab 7: End-user authentication">Lab 7: End-user authentication<i class="fas fa-chevron-right p-1"></i></a>
     </div>
 </div>
 

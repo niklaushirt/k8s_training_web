@@ -396,36 +396,143 @@
 <ol>
 <li>
 <p>Install Rakkess</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">curl -LO https://github.com/corneliusweig/rakkess/releases/download/v0.4.4/rakkess-amd64-linux.tar.gz <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>  <span style="color:#f92672">&amp;&amp;</span> tar xf rakkess-amd64-linux.tar.gz rakkess-amd64-linux <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>  <span style="color:#f92672">&amp;&amp;</span> chmod +x rakkess-amd64-linux <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>  <span style="color:#f92672">&amp;&amp;</span> sudo mv -i rakkess-amd64-linux $GOPATH/bin/rakkess
-</code></pre></div><p>``</p>
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_1c516039be">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_1c516039be">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> 
+curl -LO https://github.com/corneliusweig/rakkess/releases/download/v0.4.4/rakkess-amd64-linux.tar.gz <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>	<span style="color:#f92672">&amp;&amp;</span> tar xf rakkess-amd64-linux.tar.gz rakkess-amd64-linux <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>	<span style="color:#f92672">&amp;&amp;</span> chmod +x rakkess-amd64-linux <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>	<span style="color:#f92672">&amp;&amp;</span> sudo mv -i rakkess-amd64-linux $GOPATH/bin/rakkess
+	
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
 </li>
 <li>
 <p>Let&rsquo;s examine the RBAC for the default Namespace:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">rakkess -n default
-</code></pre></div><p>``</p>
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_087c97737f">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_087c97737f">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> 
+rakkess -n default
+	
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
 <p><img src="../../../images/rbac1.png" alt=""></p>
 </li>
 <li>
 <p>And now the RBAC for the ServiceAccount that we have created earlier:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">rakkess --sa service-account-1 -n default
-</code></pre></div><p>``</p>
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_da575de782">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_da575de782">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> 
+rakkess --sa service-account-1 -n default
+	
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
 <p><img src="../../../images/rbac2.png" alt=""></p>
 <p>We can see that the <code>ServcieAccount</code> has the rights to list <code>Services</code> and to create <code>ConfigMaps</code>.
 This corresponds to the <code>api-role</code> <code>Role</code> that we have defined earlier:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">...
-- <span style="color:#66d9ef">apiGroups</span>: [<span style="color:#e6db74">&#34;&#34;</span>]
-  <span style="color:#66d9ef">resources</span>: [<span style="color:#e6db74">&#34;services&#34;</span>]
-  <span style="color:#66d9ef">verbs</span>: [<span style="color:#e6db74">&#34;get&#34;</span>, <span style="color:#e6db74">&#34;list&#34;</span>]
-- <span style="color:#66d9ef">apiGroups</span>: [<span style="color:#e6db74">&#34;&#34;</span>]
-  <span style="color:#66d9ef">resources</span>: [<span style="color:#e6db74">&#34;configmaps&#34;</span>]
-  <span style="color:#66d9ef">verbs</span>: [<span style="color:#e6db74">&#34;create&#34;</span>]
-...
-   
 
-</code></pre></div></li>
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_cc7a91dcbb">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_cc7a91dcbb">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"> 
+  ...
+- <span style="color:#66d9ef">apiGroups</span>: [<span style="color:#e6db74">&#34;&#34;</span>]
+	<span style="color:#66d9ef">resources</span>: [<span style="color:#e6db74">&#34;services&#34;</span>]
+	<span style="color:#66d9ef">verbs</span>: [<span style="color:#e6db74">&#34;get&#34;</span>, <span style="color:#e6db74">&#34;list&#34;</span>]
+- <span style="color:#66d9ef">apiGroups</span>: [<span style="color:#e6db74">&#34;&#34;</span>]
+	<span style="color:#66d9ef">resources</span>: [<span style="color:#e6db74">&#34;configmaps&#34;</span>]
+	<span style="color:#66d9ef">verbs</span>: [<span style="color:#e6db74">&#34;create&#34;</span>]
+	...
+	
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
+</li>
 </ol>
 <h2 id="rbac-view">rbac-view</h2>
 <p>Polaris runs a variety of checks to ensure that Kubernetes pods and controllers are configured using best practices, helping you avoid problems in the future.</p>
@@ -434,27 +541,80 @@ This corresponds to the <code>api-role</code> <code>Role</code> that we have def
 <ol>
 <li>
 <p>Install rbac-view</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e">#Linux</span>
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_d5be834c8a">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_d5be834c8a">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> 
+	<span style="color:#75715e">#Linux</span>
 wget https://github.com/jasonrichardsmith/rbac-view/releases/download/v0.2.1/rbac-view.v0.2.1.linux.tar.gz
 tar xf rbac-view.v0.2.1.linux.tar.gz
 chmod +x ./bin/linux/rbac-view
 sudo mv -i ./bin/linux/rbac-view $GOPATH/bin/rbac-view
+
 
 <span style="color:#75715e">#Mac</span>
 wget https://github.com/jasonrichardsmith/rbac-view/releases/download/v0.2.1/rbac-view.v0.2.1.darwin.tar.gz
 tar xf rbac-view.v0.2.1.darwin.tar.gz
 chmod +x ./bin/darwin/rbac-view
 sudo mv -i ./bin/linux/rbac-view /usr/local/bin/rbac-view
+	
+</code></pre></div>
+    </div>
+</div>
 
 
-</code></pre></div><p>``</p>
+
+
 </li>
 <li>
 <p>Run the following in your Terminal:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">rbac-view 
-   
-&gt; INFO<span style="color:#f92672">[</span>0000<span style="color:#f92672">]</span> Getting K8s client                           
-&gt; INFO<span style="color:#f92672">[</span>0000<span style="color:#f92672">]</span> serving RBAC View and http://localhost:8800            
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_ea9e2e3891">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_ea9e2e3891">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> 
+rbac-view 
+	
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext">&gt; INFO[0000] Getting K8s client                           
+&gt; INFO[0000] serving RBAC View and http://localhost:8800            
 </code></pre></div><p>``</p>
 </li>
 <li>
@@ -462,26 +622,26 @@ sudo mv -i ./bin/linux/rbac-view /usr/local/bin/rbac-view
 </li>
 <li>
 <p>Rbac-view will then run some initialization which may take some time.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">&gt; INFO<span style="color:#f92672">[</span>0000<span style="color:#f92672">]</span> Getting K8s client                           
-&gt; INFO<span style="color:#f92672">[</span>0000<span style="color:#f92672">]</span> serving RBAC View and http://localhost:8800  
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext">&gt; INFO[0000] Getting K8s client                           
+&gt; INFO[0000] serving RBAC View and http://localhost:8800  
 ...
-&gt; INFO<span style="color:#f92672">[</span>0039<span style="color:#f92672">]</span> Building full matrix <span style="color:#66d9ef">for</span> json                
-&gt; INFO<span style="color:#f92672">[</span>0039<span style="color:#f92672">]</span> Building Matrix <span style="color:#66d9ef">for</span> Roles                    
-&gt; INFO<span style="color:#f92672">[</span>0039<span style="color:#f92672">]</span> Retrieving RoleBindings                      
-&gt; INFO<span style="color:#f92672">[</span>0039<span style="color:#f92672">]</span> Building Matrix <span style="color:#66d9ef">for</span> ClusterRoles             
-&gt; INFO<span style="color:#f92672">[</span>0039<span style="color:#f92672">]</span> Retrieving ClusterRoleBindings               
-&gt; INFO<span style="color:#f92672">[</span>0039<span style="color:#f92672">]</span> Retrieved <span style="color:#ae81ff">49</span> ClusterRoleBindings             
-&gt; INFO<span style="color:#f92672">[</span>0039<span style="color:#f92672">]</span> Retrieving ClusterRole system:volume-scheduler 
-&gt; INFO<span style="color:#f92672">[</span>0039<span style="color:#f92672">]</span> Retrieving ClusterRole system:controller:horizontal-pod-autoscaler 
-&gt; INFO<span style="color:#f92672">[</span>0039<span style="color:#f92672">]</span> Retrieving ClusterRole system:controller:generic-garbage-collector 
-&gt; INFO<span style="color:#f92672">[</span>0039<span style="color:#f92672">]</span> Retrieving ClusterRole system:controller:job-controller 
-&gt; INFO<span style="color:#f92672">[</span>0039<span style="color:#f92672">]</span> Retrieving ClusterRole cilium  
+&gt; INFO[0039] Building full matrix for json                
+&gt; INFO[0039] Building Matrix for Roles                    
+&gt; INFO[0039] Retrieving RoleBindings                      
+&gt; INFO[0039] Building Matrix for ClusterRoles             
+&gt; INFO[0039] Retrieving ClusterRoleBindings               
+&gt; INFO[0039] Retrieved 49 ClusterRoleBindings             
+&gt; INFO[0039] Retrieving ClusterRole system:volume-scheduler 
+&gt; INFO[0039] Retrieving ClusterRole system:controller:horizontal-pod-autoscaler 
+&gt; INFO[0039] Retrieving ClusterRole system:controller:generic-garbage-collector 
+&gt; INFO[0039] Retrieving ClusterRole system:controller:job-controller 
+&gt; INFO[0039] Retrieving ClusterRole cilium  
 ... 
-&gt; INFO<span style="color:#f92672">[</span>0048<span style="color:#f92672">]</span> Retrieving Role system:controller:bootstrap-signer in namespace kube-public 
-&gt; INFO<span style="color:#f92672">[</span>0048<span style="color:#f92672">]</span> Retrieving Role kubernetes-dashboard in namespace kubernetes-dashboard 
-&gt; INFO<span style="color:#f92672">[</span>0048<span style="color:#f92672">]</span> Retrieving Role deployment-manager in namespace rbactest 
-&gt; INFO<span style="color:#f92672">[</span>0051<span style="color:#f92672">]</span> Built Matrix <span style="color:#66d9ef">for</span> Roles                       
-&gt; INFO<span style="color:#f92672">[</span>0051<span style="color:#f92672">]</span> Matrix <span style="color:#66d9ef">for</span> json built           
+&gt; INFO[0048] Retrieving Role system:controller:bootstrap-signer in namespace kube-public 
+&gt; INFO[0048] Retrieving Role kubernetes-dashboard in namespace kubernetes-dashboard 
+&gt; INFO[0048] Retrieving Role deployment-manager in namespace rbactest 
+&gt; INFO[0051] Built Matrix for Roles                       
+&gt; INFO[0051] Matrix for json built           
 </code></pre></div><p>``</p>
 </li>
 <li>
@@ -502,8 +662,9 @@ In this cas we can see the <code>ServiceAccount</code> <code>service-account-1</
 </ol>
 <hr>
 <hr>
-<h1 id="congratulations">Congratulations!!!</h1>
-<h1 id="this-concludes-lab-3-on-rbac-tooling">This concludes Lab 3 on RBAC Tooling.</h1>
+<blockquote>
+<p>Congratulations!!! This concludes the Lab</p>
+</blockquote>
 
 
     
@@ -513,10 +674,8 @@ In this cas we can see the <code>ServiceAccount</code> <code>service-account-1</
                     <div class="row"><div class="position-relative mx-auto col-lg-9">
                           <div class="bg-primary overflow-hidden p-3 mt-5 shadow">
 
-    <h4 class="text-white text-center">Read more</h4>
 
-    <div class="d-flex justify-content-center"><a class="p-1 mr-3 d-inline-block text-white" href="/k8s_training_web/jtc17/lab2/" title="Lab 2: Service Accounts"><i class="fas fa-chevron-left p-1"></i>Lab 2: Service Accounts</a>
-        <a class="p-1 ml-3 d-inline-block text-white text-right" href="/k8s_training_web/jtc17/lab4/" title="Lab 4: Image Scanning">Lab 4: Image Scanning<i class="fas fa-chevron-right p-1"></i></a>
+    <div class="d-flex justify-content-center"><a class="p-1 ml-3 d-inline-block text-white text-right" href="/k8s_training_web/jtc17/lab4/" title="Lab 4: Image Scanning">Lab 4: Image Scanning<i class="fas fa-chevron-right p-1"></i></a>
     </div>
 </div>
 

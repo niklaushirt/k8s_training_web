@@ -389,77 +389,272 @@
 <ol>
 <li>
 <p>Execute the following command to get the latest ISTIO source:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">cd
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_962f8fbf8c">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_962f8fbf8c">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> 
+cd
 
 <span style="color:#75715e">#Linux (Lab VM)</span>
 wget https://github.com/istio/istio/releases/download/1.6.4/istio-1.6.4-linux-amd64.tar.gz
 tar xfvz istio-1.6.4-linux-amd64.tar.gz     
-    
+
 <span style="color:#75715e">#Mac</span>
 wget https://github.com/istio/istio/releases/download/1.6.4/istio-1.6.4-osx.tar.gz
 tar xfvz istio-1.6.4-osx.tar.gz
-	
+
 <span style="color:#75715e">#Windows</span>
 Download https://github.com/istio/istio/releases/download/1.6.4/istio-1.6.4-win.zip
-</code></pre></div></li>
+    
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
+</li>
 <li>
 <p>Add the <code>istioctl</code> client to your executables.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">export PATH<span style="color:#f92672">=</span>./istio-1.6.4/bin:$PATH
 
-</code></pre></div></li>
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_04e4b66c4b">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_04e4b66c4b">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> 
+export PATH<span style="color:#f92672">=</span>./istio-1.6.4/bin:$PATH
+    
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
+</li>
 <li>
 <p>Install Istio into the cluster:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">istioctl install --set profile<span style="color:#f92672">=</span>demo
-      
-&gt; Detected that your cluster does not support third party JWT authentication. Falling back to less secure first party JWT. See https://istio.io/docs/ops/best-practices/security/#configure-third-party-service-account-tokens <span style="color:#66d9ef">for</span> details.
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_58b7805664">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_58b7805664">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> 
+istioctl install --set profile<span style="color:#f92672">=</span>demo
+    
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext">&gt; Detected that your cluster does not support third party JWT authentication. Falling back to less secure first party JWT. See https://istio.io/docs/ops/best-practices/security/#configure-third-party-service-account-tokens for details.
 &gt; ✔ Istio core installed                                                                                                                                            
-&gt; - Processing resources <span style="color:#66d9ef">for</span> Istiod. Waiting <span style="color:#66d9ef">for</span> Deployment/istio-system/istiod 
+&gt; - Processing resources for Istiod. Waiting for Deployment/istio-system/istiod 
 &gt; ...
 
-</code></pre></div></li>
+</code></pre></div><p>``</p>
+</li>
 <li>
 <p>Label the default namespace for automatic sidecar injection</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl label namespace default istio-injection<span style="color:#f92672">=</span>enabled                                                                                   
-   
-&gt; namespace/default labeled
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_096c9f157b">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_096c9f157b">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> 
+kubectl label namespace default istio-injection<span style="color:#f92672">=</span>enabled                                                                                   
+	
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext">&gt; namespace/default labeled
 </code></pre></div><p>``</p>
 </li>
 <li>
 <p>Check the labels</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl get ns --show-labels                                                                                                              
-   
-&gt; NAME                   STATUS   AGE   LABELS
-&gt; default                Active   66d   istio-injection<span style="color:#f92672">=</span>enabled
-&gt; istio-system           Active   62s   istio-injection<span style="color:#f92672">=</span>disabled,istio-operator-managed<span style="color:#f92672">=</span>Reconcile,operator.istio.io/	&gt; component<span style="color:#f92672">=</span>Base,operator.istio.io/managed<span style="color:#f92672">=</span>Reconcile,operator.istio.io/version<span style="color:#f92672">=</span>1.4.0
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_5c38eeeff3">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_5c38eeeff3">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> 
+kubectl get ns --show-labels                                                                                                              
+	
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext">&gt; NAME                   STATUS   AGE   LABELS
+&gt; default                Active   66d   istio-injection=enabled
+&gt; istio-system           Active   62s   istio-injection=disabled,istio-operator-managed=Reconcile,operator.istio.io/	&gt; component=Base,operator.istio.io/managed=Reconcile,operator.istio.io/version=1.4.0
 &gt; kube-node-lease        Active   66d   &lt;none&gt;
 &gt; kube-public            Active   66d   &lt;none&gt;
 &gt; kube-system            Active   66d   &lt;none&gt;
-&gt; kubernetes-dashboard   Active   66d   addonmanager.kubernetes.io/mode<span style="color:#f92672">=</span>Reconcile,kubernetes.io/minikube-addons<span style="color:#f92672">=</span>dashboard
+&gt; kubernetes-dashboard   Active   66d   addonmanager.kubernetes.io/mode=Reconcile,kubernetes.io/minikube-addons=dashboard
 </code></pre></div><p>``</p>
 </li>
 <li>
 <p>Ensure the corresponding pods are all in <strong><code>Running</code></strong> state before you continue.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl get pods -n istio-system
-   
-&gt; NAME                                    READY   STATUS    RESTARTS   AGE
-&gt; grafana-5dc4b4676c-dsdb5                1/1     Running   <span style="color:#ae81ff">0</span>          21m
-&gt; istio-egressgateway-5c7967cf9d-gnrpj    1/1     Running   <span style="color:#ae81ff">0</span>          21m
-&gt; istio-ingressgateway-676fbf789d-vldbf   1/1     Running   <span style="color:#ae81ff">0</span>          21m
-&gt; istio-tracing-8584b4d7f9-cj9p6          1/1     Running   <span style="color:#ae81ff">0</span>          21m
-&gt; istiod-55cd8455dd-4gq2j                 1/1     Running   <span style="color:#ae81ff">0</span>          23m
-&gt; kiali-6f457f5964-pvjw5                  1/1     Running   <span style="color:#ae81ff">0</span>          21m
-&gt; prometheus-7f54ff69cd-lf4xz             2/2     Running   <span style="color:#ae81ff">0</span>          21m
-</code></pre></div></li>
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_404ca95b7d">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_404ca95b7d">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> 
+kubectl get pods -n istio-system
+   	
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext">&gt; NAME                                    READY   STATUS    RESTARTS   AGE
+&gt; grafana-5dc4b4676c-dsdb5                1/1     Running   0          21m
+&gt; istio-egressgateway-5c7967cf9d-gnrpj    1/1     Running   0          21m
+&gt; istio-ingressgateway-676fbf789d-vldbf   1/1     Running   0          21m
+&gt; istio-tracing-8584b4d7f9-cj9p6          1/1     Running   0          21m
+&gt; istiod-55cd8455dd-4gq2j                 1/1     Running   0          23m
+&gt; kiali-6f457f5964-pvjw5                  1/1     Running   0          21m
+&gt; prometheus-7f54ff69cd-lf4xz             2/2     Running   0          21m
+</code></pre></div><p>``</p>
+</li>
 <li>
 <p>Patch the NodePort of the Istio Ingress to 30762. Like that we are sure that the HTTP port is fixed and known.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl patch service -n istio-system istio-ingressgateway -p <span style="color:#e6db74">&#39;{&#34;spec&#34;: {&#34;ports&#34;: [{&#34;nodePort&#34;: 30762,&#34;port&#34;:80,&#34;name&#34;: &#34;http2&#34;}],&#34;type&#34;: &#34;NodePort&#34;}}&#39;</span>
-   
- &gt; service/istio-ingressgateway patched
-</code></pre></div></li>
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_a066d68fc8">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_a066d68fc8">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> 
+kubectl patch service -n istio-system istio-ingressgateway -p <span style="color:#e6db74">&#39;{&#34;spec&#34;: {&#34;ports&#34;: [{&#34;nodePort&#34;: 30762,&#34;port&#34;:80,&#34;name&#34;: &#34;http2&#34;}],&#34;type&#34;: &#34;NodePort&#34;}}&#39;</span>
+    
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext"> &gt; service/istio-ingressgateway patched
+</code></pre></div><p>``</p>
+</li>
 </ol>
 <p>​
 Before you continue, make sure all the pods are deployed and are either in the <strong><code>Running</code></strong> or <strong><code>Completed</code></strong> state. If they&rsquo;re in <code>Pending</code> or <code>CrashLoopBackOff</code> state, wait a few minutes to let the deployment to settle.</p>
-<p><strong>Congratulations! You successfully installed Istio into your cluster.</strong></p>
+<blockquote>
+<p>Congratulations!!! This concludes the Lab</p>
+</blockquote>
 
 
     
@@ -469,10 +664,8 @@ Before you continue, make sure all the pods are deployed and are either in the <
                     <div class="row"><div class="position-relative mx-auto col-lg-9">
                           <div class="bg-primary overflow-hidden p-3 mt-5 shadow">
 
-    <h4 class="text-white text-center">Read more</h4>
 
-    <div class="d-flex justify-content-center"><a class="p-1 mr-3 d-inline-block text-white" href="/k8s_training_web/jtc10/lab1/" title="Lab 1: Get to know ISTIO"><i class="fas fa-chevron-left p-1"></i>Lab 1: Get to know ISTIO</a>
-        <a class="p-1 ml-3 d-inline-block text-white text-right" href="/k8s_training_web/jtc10/lab3/" title="Lab 3: Deploy BookInfo application ">Lab 3: Deploy BookInfo application <i class="fas fa-chevron-right p-1"></i></a>
+    <div class="d-flex justify-content-center"><a class="p-1 ml-3 d-inline-block text-white text-right" href="/k8s_training_web/jtc10/lab3/" title="Lab 3: Deploy BookInfo application ">Lab 3: Deploy BookInfo application <i class="fas fa-chevron-right p-1"></i></a>
     </div>
 </div>
 

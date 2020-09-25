@@ -399,44 +399,181 @@
 <ol>
 <li>
 <p>Install Polaris Dashboard by running:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl apply -f ~/training/tools/polaris.yaml
-   
-&gt; namespace/polaris created
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_a365ab3910">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_a365ab3910">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> 
+kubectl apply -f ~/training/tools/polaris.yaml
+	
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext">&gt; namespace/polaris created
 &gt; configmap/polaris created
 &gt; serviceaccount/polaris-dashboard created
 &gt; clusterrole.rbac.authorization.k8s.io/polaris-dashboard created
 &gt; clusterrolebinding.rbac.authorization.k8s.io/polaris-dashboard created
 &gt; service/polaris-dashboard created
 &gt; deployment.apps/polaris-dashboard created
-   
 </code></pre></div><p>``</p>
 </li>
 <li>
 <p>Wait until the pod si running:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl get pods -n polaris
-   
-&gt; NAME                                 READY     STATUS    RESTARTS   AGE
-&gt; polaris-dashboard-69f5bc4b5d-8jz24   1/1       Running   <span style="color:#ae81ff">0</span>          66s
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_cb3bf0dbe1">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_cb3bf0dbe1">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> 
+kubectl get pods -n polaris
+	
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext">&gt; NAME                                 READY     STATUS    RESTARTS   AGE
+&gt; polaris-dashboard-69f5bc4b5d-8jz24   1/1       Running   0          66s
 </code></pre></div><p>``</p>
 </li>
 <li>
 <p>Once the status reads <code>Running</code>, we need to expose the Dashboard as a service so we can access it:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl expose deployment polaris-dashboard -n polaris --name polaris-dashboard-service --type<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;NodePort&#34;</span> --port<span style="color:#f92672">=</span><span style="color:#ae81ff">8080</span>
-   
-&gt; service/polaris-dashboard-service exposed
-</code></pre></div></li>
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_ca9c71d510">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_ca9c71d510">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> 
+kubectl expose deployment polaris-dashboard -n polaris --name polaris-dashboard-service --type<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;NodePort&#34;</span> --port<span style="color:#f92672">=</span><span style="color:#ae81ff">8080</span>
+	
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext">&gt; service/polaris-dashboard-service exposed
+</code></pre></div><p>``</p>
+</li>
 <li>
 <p>The Polaris Dashboard is now running in your cluster, and exposed to the internet.
 You can open it by typing:</p>
 <p><img src="../../../images/vm.png" alt=""> <strong>Training VM</strong></p>
 <p>If you are using the training VM, you can open Polaris directly by typing:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">minikube service polaris-dashboard-service -n polaris
-</code></pre></div><hr>
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_e623d8bf4a">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_e623d8bf4a">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> 
+	minikube service polaris-dashboard-service -n polaris
+    
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
+<hr>
 <p><img src="../../../images/cloud.png" alt=""> <strong>Cloud/Standalone</strong></p>
 <p>If you are <strong>NOT</strong> using the training VM, you can open the webpage by forwarding a local port to the service in your Cluster.</p>
 <p>Execute this in a separate Terminal Window/Tab in order to be able to access the web page:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl port-forward --namespace polaris <span style="color:#66d9ef">$(</span>kubectl get po -n polaris | grep polaris-dashboard | <span style="color:#ae81ff">\a</span>wk <span style="color:#e6db74">&#39;{print $1;}&#39;</span><span style="color:#66d9ef">)</span> 8080:8080 
-</code></pre></div><p>And then navigating to <a href="http://localhost:8080/">http://localhost:8080/</a> in your browser.</p>
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_ec88241f32">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_ec88241f32">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> 
+	kubectl port-forward --namespace polaris <span style="color:#66d9ef">$(</span>kubectl get po -n polaris | grep polaris-dashboard | <span style="color:#ae81ff">\a</span>wk <span style="color:#e6db74">&#39;{print $1;}&#39;</span><span style="color:#66d9ef">)</span> 8080:8080 
+    
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
+<p>And then navigating to <a href="http://localhost:8080/">http://localhost:8080/</a> in your browser.</p>
 </li>
 <li>
 <p>Look around the Dashboard to get familiar with the checks.</p>
@@ -444,8 +581,35 @@ You can open it by typing:</p>
 </li>
 <li>
 <p>Let&rsquo;s deploy a version of <code>k8sdemo</code> that has some more problems by running:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl create -f ~/training/deployment/demoapp-errors.yaml
-</code></pre></div><p>``</p>
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_b64659dfef">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_b64659dfef">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> 
+kubectl create -f ~/training/deployment/demoapp-errors.yaml
+	
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
 <p>This action will take a bit of time. To check the status of the running application, you can use <code> kubectl get pods</code>.</p>
 </li>
 <li>
@@ -456,9 +620,36 @@ You can open it by typing:</p>
 <ol start="8">
 <li>
 <p>Clean-up by running:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl delete -f ~/training/deployment/demoapp-errors.yaml
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_e3654a9e23">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_e3654a9e23">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> 
+kubectl delete -f ~/training/deployment/demoapp-errors.yaml
 kubectl delete -f ~/training/tools/polaris.yaml
-</code></pre></div><p>``</p>
+	
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
 </li>
 </ol>
 <p>Now on to the next tool&hellip;</p>
@@ -480,49 +671,103 @@ kubectl delete -f ~/training/tools/polaris.yaml
 <ol>
 <li>
 <p>Let&rsquo;s examine the list of passive test (non intrusive, aka that do not change the cluster state) that kube-hunter runs:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">~/kube-hunter/kube-hunter.py --list
-   
-&gt; Passive Hunters:
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_07fa3095a2">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_07fa3095a2">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> 
+~/kube-hunter/kube-hunter.py --list
+	
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext">&gt; Passive Hunters:
 &gt; ----------------
 &gt; * Mount Hunter - /var/log
-&gt;   Hunt pods that have write access to host<span style="color:#960050;background-color:#1e0010">&#39;</span>s /var/log. in such <span style="color:#66d9ef">case</span>, the pod can traverse read files on the host machine
+&gt;   Hunt pods that have write access to host&#39;s /var/log. in such case, the pod can traverse read files on the host machine
 &gt; 
 &gt; * Host Discovery when running as pod
 &gt;   Generates ip adresses to scan, based on cluster/scan type
 &gt; 
 &gt; * API Server Hunter
-&gt;   Checks <span style="color:#66d9ef">if</span> API server is accessible
+&gt;   Checks if API server is accessible
 &gt; 
 &gt; * K8s CVE Hunter
-&gt;   Checks <span style="color:#66d9ef">if</span> Node is running a Kubernetes version vulnerable to specific important CVEs
+&gt;   Checks if Node is running a Kubernetes version vulnerable to specific important CVEs
 &gt; 
 &gt; * Proxy Discovery
-&gt;   Checks <span style="color:#66d9ef">for</span> the existence of a an open Proxy service
+&gt;   Checks for the existence of a an open Proxy service
 &gt; 
 &gt; * Pod Capabilities Hunter
-&gt;   Checks <span style="color:#66d9ef">for</span> default enabled capabilities in a pod
+&gt;   Checks for default enabled capabilities in a pod
 &gt; 
 &gt; * Kubectl CVE Hunter
-&gt;   Checks <span style="color:#66d9ef">if</span> the kubectl client is vulnerable to specific important CVEs
+&gt;   Checks if the kubectl client is vulnerable to specific important CVEs
 ...
-   
+
 </code></pre></div><p>``</p>
 </li>
 <li>
 <p>Let&rsquo;s examine the list of passive test (non intrusive, aka that do not change the cluster state) that kube-hunter runs:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">~/kube-hunter/kube-hunter.py --list --active
-   
-&gt; Passive Hunters:
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_597d2c5de6">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_597d2c5de6">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> 
+~/kube-hunter/kube-hunter.py --list --active
+	
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext">&gt; Passive Hunters:
 &gt; ----------------
 ...
-   
+
 &gt; Active Hunters:
 &gt; ---------------
 &gt; * Kubelet System Logs Hunter
-&gt;   Retrieves commands from host<span style="color:#960050;background-color:#1e0010">&#39;</span>s system audit
+&gt;   Retrieves commands from host&#39;s system audit
 &gt; 
 &gt; * Etcd Remote Access
-&gt;   Checks <span style="color:#66d9ef">for</span> remote write access to etcd- will attempt to add a new key to the etcd DB
+&gt;   Checks for remote write access to etcd- will attempt to add a new key to the etcd DB
 &gt; 
 &gt; * Azure SPN Hunter
 &gt;   Gets the azure subscription file on the host by executing inside a container
@@ -534,25 +779,105 @@ kubectl delete -f ~/training/tools/polaris.yaml
 &gt;   Executes uname inside of a random container
 &gt; 
 ...
-   
 </code></pre></div><p>``</p>
 </li>
 <li>
 <p>Get the Cluster IP (MY-CLUSTER-IP)</p>
 <p>Use the adequate method for this:</p>
 <p>Minikube in the training VM</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">minikube ip
-</code></pre></div><p>``
+<p>
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_0e136ce986">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_0e136ce986">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> 
+minikube ip
+	
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
 or</p>
 <p>IBM Cloud Kubernetes Service</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ibmcloud ks worker ls --cluster mycluster-free
-</code></pre></div><p>``</p>
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_0bdfeb1144">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_0bdfeb1144">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> 
+ibmcloud ks worker ls --cluster mycluster-free
+	
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
 </li>
 <li>
 <p>Now let&rsquo;s run an active and passive test against our minikube cluster::</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">~/kube-hunter/kube-hunter.py  --remote &lt;MY-CLUSTER-IP&gt; --active
-   
-&gt; ~ Started
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_0ef73b571b">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_0ef73b571b">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> 
+~/kube-hunter/kube-hunter.py  --remote &lt;MY-CLUSTER-IP&gt; --active
+	
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext">&gt; ~ Started
 &gt; ~ Discovering Open Kubernetes Services...
 &gt; |
 &gt; | Etcd:
@@ -560,9 +885,9 @@ or</p>
 &gt; |   service: Etcd
 &gt; |_  location: localhost:2379
 &gt; |
-&gt; | Kubelet API <span style="color:#f92672">(</span>readonly<span style="color:#f92672">)</span>:
+&gt; | Kubelet API (readonly):
 &gt; |   type: open service
-&gt; |   service: Kubelet API <span style="color:#f92672">(</span>readonly<span style="color:#f92672">)</span>
+&gt; |   service: Kubelet API (readonly)
 &gt; |_  location: localhost:10255
 ...
 </code></pre></div><p>``</p>
@@ -571,7 +896,27 @@ or</p>
 <p><strong>Findings</strong></p>
 <p>You should get no findings, meaning that the Minikube instance has been correctly configured.</p>
 <p>If you get vulnerabilities like the following, this might be due to the fact that <code>minikube</code> API by default allows for access with user <code>system:anonymous</code>.</p>
-<pre><code>+-----------------+----------------------+----------------------+----------------------+----------+
+<p>
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_40e9755f39">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_40e9755f39">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> 
++-----------------+----------------------+----------------------+----------------------+----------+
 | LOCATION        | CATEGORY             | VULNERABILITY        | DESCRIPTION          | EVIDENCE |
 +-----------------+----------------------+----------------------+----------------------+----------+
 | localhost:10250 | Remote Code          | Anonymous            | The kubelet is       |          |
@@ -583,7 +928,15 @@ or</p>
 |                 |                      |                      | need to authenticate |          |
 +-----------------+----------------------+----------------------+----------------------+----------+
 
-</code></pre><p>This should (hopefully!) not be the case in your clusters and in this case could be remediated by launching <code>minikube</code> with the option <code>--extra-config=apiserver.anonymous-auth=false</code></p>
+
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
+This should (hopefully!) not be the case in your clusters and in this case could be remediated by launching <code>minikube</code> with the option <code>--extra-config=apiserver.anonymous-auth=false</code></p>
 <h2 id="kubesec">kubesec</h2>
 <p><a href="https://kubesec.io/">kubesec</a> is a utility that performs security risk analysis for Kubernetes resources and tells you what you should change in order to improve the security of those pods. It also gives you a score that you can use to create a minimum standard. The score incorporates a great number of Kubernetes best practices.</p>
 <p><img src="../../../images/vm.png" alt=""> <strong>Training VM</strong></p>
@@ -598,92 +951,200 @@ or</p>
 <ol start="2">
 <li>
 <p>Launch a test against the demo application</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubesec scan ~/training/deployment/demoapp.yaml
-</code></pre></div><p>``</p>
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_72dcb917cc">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_72dcb917cc">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> 
+kubesec scan ~/training/deployment/demoapp.yaml
+	
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
 <p>The output is in JSON format that can easily be integrated into a CI/CD process.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">[
-  {
-    <span style="color:#66d9ef">&#34;object&#34;: </span><span style="color:#e6db74">&#34;Deployment/k8sdemo.default&#34;</span>,
-    <span style="color:#66d9ef">&#34;valid&#34;: </span><span style="color:#66d9ef">true</span>,
-    <span style="color:#66d9ef">&#34;message&#34;: </span><span style="color:#e6db74">&#34;Passed with a score of 4 points&#34;</span>,
-    <span style="color:#66d9ef">&#34;score&#34;: </span><span style="color:#ae81ff">4</span>,
-    <span style="color:#66d9ef">&#34;scoring&#34;: </span>{
-      <span style="color:#66d9ef">&#34;advise&#34;: </span>[
-        {
-          <span style="color:#66d9ef">&#34;selector&#34;: </span><span style="color:#e6db74">&#34;.metadata .annotations .\&#34;container.apparmor.security.beta.kubernetes.io/nginx\&#34;&#34;</span>,
-          <span style="color:#66d9ef">&#34;reason&#34;: </span><span style="color:#e6db74">&#34;Well defined AppArmor policies may provide greater protection from unknown threats. WARNING: NOT PRODUCTION READY&#34;</span>,
-          <span style="color:#66d9ef">&#34;points&#34;: </span><span style="color:#ae81ff">3</span>
-        },
-        {
-          <span style="color:#66d9ef">&#34;selector&#34;: </span><span style="color:#e6db74">&#34;.spec .serviceAccountName&#34;</span>,
-          <span style="color:#66d9ef">&#34;reason&#34;: </span><span style="color:#e6db74">&#34;Service accounts restrict Kubernetes API access and should be configured with least privilege&#34;</span>,
-          <span style="color:#66d9ef">&#34;points&#34;: </span><span style="color:#ae81ff">3</span>
-        },
-        {
-          <span style="color:#66d9ef">&#34;selector&#34;: </span><span style="color:#e6db74">&#34;.metadata .annotations .\&#34;container.seccomp.security.alpha.kubernetes.io/pod\&#34;&#34;</span>,
-          <span style="color:#66d9ef">&#34;reason&#34;: </span><span style="color:#e6db74">&#34;Seccomp profiles set minimum privilege and secure against unknown threats&#34;</span>,
-          <span style="color:#66d9ef">&#34;points&#34;: </span><span style="color:#ae81ff">1</span>
-        },
-        {
-          <span style="color:#66d9ef">&#34;selector&#34;: </span><span style="color:#e6db74">&#34;containers[] .securityContext .capabilities .drop&#34;</span>,
-          <span style="color:#66d9ef">&#34;reason&#34;: </span><span style="color:#e6db74">&#34;Reducing kernel capabilities available to a container limits its attack surface&#34;</span>,
-          <span style="color:#66d9ef">&#34;points&#34;: </span><span style="color:#ae81ff">1</span>
-        },
-        {
-          <span style="color:#66d9ef">&#34;selector&#34;: </span><span style="color:#e6db74">&#34;containers[] .securityContext .capabilities .drop | index(\&#34;ALL\&#34;)&#34;</span>,
-          <span style="color:#66d9ef">&#34;reason&#34;: </span><span style="color:#e6db74">&#34;Drop all capabilities and add only those required to reduce syscall attack surface&#34;</span>,
-          <span style="color:#66d9ef">&#34;points&#34;: </span><span style="color:#ae81ff">1</span>
-        },
-        {
-          <span style="color:#66d9ef">&#34;selector&#34;: </span><span style="color:#e6db74">&#34;containers[] .securityContext .readOnlyRootFilesystem == true&#34;</span>,
-          <span style="color:#66d9ef">&#34;reason&#34;: </span><span style="color:#e6db74">&#34;An immutable root filesystem can prevent malicious binaries being added to PATH and increase attack cost&#34;</span>,
-          <span style="color:#66d9ef">&#34;points&#34;: </span><span style="color:#ae81ff">1</span>
-        },
-        {
-          <span style="color:#66d9ef">&#34;selector&#34;: </span><span style="color:#e6db74">&#34;containers[] .securityContext .runAsNonRoot == true&#34;</span>,
-          <span style="color:#66d9ef">&#34;reason&#34;: </span><span style="color:#e6db74">&#34;Force the running image to run as a non-root user to ensure least privilege&#34;</span>,
-          <span style="color:#66d9ef">&#34;points&#34;: </span><span style="color:#ae81ff">1</span>
-        },
-        {
-          <span style="color:#66d9ef">&#34;selector&#34;: </span><span style="color:#e6db74">&#34;containers[] .securityContext .runAsUser -gt 10000&#34;</span>,
-          <span style="color:#66d9ef">&#34;reason&#34;: </span><span style="color:#e6db74">&#34;Run as a high-UID user to avoid conflicts with the host&#39;s user table&#34;</span>,
-          <span style="color:#66d9ef">&#34;points&#34;: </span><span style="color:#ae81ff">1</span>
-        }
-      ]
-    }
-  }
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_215a87aebe">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_215a87aebe">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json"> 
+[
+	{
+		<span style="color:#f92672">&#34;object&#34;</span>: <span style="color:#e6db74">&#34;Deployment/k8sdemo.default&#34;</span>,
+		<span style="color:#f92672">&#34;valid&#34;</span>: <span style="color:#66d9ef">true</span>,
+		<span style="color:#f92672">&#34;message&#34;</span>: <span style="color:#e6db74">&#34;Passed with a score of 4 points&#34;</span>,
+		<span style="color:#f92672">&#34;score&#34;</span>: <span style="color:#ae81ff">4</span>,
+		<span style="color:#f92672">&#34;scoring&#34;</span>: {
+			<span style="color:#f92672">&#34;advise&#34;</span>: [
+				{
+					<span style="color:#f92672">&#34;selector&#34;</span>: <span style="color:#e6db74">&#34;.metadata .annotations .\&#34;container.apparmor.security.beta.kubernetes.io/nginx\&#34;&#34;</span>,
+					<span style="color:#f92672">&#34;reason&#34;</span>: <span style="color:#e6db74">&#34;Well defined AppArmor policies may provide greater protection from unknown threats. WARNING: NOT PRODUCTION READY&#34;</span>,
+					<span style="color:#f92672">&#34;points&#34;</span>: <span style="color:#ae81ff">3</span>
+				},
+				{
+					<span style="color:#f92672">&#34;selector&#34;</span>: <span style="color:#e6db74">&#34;.spec .serviceAccountName&#34;</span>,
+					<span style="color:#f92672">&#34;reason&#34;</span>: <span style="color:#e6db74">&#34;Service accounts restrict Kubernetes API access and should be configured with least privilege&#34;</span>,
+					<span style="color:#f92672">&#34;points&#34;</span>: <span style="color:#ae81ff">3</span>
+				},
+				{
+					<span style="color:#f92672">&#34;selector&#34;</span>: <span style="color:#e6db74">&#34;.metadata .annotations .\&#34;container.seccomp.security.alpha.kubernetes.io/pod\&#34;&#34;</span>,
+					<span style="color:#f92672">&#34;reason&#34;</span>: <span style="color:#e6db74">&#34;Seccomp profiles set minimum privilege and secure against unknown threats&#34;</span>,
+					<span style="color:#f92672">&#34;points&#34;</span>: <span style="color:#ae81ff">1</span>
+				},
+				{
+					<span style="color:#f92672">&#34;selector&#34;</span>: <span style="color:#e6db74">&#34;containers[] .securityContext .capabilities .drop&#34;</span>,
+					<span style="color:#f92672">&#34;reason&#34;</span>: <span style="color:#e6db74">&#34;Reducing kernel capabilities available to a container limits its attack surface&#34;</span>,
+					<span style="color:#f92672">&#34;points&#34;</span>: <span style="color:#ae81ff">1</span>
+				},
+				{
+					<span style="color:#f92672">&#34;selector&#34;</span>: <span style="color:#e6db74">&#34;containers[] .securityContext .capabilities .drop | index(\&#34;ALL\&#34;)&#34;</span>,
+					<span style="color:#f92672">&#34;reason&#34;</span>: <span style="color:#e6db74">&#34;Drop all capabilities and add only those required to reduce syscall attack surface&#34;</span>,
+					<span style="color:#f92672">&#34;points&#34;</span>: <span style="color:#ae81ff">1</span>
+				},
+				{
+					<span style="color:#f92672">&#34;selector&#34;</span>: <span style="color:#e6db74">&#34;containers[] .securityContext .readOnlyRootFilesystem == true&#34;</span>,
+					<span style="color:#f92672">&#34;reason&#34;</span>: <span style="color:#e6db74">&#34;An immutable root filesystem can prevent malicious binaries being added to PATH and increase attack cost&#34;</span>,
+					<span style="color:#f92672">&#34;points&#34;</span>: <span style="color:#ae81ff">1</span>
+				},
+				{
+					<span style="color:#f92672">&#34;selector&#34;</span>: <span style="color:#e6db74">&#34;containers[] .securityContext .runAsNonRoot == true&#34;</span>,
+					<span style="color:#f92672">&#34;reason&#34;</span>: <span style="color:#e6db74">&#34;Force the running image to run as a non-root user to ensure least privilege&#34;</span>,
+					<span style="color:#f92672">&#34;points&#34;</span>: <span style="color:#ae81ff">1</span>
+				},
+				{
+					<span style="color:#f92672">&#34;selector&#34;</span>: <span style="color:#e6db74">&#34;containers[] .securityContext .runAsUser -gt 10000&#34;</span>,
+					<span style="color:#f92672">&#34;reason&#34;</span>: <span style="color:#e6db74">&#34;Run as a high-UID user to avoid conflicts with the host&#39;s user table&#34;</span>,
+					<span style="color:#f92672">&#34;points&#34;</span>: <span style="color:#ae81ff">1</span>
+				}
+			]
+		}
+	}
 ]
-   
-</code></pre></div><p>``</p>
+
+	
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
 </li>
 <li>
 <p>Launch a test against a really vulnerable app</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubesec scan ~/training/kubesec/critical.yaml 
-</code></pre></div><p>``</p>
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_220c3cd04b">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_220c3cd04b">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> 
+kubesec scan ~/training/kubesec/critical.yaml 
+	
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
 <p>The output is in JSON format that can easily be integrated into a CI/CD process.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">    [
-      {
-        <span style="color:#66d9ef">&#34;object&#34;: </span><span style="color:#e6db74">&#34;Pod/kubesec-test.default&#34;</span>,
-        <span style="color:#66d9ef">&#34;valid&#34;: </span><span style="color:#66d9ef">true</span>,
-        <span style="color:#66d9ef">&#34;message&#34;: </span><span style="color:#e6db74">&#34;Failed with a score of -37 points&#34;</span>,
-        <span style="color:#66d9ef">&#34;score&#34;: </span>-<span style="color:#ae81ff">37</span>,
-        <span style="color:#66d9ef">&#34;scoring&#34;: </span>{
-          <span style="color:#66d9ef">&#34;critical&#34;: </span>[
-            {
-              <span style="color:#66d9ef">&#34;selector&#34;: </span><span style="color:#e6db74">&#34;containers[] .securityContext .privileged == true&#34;</span>,
-              <span style="color:#66d9ef">&#34;reason&#34;: </span><span style="color:#e6db74">&#34;Privileged containers can allow almost completely unrestricted host access&#34;</span>,
-              <span style="color:#66d9ef">&#34;points&#34;: </span>-<span style="color:#ae81ff">30</span>
-            },
-            {
-              <span style="color:#66d9ef">&#34;selector&#34;: </span><span style="color:#e6db74">&#34;containers[] .securityContext .allowPrivilegeEscalation == true&#34;</span>,
-              <span style="color:#66d9ef">&#34;reason&#34;: </span><span style="color:#e6db74">&#34;&#34;</span>,
-              <span style="color:#66d9ef">&#34;points&#34;: </span>-<span style="color:#ae81ff">7</span>
-            }
-          ],
-          <span style="color:#66d9ef">&#34;advise&#34;: </span>[
-            {
-          ....
-</code></pre></div><p>``</p>
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_2482a49dd9">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_2482a49dd9">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json"> 
+	[
+		{
+			<span style="color:#f92672">&#34;object&#34;</span>: <span style="color:#e6db74">&#34;Pod/kubesec-test.default&#34;</span>,
+			<span style="color:#f92672">&#34;valid&#34;</span>: <span style="color:#66d9ef">true</span>,
+			<span style="color:#f92672">&#34;message&#34;</span>: <span style="color:#e6db74">&#34;Failed with a score of -37 points&#34;</span>,
+			<span style="color:#f92672">&#34;score&#34;</span>: <span style="color:#ae81ff">-37</span>,
+			<span style="color:#f92672">&#34;scoring&#34;</span>: {
+				<span style="color:#f92672">&#34;critical&#34;</span>: [
+					{
+						<span style="color:#f92672">&#34;selector&#34;</span>: <span style="color:#e6db74">&#34;containers[] .securityContext .privileged == true&#34;</span>,
+						<span style="color:#f92672">&#34;reason&#34;</span>: <span style="color:#e6db74">&#34;Privileged containers can allow almost completely unrestricted host access&#34;</span>,
+						<span style="color:#f92672">&#34;points&#34;</span>: <span style="color:#ae81ff">-30</span>
+					},
+					{
+						<span style="color:#f92672">&#34;selector&#34;</span>: <span style="color:#e6db74">&#34;containers[] .securityContext .allowPrivilegeEscalation == true&#34;</span>,
+						<span style="color:#f92672">&#34;reason&#34;</span>: <span style="color:#e6db74">&#34;&#34;</span>,
+						<span style="color:#f92672">&#34;points&#34;</span>: <span style="color:#ae81ff">-7</span>
+					}
+				],
+				<span style="color:#f92672">&#34;advise&#34;</span>: [
+					{
+				<span style="color:#960050;background-color:#1e0010">....</span>
+	
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
 </li>
 </ol>
 <p>kubesec gives us a simple tool to check the deployment manifests early on and integrate into a CI/CD process at build-time.
@@ -700,59 +1161,171 @@ KubeSec can run in different ways (commandline, Docker container and even as a K
 <a href="https://www.conftest.dev/install/">https://www.conftest.dev/install/</a></p>
 </blockquote>
 <ol start="2">
-<li>Launch a test against the demo application</li>
-</ol>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">conftest test -p ~/training/conftest/src/examples/kubernetes/policy ~/training/deployment/demoapp.yaml
+<li>
+<p>Launch a test against the demo application</p>
 
-&gt; FAIL - /home/training/training/deployment/demoapp.yaml - Containers must not run as root in Deployment k8sdemo
-&gt; FAIL - /home/training/training/deployment/demoapp.yaml - Deployment k8sdemo must provide app/release labels <span style="color:#66d9ef">for</span> pod selectors
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_fd98b64820">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_fd98b64820">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> 
+conftest test -p ~/training/conftest/src/examples/kubernetes/policy ~/training/deployment/demoapp.yaml
+	
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext">&gt; FAIL - /home/training/training/deployment/demoapp.yaml - Containers must not run as root in Deployment k8sdemo
+&gt; FAIL - /home/training/training/deployment/demoapp.yaml - Deployment k8sdemo must provide app/release labels for pod selectors
 &gt; FAIL - /home/training/training/deployment/demoapp.yaml - k8sdemo must include Kubernetes recommended labels: https://kubernetes.io/docs/concepts/overview/working-with-objects/common-labels/#labels 
 
-</code></pre></div><ol start="3">
-<li>Launch a test against all the files for the demo application</li>
-</ol>
+</code></pre></div><p>``</p>
+</li>
+<li>
+<p>Launch a test against all the files for the demo application</p>
 <p>The output format here is set to TAP (<a href="https://testanything.org/">Test Anything Protocol</a>)</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">conftest test -p ~/training/conftest/src/examples/kubernetes/policy --output<span style="color:#f92672">=</span>tap ~/training/deployment/*.yaml
 
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_633186d8ec">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_633186d8ec">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> 
+conftest test -p ~/training/conftest/src/examples/kubernetes/policy --output<span style="color:#f92672">=</span>tap ~/training/deployment/*.yaml
+	
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext">&gt; 1..3
+&gt; not ok 1 - /home/training/training/deployment/demoapp-backend.yaml - Containers must not run as root in Deployment k8sdemo-backend
+&gt; not ok 2 - /home/training/training/deployment/demoapp-backend.yaml - Deployment k8sdemo-backend must provide app/release labels for pod selectors
+&gt; not ok 3 - /home/training/training/deployment/demoapp-backend.yaml - k8sdemo-backend must include Kubernetes recommended labels: https://kubernetes.io/docs/concepts/overview/working-with-objects/common-labels/#labels 
 &gt; 1..3
-&gt; not ok <span style="color:#ae81ff">1</span> - /home/training/training/deployment/demoapp-backend.yaml - Containers must not run as root in Deployment k8sdemo-backend
-&gt; not ok <span style="color:#ae81ff">2</span> - /home/training/training/deployment/demoapp-backend.yaml - Deployment k8sdemo-backend must provide app/release labels <span style="color:#66d9ef">for</span> pod selectors
-&gt; not ok <span style="color:#ae81ff">3</span> - /home/training/training/deployment/demoapp-backend.yaml - k8sdemo-backend must include Kubernetes recommended labels: https://kubernetes.io/docs/concepts/overview/working-with-objects/common-labels/#labels 
-&gt; 1..3
-&gt; not ok <span style="color:#ae81ff">1</span> - /home/training/training/deployment/demoapp-errors.yaml - Containers must not run as root in Deployment k8sdemo-nok
-&gt; not ok <span style="color:#ae81ff">2</span> - /home/training/training/deployment/demoapp-errors.yaml - Deployment k8sdemo-nok must provide app/release labels <span style="color:#66d9ef">for</span> pod selectors
-&gt; not ok <span style="color:#ae81ff">3</span> - /home/training/training/deployment/demoapp-errors.yaml - k8sdemo-nok must include Kubernetes recommended labels: https://kubernetes.io/docs/concepts/overview/working-with-objects/common-labels/#labels 
+&gt; not ok 1 - /home/training/training/deployment/demoapp-errors.yaml - Containers must not run as root in Deployment k8sdemo-nok
+&gt; not ok 2 - /home/training/training/deployment/demoapp-errors.yaml - Deployment k8sdemo-nok must provide app/release labels for pod selectors
+&gt; not ok 3 - /home/training/training/deployment/demoapp-errors.yaml - k8sdemo-nok must include Kubernetes recommended labels: https://kubernetes.io/docs/concepts/overview/working-with-objects/common-labels/#labels 
 &gt; 1..1
-&gt; <span style="color:#75715e"># Warnings</span>
-&gt; not ok <span style="color:#ae81ff">1</span> - /home/training/training/deployment/demoapp-service.yaml - Found service k8sdemo-service but services are not allowed
+&gt; # Warnings
+&gt; not ok 1 - /home/training/training/deployment/demoapp-service.yaml - Found service k8sdemo-service but services are not allowed
 &gt; 1..3
-&gt; not ok <span style="color:#ae81ff">1</span> - /home/training/training/deployment/demoapp.yaml - Containers must not run as root in Deployment k8sdemo
-&gt; not ok <span style="color:#ae81ff">2</span> - /home/training/training/deployment/demoapp.yaml - Deployment k8sdemo must provide app/release labels <span style="color:#66d9ef">for</span> pod selectors
-&gt; not ok <span style="color:#ae81ff">3</span> - /home/training/training/deployment/demoapp.yaml - k8sdemo must include Kubernetes recommended labels: https://kubernetes.io/docs/concepts/overview/working-with-objects/common-labels/#labels 
+&gt; not ok 1 - /home/training/training/deployment/demoapp.yaml - Containers must not run as root in Deployment k8sdemo
+&gt; not ok 2 - /home/training/training/deployment/demoapp.yaml - Deployment k8sdemo must provide app/release labels for pod selectors
+&gt; not ok 3 - /home/training/training/deployment/demoapp.yaml - k8sdemo must include Kubernetes recommended labels: https://kubernetes.io/docs/concepts/overview/working-with-objects/common-labels/#labels 
 &gt; 1..1
-&gt; <span style="color:#75715e"># Warnings</span>
-&gt; not ok <span style="color:#ae81ff">1</span> - /home/training/training/deployment/demoapp-backend-service.yaml - Found service k8sdemo-backend-service but services are not allowed
-
-
-</code></pre></div><ol start="3">
-<li>Launch a test against sample Dockerfile</li>
-</ol>
+&gt; # Warnings
+&gt; not ok 1 - /home/training/training/deployment/demoapp-backend-service.yaml - Found service k8sdemo-backend-service but services are not allowed
+</code></pre></div><p>``</p>
+</li>
+<li>
+<p>Launch a test against sample Dockerfile</p>
 <p>The output format here is set to JSON.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">conftest test -p ~/training/conftest/src/examples/docker/policy --output<span style="color:#f92672">=</span>json ~/training/conftest/src/examples/docker/Dockerfile 
-</code></pre></div><p>A blakclisted base image has been detected:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">[
-	{
-		<span style="color:#66d9ef">&#34;filename&#34;: </span><span style="color:#e6db74">&#34;/home/training/training/conftest/src/examples/docker/Dockerfile&#34;</span>,
-		<span style="color:#66d9ef">&#34;Warnings&#34;: </span>[],
-		<span style="color:#66d9ef">&#34;Failures&#34;: </span>[
-			<span style="color:#e6db74">&#34;blacklisted image found [\&#34;openjdk:8-jdk-alpine\&#34;]&#34;</span>
-		],
-		<span style="color:#66d9ef">&#34;Successes&#34;: </span>[]
-	}
-]
-</code></pre></div><blockquote>
-<h1 id="congratulations">Congratulations!!!</h1>
-<h1 id="this-concludes-lab-2-on-security-tooling">This concludes Lab 2 on Security Tooling.</h1>
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_547ee11b12">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_547ee11b12">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> 
+conftest test -p ~/training/conftest/src/examples/docker/policy --output<span style="color:#f92672">=</span>json ~/training/conftest/src/examples/docker/Dockerfile 
+	
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
+<p>A blakclisted base image has been detected:</p>
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_8d108725b1">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_8d108725b1">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json"> 
+	[
+		{
+			<span style="color:#f92672">&#34;filename&#34;</span>: <span style="color:#e6db74">&#34;/home/training/training/conftest/src/examples/docker/Dockerfile&#34;</span>,
+			<span style="color:#f92672">&#34;Warnings&#34;</span>: [],
+			<span style="color:#f92672">&#34;Failures&#34;</span>: [
+				<span style="color:#e6db74">&#34;blacklisted image found [\&#34;openjdk:8-jdk-alpine\&#34;]&#34;</span>
+			],
+			<span style="color:#f92672">&#34;Successes&#34;</span>: []
+		}
+	]
+	
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
+</li>
+</ol>
+<blockquote>
+<p>Congratulations!!! This concludes the Lab and the Course.
+Hope to see you soon!!!</p>
 </blockquote>
 
 
@@ -763,10 +1336,8 @@ KubeSec can run in different ways (commandline, Docker container and even as a K
                     <div class="row"><div class="position-relative mx-auto col-lg-9">
                           <div class="bg-primary overflow-hidden p-3 mt-5 shadow">
 
-    <h4 class="text-white text-center">Read more</h4>
 
-    <div class="d-flex justify-content-center"><a class="p-1 mr-3 d-inline-block text-white" href="/k8s_training_web/jtc16/lab1/" title="Lab 1: Network Policies"><i class="fas fa-chevron-left p-1"></i>Lab 1: Network Policies</a>
-        <a class="p-1 ml-3 d-inline-block text-white text-right" href="/k8s_training_web/jtc17/" title="JTC17 Kubernetes Advanced Security">JTC17 Kubernetes Advanced Security<i class="fas fa-chevron-right p-1"></i></a>
+    <div class="d-flex justify-content-center"><a class="p-1 ml-3 d-inline-block text-white text-right" href="/k8s_training_web/jtc17/" title="JTC17 Kubernetes Advanced Security">JTC17 Kubernetes Advanced Security<i class="fas fa-chevron-right p-1"></i></a>
     </div>
 </div>
 

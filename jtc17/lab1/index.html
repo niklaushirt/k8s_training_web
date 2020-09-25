@@ -474,8 +474,36 @@ Have a user only see resources in their authorized namespace. This allows you to
 <ul>
 <li>
 <p>Execute the <code>kubectl create</code> command to create the namespace (as the admin user):</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl create namespace rbactest 
-</code></pre></div></li>
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_dcaf98618c">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_dcaf98618c">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> 
+kubectl create namespace rbactest 
+    
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
+</li>
 </ul>
 <h3 id="create-the-user-credentials">Create the user credentials</h3>
 <p>Kubernetes does not have API Objects for User Accounts. Of the available ways to manage authentication (see <a href="https://kubernetes.io/docs/admin/authentication">Kubernetes official documentation</a> for a complete list), we will use OpenSSL certificates for their simplicity.</p>
@@ -484,54 +512,241 @@ Have a user only see resources in their authorized namespace. This allows you to
 <li>
 <p>Create a private key for your user. In this example, we will name the file <code>demo.key</code>.</p>
 <p>Go to a temporary working directory in your terminal.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">mkdir rbacdemo
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_1ca0be9c41">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_1ca0be9c41">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> 
+mkdir rbacdemo
 cd rbacdemo
-</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">openssl genrsa -out demo.key <span style="color:#ae81ff">2048</span> 
-       
-&gt; Generating RSA private key, <span style="color:#ae81ff">2048</span> bit long modulus <span style="color:#f92672">(</span><span style="color:#ae81ff">2</span> primes<span style="color:#f92672">)</span>
+	
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_233263e35d">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_233263e35d">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> 
+openssl genrsa -out demo.key <span style="color:#ae81ff">2048</span> 
+	
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext">&gt; Generating RSA private key, 2048 bit long modulus (2 primes)
 ...
-</code></pre></div><p>The private key file <code>demo.key</code> has been created:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ls
-       
-&gt; demo.key
-</code></pre></div></li>
+</code></pre></div><p>``</p>
+<p>The private key file <code>demo.key</code> has been created:</p>
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_fd26931e70">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_fd26931e70">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> 
+ls
+	
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext">&gt; demo.key
+</code></pre></div><p>``</p>
+</li>
 <li>
 <p>Create a certificate sign request <code>demo.csr</code> using the private key you just created (<code>demo.key</code> in this example). Make sure you specify your username and group in the <em>-subj</em> section (CN is for the username and O for the group). As previously mentioned, we will use <code>demo</code> as the name and <code>demogroup</code> as the group</p>
-</li>
-</ol>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">  openssl req -new -key demo.key -out demo.csr -subj <span style="color:#e6db74">&#34;/CN=demo/O=demogroup&#34;</span> 
-</code></pre></div><pre><code>The certificate sign request `demo.csr` has been created:
 
-```bash
-ls
+
+
+
+
+
     
-&gt; demo.csr  demo.key
-```
-</code></pre>
-<ol start="3">
-<li>We will use the Kubernetes cluster certificate authority (CA) for approving the request and generating the necessary certificate to access the cluster API.</li>
-</ol>
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_f206bfa483">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_f206bfa483">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> 
+openssl req -new -key demo.key -out demo.csr -subj <span style="color:#e6db74">&#34;/CN=demo/O=demogroup&#34;</span> 
+	
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
+<p>The certificate sign request <code>demo.csr</code> has been created:</p>
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_fd26931e70">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_fd26931e70">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> 
+ls
+	
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext">&gt; demo.csr  demo.key
+</code></pre></div><p>``</p>
+</li>
+<li>
+<p>We will use the Kubernetes cluster certificate authority (CA) for approving the request and generating the necessary certificate to access the cluster API.</p>
 <p>Its location usually is <code>/etc/kubernetes/pki/</code>.
 But in our case (for Minikube), it would be <code>~/.minikube/</code>.</p>
-<pre><code>![](../../../images/cloud.png) **Cloud/Standalone**
-
-&gt; If you are **NOT** using the training VM, you have to use your own certificates.
-</code></pre>
-<ol start="4">
+<p><img src="../../../images/cloud.png" alt=""> <strong>Cloud/Standalone</strong></p>
+<blockquote>
+<p>If you are <strong>NOT</strong> using the training VM, you have to use your own certificates.</p>
+</blockquote>
+</li>
 <li>
 <p>Generate the final certificate <code>demo.crt</code> by approving the certificate sign request, <code>demo.csr</code>, you made earlier. In this example, the certificate will be valid for 500 days:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">openssl x509 -req -in demo.csr -CA ~/.minikube/ca.crt -CAkey ~/.minikube/ca.key -CAcreateserial -out demo.crt -days <span style="color:#ae81ff">500</span> 
-       
-&gt; key -CAcreateserial -out demo.crt -days <span style="color:#ae81ff">500</span> 
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_f4a34ea4bc">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_f4a34ea4bc">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> 
+openssl x509 -req -in demo.csr -CA ~/.minikube/ca.crt -CAkey ~/.minikube/ca.key -CAcreateserial -out demo.crt -days <span style="color:#ae81ff">500</span> 
+	
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext">&gt; key -CAcreateserial -out demo.crt -days 500 
 &gt; Signature ok
-&gt; subject<span style="color:#f92672">=</span>CN <span style="color:#f92672">=</span> demo, O <span style="color:#f92672">=</span> demogroup
+&gt; subject=CN = demo, O = demogroup
 &gt; Getting CA Private Key
-   
 </code></pre></div><p>``</p>
 <p>The final certificate <code>demo.crt</code> has been created:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ls
-       
-&gt; demo.crt  demo.csr  demo.key
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_fd26931e70">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_fd26931e70">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> 
+ls
+	
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext">&gt; demo.crt  demo.csr  demo.key
 </code></pre></div><p>``</p>
 </li>
 <li>
@@ -543,16 +758,70 @@ But in our case (for Minikube), it would be <code>~/.minikube/</code>.</p>
 <ol>
 <li>
 <p>Set credentials</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl config set-credentials demo --client-certificate<span style="color:#f92672">=</span>./demo.crt --client-key<span style="color:#f92672">=</span>./demo.key 
-      
-&gt; User <span style="color:#e6db74">&#34;demo&#34;</span> set.
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_614930c12c">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_614930c12c">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> 
+kubectl config set-credentials demo --client-certificate<span style="color:#f92672">=</span>./demo.crt --client-key<span style="color:#f92672">=</span>./demo.key 
+	
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext">&gt; User &#34;demo&#34; set.
 </code></pre></div><p>``</p>
 </li>
 <li>
 <p>Create context</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl config set-context demo-context --cluster<span style="color:#f92672">=</span>minikube --namespace<span style="color:#f92672">=</span>rbactest --user<span style="color:#f92672">=</span>demo 
-       
-&gt; Context <span style="color:#e6db74">&#34;demo-context&#34;</span> created.
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_d17fe48048">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_d17fe48048">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> 
+kubectl config set-context demo-context --cluster<span style="color:#f92672">=</span>minikube --namespace<span style="color:#f92672">=</span>rbactest --user<span style="color:#f92672">=</span>demo 
+	
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext">&gt; Context &#34;demo-context&#34; created.
 </code></pre></div><p>``</p>
 <p><img src="../../../images/cloud.png" alt=""> <strong>Cloud/Standalone</strong></p>
 <blockquote>
@@ -562,20 +831,93 @@ You should be able to get it with <code>kubectl config current-context</code>.</
 </li>
 <li>
 <p>Check configuration</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl config view 
-       
-</code></pre></div><p>``</p>
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_73a7b30782">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_73a7b30782">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> 
+kubectl config view 
+	
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
 </li>
 </ol>
 <p>We can see that we now have a context <code>demo-context</code> and a user <code>demo</code> in our configuration that will be used to access the Kubernetes API via <code>kubectl</code>.</p>
 <p>You should get an access denied error when using the <code>kubectl</code> CLI with this configuration file. This is expected as we have not defined any permitted operations for this user.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl --context<span style="color:#f92672">=</span>demo-context get pods 
+
+
+
+
+
+
     
-&gt; No resources found.
-&gt; Error from server <span style="color:#f92672">(</span>Forbidden<span style="color:#f92672">)</span>: pods is forbidden: User <span style="color:#e6db74">&#34;demo&#34;</span> cannot list resource <span style="color:#e6db74">&#34;pods&#34;</span> in API group <span style="color:#e6db74">&#34;&#34;</span> in the namespace <span style="color:#e6db74">&#34;rbactest&#34;</span>
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_78f3ae33c3">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_78f3ae33c3">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> 
+kubectl --context<span style="color:#f92672">=</span>demo-context get pods 
+
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext">&gt; No resources found.
+&gt; Error from server (Forbidden): pods is forbidden: User &#34;demo&#34; cannot list resource &#34;pods&#34; in API group &#34;&#34; in the namespace &#34;rbactest&#34;
 </code></pre></div><h3 id="create-the-role-for-viewing-deployments">Create the role for viewing deployments</h3>
 <p>We are creating the <code>Rule</code> that allows a user to execute several <code>Read Only</code> operations on Deployments, Pods and ReplicaSets, which belong to the <code>core</code> (expressed by “” in the <code>yaml</code> file), <code>apps</code>, and <code>extensions</code> API Groups:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">kind</span>: Role
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_39a9a314a8">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_39a9a314a8">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"> 
+<span style="color:#66d9ef">kind</span>: Role
 <span style="color:#66d9ef">apiVersion</span>: rbac.authorization.k8s.io/v1beta1
 <span style="color:#66d9ef">metadata</span>:
   <span style="color:#66d9ef">name</span>: deployment-viewer
@@ -584,11 +926,67 @@ You should be able to get it with <code>kubectl config current-context</code>.</
 - <span style="color:#66d9ef">apiGroups</span>: [<span style="color:#e6db74">&#34;&#34;</span>, <span style="color:#e6db74">&#34;extensions&#34;</span>, <span style="color:#e6db74">&#34;apps&#34;</span>]
   <span style="color:#66d9ef">resources</span>: [<span style="color:#e6db74">&#34;deployments&#34;</span>, <span style="color:#e6db74">&#34;replicasets&#34;</span>, <span style="color:#e6db74">&#34;pods&#34;</span>]
   <span style="color:#66d9ef">verbs</span>: [<span style="color:#e6db74">&#34;get&#34;</span>, <span style="color:#e6db74">&#34;list&#34;</span>] <span style="color:#75715e"># You can also use [&#34;*&#34;]</span>
-</code></pre></div><p>Create the <code>Role</code> in the cluster using:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl create -f ~/training/rbac/deployment-viewer.yaml 
-</code></pre></div><h3 id="bind-the-viewer-role-to-the-demo-user">Bind the viewer role to the demo user</h3>
+
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
+<p>Create the <code>Role</code> in the cluster using:</p>
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_061f8d2a5f">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_061f8d2a5f">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> 
+kubectl create -f ~/training/rbac/deployment-viewer.yaml 
+
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
+<h3 id="bind-the-viewer-role-to-the-demo-user">Bind the viewer role to the demo user</h3>
 <p>In this step we are creating the <code>RuleBinding</code> that binds the <code>deployment-viewer</code> <code>Role</code> to the User Account <code>demo</code> inside the <code>rbactest</code> namespace:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">kind</span>: RoleBinding
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_5d6f70788e">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_5d6f70788e">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"> 
+<span style="color:#66d9ef">kind</span>: RoleBinding
 <span style="color:#66d9ef">apiVersion</span>: rbac.authorization.k8s.io/v1beta1
 <span style="color:#66d9ef">metadata</span>:
   <span style="color:#66d9ef">name</span>: deployment-viewer-binding
@@ -601,27 +999,163 @@ You should be able to get it with <code>kubectl config current-context</code>.</
   <span style="color:#66d9ef">kind</span>: Role
   <span style="color:#66d9ef">name</span>: deployment-viewer
   <span style="color:#66d9ef">apiGroup</span>: <span style="color:#e6db74">&#34;&#34;</span>
-</code></pre></div><p>Create the Role in the cluster using:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl create -f ~/training/rbac/deployment-viewer-binding.yaml 
-</code></pre></div><h2 id="test-the-rbac-viewer-rule">Test the RBAC viewer rule</h2>
-<p>Now you should be able to execute the following command without any issues:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl --context<span style="color:#f92672">=</span>demo-context get pods 
 
-&gt; No resources found.
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
+<p>Create the Role in the cluster using:</p>
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_cfacd1f060">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_cfacd1f060">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> 
+kubectl create -f ~/training/rbac/deployment-viewer-binding.yaml 
+
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
+<h2 id="test-the-rbac-viewer-rule">Test the RBAC viewer rule</h2>
+<p>Now you should be able to execute the following command without any issues:</p>
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_78f3ae33c3">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_78f3ae33c3">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> 
+kubectl --context<span style="color:#f92672">=</span>demo-context get pods 
+
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext">&gt; No resources found.
 </code></pre></div><p><code>No resources found.</code> simply means that we don&rsquo;t have any <code>Pods</code> deployed in this <code>Namespace</code>.</p>
 <p>If you run the same command for the default namespace with the <code>--namespace=default</code> argument, it will fail, as the <code>demo</code> user does not have access to this namespace.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl --context<span style="color:#f92672">=</span>demo-context get pods --namespace<span style="color:#f92672">=</span>default 
 
-&gt; No resources found.
-&gt; Error from server <span style="color:#f92672">(</span>Forbidden<span style="color:#f92672">)</span>: pods is forbidden: User <span style="color:#e6db74">&#34;demo&#34;</span> cannot list resource <span style="color:#e6db74">&#34;pods&#34;</span> in API group <span style="color:#e6db74">&#34;&#34;</span> in the namespace <span style="color:#e6db74">&#34;default&#34;</span>
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_f8021fc4eb">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_f8021fc4eb">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> 
+kubectl --context<span style="color:#f92672">=</span>demo-context get pods --namespace<span style="color:#f92672">=</span>default 
+
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext">&gt; No resources found.
+&gt; Error from server (Forbidden): pods is forbidden: User &#34;demo&#34; cannot list resource &#34;pods&#34; in API group &#34;&#34; in the namespace &#34;default&#34;
 </code></pre></div><p>Also you still don&rsquo;t have the rights to create or delete <code>Deployments</code>:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl --context<span style="color:#f92672">=</span>demo-context run --image alpine alpine                                                                                                                                                                                                                                                                                              
 
-&gt; Error from server <span style="color:#f92672">(</span>Forbidden<span style="color:#f92672">)</span>: deployments.apps is forbidden: User <span style="color:#e6db74">&#34;demo&#34;</span> cannot create resource <span style="color:#e6db74">&#34;deployments&#34;</span> in API group <span style="color:#e6db74">&#34;apps&#34;</span> in the namespace <span style="color:#e6db74">&#34;rbactest&#34;</span>
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_6aad902950">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_6aad902950">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> 
+kubectl --context<span style="color:#f92672">=</span>demo-context run --image alpine alpine                                                                                                                                             	
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext">&gt; Error from server (Forbidden): deployments.apps is forbidden: User &#34;demo&#34; cannot create resource &#34;deployments&#34; in API group &#34;apps&#34; in the namespace &#34;rbactest&#34;
 </code></pre></div><p>Now you have created a user with limited Read Only permissions in your cluster.</p>
 <h3 id="create-the-role-for-managing-deployments">Create the role for managing deployments</h3>
 <p>We are creating the <code>Rule</code> that allows a user to execute several <code>Read and Write</code> operations on Deployments, Pods and ReplicaSets, which belong to the <code>core</code> (expressed by “” in the <code>yaml</code> file), <code>apps</code>, and <code>extensions</code> API Groups:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">kind</span>: Role
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_366543c875">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_366543c875">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"> 
+<span style="color:#66d9ef">kind</span>: Role
 <span style="color:#66d9ef">apiVersion</span>: rbac.authorization.k8s.io/v1beta1
 <span style="color:#66d9ef">metadata</span>:
   <span style="color:#66d9ef">name</span>: deployment-manager
@@ -630,11 +1164,67 @@ You should be able to get it with <code>kubectl config current-context</code>.</
 - <span style="color:#66d9ef">apiGroups</span>: [<span style="color:#e6db74">&#34;&#34;</span>, <span style="color:#e6db74">&#34;extensions&#34;</span>, <span style="color:#e6db74">&#34;apps&#34;</span>]
   <span style="color:#66d9ef">resources</span>: [<span style="color:#e6db74">&#34;deployments&#34;</span>, <span style="color:#e6db74">&#34;replicasets&#34;</span>, <span style="color:#e6db74">&#34;pods&#34;</span>]
   <span style="color:#66d9ef">verbs</span>: [<span style="color:#e6db74">&#34;get&#34;</span>, <span style="color:#e6db74">&#34;list&#34;</span>, <span style="color:#e6db74">&#34;watch&#34;</span>, <span style="color:#e6db74">&#34;create&#34;</span>, <span style="color:#e6db74">&#34;update&#34;</span>, <span style="color:#e6db74">&#34;patch&#34;</span>, <span style="color:#e6db74">&#34;delete&#34;</span>] <span style="color:#75715e"># You can also use [&#34;*&#34;]</span>
-</code></pre></div><p>Create the <code>Role</code> in the cluster using:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl create -f ~/training/rbac/deployment-manager.yaml 
-</code></pre></div><h3 id="bind-the-manager-role-to-the-demo-user">Bind the Manager role to the demo user</h3>
+
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
+<p>Create the <code>Role</code> in the cluster using:</p>
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_b90ce76668">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_b90ce76668">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> 
+kubectl create -f ~/training/rbac/deployment-manager.yaml 
+
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
+<h3 id="bind-the-manager-role-to-the-demo-user">Bind the Manager role to the demo user</h3>
 <p>In this step we are creating the <code>RuleBinding</code> that binds the <code>deployment-manager</code> <code>Role</code> to the User Account <code>demo</code> inside the <code>rbactest</code> namespace:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">kind</span>: RoleBinding
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_f3b06bdc33">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_f3b06bdc33">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"> 
+<span style="color:#66d9ef">kind</span>: RoleBinding
 <span style="color:#66d9ef">apiVersion</span>: rbac.authorization.k8s.io/v1beta1
 <span style="color:#66d9ef">metadata</span>:
   <span style="color:#66d9ef">name</span>: deployment-manager-binding
@@ -647,27 +1237,142 @@ You should be able to get it with <code>kubectl config current-context</code>.</
   <span style="color:#66d9ef">kind</span>: Role
   <span style="color:#66d9ef">name</span>: deployment-manager
   <span style="color:#66d9ef">apiGroup</span>: <span style="color:#e6db74">&#34;&#34;</span>
-</code></pre></div><p>Create the Role in the cluster using:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl create -f ~/training/rbac/deployment-manager-binding.yaml 
-</code></pre></div><h2 id="test-the-rbac-manager-rule">Test the RBAC manager rule</h2>
+
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
+<p>Create the Role in the cluster using:</p>
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_262b118916">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_262b118916">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> 
+kubectl create -f ~/training/rbac/deployment-manager-binding.yaml 
+
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
+<h2 id="test-the-rbac-manager-rule">Test the RBAC manager rule</h2>
 <p>Now you should be able to execute the following commands without any issues:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl --context<span style="color:#f92672">=</span>demo-context run --image alpine alpine                                                                                                                                                                                                                                                                                              
 
-&gt; deployment.apps/alpine created
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_e90aa4327a">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_e90aa4327a">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> 
+kubectl --context<span style="color:#f92672">=</span>demo-context run --image alpine alpine                                                                                                                                            
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext">&gt; deployment.apps/alpine created
 </code></pre></div><p>Check that the alpine Pod is running</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl --context<span style="color:#f92672">=</span>demo-context get pods 
 
-&gt; NAME                      READY     STATUS      RESTARTS   AGE
-&gt; alpine-7f866557df-dkmks   0/1       Completed   <span style="color:#ae81ff">0</span>          6s
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_78f3ae33c3">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_78f3ae33c3">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> 
+kubectl --context<span style="color:#f92672">=</span>demo-context get pods 
+
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext">&gt; NAME                      READY     STATUS      RESTARTS   AGE
+&gt; alpine-7f866557df-dkmks   0/1       Completed   0          6s
 </code></pre></div><p>However if you run the same command for the default namespace with the <code>--namespace=default</code> argument, it will still fail, as the <code>demo</code> user still does not have access to this namespace.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl --context<span style="color:#f92672">=</span>demo-context get pods --namespace<span style="color:#f92672">=</span>default 
 
-&gt; No resources found.
-&gt; Error from server <span style="color:#f92672">(</span>Forbidden<span style="color:#f92672">)</span>: pods is forbidden: User <span style="color:#e6db74">&#34;demo&#34;</span> cannot list resource <span style="color:#e6db74">&#34;pods&#34;</span> in API group <span style="color:#e6db74">&#34;&#34;</span> in the namespace <span style="color:#e6db74">&#34;default&#34;</span>
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_f8021fc4eb">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_f8021fc4eb">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> 
+kubectl --context<span style="color:#f92672">=</span>demo-context get pods --namespace<span style="color:#f92672">=</span>default 
+
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext">&gt; No resources found.
+&gt; Error from server (Forbidden): pods is forbidden: User &#34;demo&#34; cannot list resource &#34;pods&#34; in API group &#34;&#34; in the namespace &#34;default&#34;
 </code></pre></div><p>Now you have created a user with limited permissions in your cluster but with full Management rights for Deployments in the <code>rbactest</code> namespace.</p>
 <blockquote>
-<h1 id="congratulations">Congratulations!!!</h1>
-<h1 id="this-concludes-lab-1-on-rbac-and-rolesrolebindings">This concludes Lab 1 on RBAC and Roles/RoleBindings.</h1>
+<p>Congratulations!!! This concludes the Lab</p>
 </blockquote>
 
 
@@ -678,10 +1383,8 @@ You should be able to get it with <code>kubectl config current-context</code>.</
                     <div class="row"><div class="position-relative mx-auto col-lg-9">
                           <div class="bg-primary overflow-hidden p-3 mt-5 shadow">
 
-    <h4 class="text-white text-center">Read more</h4>
 
-    <div class="d-flex justify-content-center"><a class="p-1 mr-3 d-inline-block text-white" href="/k8s_training_web/jtc17/lab0/" title="Lab 0: Preparation"><i class="fas fa-chevron-left p-1"></i>Lab 0: Preparation</a>
-        <a class="p-1 ml-3 d-inline-block text-white text-right" href="/k8s_training_web/jtc17/lab2/" title="Lab 2: Service Accounts">Lab 2: Service Accounts<i class="fas fa-chevron-right p-1"></i></a>
+    <div class="d-flex justify-content-center"><a class="p-1 ml-3 d-inline-block text-white text-right" href="/k8s_training_web/jtc17/lab2/" title="Lab 2: Service Accounts">Lab 2: Service Accounts<i class="fas fa-chevron-right p-1"></i></a>
     </div>
 </div>
 

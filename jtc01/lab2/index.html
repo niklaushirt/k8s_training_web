@@ -380,11 +380,7 @@
 	<nav id="TableOfContents">
   <ul>
     <li><a href="#create-your-first-image">Create your first Image</a></li>
-    <li><a href="#run-your-first-image">Run your first Image</a>
-      <ul>
-        <li></li>
-      </ul>
-    </li>
+    <li><a href="#run-your-first-image">Run your first Image</a></li>
     <li><a href="#use-portainer">Use Portainer</a></li>
     <li><a href="#create-the-frontend-image">Create the frontend Image</a></li>
     <li><a href="#run-the-frontend-image">Run the frontend Image</a></li>
@@ -402,7 +398,27 @@
 <h2 id="create-your-first-image">Create your first Image</h2>
 <p><img src="../../../images/docker_arch1.png" alt="K8s CNI"></p>
 <p>Let&rsquo;s create our first image (the <code>k8sdemo-backend</code> image) from this <code>Dockerfile</code>:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">FROM node:<span style="color:#ae81ff">8</span>-stretch
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_2a026b4ecd">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_2a026b4ecd">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"> 
+FROM node:<span style="color:#ae81ff">8</span>-stretch
 
 <span style="color:#75715e"># Change working directory</span>
 WORKDIR <span style="color:#e6db74">&#34;/app&#34;</span>
@@ -427,18 +443,53 @@ ENV PORT <span style="color:#ae81ff">3000</span>
 EXPOSE <span style="color:#ae81ff">3000</span>
 
 CMD [<span style="color:#e6db74">&#34;npm&#34;</span>, <span style="color:#e6db74">&#34;start&#34;</span>]
-</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">cd ~/training/demo-app/k8sdemo_backend
+
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_b6d85e13a0">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_b6d85e13a0">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> 
+cd ~/training/demo-app/k8sdemo_backend
 
 docker build -t k8sdemo-backend:lab .
 
-&gt; Sending build context to Docker daemon  6.975MB
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext">&gt; Sending build context to Docker daemon  6.975MB
 &gt; Step 1/11 : FROM node:8-stretch
 &gt;  ---&gt; 7a9afc16a57f
-&gt; Step 2/11 : WORKDIR <span style="color:#e6db74">&#34;/app&#34;</span>
+&gt; Step 2/11 : WORKDIR &#34;/app&#34;
 &gt;  ---&gt; Using cache
 &gt;  ---&gt; a2515f8a3ec5
 ...
-&gt; Step 11/11 : CMD <span style="color:#f92672">[</span><span style="color:#e6db74">&#34;npm&#34;</span>, <span style="color:#e6db74">&#34;start&#34;</span><span style="color:#f92672">]</span>
+&gt; Step 11/11 : CMD [&#34;npm&#34;, &#34;start&#34;]
 &gt;  ---&gt; Using cache
 &gt;  ---&gt; b9b0f3fea9f7
 &gt; Successfully built b9b0f3fea9f7
@@ -446,11 +497,37 @@ docker build -t k8sdemo-backend:lab .
 
 </code></pre></div><h2 id="run-your-first-image">Run your first Image</h2>
 <p><img src="../../../images/docker_arch2.png" alt="K8s CNI"></p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">docker run --rm --name k8sdemo-backend -p 3001:3000 k8sdemo-backend:lab
 
-&gt; test@0.0.0 start /app
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_a0902920c0">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_a0902920c0">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> 
+docker run --rm --name k8sdemo-backend -p 3001:3000 k8sdemo-backend:lab
+
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext">&gt; test@0.0.0 start /app
 &gt; node ./bin/www
-
 </code></pre></div><p>This command runs the backend server:</p>
 <ul>
 <li>&ndash;rm makes sure that the container is deleted once it&rsquo;s stopped</li>
@@ -458,12 +535,6 @@ docker build -t k8sdemo-backend:lab .
 <li>-p exposes the container port 3000 to the outside port 3001 (we do this so that it does not conflict with port 3000 of the k8sdemo web application we will start later)</li>
 <li>k8sdemo-backend:lab is the image we created before</li>
 </ul>
-<h4 id="hint-lab2_runyourfirstimage">Hint Lab2_RunYourFirstImage</h4>
-<p>No hint available</p>
-<h4 id="complete-lab2_runyourfirstimage">Complete Lab2_RunYourFirstImage</h4>
-<p>Confirm Lab2_RunYourFirstImage complete</p>
-<h4 id="task-lab2_useportainer">Task Lab2_UsePortainer</h4>
-<hr>
 <h2 id="use-portainer">Use Portainer</h2>
 <p>Portainer Community Edition is a powerful, open-source management toolset that allows you to easily build, manage and maintain Docker environments.</p>
 <ol>
@@ -491,14 +562,40 @@ docker build -t k8sdemo-backend:lab .
 </li>
 <li>
 <p>In your terminal you will see that this generated some traffic:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">docker run --rm --name k8sdemo-backend -p 3001:3000 k8sdemo-backend:lab
-   
-&gt; test@0.0.0 start /app
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_59137c46ab">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_59137c46ab">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> 
+docker run --rm --name k8sdemo-backend -p 3001:3000 k8sdemo-backend:lab
+	
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext">&gt; test@0.0.0 start /app
 &gt; node ./bin/www
    
-&gt; GET / <span style="color:#ae81ff">304</span> 225.805 ms - -
-&gt; GET /stylesheets/style.css <span style="color:#ae81ff">304</span> 2.175 ms - -
-   
+&gt; GET / 304 225.805 ms - -
+&gt; GET /stylesheets/style.css 304 2.175 ms - -
 </code></pre></div><p>``</p>
 </li>
 <li>
@@ -508,54 +605,135 @@ docker build -t k8sdemo-backend:lab .
 <p>** So now we have tested our backend component. **</p>
 <h2 id="create-the-frontend-image">Create the frontend Image</h2>
 <p>Let&rsquo;s create our first image (the <code>k8sdemo</code> frontend image) from this <code>Dockerfile</code>:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">FROM node:<span style="color:#ae81ff">8</span>-stretch
 
-<span style="color:#75715e"># Change working directory</span>
-WORKDIR <span style="color:#e6db74">&#34;/app&#34;</span>
 
-<span style="color:#75715e"># Update packages and install dependency packages for services</span>
-RUN apt-get update \
- <span style="color:#75715e">&amp;&amp;</span> apt-get dist-upgrade -y \
- <span style="color:#75715e">&amp;&amp;</span> apt-get clean \
- <span style="color:#75715e">&amp;&amp;</span> echo <span style="color:#e6db74">&#39;Finished installing dependencies&#39;</span>
 
-<span style="color:#75715e"># Install npm production packages</span>
-COPY package.json /app/
-RUN cd /app; npm install --production
 
-COPY . /app
 
-ENV NODE_ENV production
-ENV BACKEND_URL https://api.nasa.gov/planetary/apod\?api_key\=DEMO_KEY
-ENV PORT <span style="color:#ae81ff">3000</span>
 
-EXPOSE <span style="color:#ae81ff">3000</span>
+    
+    
 
-CMD [<span style="color:#e6db74">&#34;npm&#34;</span>, <span style="color:#e6db74">&#34;start&#34;</span>]
-</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">cd ~/training/demo-app/k8sdemo
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_7454533832">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_7454533832">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-docker" data-lang="docker"> <span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">FROM</span><span style="color:#e6db74"> node:8-stretch</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e"># Change working directory</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">WORKDIR</span><span style="color:#e6db74"> &#34;/app&#34;</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e"># Update packages and install dependency packages for services</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">RUN</span> apt-get update <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span> <span style="color:#f92672">&amp;&amp;</span> apt-get dist-upgrade -y <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span> <span style="color:#f92672">&amp;&amp;</span> apt-get clean <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span> <span style="color:#f92672">&amp;&amp;</span> echo <span style="color:#e6db74">&#39;Finished installing dependencies&#39;</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e"># Install npm production packages</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">COPY</span> package.json /app/<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">RUN</span> cd /app; npm install --production<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">COPY</span> . /app<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">ENV</span> NODE_ENV production<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">ENV</span> BACKEND_URL https://api.nasa.gov/planetary/apod<span style="color:#ae81ff">\?</span>api_key<span style="color:#ae81ff">\=</span>DEMO_KEY<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">ENV</span> PORT <span style="color:#ae81ff">3000</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">EXPOSE</span><span style="color:#e6db74"> 3000</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">CMD</span> [<span style="color:#e6db74">&#34;npm&#34;</span>, <span style="color:#e6db74">&#34;start&#34;</span>]<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010">
+</span></code></pre></div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_a40e13f67b">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_a40e13f67b">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> 
+cd ~/training/demo-app/k8sdemo
 
 docker build -t k8sdemo:lab .
 
-&gt; Sending build context to Docker daemon  13.23MB
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext">&gt; Sending build context to Docker daemon  13.23MB
 &gt; Step 1/11 : FROM node:8-stretch
 &gt;  ---&gt; 7a9afc16a57f
-&gt; Step 2/11 : WORKDIR <span style="color:#e6db74">&#34;/app&#34;</span>
+&gt; Step 2/11 : WORKDIR &#34;/app&#34;
 &gt;  ---&gt; Using cache
 &gt;  ---&gt; a2515f8a3ec5
 ...
-&gt; Step 11/11 : CMD <span style="color:#f92672">[</span><span style="color:#e6db74">&#34;npm&#34;</span>, <span style="color:#e6db74">&#34;start&#34;</span><span style="color:#f92672">]</span>
+&gt; Step 11/11 : CMD [&#34;npm&#34;, &#34;start&#34;]
 &gt;  ---&gt; Using cache
 &gt;  ---&gt; 5293cb32d1f6
 &gt; Successfully built 5293cb32d1f6
 &gt; Successfully tagged k8sdemo:lab
-
 </code></pre></div><h2 id="run-the-frontend-image">Run the frontend Image</h2>
 <ol>
 <li>
 <p>First let&rsquo;s run the backend container again, but this time in the background</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">docker run --rm -d --name k8sdemo-backend -p 3001:3000 k8sdemo-backend:lab
-   
-&gt; 444b0570058b97f0532ef89c92963bb7da6aa1f2d3e27bf8c989da5fb8277fe0
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_0e3a192e9e">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_0e3a192e9e">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> 
+docker run --rm -d --name k8sdemo-backend -p 3001:3000 k8sdemo-backend:lab
+	
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext">&gt; 444b0570058b97f0532ef89c92963bb7da6aa1f2d3e27bf8c989da5fb8277fe0
 </code></pre></div><p>``</p>
 <p>This command runs the backend server:</p>
 <ul>
@@ -564,11 +742,37 @@ docker build -t k8sdemo:lab .
 </li>
 <li>
 <p>Then we start the new Web Frontend container</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">docker run --rm --name k8sdemo -p 3000:3000 --env BACKEND_URL<span style="color:#f92672">=</span>http://172.17.0.1:3001/api k8sdemo:lab
-   
-&gt; test@0.0.0 start /app
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_8d2893aaa3">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_8d2893aaa3">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> 
+docker run --rm --name k8sdemo -p 3000:3000 --env BACKEND_URL<span style="color:#f92672">=</span>http://172.17.0.1:3001/api k8sdemo:lab
+	
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext">&gt; test@0.0.0 start /app
 &gt; node ./bin/www
-   
 </code></pre></div><p>``</p>
 </li>
 </ol>
@@ -590,34 +794,89 @@ docker build -t k8sdemo:lab .
 </li>
 <li>
 <p>Refresh several times and check in the terminal that some traffic is being generated</p>
-</li>
-</ol>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">GET / <span style="color:#ae81ff">304</span> 6.314 ms - -
-GET /public/bootstrap.min.css <span style="color:#ae81ff">304</span> 0.975 ms - -
-GET /public/bootstrap-theme.min.css <span style="color:#ae81ff">304</span> 0.843 ms - -
-GET /public/stylesheets/style.css <span style="color:#ae81ff">304</span> 2.568 ms - -
-GET /public/images/ibm_cloud.png <span style="color:#ae81ff">304</span> 0.522 ms - -
-GET /public/images/cloud_private.png <span style="color:#ae81ff">304</span> 1.057 ms - -
-GET /public/images/back.png <span style="color:#ae81ff">304</span> 0.411 ms - -
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext">GET / 304 6.314 ms - -
+GET /public/bootstrap.min.css 304 0.975 ms - -
+GET /public/bootstrap-theme.min.css 304 0.843 ms - -
+GET /public/stylesheets/style.css 304 2.568 ms - -
+GET /public/images/ibm_cloud.png 304 0.522 ms - -
+GET /public/images/cloud_private.png 304 1.057 ms - -
+GET /public/images/back.png 304 0.411 ms - -
 The value of BACKEND_URL is: http://k8sdemo-backend
 Error: getaddrinfo ENOTFOUND k8sdemo-backend k8sdemo-backend:80
-</code></pre></div><ol start="6">
-<li>Stop the container by hitting <code>CTRL-C</code> in the terminal</li>
+</code></pre></div><p>``</p>
+</li>
+<li>
+<p>Stop the container by hitting <code>CTRL-C</code> in the terminal</p>
+</li>
 </ol>
 <h2 id="push-the-frontend-image-to-the-registry">Push the frontend Image to the registry</h2>
 <p><img src="../../../images/docker_arch3.png" alt="K8s CNI"></p>
 <ol>
 <li>
 <p>Let&rsquo;s tag the image with the address of the local Docker registry (localhost:5000).</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">docker tag k8sdemo:lab localhost:5000/k8sdemo:lab
-</code></pre></div><p>``</p>
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_e236471c29">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_e236471c29">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> 
+docker tag k8sdemo:lab localhost:5000/k8sdemo:lab
+	
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
 </li>
 <li>
 <p>Expose the local Docker registry.</p>
 <p>First execute this in order to be able to access the private registry:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl port-forward --namespace kube-system <span style="color:#66d9ef">$(</span>kubectl get po -n kube-system | grep kube-registry-v0 | <span style="color:#ae81ff">\a</span>wk <span style="color:#e6db74">&#39;{print $1;}&#39;</span><span style="color:#66d9ef">)</span> 5000:5000  &gt; /dev/null&amp;
-       
-</code></pre></div><p>``</p>
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_14b4bcf10b">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_14b4bcf10b">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> 
+kubectl port-forward --namespace kube-system <span style="color:#66d9ef">$(</span>kubectl get po -n kube-system | grep kube-registry-v0 | <span style="color:#ae81ff">\a</span>wk <span style="color:#e6db74">&#39;{print $1;}&#39;</span><span style="color:#66d9ef">)</span> 5000:5000  &gt; /dev/null&amp;
+		
+	
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
 <p>This exposes the Docker Registry to the Terminal we are using.</p>
 <blockquote>
 <p>If you don&rsquo;t get a command line prompt, press <code>enter</code> several times</p>
@@ -625,8 +884,35 @@ Error: getaddrinfo ENOTFOUND k8sdemo-backend k8sdemo-backend:80
 </li>
 <li>
 <p>And now push the image to the local registry:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">docker push localhost:5000/k8sdemo:lab
-</code></pre></div><p>``</p>
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_ca5174e7aa">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_ca5174e7aa">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> 
+docker push localhost:5000/k8sdemo:lab
+	
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
 </li>
 </ol>
 <p>Messages like <code>Handling connection for 5000</code> and <code>Retrying in x seconds</code> are due to the Lab setup and can be ignored.</p>
@@ -635,10 +921,36 @@ Error: getaddrinfo ENOTFOUND k8sdemo-backend k8sdemo-backend:80
 <ol>
 <li>
 <p>Now let&rsquo;s start the Web Frontend container with the image from the registry</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">docker run -d --rm --name k8sdemo -p 3000:3000 --env BACKEND_URL<span style="color:#f92672">=</span>http://172.17.0.1:3001/api localhost:5000/k8sdemo:lab
-   
-&gt; b6e46d8bd60978af7e9e45260111e938da63a64247c9cff3b4e398a6498670a6
-   
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_2eebf3e432">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_2eebf3e432">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> 
+docker run -d --rm --name k8sdemo -p 3000:3000 --env BACKEND_URL<span style="color:#f92672">=</span>http://172.17.0.1:3001/api localhost:5000/k8sdemo:lab
+	
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext">&gt; b6e46d8bd60978af7e9e45260111e938da63a64247c9cff3b4e398a6498670a6
 </code></pre></div><p>``</p>
 </li>
 </ol>
@@ -654,6 +966,9 @@ Error: getaddrinfo ENOTFOUND k8sdemo-backend k8sdemo-backend:80
 <ol start="3">
 <li>Go back to your browser and refresh the <code>k8sdemo</code> web application to make sure that the container has been started.</li>
 </ol>
+<blockquote>
+<p>Congratulations!!! This concludes the Lab</p>
+</blockquote>
 
 
     
@@ -663,10 +978,8 @@ Error: getaddrinfo ENOTFOUND k8sdemo-backend k8sdemo-backend:80
                     <div class="row"><div class="position-relative mx-auto col-lg-9">
                           <div class="bg-primary overflow-hidden p-3 mt-5 shadow">
 
-    <h4 class="text-white text-center">Read more</h4>
 
-    <div class="d-flex justify-content-center"><a class="p-1 mr-3 d-inline-block text-white" href="/k8s_training_web/jtc01/lab1/" title="Lab 1: Get to know Docker"><i class="fas fa-chevron-left p-1"></i>Lab 1: Get to know Docker</a>
-        <a class="p-1 ml-3 d-inline-block text-white text-right" href="/k8s_training_web/jtc01/lab3/" title="Lab 3: Docker Internals">Lab 3: Docker Internals<i class="fas fa-chevron-right p-1"></i></a>
+    <div class="d-flex justify-content-center"><a class="p-1 ml-3 d-inline-block text-white text-right" href="/k8s_training_web/jtc01/lab3/" title="Lab 3: Docker Internals">Lab 3: Docker Internals<i class="fas fa-chevron-right p-1"></i></a>
     </div>
 </div>
 

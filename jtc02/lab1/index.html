@@ -410,7 +410,27 @@ There are a lot of different types of Resources but the most important ones that
 <h3 id="deployment">Deployment</h3>
 <p>A Deployment provides declarative updates for Pods (and ReplicaSets).</p>
 <p>You describe a desired state in a Deployment, and the Deployment Controller changes the actual state to the desired state at a controlled rate. You can define Deployments to create new ReplicaSets, or to remove existing Deployments and adopt all their resources with new Deployments.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">kind</span>: Deployment
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_65f147a558">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_65f147a558">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"> 
+<span style="color:#66d9ef">kind</span>: Deployment
 <span style="color:#66d9ef">metadata</span>:
   <span style="color:#66d9ef">name</span>: nginx-deployment
 <span style="color:#66d9ef">spec</span>:
@@ -425,7 +445,15 @@ There are a lot of different types of Resources but the most important ones that
           <span style="color:#66d9ef">image</span>: nginx:<span style="color:#ae81ff">1.7.9</span>
           <span style="color:#66d9ef">ports</span>:
           - <span style="color:#66d9ef">containerPort</span>: <span style="color:#ae81ff">80</span>
-</code></pre></div><p><img src="../../../images/kube3.png" alt=""></p>
+
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
+<p><img src="../../../images/kube3.png" alt=""></p>
 <p>This yaml file defines (amongst others):</p>
 <table>
 <thead>
@@ -462,7 +490,27 @@ There are a lot of different types of Resources but the most important ones that
 <h3 id="service">Service</h3>
 <p>An abstract way to expose an application running on a set of Pods as a network service.</p>
 <p>With Kubernetes you don’t need to modify your application to use an unfamiliar service discovery mechanism. Kubernetes gives Pods their own IP addresses and a single DNS name for a set of Pods, and can load-balance across them.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">kind</span>: Service
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_569a93cf52">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_569a93cf52">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"> 
+<span style="color:#66d9ef">kind</span>: Service
 <span style="color:#66d9ef">metadata</span>:
   <span style="color:#66d9ef">name</span>: nginx-service
 <span style="color:#66d9ef">spec</span>:
@@ -472,7 +520,15 @@ There are a lot of different types of Resources but the most important ones that
     <span style="color:#66d9ef">protocol</span>: TCP
   <span style="color:#66d9ef">selector</span>:
     <span style="color:#66d9ef">app</span>: nginx
-</code></pre></div><p><img src="../../../images/kube5.png" alt=""></p>
+
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
+<p><img src="../../../images/kube5.png" alt=""></p>
 <p>This yaml file defines (amongst others):</p>
 <table>
 <thead>
@@ -510,10 +566,8 @@ There are a lot of different types of Resources but the most important ones that
                     <div class="row"><div class="position-relative mx-auto col-lg-9">
                           <div class="bg-primary overflow-hidden p-3 mt-5 shadow">
 
-    <h4 class="text-white text-center">Read more</h4>
 
-    <div class="d-flex justify-content-center"><a class="p-1 mr-3 d-inline-block text-white" href="/k8s_training_web/jtc02/" title="JTC02 Kubernetes Labs"><i class="fas fa-chevron-left p-1"></i>JTC02 Kubernetes Labs</a>
-        <a class="p-1 ml-3 d-inline-block text-white text-right" href="/k8s_training_web/jtc02/lab2/" title="Lab 2: Deploy your first Pod">Lab 2: Deploy your first Pod<i class="fas fa-chevron-right p-1"></i></a>
+    <div class="d-flex justify-content-center"><a class="p-1 ml-3 d-inline-block text-white text-right" href="/k8s_training_web/jtc02/lab2/" title="Lab 2: Deploy your first Pod">Lab 2: Deploy your first Pod<i class="fas fa-chevron-right p-1"></i></a>
     </div>
 </div>
 

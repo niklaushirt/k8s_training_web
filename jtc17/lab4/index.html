@@ -406,7 +406,27 @@
 </ol>
 <p>To make things easier we will use the <a href="https://github.com/optiopay/klar">Klar</a> command line tool to interact with the Clair engine.</p>
 <h3 id="install-the-klar-command-line-tool">Install the Klar command line tool</h3>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e">#Linux</span>
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_bd987a4718">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_bd987a4718">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> 
+<span style="color:#75715e">#Linux</span>
 wget https://github.com/optiopay/klar/releases/download/v2.4.0/klar-2.4.0-linux-amd64
 sudo chmod +x klar-2.4.0-linux-amd64
 sudo mv klar-2.4.0-linux-amd64 /usr/local/bin/klar
@@ -415,41 +435,155 @@ sudo mv klar-2.4.0-linux-amd64 /usr/local/bin/klar
 wget https://github.com/optiopay/klar/releases/download/v2.4.0/klar-2.4.0-osx-amd64
 sudo chmod +x klar-2.4.0-osx-amd64
 sudo mv klar-2.4.0-osx-amd64 /usr/local/bin/klar
-</code></pre></div><p>​</p>
+
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
+<p>​</p>
 <h3 id="deploy-clair-into-the-kubernetes-cluster">Deploy Clair into the Kubernetes Cluster</h3>
 <ol>
 <li>
 <p>Go to the directory with the clair resources</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">cd ~/training/clair
-</code></pre></div><p>``</p>
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_78720c1df6">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_78720c1df6">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> 
+cd ~/training/clair
+	
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
 </li>
 <li>
 <p>Create the Secret that holds the Clair configuration</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl create secret generic clairsecret --from-file<span style="color:#f92672">=</span>./config.yaml
-   
-&gt; from-file<span style="color:#f92672">=</span>./config.yaml
-&gt; secret/clairsecret created
 
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_f28562553a">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_f28562553a">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> 
+kubectl create secret generic clairsecret --from-file<span style="color:#f92672">=</span>./config.yaml
+	
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext">&gt; from-file=./config.yaml
+&gt; secret/clairsecret created
 </code></pre></div><p>``</p>
 </li>
 <li>
 <p>Deploy Clair</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl create -f clair-kubernetes.yaml
-   
-&gt; service/clairsvc created
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_4a138cbdb5">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_4a138cbdb5">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> 
+kubectl create -f clair-kubernetes.yaml
+	
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext">&gt; service/clairsvc created
 &gt; replicationcontroller/clair created
 &gt; replicationcontroller/clair-postgres created
 &gt; service/postgres created
-   
 </code></pre></div><p>``</p>
 </li>
 <li>
 <p>Wait for Clair to be running (Ready is 1/1)</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl get pods
-   
-&gt; NAME                   READY   STATUS              RESTARTS   AGE
-&gt; clair-jcb6r            1/1     Running             <span style="color:#ae81ff">0</span>          17s
-&gt; clair-postgres-2rbgj   1/1     Running             <span style="color:#ae81ff">0</span>          17s
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_bd0798d966">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_bd0798d966">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> 
+kubectl get pods
+	
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext">&gt; NAME                   READY   STATUS              RESTARTS   AGE
+&gt; clair-jcb6r            1/1     Running             0          17s
+&gt; clair-postgres-2rbgj   1/1     Running             0          17s
 </code></pre></div><p>``</p>
 </li>
 </ol>
@@ -467,27 +601,108 @@ Klar is designed to be used integrated in other CI/CD tools. It&rsquo;s a single
 <p>Get the Cluster IP (MY-CLUSTER-IP)</p>
 <p>Use the adequate method for this:</p>
 <p>Minikube in the training VM</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">minikube ip
-</code></pre></div><p>``
+<p>
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_0e136ce986">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_0e136ce986">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> 
+minikube ip
+	
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
 or</p>
 <p>IBM Cloud Kubernetes Service</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ibmcloud ks worker ls --cluster &lt;MY-CLUSTER-NAME&gt;
-</code></pre></div><p>``</p>
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_da2d6cd7fc">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_da2d6cd7fc">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> 
+ibmcloud ks worker ls --cluster &lt;MY-CLUSTER-NAME&gt;
+	
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
 </li>
 <li>
 <p>Execute the following command</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">CLAIR_ADDR<span style="color:#f92672">=</span>&lt;MY-CLUSTER-IP&gt;:30060 FORMAT_OUTPUT<span style="color:#f92672">=</span>table CLAIR_OUTPUT<span style="color:#f92672">=</span>High klar niklaushirt/k8sdemo:1.0.1
-   
-&gt; clair timeout 1m0s
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_e1eb83dfb8">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_e1eb83dfb8">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> 
+CLAIR_ADDR<span style="color:#f92672">=</span>&lt;MY-CLUSTER-IP&gt;:30060 FORMAT_OUTPUT<span style="color:#f92672">=</span>table CLAIR_OUTPUT<span style="color:#f92672">=</span>High klar niklaushirt/k8sdemo:1.0.1
+	
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext">&gt; clair timeout 1m0s
 &gt; docker timeout: 1m0s
 &gt; no whitelist file
-&gt; Analysing <span style="color:#ae81ff">14</span> layers
+&gt; Analysing 14 layers
 &gt; Got results from Clair API v1
-&gt; Found <span style="color:#ae81ff">597</span> vulnerabilities
-&gt; Unknown: <span style="color:#ae81ff">176</span>
-&gt; Negligible: <span style="color:#ae81ff">284</span>
-&gt; Low: <span style="color:#ae81ff">135</span>
-&gt; Medium: <span style="color:#ae81ff">2</span>
+&gt; Found 597 vulnerabilities
+&gt; Unknown: 176
+&gt; Negligible: 284
+&gt; Low: 135
+&gt; Medium: 2
 </code></pre></div><p>``</p>
 <p>We define several things here:</p>
 <ul>
@@ -503,23 +718,50 @@ If the output shows a completely different count than in this example you have t
 </li>
 <li>
 <p>Now let&rsquo;s execute it again with a lower OUTPUT (Medium)</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">CLAIR_ADDR<span style="color:#f92672">=</span>&lt;MY-CLUSTER-IP&gt;:30060 FORMAT_OUTPUT<span style="color:#f92672">=</span>table CLAIR_OUTPUT<span style="color:#f92672">=</span>Medium klar niklaushirt/k8sdemo:1.0.1
-       
-&gt; clair timeout 1m0s
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_064c6faa55">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_064c6faa55">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> 
+CLAIR_ADDR<span style="color:#f92672">=</span>&lt;MY-CLUSTER-IP&gt;:30060 FORMAT_OUTPUT<span style="color:#f92672">=</span>table CLAIR_OUTPUT<span style="color:#f92672">=</span>Medium klar niklaushirt/k8sdemo:1.0.1
+	
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext">&gt; clair timeout 1m0s
 &gt; docker timeout: 1m0s
 &gt; no whitelist file
-&gt; Analysing <span style="color:#ae81ff">14</span> layers
+&gt; Analysing 14 layers
 &gt; Got results from Clair API v1
-&gt; Found <span style="color:#ae81ff">597</span> vulnerabilities
-&gt; Unknown: <span style="color:#ae81ff">176</span>
-&gt; Negligible: <span style="color:#ae81ff">284</span>
-&gt; Low: <span style="color:#ae81ff">135</span>
-&gt; Medium: <span style="color:#ae81ff">2</span>
-       
+&gt; Found 597 vulnerabilities
+&gt; Unknown: 176
+&gt; Negligible: 284
+&gt; Low: 135
+&gt; Medium: 2
+
 &gt; +----------+---------------+-------------+----------------+---------+--------------------------------	&gt; +-----------------------------------------------------------+
 &gt; | SEVERITY | NAME          | FEATURENAME | FEATUREVERSION | FIXEDBY | DESCRIPTION                    | LINK                                                      	&gt; |
 &gt; +----------+---------------+-------------+----------------+---------+--------------------------------	&gt; +-----------------------------------------------------------+
-&gt; | Medium   | CVE-2009-3546 | libwmf      | 0.2.8.4-10.6   |         | The _gdGetColors <span style="color:#66d9ef">function</span>      | https://security-tracker.debian.org/tracker/CVE-2009-3546 |
+&gt; | Medium   | CVE-2009-3546 | libwmf      | 0.2.8.4-10.6   |         | The _gdGetColors function      | https://security-tracker.debian.org/tracker/CVE-2009-3546 |
 &gt; |          |               |             |                |         | in gd_gd.c in PHP 5.2.11 and   |                                                           	&gt; |
 &gt; |          |               |             |                |         | 5.3.x before 5.3.1, and the    |                                                           	&gt; |
 &gt; |          |               |             |                |         | GD Graphics Library 2.x, does  |                                                           	&gt; |
@@ -530,9 +772,9 @@ If the output shows a completely different count than in this example you have t
 &gt; |          |               |             |                |         | in libgd in PHP before 5.2.4   |                                                           	&gt; |
 &gt; |          |               |             |                |         | allow remote attackers to      |                                                           	&gt; |
 ...
-&gt; |          |               |             |                |         | <span style="color:#66d9ef">function</span>.                      |                                                           	&gt; |
+&gt; |          |               |             |                |         | function.                      |                                                           	&gt; |
 &gt; +----------+---------------+-------------+----------------+---------+--------------------------------	&gt; +-----------------------------------------------------------+
-   
+
 </code></pre></div><p>``</p>
 </li>
 </ol>
@@ -541,8 +783,8 @@ If the output shows a completely different count than in this example you have t
 <hr>
 <hr>
 <blockquote>
-<h1 id="congratulations">Congratulations!!!</h1>
-<h1 id="this-concludes-lab-4-on-image-scanning">This concludes Lab 4 on Image Scanning.</h1>
+<p>Congratulations!!! This concludes the last Lab and the Course.
+Hope to see you soon!!!</p>
 </blockquote>
 
 
@@ -553,10 +795,8 @@ If the output shows a completely different count than in this example you have t
                     <div class="row"><div class="position-relative mx-auto col-lg-9">
                           <div class="bg-primary overflow-hidden p-3 mt-5 shadow">
 
-    <h4 class="text-white text-center">Read more</h4>
 
-    <div class="d-flex justify-content-center"><a class="p-1 mr-3 d-inline-block text-white" href="/k8s_training_web/jtc17/lab3/" title="Lab 3: RBAC Tooling"><i class="fas fa-chevron-left p-1"></i>Lab 3: RBAC Tooling</a>
-        <a class="p-1 ml-3 d-inline-block text-white text-right" href="/k8s_training_web/jtc18/" title="JTC18 Kubernetes Advanced Labs">JTC18 Kubernetes Advanced Labs<i class="fas fa-chevron-right p-1"></i></a>
+    <div class="d-flex justify-content-center"><a class="p-1 ml-3 d-inline-block text-white text-right" href="/k8s_training_web/jtc18/" title="JTC18 Kubernetes Advanced Labs">JTC18 Kubernetes Advanced Labs<i class="fas fa-chevron-right p-1"></i></a>
     </div>
 </div>
 

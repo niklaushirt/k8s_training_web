@@ -390,31 +390,84 @@
 <ol>
 <li>
 <p>Let&rsquo;s create a VirtualService that creates 50% of 501 errors when the <code>details</code> service is called.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">apiVersion</span>: networking.istio.io/v1alpha3
-<span style="color:#66d9ef">kind</span>: VirtualService
-<span style="color:#66d9ef">metadata</span>:
-  <span style="color:#66d9ef">name</span>: details
-<span style="color:#66d9ef">spec</span>:
-  <span style="color:#66d9ef">hosts</span>:
-  - details
-  <span style="color:#66d9ef">http</span>:
-  - <span style="color:#66d9ef">fault</span>:
-      <span style="color:#66d9ef">abort</span>:
-        <span style="color:#66d9ef">httpStatus</span>: <span style="color:#ae81ff">500</span>
-        <span style="color:#66d9ef">percentage</span>:
-          <span style="color:#66d9ef">value</span>: <span style="color:#ae81ff">50</span>
-    <span style="color:#66d9ef">route</span>:
-    - <span style="color:#66d9ef">destination</span>:
-        <span style="color:#66d9ef">host</span>: details
-        <span style="color:#66d9ef">subset</span>: v1
-...
-</code></pre></div><p>``</p>
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_a2ecf51078">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_a2ecf51078">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"> 
+	<span style="color:#66d9ef">apiVersion</span>: networking.istio.io/v1alpha3
+	<span style="color:#66d9ef">kind</span>: VirtualService
+	<span style="color:#66d9ef">metadata</span>:
+	  <span style="color:#66d9ef">name</span>: details
+	<span style="color:#66d9ef">spec</span>:
+	  <span style="color:#66d9ef">hosts</span>:
+	  - details
+	  <span style="color:#66d9ef">http</span>:
+	  - <span style="color:#66d9ef">fault</span>:
+	      <span style="color:#66d9ef">abort</span>:
+	        <span style="color:#66d9ef">httpStatus</span>: <span style="color:#ae81ff">500</span>
+	        <span style="color:#66d9ef">percentage</span>:
+	          <span style="color:#66d9ef">value</span>: <span style="color:#ae81ff">50</span>
+	    <span style="color:#66d9ef">route</span>:
+	    - <span style="color:#66d9ef">destination</span>:
+	        <span style="color:#66d9ef">host</span>: details
+	        <span style="color:#66d9ef">subset</span>: v1
+	...
+	
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
 <p>Run the following:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl apply -f ~/training/istio/samples/bookinfo/networking/fault-injection-details-v1.yaml
-     
-&gt; virtualservice.networking.istio.io/details created
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_0ba1d0b6ae">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_0ba1d0b6ae">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> 
+kubectl apply -f ~/training/istio/samples/bookinfo/networking/fault-injection-details-v1.yaml
+	
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext">&gt; virtualservice.networking.istio.io/details created
 &gt; destinationrule.networking.istio.io/details created
-   
 </code></pre></div><p>``</p>
 </li>
 <li>
@@ -422,6 +475,9 @@
 <p><img src="../../../images/istio1.png" alt=""></p>
 </li>
 </ol>
+<blockquote>
+<p>Congratulations!!! This concludes the Lab</p>
+</blockquote>
 
 
     
@@ -431,10 +487,8 @@
                     <div class="row"><div class="position-relative mx-auto col-lg-9">
                           <div class="bg-primary overflow-hidden p-3 mt-5 shadow">
 
-    <h4 class="text-white text-center">Read more</h4>
 
-    <div class="d-flex justify-content-center"><a class="p-1 mr-3 d-inline-block text-white" href="/k8s_training_web/jtc10/lab8/" title="Lab 8: Traffic Mirroring"><i class="fas fa-chevron-left p-1"></i>Lab 8: Traffic Mirroring</a>
-        <a class="p-1 ml-3 d-inline-block text-white text-right" href="/k8s_training_web/jtc10/lab10/" title="Lab 10: Cleanup">Lab 10: Cleanup<i class="fas fa-chevron-right p-1"></i></a>
+    <div class="d-flex justify-content-center"><a class="p-1 ml-3 d-inline-block text-white text-right" href="/k8s_training_web/jtc10/lab10/" title="Lab 10: Cleanup">Lab 10: Cleanup<i class="fas fa-chevron-right p-1"></i></a>
     </div>
 </div>
 

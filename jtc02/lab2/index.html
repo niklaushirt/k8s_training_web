@@ -403,26 +403,107 @@
 <p>A<code>Pod</code> can be killed and restarted whenever the system has/wants to. So a <code>Pod</code> is <strong>ephemeral</strong> and it <strong>will</strong> be destroyed at some point.</p>
 <h3 id="1-create-the-pod">1. Create the Pod</h3>
 <p>Let&rsquo;s start to deploy the <code>nginx</code> docker image. It&rsquo;s a simple webserver that is used widely in the Kubernetes world.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl run nginx --image<span style="color:#f92672">=</span>nginx 
 
-&gt; kubectl run --generator<span style="color:#f92672">=</span>deployment/apps.v1 is DEPRECATED and will be removed in a future version. Use kubectl run --generator<span style="color:#f92672">=</span>run-pod/v1 or kubectl create instead.
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_fa6ea455dc">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_fa6ea455dc">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> 
+kubectl run nginx --image<span style="color:#f92672">=</span>nginx 
+	
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext">&gt; kubectl run --generator=deployment/apps.v1 is DEPRECATED and will be removed in a future version. Use kubectl run --generator=run-pod/v1 or kubectl create instead.
 &gt; deployment.apps/nginx created
 </code></pre></div><h3 id="2-list-the-pods">2. List the Pods</h3>
 <p>Now list all the <code>Pods</code> running in Kubernetes. <code>kubectl get</code> is the <code>ls</code> of Kubernetes.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl get pods
 
-&gt; NAME                     READY   STATUS              RESTARTS   AGE
-&gt; nginx-755464dd6c-2rbgj   0/1     ContainerCreating   <span style="color:#ae81ff">0</span>          32s
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_bd0798d966">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_bd0798d966">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> 
+kubectl get pods
+	
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext">&gt; NAME                     READY   STATUS              RESTARTS   AGE
+&gt; nginx-755464dd6c-2rbgj   0/1     ContainerCreating   0          32s
 
 </code></pre></div><p><strong>Note the name of the Pod which is randomly generated!</strong></p>
 <h3 id="3-get-the-yaml-manifest">3. Get the yaml manifest</h3>
 <p>Now we can have a look at the <code>yaml</code> description of our <code>Pod</code></p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl get pods &lt;name of pod from step 2&gt; -o yaml
 
-&gt; apiVersion: v1
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_6cc154636e">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_6cc154636e">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> 
+kubectl get pods &lt;name of pod from step 2&gt; -o yaml
+	
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext">&gt; apiVersion: v1
 &gt; kind: Pod
 &gt; metadata:
-&gt;   creationTimestamp: <span style="color:#e6db74">&#34;2019-11-14T08:51:33Z&#34;</span>
+&gt;   creationTimestamp: &#34;2019-11-14T08:51:33Z&#34;
 &gt;   generateName: nginx-755464dd6c-
 &gt;   labels:
 &gt;     pod-template-hash: 755464dd6c
@@ -434,7 +515,27 @@
  
 </code></pre></div><p><strong>Use the name of the Pod that you wrote down in step #2.</strong></p>
 <p>Here is a simplified version that contains the main elements:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">apiVersion</span>: v1
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_bb4b083a3c">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_bb4b083a3c">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"> 
+<span style="color:#66d9ef">apiVersion</span>: v1
 <span style="color:#66d9ef">kind</span>: Pod
 <span style="color:#66d9ef">metadata</span>:
   <span style="color:#66d9ef">name</span>: nginx-755464dd6c-2rbgj
@@ -442,7 +543,15 @@
   <span style="color:#66d9ef">containers</span>:
   - <span style="color:#66d9ef">name</span>: nginx
     <span style="color:#66d9ef">image</span>: nginx  <span style="color:#75715e">#hosted on hub.docker.com</span>
-</code></pre></div><p>The  Kubernetes manifest represents a desired state. We do not write the steps to achieve this state. Kubernetes will handle it  for us.</p>
+
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
+<p>The  Kubernetes manifest represents a desired state. We do not write the steps to achieve this state. Kubernetes will handle it  for us.</p>
 <p>Let&rsquo;s have a look at the most important fields:</p>
 <ul>
 <li><code>apiVersion</code>: the version of the Kubernetes API we will be using, <code>v1</code> here</li>
@@ -461,26 +570,83 @@
 </ul>
 <h3 id="4-describe-the-pod">4. Describe the Pod</h3>
 <p><code>Describe</code> gives us a lot of information about the status and events of a Kubernetes object.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl describe pods &lt;name of pod from step 2&gt;
 
-...
 
-Events:
-  Type    Reason     Age   From               Message
 
-----    ------     ----  ----               -------
 
-  Normal  Scheduled  90s   default-scheduler  Successfully assigned default/nginx-755464dd6c-2rbgj to minikube
-  Normal  Pulling    82s   kubelet, minikube  Pulling image <span style="color:#e6db74">&#34;nginx&#34;</span>
-  Normal  Pulled     36s   kubelet, minikube  Successfully pulled image <span style="color:#e6db74">&#34;nginx&#34;</span>
-  Normal  Created    36s   kubelet, minikube  Created container nginx
-  Normal  Started    34s   kubelet, minikube  Started container nginx
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_8e453a8516">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_8e453a8516">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> 
+kubectl describe pods &lt;name of pod from step 2&gt;
+	
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext">...
+
+&gt; Events:
+&gt;  Type    Reason     Age   From               Message
+&gt;
+&gt; ----    ------     ----  ----               -------
+&gt;
+&gt;  Normal  Scheduled  90s   default-scheduler  Successfully assigned default/nginx-755464dd6c-2rbgj to minikube
+&gt;  Normal  Pulling    82s   kubelet, minikube  Pulling image &#34;nginx&#34;
+&gt;  Normal  Pulled     36s   kubelet, minikube  Successfully pulled image &#34;nginx&#34;
+&gt;  Normal  Created    36s   kubelet, minikube  Created container nginx
+&gt;  Normal  Started    34s   kubelet, minikube  Started container nginx
 
 
 </code></pre></div><h3 id="5-clean-up">5. Clean-up</h3>
 <p>Now to wrap this up, let&rsquo;s delete the <code>Pod</code></p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl delete pod nginx
-</code></pre></div><p><strong>Congratulations!!! This concludes Lab 2 on deploying your first Pod</strong></p>
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_d274b5b2b1">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_d274b5b2b1">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> 
+kubectl delete pod nginx
+
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
+<blockquote>
+<p>Congratulations!!! This concludes the Lab</p>
+</blockquote>
 
 
     
@@ -490,10 +656,8 @@ Events:
                     <div class="row"><div class="position-relative mx-auto col-lg-9">
                           <div class="bg-primary overflow-hidden p-3 mt-5 shadow">
 
-    <h4 class="text-white text-center">Read more</h4>
 
-    <div class="d-flex justify-content-center"><a class="p-1 mr-3 d-inline-block text-white" href="/k8s_training_web/jtc02/lab1/" title="Lab 1: Get to know Kubernetes"><i class="fas fa-chevron-left p-1"></i>Lab 1: Get to know Kubernetes</a>
-        <a class="p-1 ml-3 d-inline-block text-white text-right" href="/k8s_training_web/jtc02/lab3/" title="Lab 3: Deploy your first application">Lab 3: Deploy your first application<i class="fas fa-chevron-right p-1"></i></a>
+    <div class="d-flex justify-content-center"><a class="p-1 ml-3 d-inline-block text-white text-right" href="/k8s_training_web/jtc02/lab3/" title="Lab 3: Deploy your first application">Lab 3: Deploy your first application<i class="fas fa-chevron-right p-1"></i></a>
     </div>
 </div>
 

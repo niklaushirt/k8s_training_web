@@ -19,9 +19,8 @@
       <guid>https://niklaushirt.github.io/k8s_training_web/jtc17/lab0/</guid>
       <description>Open a Terminal window by clicking on the Termnial icon in the left sidebar - we will use this extensively later as well
   Start the demo application
-kubectl create -f ~/training/deployment/demoapp.yaml kubectl create -f ~/training/deployment/demoapp-service.yaml kubectl create -f ~/training/deployment/demoapp-backend.yaml kubectl create -f ~/training/deployment/demoapp-backend-service.yaml ``
-  Wait for the demo application to be available (the status must be 1/1)
-kubectl get pods &amp;gt; NAME READY STATUS RESTARTS AGE &amp;gt; k8sdemo-backend-5b779f567f-2rbgj 1/1 Running 0 21s &amp;gt; k8sdemo-backend-5b779f567f-p6j76 1/1 Running 0 21s &amp;gt; k8sdemo-bd6bbd548-jcb6r 1/1 Running 0 21s ``</description>
+Copy   kubectl create -f ~/training/deployment/demoapp.yaml kubectl create -f ~/training/deployment/demoapp-service.yaml kubectl create -f ~/training/deployment/demoapp-backend.yaml kubectl create -f ~/training/deployment/demoapp-backend-service.yaml      Wait for the demo application to be available (the status must be 1/1)
+Copy   kubectl get pods    &amp;gt; NAME READY STATUS RESTARTS AGE &amp;gt; k8sdemo-backend-5b779f567f-2rbgj 1/1 Running 0 21s &amp;gt; k8sdemo-backend-5b779f567f-p6j76 1/1 Running 0 21s &amp;gt; k8sdemo-bd6bbd548-jcb6r 1/1 Running 0 21s ``</description>
     </item>
     
     <item>
@@ -42,8 +41,8 @@ Secure your cluster by granting privileged operations (accessing secrets, for ex
       <guid>https://niklaushirt.github.io/k8s_training_web/jtc17/lab2/</guid>
       <description>Create a ServiceAccount for a Deployment In this chapter we will start this Pod with a limited ServiceAccount.
 Create the resources To create the ServiceAccount:
-apiVersion: v1 kind: ServiceAccount metadata: name: service-account-1 labels: app: tools-rbac Run the following command:
-kubectl apply -f ~/training/rbac/service-accounts.yaml &amp;gt; serviceaccount &amp;#34;service-account-1&amp;#34; Now we will create a Deployment that runs under the ServiceAccount that we have just created. The Pod contains the kubectl executable, so that we can test the access rights from withing this Pod.</description>
+Copy   apiVersion: v1 kind: ServiceAccount metadata: name: service-account-1 labels: app: tools-rbac    Run the following command:
+Copy   kubectl apply -f ~/training/rbac/service-accounts.yaml    &amp;gt; serviceaccount &amp;#34;service-account-1&amp;#34; Now we will create a Deployment that runs under the ServiceAccount that we have just created.</description>
     </item>
     
     <item>
@@ -55,7 +54,7 @@ kubectl apply -f ~/training/rbac/service-accounts.yaml &amp;gt; serviceaccount &
       <description>Rakkess Have you ever wondered what access rights you have on a provided kubernetes cluster? For single resources you can use kubectl auth can-i list deployments, but maybe you are looking for a complete overview? This is what rakkess is for. It lists access rights for the current user and all server resources.
 You can get more details here.
   Install Rakkess
-curl -LO https://github.com/corneliusweig/rakkess/releases/download/v0.4.4/rakkess-amd64-linux.tar.gz \  &amp;amp;&amp;amp; tar xf rakkess-amd64-linux.</description>
+Copy   curl -LO https://github.com/corneliusweig/rakkess/releases/download/v0.4.4/rakkess-amd64-linux.tar.gz \ 	&amp;amp;&amp;amp; tar xf rakkess-amd64-linux.</description>
     </item>
     
     <item>

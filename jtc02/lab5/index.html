@@ -402,7 +402,27 @@
 <p>As we have seen, a <code>Pod</code> as something that requests CPU &amp; RAM.</p>
 <p>A <code>PersistentVolume</code> as something that provides a storage on disk. Kubernetes handles a lot of different kinds of volumes. From local disk storage to s3, over 25 as of this writing.</p>
 <p>First we create the <code>PersistentVolume</code> where our mysql data will be stored. It is a piece of  storage in the cluster that has been provisioned by a cluster  administrator. It is a resource in the cluster just like a node is a  resource of the cluster.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">apiVersion</span>: v1
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_2f76250c5e">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_2f76250c5e">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"> 
+<span style="color:#66d9ef">apiVersion</span>: v1
 <span style="color:#66d9ef">kind</span>: PersistentVolume
 <span style="color:#66d9ef">metadata</span>:
   <span style="color:#66d9ef">name</span>: mysql-pv-volume
@@ -413,7 +433,15 @@
     - ReadWriteOnce
   <span style="color:#66d9ef">hostPath</span>:
     <span style="color:#66d9ef">path</span>: <span style="color:#e6db74">&#34;/mnt/data&#34;</span>
-</code></pre></div><p>Let&rsquo;s review some parameters:</p>
+
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
+<p>Let&rsquo;s review some parameters:</p>
 <ul>
 <li><code>capacity</code>: the capacity of the volume
 <ul>
@@ -433,17 +461,70 @@
 <ol>
 <li>
 <p>Create the PersistentVolume</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl apply -f ~/training/volumes/1-simple-mysql-pv.yaml
-   
-&gt; persistentvolume/mysql-pv-volume created 
 
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_6c3782b8af">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_6c3782b8af">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> 
+kubectl apply -f ~/training/volumes/1-simple-mysql-pv.yaml
+	
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext">&gt; persistentvolume/mysql-pv-volume created 
 </code></pre></div><p>``</p>
 </li>
 <li>
 <p>Check that the Volume has been created</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl get pv
-   
-&gt; NAME              CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS      CLAIM   STORAGECLASS   REASON   AGE
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_b9a869debe">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_b9a869debe">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> 
+kubectl get pv
+	
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext">&gt; NAME              CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS      CLAIM   STORAGECLASS   REASON   AGE
 &gt; mysql-pv-volume   1Gi        RWO            Retain           Available                                   4s
 </code></pre></div><p>``</p>
 </li>
@@ -452,7 +533,27 @@
 <p>Now that we have a storage, we need to claim it, make it available for our <code>Pods</code>. So we need a <code>PersistentVolumeClaim</code>. It is a request for storage by a user. It is similar to a pod. Pods consume node resources and <code>PersistentVolumeClaim</code> consume <code>PersistentVolume</code> resources.</p>
 <p>A <code>PersistentVolumeClaim</code> as something that requests a storage on disk and makes it available for the <code>Pod</code> think of it as an abstraction over the hard drives of the Kubernetes nodes - a fancy name for local hard drive.</p>
 <p>The manifest for the <code>PersistentVolumeClaim</code>is quite similar to the <code>PersistentVolume</code>:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">apiVersion</span>: v1
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_90b4fa99cd">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_90b4fa99cd">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"> 
+<span style="color:#66d9ef">apiVersion</span>: v1
 <span style="color:#66d9ef">kind</span>: PersistentVolumeClaim
 <span style="color:#66d9ef">metadata</span>:
   <span style="color:#66d9ef">name</span>: mysql-pv-claim
@@ -462,26 +563,108 @@
   <span style="color:#66d9ef">resources</span>:
     <span style="color:#66d9ef">requests</span>:
       <span style="color:#66d9ef">storage</span>: 1Gi
-</code></pre></div><ol>
+
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
+<ol>
 <li>
 <p>Create the PersistentVolume</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl apply -f ~/training/volumes/2-simple-mysql-pvc.yaml
-   
-&gt; persistentvolumeclaim/mysql-pv-claim created
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_4f7831e7b2">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_4f7831e7b2">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> 
+kubectl apply -f ~/training/volumes/2-simple-mysql-pvc.yaml
+	
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext">&gt; persistentvolumeclaim/mysql-pv-claim created
 </code></pre></div><p>``</p>
 </li>
 <li>
 <p>Check that the Volume has been created. Make sure that the STATUS reads Bound!</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl get pvc
-   
-&gt; NAME             STATUS   VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS   AGE
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_48c0dcea16">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_48c0dcea16">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> 
+kubectl get pvc
+	
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext">&gt; NAME             STATUS   VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS   AGE
 &gt; mysql-pv-claim   Bound    pvc-918d5a94-06c7-11ea-80af-080027c4f0ca   1Gi        RWO            standard       5s
 </code></pre></div><p>``</p>
 </li>
 </ol>
 <h2 id="create-the-stateful-deployment">Create the stateful deployment</h2>
 <p>Now let&rsquo;s create the stateful <code>deployment</code> for mysql.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">apiVersion</span>: apps/v1
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_2e05583206">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_2e05583206">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"> 
+<span style="color:#66d9ef">apiVersion</span>: apps/v1
 <span style="color:#66d9ef">kind</span>: Deployment
 <span style="color:#66d9ef">metadata</span>:
  <span style="color:#66d9ef">name</span>: mysql
@@ -510,7 +693,15 @@
 <span style="color:#66d9ef">​     - name</span>: mysql-persistent-storage
 <span style="color:#66d9ef">​     persistentVolumeClaim</span>:
 <span style="color:#66d9ef">​      claimName</span>: mysql-pv-claim
-</code></pre></div><p>We define several things here:</p>
+
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
+<p>We define several things here:</p>
 <ul>
 <li>
 <p><code>env</code>: the list of environment variables to pass to the container</p>
@@ -543,18 +734,72 @@ Here we map out the path where mysql stores its database files</li>
 <ol>
 <li>
 <p>Create the <code>Deployment</code> (this creates the deployment as well as the service to access the mysql container)</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl apply -f ~/training/volumes/3-simple-mysql-deployment.yaml
-   
-&gt; deployment.apps/mysql created
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_bf011bd311">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_bf011bd311">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> 
+kubectl apply -f ~/training/volumes/3-simple-mysql-deployment.yaml
+	
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext">&gt; deployment.apps/mysql created
 &gt; service/mysql created
 </code></pre></div><p>``</p>
 </li>
 <li>
 <p>Verify that the <code>Deployment</code> has been created and is running  (READY must be 1/1)</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl get deployment
-   
-&gt; NAME    READY   UP-TO-DATE   AVAILABLE   AGE
-&gt; mysql   0/1     <span style="color:#ae81ff">1</span>            <span style="color:#ae81ff">0</span>           8s
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_e273254f49">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_e273254f49">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> 
+kubectl get deployment
+	
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext">&gt; NAME    READY   UP-TO-DATE   AVAILABLE   AGE
+&gt; mysql   0/1     1            0           8s
 </code></pre></div><p>``</p>
 </li>
 </ol>
@@ -562,25 +807,106 @@ Here we map out the path where mysql stores its database files</li>
 <ol>
 <li>
 <p>Now let&rsquo;s access the mysql container by running a mysql client in a temporary container:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl run -it --rm --image<span style="color:#f92672">=</span>mysql:5.6 --restart<span style="color:#f92672">=</span>Never mysql-client -- mysql -h mysql -ppassword
-   
-If you don<span style="color:#960050;background-color:#1e0010">&#39;</span>t see a command prompt, try pressing enter.
-   
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_b5eae2f022">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_b5eae2f022">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> 
+kubectl run -it --rm --image<span style="color:#f92672">=</span>mysql:5.6 --restart<span style="color:#f92672">=</span>Never mysql-client -- mysql -h mysql -ppassword
+	
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext">If you don&#39;t see a command prompt, try pressing enter.
+
 mysql&gt; 
 </code></pre></div><p>``</p>
 </li>
 <li>
 <p>Create a new database in mysql:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">mysql&gt; CREATE DATABASE testing;
-   
-&gt; Query OK, <span style="color:#ae81ff">1</span> row affected <span style="color:#f92672">(</span>0.01 sec<span style="color:#f92672">)</span>
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_bffb240cc1">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_bffb240cc1">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> 
+mysql&gt; CREATE DATABASE testing;
+	
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext">&gt; Query OK, 1 row affected (0.01 sec)
 </code></pre></div><p>``</p>
 </li>
 <li>
 <p>Check that it has been created</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">mysql&gt; show databases;
-   
-&gt; +--------------------+
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_024797b311">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_024797b311">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> 
+mysql&gt; show databases;
+	
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext">&gt; +--------------------+
 &gt; | Database           |
 &gt; +--------------------+
 &gt; | information_schema |
@@ -588,69 +914,259 @@ mysql&gt;
 &gt; | performance_schema |
 &gt; | testing            |
 &gt; +--------------------+
-&gt; <span style="color:#ae81ff">4</span> rows in set <span style="color:#f92672">(</span>0.00 sec<span style="color:#f92672">)</span>
+&gt; 4 rows in set (0.00 sec)
 </code></pre></div><p>``</p>
 </li>
 <li>
 <p>Exit the mysql client</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">mysql&gt; exit
 
-&gt; Bye
-&gt; pod <span style="color:#e6db74">&#34;mysql-client&#34;</span> deleted
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_faeb387484">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_faeb387484">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> 
+mysql&gt; exit
+	
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext">    &gt; Bye
+    &gt; pod &#34;mysql-client&#34; deleted
 </code></pre></div><p>``</p>
 </li>
 <li>
 <p>Get the list of Pods</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl get pods
-   
-&gt; NAME                     READY   STATUS    RESTARTS   AGE
-&gt; mysql-7b9b7999d8-v4r5l   1/1     Running   <span style="color:#ae81ff">0</span>          4m26s
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_875ece6a6e">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_875ece6a6e">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> 
+kubectl get pods
+		
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext">&gt; NAME                     READY   STATUS    RESTARTS   AGE
+&gt; mysql-7b9b7999d8-v4r5l   1/1     Running   0          4m26s
 </code></pre></div><p>``</p>
 </li>
 <li>
 <p>Delete the Pod (you&rsquo;ll have to use the name of your Pod, which is dynamic)</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl delete pod mysql-7b9b7999d8-v4r5l
-   
-&gt; pod <span style="color:#e6db74">&#34;mysql-7b9b7999d8-v4r5l&#34;</span> deleted
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_98f068d832">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_98f068d832">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> 
+kubectl delete pod mysql-7b9b7999d8-v4r5l
+		
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext">&gt; pod &#34;mysql-7b9b7999d8-v4r5l&#34; deleted
 </code></pre></div><p>``</p>
 </li>
 <li>
 <p>A new Pod has been spun up</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl get pods
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_55d992a922">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_55d992a922">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> 
+kubectl get pods
   
-&gt; NAME                     READY   STATUS    RESTARTS   AGE
-&gt; mysql-7b9b7999d8-vqln7   1/1     Running   <span style="color:#ae81ff">0</span>          18s
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext">&gt; NAME                     READY   STATUS    RESTARTS   AGE
+&gt; mysql-7b9b7999d8-vqln7   1/1     Running   0          18s
 </code></pre></div><p>``</p>
 </li>
 <li>
 <p>Recreate a mysql client</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl run -it --rm --image<span style="color:#f92672">=</span>mysql:5.6 --restart<span style="color:#f92672">=</span>Never mysql-client -- mysql -h mysql -ppassword
-   
-If you don<span style="color:#960050;background-color:#1e0010">&#39;</span>t see a command prompt, try pressing enter.
-   
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_b5eae2f022">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_b5eae2f022">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> 
+kubectl run -it --rm --image<span style="color:#f92672">=</span>mysql:5.6 --restart<span style="color:#f92672">=</span>Never mysql-client -- mysql -h mysql -ppassword
+	
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext">If you don&#39;t see a command prompt, try pressing enter.
+
 mysql&gt; 
 </code></pre></div><p>``</p>
 </li>
 <li>
 <p>Verify that the database testing is still there because it has been persisted in the PV through the PVC.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">mysql&gt; show databases;
-+--------------------+
-| Database           |
-+--------------------+
-| information_schema |
-| mysql              |
-| performance_schema |
-| testing            |
-+--------------------+
-<span style="color:#ae81ff">4</span> rows in set <span style="color:#f92672">(</span>0.00 sec<span style="color:#f92672">)</span>
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_024797b311">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_024797b311">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> 
+mysql&gt; show databases;
+	
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext">&gt; +--------------------+
+&gt; | Database           |
+&gt; +--------------------+
+&gt; | information_schema |
+&gt; | mysql              |
+&gt; | performance_schema |
+&gt; | testing            |
+&gt; +--------------------+
+&gt; 4 rows in set (0.00 sec)
 </code></pre></div><p>``</p>
 </li>
 <li>
 <p>Exit the mysql client</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">mysql&gt; exit
 
-&gt; Bye
-&gt; pod <span style="color:#e6db74">&#34;mysql-client&#34;</span> deleted
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_faeb387484">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_faeb387484">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> 
+mysql&gt; exit
+	
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext">    &gt; Bye
+    &gt; pod &#34;mysql-client&#34; deleted
 </code></pre></div><p>``</p>
 </li>
 </ol>
@@ -663,7 +1179,9 @@ mysql&gt;
 <li>We have killed the mysql Pod, which would normally make it loose the data (the new database)</li>
 <li>We have reconnected to the mysql instance to verify that the newly created database is still present</li>
 </ul>
-<p><strong>Congratulations!!! This concludes Lab 5 on stateful Deployments</strong></p>
+<blockquote>
+<p>Congratulations!!! This concludes the Lab</p>
+</blockquote>
 
 
     
@@ -673,10 +1191,8 @@ mysql&gt;
                     <div class="row"><div class="position-relative mx-auto col-lg-9">
                           <div class="bg-primary overflow-hidden p-3 mt-5 shadow">
 
-    <h4 class="text-white text-center">Read more</h4>
 
-    <div class="d-flex justify-content-center"><a class="p-1 mr-3 d-inline-block text-white" href="/k8s_training_web/jtc02/lab4/" title="Lab 4: Scale and Update Deployments"><i class="fas fa-chevron-left p-1"></i>Lab 4: Scale and Update Deployments</a>
-        <a class="p-1 ml-3 d-inline-block text-white text-right" href="/k8s_training_web/jtc02/lab6/" title="Lab 6: Cleanup">Lab 6: Cleanup<i class="fas fa-chevron-right p-1"></i></a>
+    <div class="d-flex justify-content-center"><a class="p-1 ml-3 d-inline-block text-white text-right" href="/k8s_training_web/jtc02/lab6/" title="Lab 6: Cleanup">Lab 6: Cleanup<i class="fas fa-chevron-right p-1"></i></a>
     </div>
 </div>
 

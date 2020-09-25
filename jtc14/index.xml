@@ -20,7 +20,7 @@
       <description>Prerequisites Using the provided Lab VM Using the provided Lab VM is the easiest way to get started with the Labs for the training:
  Download the Lab VM Install a Hypervisor on your PC (VMWare, VirtualBox, KVM, &amp;hellip;) Start the VM Test that it works in your setting  You can find detailed instructions here: https://github.com/niklaushirt/training
 Install the Operator SDK
-RELEASE_VERSION=v0.19.0 curl -LO https://github.com/operator-framework/operator-sdk/releases/download/${RELEASE_VERSION}/operator-sdk-${RELEASE_VERSION}-x86_64-linux-gnu chmod +x operator-sdk-${RELEASE_VERSION}-x86_64-linux-gnu sudo mv operator-sdk-${RELEASE_VERSION}-x86_64-linux-gnu /usr/local/bin/operator-sdk Using your own environment These are two methods to perform the Labs without downloading and starting the VM.</description>
+Copy   RELEASE_VERSION=v0.19.0 curl -LO https://github.com/operator-framework/operator-sdk/releases/download/${RELEASE_VERSION}/operator-sdk-${RELEASE_VERSION}-x86_64-linux-gnu chmod +x operator-sdk-${RELEASE_VERSION}-x86_64-linux-gnu sudo mv operator-sdk-${RELEASE_VERSION}-x86_64-linux-gnu /usr/local/bin/operator-sdk    Using your own environment These are two methods to perform the Labs without downloading and starting the VM.</description>
     </item>
     
     <item>
@@ -43,9 +43,8 @@ The Operator Framework is an open source toolkit to manage Kubernetes native app
       <guid>https://niklaushirt.github.io/k8s_training_web/jtc14/lab2/</guid>
       <description>Create the Lab Operator Project In this part of the lab we will create a demo Ansible operator and deploy it to our Cluster.
   Create the ansible-operator-frontend directory
-cd mkdir ansible-operator cd ~/ansible-operator ``
-  Create the ansible-operator-frontend Project
-operator-sdk new ansible-operator-frontend --type=ansible --api-version=ansiblelab.ibm.com/v1beta1 --kind=MyAnsibleLabDemo &amp;gt; INFO[0000] Creating new Ansible operator &amp;#39;ansible-operator-frontend&amp;#39;. &amp;gt; INFO[0000] Created deploy/service_account.yaml &amp;gt; INFO[0000] Created deploy/role.yaml &amp;gt; INFO[0000] Created deploy/role_binding.yaml &amp;gt; INFO[0000] Created deploy/crds/lab_v1beta1_MyAnsibleLabDemo_crd.</description>
+Copy   cd mkdir ansible-operator cd ~/ansible-operator      Create the ansible-operator-frontend Project
+Copy   operator-sdk new ansible-operator-frontend --type=ansible --api-version=ansiblelab.ibm.com/v1beta1 --kind=MyAnsibleLabDemo    &amp;gt; INFO[0000] Creating new Ansible operator &amp;#39;ansible-operator-frontend&amp;#39;. &amp;gt; INFO[0000] Created deploy/service_account.yaml &amp;gt; INFO[0000] Created deploy/role.</description>
     </item>
     
     <item>
@@ -55,11 +54,10 @@ operator-sdk new ansible-operator-frontend --type=ansible --api-version=ansiblel
       
       <guid>https://niklaushirt.github.io/k8s_training_web/jtc14/lab3/</guid>
       <description>Deploy the Custom Resource   Deploy the ansible-operator-frontend Custom Resource
-kubectl create -f ~/ansible-operator/ansible-operator-frontend/deploy/crds/ansiblelab.ibm.com_v1beta1_myansiblelabdemo_cr.yaml &amp;gt; MyAnsibleLabDemo.ansiblelab.ibm.com/example-MyAnsibleLabDemo created ``
+Copy   kubectl create -f ~/ansible-operator/ansible-operator-frontend/deploy/crds/ansiblelab.ibm.com_v1beta1_myansiblelabdemo_cr.yaml    &amp;gt; MyAnsibleLabDemo.ansiblelab.ibm.com/example-MyAnsibleLabDemo created ``
 From the resource that we defined earlier:
-apiVersion: ansiblelab.ibm.com/v1beta1 kind: MyAnsibleLabDemo metadata: name: example-MyAnsibleLabDemo spec: # Add fields here size: 3 demo: image: niklaushirt/k8sdemo:1.0.0 ``
-  Check that the CustomResource is running
-kubectl get pods &amp;gt; NAME READY STATUS RESTARTS AGE &amp;gt; ansible-operator-frontend-fd78bcf5-zxgws 2/2 Running 0 3m11s &amp;gt; k8sdemo-7fc8554dff-2krkz 1/1 Running 0 45s ``</description>
+Copy   apiVersion: ansiblelab.ibm.com/v1beta1 kind: MyAnsibleLabDemo metadata: name: example-MyAnsibleLabDemo spec: # Add fields here size: 3 demo: image: niklaushirt/k8sdemo:1.0.0      Check that the CustomResource is running
+Copy   kubectl get pods    &amp;gt; NAME READY STATUS RESTARTS AGE &amp;gt; ansible-operator-frontend-fd78bcf5-zxgws 2/2 Running 0 3m11s &amp;gt; k8sdemo-7fc8554dff-2krkz 1/1 Running 0 45s ``</description>
     </item>
     
     <item>
@@ -69,7 +67,8 @@ kubectl get pods &amp;gt; NAME READY STATUS RESTARTS AGE &amp;gt; ansible-operat
       
       <guid>https://niklaushirt.github.io/k8s_training_web/jtc14/lab4/</guid>
       <description>Cleanup Delete the ansible-operator-frontend Resources
-kubectl delete -f ~/ansible-operator/ansible-operator-frontend/deploy/crds/ansiblelab.ibm.com_myansiblelabdemos_crd.yaml kubectl delete -f ~/ansible-operator/ansible-operator-frontend/deploy/service_account.yaml kubectl delete -f ~/ansible-operator/ansible-operator-frontend/deploy/role.yaml kubectl delete -f ~/ansible-operator/ansible-operator-frontend/deploy/role_binding.yaml kubectl delete -f ~/ansible-operator/ansible-operator-frontend/deploy/operator.yaml kubectl delete -f ~/ansible-operator/ansible-operator-frontend/deploy/crds/ansiblelab.ibm.com_v1beta1_myansiblelabdemo_cr.yaml kubectl delete service -n default k8sdemoansible-service **Congratulations!!! This concludes Lab 2 on Kubernetes Ansible Operators **</description>
+Copy   kubectl delete -f ~/ansible-operator/ansible-operator-frontend/deploy/crds/ansiblelab.ibm.com_myansiblelabdemos_crd.yaml kubectl delete -f ~/ansible-operator/ansible-operator-frontend/deploy/service_account.yaml kubectl delete -f ~/ansible-operator/ansible-operator-frontend/deploy/role.yaml kubectl delete -f ~/ansible-operator/ansible-operator-frontend/deploy/role_binding.yaml kubectl delete -f ~/ansible-operator/ansible-operator-frontend/deploy/operator.yaml kubectl delete -f ~/ansible-operator/ansible-operator-frontend/deploy/crds/ansiblelab.ibm.com_v1beta1_myansiblelabdemo_cr.yaml kubectl delete service -n default k8sdemoansible-service     Congratulations!!! This concludes the Lab and the Course. Hope to see you soon!!!
+ </description>
     </item>
     
   </channel>

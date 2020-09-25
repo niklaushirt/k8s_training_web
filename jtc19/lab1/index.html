@@ -385,7 +385,27 @@
 
 <h1>Lab 1: Tekton</h1>
 
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl apply -f ~/training/devops/tekton/install/tekton.yaml
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_283b5979f2">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_283b5979f2">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> 
+kubectl apply -f ~/training/devops/tekton/install/tekton.yaml
 kubectl apply -n tekton-pipelines -f ~/training/devops/tekton/install/tekton-dashboard.yaml
 kubectl apply -n tekton-pipelines -f ~/training/devops/tekton/install/triggers.yaml
 
@@ -438,7 +458,15 @@ kubectl delete -n training-pipeline pipelineresource --all
 
 
 
-</code></pre></div><p>kubectl create clusterrolebinding cluster-admin-binding<br>
+
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
+<p>kubectl create clusterrolebinding cluster-admin-binding<br>
 &ndash;clusterrole=cluster-admin<br>
 &ndash;user=system:serviceaccount:tekton-pipelines:default</p>
 <p>kubectl create clusterrolebinding cluster-admin-binding1<br>
@@ -454,10 +482,8 @@ system:serviceaccount:openshift-pipelines:tekton-dashboard</p>
                     <div class="row"><div class="position-relative mx-auto col-lg-9">
                           <div class="bg-primary overflow-hidden p-3 mt-5 shadow">
 
-    <h4 class="text-white text-center">Read more</h4>
 
-    <div class="d-flex justify-content-center"><a class="p-1 mr-3 d-inline-block text-white" href="/k8s_training_web/jtc19/" title="JTC19 CloudNative DevOps"><i class="fas fa-chevron-left p-1"></i>JTC19 CloudNative DevOps</a>
-        <a class="p-1 ml-3 d-inline-block text-white text-right" href="/k8s_training_web/jtc19/lab5/" title="Lab 5: Cleanup">Lab 5: Cleanup<i class="fas fa-chevron-right p-1"></i></a>
+    <div class="d-flex justify-content-center"><a class="p-1 ml-3 d-inline-block text-white text-right" href="/k8s_training_web/jtc19/lab5/" title="Lab 5: Cleanup">Lab 5: Cleanup<i class="fas fa-chevron-right p-1"></i></a>
     </div>
 </div>
 

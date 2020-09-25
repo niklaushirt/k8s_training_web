@@ -419,9 +419,36 @@
 <hr>
 <h2 id="set-default-destination-rules">Set default Destination Rules</h2>
 <p>Before moving on, we have to define the destination rules. The destination rules tell Istio what versions (subsets in Istio terminology) are available for routing. This step is required before fine-grained traffic shaping is possible.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl apply -f ~/training/istio/samples/bookinfo/networking/destination-rule-reviews.yaml
 
-&gt; destinationrule.networking.istio.io/reviews created
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_30b7acda0c">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_30b7acda0c">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> 
+kubectl apply -f ~/training/istio/samples/bookinfo/networking/destination-rule-reviews.yaml
+
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext">&gt; destinationrule.networking.istio.io/reviews created
 
 </code></pre></div><p>For more details, see the <a href="https://istio.io/docs/tasks/traffic-management/traffic-shifting/">Istio documentation</a>.</p>
 <hr>
@@ -429,13 +456,58 @@
 <p>A/B testing is a method of performing identical tests against two separate service versions in order to determine which performs better.</p>
 <p>Set Default Routes to <code>reviews-v1</code> for all microservices</p>
 <p>This would set all incoming routes on the services (indicated in the line <code>destination: &lt;service&gt;</code>) to the deployment with a tag <code>version: v1</code>. To set the default routes, run:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl create -f ~/training/istio/samples/bookinfo/networking/virtual-service-all-v1.yaml
-
-&gt; virtualservice.networking.istio.io/reviews created
 
 
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_a26dd4a5d1">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_a26dd4a5d1">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> 
+kubectl create -f ~/training/istio/samples/bookinfo/networking/virtual-service-all-v1.yaml
+  
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext">&gt; virtualservice.networking.istio.io/reviews created
 </code></pre></div><p>The definition yaml file that we have just applied looks like this</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">kind</span>: VirtualService
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_ef60be7750">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_ef60be7750">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"> 
+<span style="color:#66d9ef">kind</span>: VirtualService
 <span style="color:#66d9ef">metadata</span>:
   <span style="color:#66d9ef">name</span>: reviews
 <span style="color:#66d9ef">spec</span>:
@@ -446,18 +518,72 @@
     - <span style="color:#66d9ef">destination</span>:
         <span style="color:#66d9ef">host</span>: reviews
         <span style="color:#66d9ef">subset</span>: v1
-</code></pre></div><p>Observe in the Kiali Dashboard. After a short while you should see that all traffic is going to V1.</p>
+
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
+<p>Observe in the Kiali Dashboard. After a short while you should see that all traffic is going to V1.</p>
 <p><strong>This may take some time to settle!</strong></p>
 <p><img src="../../../images/traffic1.png" alt=""></p>
 <p><strong>After the deployment of v2:</strong></p>
 <p>Route 100% of the traffic to the <code>version: v2</code> of the <strong>reviews microservices</strong></p>
 <p>This will direct/switch all incoming traffic to version v2 of the reviews microservice. Run:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl apply -f ~/training/istio/samples/bookinfo/networking/virtual-service-all-v2.yaml
 
-&gt; virtualservice.networking.istio.io/reviews configured
 
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_ee9b359866">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_ee9b359866">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> 
+kubectl apply -f ~/training/istio/samples/bookinfo/networking/virtual-service-all-v2.yaml
+  
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext">&gt; virtualservice.networking.istio.io/reviews configured
 </code></pre></div><p>The new definition yaml file that we have just applied looks like this</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">kind</span>: VirtualService
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_5c7fbb5c01">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_5c7fbb5c01">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"> 
+<span style="color:#66d9ef">kind</span>: VirtualService
 <span style="color:#66d9ef">metadata</span>:
   <span style="color:#66d9ef">name</span>: reviews
 <span style="color:#66d9ef">spec</span>:
@@ -469,7 +595,15 @@
         <span style="color:#66d9ef">host</span>: reviews
         <span style="color:#66d9ef">subset</span>: v2
 
-</code></pre></div><p>Observe in the Kiali Dashboard. After a short wile you should see that all traffic is going to V2.</p>
+
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
+<p>Observe in the Kiali Dashboard. After a short wile you should see that all traffic is going to V2.</p>
 <p><img src="../../../images/traffic2.png" alt=""></p>
 <hr>
 <h2 id="canary-deployment">Canary deployment</h2>
@@ -479,9 +613,57 @@
 <blockquote>
 <p>Using <code>replace</code> should allow you to edit existing route-rules.</p>
 </blockquote>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl apply -f ~/training/istio/samples/bookinfo/networking/virtual-service-reviews-80-20.yaml
-</code></pre></div><p>The new definition yaml file that we have just applied looks like this</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">kind</span>: VirtualService
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_16aac3172b">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_16aac3172b">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> 
+kubectl apply -f ~/training/istio/samples/bookinfo/networking/virtual-service-reviews-80-20.yaml
+  
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
+<p>The new definition yaml file that we have just applied looks like this</p>
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_d517b335ae">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_d517b335ae">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"> 
+<span style="color:#66d9ef">kind</span>: VirtualService
 <span style="color:#66d9ef">metadata</span>:
   <span style="color:#66d9ef">name</span>: reviews
 <span style="color:#66d9ef">spec</span>:
@@ -497,7 +679,15 @@
         <span style="color:#66d9ef">host</span>: reviews
         <span style="color:#66d9ef">subset</span>: v2
       <span style="color:#66d9ef">weight</span>: <span style="color:#ae81ff">20</span>
-</code></pre></div><p>Observe in the Kiali Dashboard. After a short wile you should see that 80% of the traffic is going to V1 and 80% of the traffic is going to V2.</p>
+
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
+<p>Observe in the Kiali Dashboard. After a short wile you should see that 80% of the traffic is going to V1 and 80% of the traffic is going to V2.</p>
 <p><img src="../../../images/traffic3.png" alt=""></p>
 <hr>
 <h2 id="navigating-kiali">Navigating Kiali</h2>
@@ -531,9 +721,57 @@ Then open the <code>reviews</code> service overview:</p>
 <p>Set Route to <code>reviews-v2</code> of <strong>reviews microservice</strong> for a specific user</p>
 <p>This would set the route for the user <code>jason</code> (You can login as <em>jason</em> with any password in your deploy web application) to see the <code>version: v3</code> of the reviews microservice.</p>
 <p>Run:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl apply -f ~/training/istio/samples/bookinfo/networking/virtual-service-reviews-jason-v2-v3.yaml
-</code></pre></div><p>The new definition yaml file that we have just applied looks like this</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">kind</span>: VirtualService
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_b84e59e8a3">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_b84e59e8a3">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> 
+kubectl apply -f ~/training/istio/samples/bookinfo/networking/virtual-service-reviews-jason-v2-v3.yaml
+  
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
+<p>The new definition yaml file that we have just applied looks like this</p>
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_de392b40c0">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_de392b40c0">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">   
+<span style="color:#66d9ef">kind</span>: VirtualService
 <span style="color:#66d9ef">metadata</span>:
   <span style="color:#66d9ef">name</span>: reviews
 <span style="color:#66d9ef">spec</span>:
@@ -552,12 +790,23 @@ Then open the <code>reviews</code> service overview:</p>
     - <span style="color:#66d9ef">destination</span>:
         <span style="color:#66d9ef">host</span>: reviews
         <span style="color:#66d9ef">subset</span>: v2
-</code></pre></div><p>Go to the Bookinfo Application in your Browser.</p>
+
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
+<p>Go to the Bookinfo Application in your Browser.</p>
 <p><strong>Refresh several times</strong> - You should see only black stars, meaning that you are using V2.</p>
 <p><img src="../../../images/traffic4.png" alt=""></p>
 <p>Now login to the Web Application as user jason with password jason and <strong>refresh several times</strong>. You should see only red stars, meaning that you are using V3.</p>
 <p>Observe in the Kiali Dashboard. After a short wile you should see that a small percentage of traffic is going to V3, which corresponds to your page refreshes.</p>
 <p><img src="../../../images/traffic5.png" alt=""></p>
+<blockquote>
+<p>Congratulations!!! This concludes the Lab</p>
+</blockquote>
 
 
     
@@ -567,10 +816,8 @@ Then open the <code>reviews</code> service overview:</p>
                     <div class="row"><div class="position-relative mx-auto col-lg-9">
                           <div class="bg-primary overflow-hidden p-3 mt-5 shadow">
 
-    <h4 class="text-white text-center">Read more</h4>
 
-    <div class="d-flex justify-content-center"><a class="p-1 mr-3 d-inline-block text-white" href="/k8s_training_web/jtc10/lab4/" title="Lab 4: Monitoring with Kiali"><i class="fas fa-chevron-left p-1"></i>Lab 4: Monitoring with Kiali</a>
-        <a class="p-1 ml-3 d-inline-block text-white text-right" href="/k8s_training_web/jtc10/lab6/" title="Lab 6: Telemetry data">Lab 6: Telemetry data<i class="fas fa-chevron-right p-1"></i></a>
+    <div class="d-flex justify-content-center"><a class="p-1 ml-3 d-inline-block text-white text-right" href="/k8s_training_web/jtc10/lab6/" title="Lab 6: Telemetry data">Lab 6: Telemetry data<i class="fas fa-chevron-right p-1"></i></a>
     </div>
 </div>
 

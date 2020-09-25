@@ -394,133 +394,517 @@
 <ol>
 <li>
 <p>Deploy  the <code>ansible-operator-frontend</code> Custom Resource</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl create -f  ~/ansible-operator/ansible-operator-frontend/deploy/crds/ansiblelab.ibm.com_v1beta1_myansiblelabdemo_cr.yaml 
 
-&gt; MyAnsibleLabDemo.ansiblelab.ibm.com/example-MyAnsibleLabDemo created
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_97c309c22e">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_97c309c22e">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> 
+kubectl create -f  ~/ansible-operator/ansible-operator-frontend/deploy/crds/ansiblelab.ibm.com_v1beta1_myansiblelabdemo_cr.yaml 
+	
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext">&gt; MyAnsibleLabDemo.ansiblelab.ibm.com/example-MyAnsibleLabDemo created
 </code></pre></div><p>``</p>
 <p>From the resource that we defined earlier:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">apiVersion</span>: ansiblelab.ibm.com/v1beta1
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_4d0bb317f7">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_4d0bb317f7">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"> 
+<span style="color:#66d9ef">apiVersion</span>: ansiblelab.ibm.com/v1beta1
 <span style="color:#66d9ef">kind</span>: MyAnsibleLabDemo
 <span style="color:#66d9ef">metadata</span>:
-  <span style="color:#66d9ef">name</span>: example-MyAnsibleLabDemo
+	<span style="color:#66d9ef">name</span>: example-MyAnsibleLabDemo
 <span style="color:#66d9ef">spec</span>:
-  <span style="color:#75715e"># Add fields here</span>
-  <span style="color:#66d9ef">size</span>: <span style="color:#ae81ff">3</span>
-  <span style="color:#66d9ef">demo</span>:
-    <span style="color:#66d9ef">image</span>: niklaushirt/k8sdemo:<span style="color:#ae81ff">1.0.0</span>
-</code></pre></div><p>``</p>
+	<span style="color:#75715e"># Add fields here</span>
+	<span style="color:#66d9ef">size</span>: <span style="color:#ae81ff">3</span>
+	<span style="color:#66d9ef">demo</span>:
+		<span style="color:#66d9ef">image</span>: niklaushirt/k8sdemo:<span style="color:#ae81ff">1.0.0</span>
+		
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
 </li>
 <li>
 <p>Check that the CustomResource is running</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl get pods
-   
-&gt; NAME                                         READY   STATUS    RESTARTS   AGE
-&gt; ansible-operator-frontend-fd78bcf5-zxgws     2/2     Running   <span style="color:#ae81ff">0</span>          3m11s
-&gt; k8sdemo-7fc8554dff-2krkz                     1/1     Running   <span style="color:#ae81ff">0</span>          45s
-   
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_875ece6a6e">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_875ece6a6e">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> 
+kubectl get pods
+		
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext">&gt; NAME                                         READY   STATUS    RESTARTS   AGE
+&gt; ansible-operator-frontend-fd78bcf5-zxgws     2/2     Running   0          3m11s
+&gt; k8sdemo-7fc8554dff-2krkz                     1/1     Running   0          45s
+
 </code></pre></div><p>``</p>
 </li>
 <li>
 <p>Check the version of the deployed Image</p>
-</li>
-</ol>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl describe deployment k8sdemo | grep Image
 
-&gt; Image:      niklaushirt/k8sdemo:1.0.0
-</code></pre></div><ol start="4">
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_61405cff9a">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_61405cff9a">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> 
+kubectl describe deployment k8sdemo | grep Image
+			
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext">&gt; Image:      niklaushirt/k8sdemo:1.0.0
+</code></pre></div><p>``</p>
+</li>
 <li>
 <p>Once the status reads <code>Running</code>, we need to expose that deployment as a service so we can access it through the IP of the worker nodes.
 The <code>k8sdemo</code> application listens on port 3000.</p>
 <p>Run:</p>
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_ca52ec3fd5">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_ca52ec3fd5">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> 
+kubectl expose deployment k8sdemo --name k8sdemoansible-service -n default --type<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;NodePort&#34;</span> --port<span style="color:#f92672">=</span><span style="color:#ae81ff">3000</span>
+	
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext">&gt; service &#34;k8sdemoansible-service&#34; exposed
+</code></pre></div><p>``</p>
 </li>
-</ol>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> kubectl expose deployment k8sdemo --name k8sdemoansible-service -n default --type<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;NodePort&#34;</span> --port<span style="color:#f92672">=</span><span style="color:#ae81ff">3000</span>
- 
- &gt; service <span style="color:#e6db74">&#34;k8sdemoansible-service&#34;</span> exposed
-</code></pre></div><ol start="5">
 <li>
 <p>Open the application in your Browser</p>
 <p><img src="../../../images/vm.png" alt=""> <strong>Training VM</strong></p>
 <p>If you are using the training VM, you can open the webpage directly by typing:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">minikube service k8sdemoansible-service
-</code></pre></div><p>where k8sdemo-service is the name of the exposed kubernetes service.</p>
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_be84363716">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_be84363716">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> 
+minikube service k8sdemoansible-service
+    
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
+<p>where k8sdemo-service is the name of the exposed kubernetes service.</p>
 <hr>
 <p><img src="../../../images/cloud.png" alt=""> <strong>Cloud/Standalone</strong></p>
 <p>If you are <strong>NOT</strong> using the training VM, you can open the webpage by forwarding a local port to the service in your Cluster.</p>
 <p>Execute this in a separate Terminal Window/Tab in order to be able to access the web page:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl port-forward --namespace default <span style="color:#66d9ef">$(</span>kubectl get po -n default -l app<span style="color:#f92672">=</span>k8sdemo | grep k8sdemo| <span style="color:#ae81ff">\a</span>wk <span style="color:#e6db74">&#39;{print $1;}&#39;</span><span style="color:#66d9ef">)</span> 3000:3000 
-</code></pre></div><p>And then navigating to <a href="http://localhost:3000/">http://localhost:3000/</a> in your browser.</p>
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_9310b5deb4">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_9310b5deb4">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> 
+kubectl port-forward --namespace default <span style="color:#66d9ef">$(</span>kubectl get po -n default -l app<span style="color:#f92672">=</span>k8sdemo | grep k8sdemo| <span style="color:#ae81ff">\a</span>wk <span style="color:#e6db74">&#39;{print $1;}&#39;</span><span style="color:#66d9ef">)</span> 3000:3000 
+    
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
+<p>And then navigating to <a href="http://localhost:3000/">http://localhost:3000/</a> in your browser.</p>
 </li>
 <li>
 <p>Get the name of the Operator Pod (if you have not done that in the previous task)</p>
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_bd0798d966">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_bd0798d966">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> 
+kubectl get pods
+	
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext">&gt; NAME                                       READY   STATUS    RESTARTS   AGE
+&gt; ansible-operator-frontend-fd78bcf5-zxgws   2/2     Running   0          87s
+&gt; k8sdemo-7c5f4f5895-g7ft7                   1/1     Running   0          2s
+
+</code></pre></div><p>``</p>
+</li>
+<li>
+<p>Get the log of the Operator Pod</p>
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_379ec908ad">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_379ec908ad">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> 
+kubectl logs -c operator ansible-operator-frontend-fd78bcf5-zxgws
+	
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
+<p>We can see that the Operator has picked up on the CustomResource of type <code>MyAnsibleLabDemo</code> and handed it to the CustomResource Controller.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext">&gt; {&#34;level&#34;:&#34;info&#34;,&#34;ts&#34;:1593618338.3867893,&#34;logger&#34;:&#34;ansible-controller&#34;,&#34;msg&#34;:&#34;Watching resource&#34;,&#34;Options.Group&#34;:&#34;ansiblelab.ibm.com&#34;,&#34;Options.Version&#34;:&#34;v1beta1&#34;,&#34;Options.Kind&#34;:&#34;MyAnsibleLabDemo&#34;}
+&gt; {&#34;level&#34;:&#34;info&#34;,&#34;ts&#34;:1593618338.387424,&#34;logger&#34;:&#34;kubebuilder.controller&#34;,&#34;msg&#34;:&#34;Starting EventSource&#34;,&#34;controller&#34;:&#34;myansiblelabdemo-controller&#34;,&#34;source&#34;:&#34;kind source: ansiblelab.ibm.com/v1beta1, Kind=MyAnsibleLabDemo&#34;}
+&gt; {&#34;level&#34;:&#34;info&#34;,&#34;ts&#34;:1593618338.487868,&#34;logger&#34;:&#34;kubebuilder.controller&#34;,&#34;msg&#34;:&#34;Starting Controller&#34;,&#34;controller&#34;:&#34;myansiblelabdemo-controller&#34;}
+&gt; {&#34;level&#34;:&#34;info&#34;,&#34;ts&#34;:1593618338.5881243,&#34;logger&#34;:&#34;kubebuilder.controller&#34;,&#34;msg&#34;:&#34;Starting workers&#34;,&#34;controller&#34;:&#34;myansiblelabdemo-controller&#34;,&#34;worker count&#34;:1}
+&gt; {&#34;level&#34;:&#34;info&#34;,&#34;ts&#34;:1593618669.4742577,&#34;logger&#34;:&#34;logging_event_handler&#34;,&#34;msg&#34;:&#34;[playbook task]&#34;,&#34;name&#34;:&#34;example-myansiblelabdemo&#34;,&#34;namespace&#34;:&#34;default&#34;,&#34;gvk&#34;:&#34;ansiblelab.ibm.com/v1beta1, Kind=MyAnsibleLabDemo&#34;,&#34;event_type&#34;:&#34;playbook_on_task_start&#34;,&#34;job&#34;:&#34;6354677430737639809&#34;,&#34;EventData.Name&#34;:&#34;Gathering Facts&#34;}
+...
+</code></pre></div><p>``</p>
+<p>And that it has executed the Ansible Playbook to create it</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext">&gt; {&#34;level&#34;:&#34;info&#34;,&#34;ts&#34;:1593618737.0413835,&#34;logger&#34;:&#34;logging_event_handler&#34;,&#34;msg&#34;:&#34;[playbook task]&#34;,&#34;name&#34;:&#34;example-myansiblelabdemo&#34;,&#34;namespace&#34;:&#34;default&#34;,&#34;gvk&#34;:&#34;ansiblelab.ibm.com/v1beta1, Kind=MyAnsibleLabDemo&#34;,&#34;event_type&#34;:&#34;playbook_on_task_start&#34;,&#34;job&#34;:&#34;520010200565329963&#34;,&#34;EventData.Name&#34;:&#34;myansiblelabdemo : Create the k8sdemo deployment&#34;}
+&gt; {&#34;level&#34;:&#34;info&#34;,&#34;ts&#34;:1593618737.89282,&#34;logger&#34;:&#34;logging_event_handler&#34;,&#34;msg&#34;:&#34;[playbook task]&#34;,&#34;name&#34;:&#34;example-myansiblelabdemo&#34;,&#34;namespace&#34;:&#34;default&#34;,&#34;gvk&#34;:&#34;ansiblelab.ibm.com/v1beta1, Kind=MyAnsibleLabDemo&#34;,&#34;event_type&#34;:&#34;playbook_on_task_start&#34;,&#34;job&#34;:&#34;520010200565329963&#34;,&#34;EventData.Name&#34;:&#34;myansiblelabdemo : Create the k8sdemo service&#34;}
+&gt; {&#34;level&#34;:&#34;info&#34;,&#34;ts&#34;:1593618738.7778618,&#34;logger&#34;:&#34;runner&#34;,&#34;msg&#34;:&#34;Ansible-runner exited successfully&#34;,&#34;job&#34;:&#34;520010200565329963&#34;,&#34;name&#34;:&#34;example-myansiblelabdemo&#34;,&#34;namespace&#34;:&#34;default&#34;}
+
+</code></pre></div><p>``</p>
 </li>
 </ol>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> kubectl get pods
- 
-  &gt; NAME                                       READY   STATUS    RESTARTS   AGE
-  &gt; ansible-operator-frontend-fd78bcf5-zxgws   2/2     Running   <span style="color:#ae81ff">0</span>          87s
-  &gt; k8sdemo-7c5f4f5895-g7ft7                   1/1     Running   <span style="color:#ae81ff">0</span>          2s
-
-</code></pre></div><ol start="7">
-<li>Get the log of the Operator Pod</li>
-</ol>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> kubectl logs -c operator ansible-operator-frontend-fd78bcf5-zxgws
-</code></pre></div><p>We can see that the Operator has picked up on the CustomResource of type <code>MyAnsibleLabDemo</code> and handed it to the CustomResource Controller.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> &gt; <span style="color:#f92672">{</span><span style="color:#e6db74">&#34;level&#34;</span>:<span style="color:#e6db74">&#34;info&#34;</span>,<span style="color:#e6db74">&#34;ts&#34;</span>:1593618338.3867893,<span style="color:#e6db74">&#34;logger&#34;</span>:<span style="color:#e6db74">&#34;ansible-controller&#34;</span>,<span style="color:#e6db74">&#34;msg&#34;</span>:<span style="color:#e6db74">&#34;Watching resource&#34;</span>,<span style="color:#e6db74">&#34;Options.Group&#34;</span>:<span style="color:#e6db74">&#34;ansiblelab.ibm.com&#34;</span>,<span style="color:#e6db74">&#34;Options.Version&#34;</span>:<span style="color:#e6db74">&#34;v1beta1&#34;</span>,<span style="color:#e6db74">&#34;Options.Kind&#34;</span>:<span style="color:#e6db74">&#34;MyAnsibleLabDemo&#34;</span><span style="color:#f92672">}</span>
- &gt; <span style="color:#f92672">{</span><span style="color:#e6db74">&#34;level&#34;</span>:<span style="color:#e6db74">&#34;info&#34;</span>,<span style="color:#e6db74">&#34;ts&#34;</span>:1593618338.387424,<span style="color:#e6db74">&#34;logger&#34;</span>:<span style="color:#e6db74">&#34;kubebuilder.controller&#34;</span>,<span style="color:#e6db74">&#34;msg&#34;</span>:<span style="color:#e6db74">&#34;Starting EventSource&#34;</span>,<span style="color:#e6db74">&#34;controller&#34;</span>:<span style="color:#e6db74">&#34;myansiblelabdemo-controller&#34;</span>,<span style="color:#e6db74">&#34;source&#34;</span>:<span style="color:#e6db74">&#34;kind source: ansiblelab.ibm.com/v1beta1, Kind=MyAnsibleLabDemo&#34;</span><span style="color:#f92672">}</span>
- &gt; <span style="color:#f92672">{</span><span style="color:#e6db74">&#34;level&#34;</span>:<span style="color:#e6db74">&#34;info&#34;</span>,<span style="color:#e6db74">&#34;ts&#34;</span>:1593618338.487868,<span style="color:#e6db74">&#34;logger&#34;</span>:<span style="color:#e6db74">&#34;kubebuilder.controller&#34;</span>,<span style="color:#e6db74">&#34;msg&#34;</span>:<span style="color:#e6db74">&#34;Starting Controller&#34;</span>,<span style="color:#e6db74">&#34;controller&#34;</span>:<span style="color:#e6db74">&#34;myansiblelabdemo-controller&#34;</span><span style="color:#f92672">}</span>
- &gt; <span style="color:#f92672">{</span><span style="color:#e6db74">&#34;level&#34;</span>:<span style="color:#e6db74">&#34;info&#34;</span>,<span style="color:#e6db74">&#34;ts&#34;</span>:1593618338.5881243,<span style="color:#e6db74">&#34;logger&#34;</span>:<span style="color:#e6db74">&#34;kubebuilder.controller&#34;</span>,<span style="color:#e6db74">&#34;msg&#34;</span>:<span style="color:#e6db74">&#34;Starting workers&#34;</span>,<span style="color:#e6db74">&#34;controller&#34;</span>:<span style="color:#e6db74">&#34;myansiblelabdemo-controller&#34;</span>,<span style="color:#e6db74">&#34;worker count&#34;</span>:1<span style="color:#f92672">}</span>
- &gt; <span style="color:#f92672">{</span><span style="color:#e6db74">&#34;level&#34;</span>:<span style="color:#e6db74">&#34;info&#34;</span>,<span style="color:#e6db74">&#34;ts&#34;</span>:1593618669.4742577,<span style="color:#e6db74">&#34;logger&#34;</span>:<span style="color:#e6db74">&#34;logging_event_handler&#34;</span>,<span style="color:#e6db74">&#34;msg&#34;</span>:<span style="color:#e6db74">&#34;[playbook task]&#34;</span>,<span style="color:#e6db74">&#34;name&#34;</span>:<span style="color:#e6db74">&#34;example-myansiblelabdemo&#34;</span>,<span style="color:#e6db74">&#34;namespace&#34;</span>:<span style="color:#e6db74">&#34;default&#34;</span>,<span style="color:#e6db74">&#34;gvk&#34;</span>:<span style="color:#e6db74">&#34;ansiblelab.ibm.com/v1beta1, Kind=MyAnsibleLabDemo&#34;</span>,<span style="color:#e6db74">&#34;event_type&#34;</span>:<span style="color:#e6db74">&#34;playbook_on_task_start&#34;</span>,<span style="color:#e6db74">&#34;job&#34;</span>:<span style="color:#e6db74">&#34;6354677430737639809&#34;</span>,<span style="color:#e6db74">&#34;EventData.Name&#34;</span>:<span style="color:#e6db74">&#34;Gathering Facts&#34;</span><span style="color:#f92672">}</span>
- ...
-</code></pre></div><p>And that it has executed the Ansible Playbook to create it</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">&gt; <span style="color:#f92672">{</span><span style="color:#e6db74">&#34;level&#34;</span>:<span style="color:#e6db74">&#34;info&#34;</span>,<span style="color:#e6db74">&#34;ts&#34;</span>:1593618737.0413835,<span style="color:#e6db74">&#34;logger&#34;</span>:<span style="color:#e6db74">&#34;logging_event_handler&#34;</span>,<span style="color:#e6db74">&#34;msg&#34;</span>:<span style="color:#e6db74">&#34;[playbook task]&#34;</span>,<span style="color:#e6db74">&#34;name&#34;</span>:<span style="color:#e6db74">&#34;example-myansiblelabdemo&#34;</span>,<span style="color:#e6db74">&#34;namespace&#34;</span>:<span style="color:#e6db74">&#34;default&#34;</span>,<span style="color:#e6db74">&#34;gvk&#34;</span>:<span style="color:#e6db74">&#34;ansiblelab.ibm.com/v1beta1, Kind=MyAnsibleLabDemo&#34;</span>,<span style="color:#e6db74">&#34;event_type&#34;</span>:<span style="color:#e6db74">&#34;playbook_on_task_start&#34;</span>,<span style="color:#e6db74">&#34;job&#34;</span>:<span style="color:#e6db74">&#34;520010200565329963&#34;</span>,<span style="color:#e6db74">&#34;EventData.Name&#34;</span>:<span style="color:#e6db74">&#34;myansiblelabdemo : Create the k8sdemo deployment&#34;</span><span style="color:#f92672">}</span>
-&gt; <span style="color:#f92672">{</span><span style="color:#e6db74">&#34;level&#34;</span>:<span style="color:#e6db74">&#34;info&#34;</span>,<span style="color:#e6db74">&#34;ts&#34;</span>:1593618737.89282,<span style="color:#e6db74">&#34;logger&#34;</span>:<span style="color:#e6db74">&#34;logging_event_handler&#34;</span>,<span style="color:#e6db74">&#34;msg&#34;</span>:<span style="color:#e6db74">&#34;[playbook task]&#34;</span>,<span style="color:#e6db74">&#34;name&#34;</span>:<span style="color:#e6db74">&#34;example-myansiblelabdemo&#34;</span>,<span style="color:#e6db74">&#34;namespace&#34;</span>:<span style="color:#e6db74">&#34;default&#34;</span>,<span style="color:#e6db74">&#34;gvk&#34;</span>:<span style="color:#e6db74">&#34;ansiblelab.ibm.com/v1beta1, Kind=MyAnsibleLabDemo&#34;</span>,<span style="color:#e6db74">&#34;event_type&#34;</span>:<span style="color:#e6db74">&#34;playbook_on_task_start&#34;</span>,<span style="color:#e6db74">&#34;job&#34;</span>:<span style="color:#e6db74">&#34;520010200565329963&#34;</span>,<span style="color:#e6db74">&#34;EventData.Name&#34;</span>:<span style="color:#e6db74">&#34;myansiblelabdemo : Create the k8sdemo service&#34;</span><span style="color:#f92672">}</span>
-&gt; <span style="color:#f92672">{</span><span style="color:#e6db74">&#34;level&#34;</span>:<span style="color:#e6db74">&#34;info&#34;</span>,<span style="color:#e6db74">&#34;ts&#34;</span>:1593618738.7778618,<span style="color:#e6db74">&#34;logger&#34;</span>:<span style="color:#e6db74">&#34;runner&#34;</span>,<span style="color:#e6db74">&#34;msg&#34;</span>:<span style="color:#e6db74">&#34;Ansible-runner exited successfully&#34;</span>,<span style="color:#e6db74">&#34;job&#34;</span>:<span style="color:#e6db74">&#34;520010200565329963&#34;</span>,<span style="color:#e6db74">&#34;name&#34;</span>:<span style="color:#e6db74">&#34;example-myansiblelabdemo&#34;</span>,<span style="color:#e6db74">&#34;namespace&#34;</span>:<span style="color:#e6db74">&#34;default&#34;</span><span style="color:#f92672">}</span>
-
-</code></pre></div><h2 id="update-the-custom-resource">Update the Custom Resource</h2>
+<h2 id="update-the-custom-resource">Update the Custom Resource</h2>
 <p>We now proceed to modifying the Custom Resource that we have created in order to demonstrate how the Operator is able to update an existing deployment based on modifications done to the Custom Resource.</p>
 <ol>
 <li>Modify the Custom Resource</li>
 </ol>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">  <span style="color:#75715e">#Linux</span> 
- sed -i <span style="color:#e6db74">&#39;s|image: niklaushirt/k8sdemo:1.0.0|image: niklaushirt/k8sdemo:1.0.1|g&#39;</span> ~/ansible-operator/ansible-operator-frontend/deploy/crds/ansiblelab.ibm.com_v1beta1_myansiblelabdemo_cr.yaml
- 
- 
- <span style="color:#75715e">#Mac</span> 
- sed -i <span style="color:#e6db74">&#39;&#39;</span> <span style="color:#e6db74">&#39;s|image: niklaushirt/k8sdemo:1.0.0|image: niklaushirt/k8sdemo:1.0.1|g&#39;</span> ~/ansible-operator/ansible-operator-frontend/deploy/crds/ansiblelab.ibm.com_v1beta1_myansiblelabdemo_cr.yaml
-</code></pre></div><ol start="2">
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_7906bf9cc8">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_7906bf9cc8">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> 
+<span style="color:#75715e">#Linux</span> 
+sed -i <span style="color:#e6db74">&#39;s|image: niklaushirt/k8sdemo:1.0.0|image: niklaushirt/k8sdemo:1.0.1|g&#39;</span> ~/ansible-operator/ansible-operator-frontend/deploy/crds/ansiblelab.ibm.com_v1beta1_myansiblelabdemo_cr.yaml
+
+
+<span style="color:#75715e">#Mac</span> 
+sed -i <span style="color:#e6db74">&#39;&#39;</span> <span style="color:#e6db74">&#39;s|image: niklaushirt/k8sdemo:1.0.0|image: niklaushirt/k8sdemo:1.0.1|g&#39;</span> ~/ansible-operator/ansible-operator-frontend/deploy/crds/ansiblelab.ibm.com_v1beta1_myansiblelabdemo_cr.yaml
+  
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
+<ol start="2">
 <li>
 <p>Check that the Image tag (version) has been changed to 1.0.1</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">more ~/ansible-operator/ansible-operator-frontend/deploy/crds/ansiblelab_v1beta1_myansiblelabdemo_cr.yaml 
-</code></pre></div><p>`</p>
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_de3db5c610">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_de3db5c610">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> 
+more ~/ansible-operator/ansible-operator-frontend/deploy/crds/ansiblelab_v1beta1_myansiblelabdemo_cr.yaml 
+	
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
 <p>The yaml manifest should look like this</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">apiVersion</span>: ansiblelab.ibm.com/v1beta1
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_48e3b9058c">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_48e3b9058c">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"> 
+<span style="color:#66d9ef">apiVersion</span>: ansiblelab.ibm.com/v1beta1
 <span style="color:#66d9ef">kind</span>: MyAnsibleLabDemo
 <span style="color:#66d9ef">metadata</span>:
-  <span style="color:#66d9ef">name</span>: example-myansiblelabdemo
+	<span style="color:#66d9ef">name</span>: example-myansiblelabdemo
 <span style="color:#66d9ef">spec</span>:
-  <span style="color:#75715e"># Add fields here</span>
-  <span style="color:#66d9ef">size</span>: <span style="color:#ae81ff">3</span>
-  <span style="color:#66d9ef">demo</span>:
-    <span style="color:#66d9ef">image</span>: niklaushirt/k8sdemo:<span style="color:#ae81ff">1.0.1</span>
-</code></pre></div><p>``</p>
+	<span style="color:#75715e"># Add fields here</span>
+	<span style="color:#66d9ef">size</span>: <span style="color:#ae81ff">3</span>
+	<span style="color:#66d9ef">demo</span>:
+		<span style="color:#66d9ef">image</span>: niklaushirt/k8sdemo:<span style="color:#ae81ff">1.0.1</span>
+ 	
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
 </li>
 <li>
 <p>Update the Custom Resource</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl apply -f ~/ansible-operator/ansible-operator-frontend/deploy/crds/ansiblelab.ibm.com_v1beta1_myansiblelabdemo_cr.yaml 
-</code></pre></div><p>`</p>
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_f4c90b6d5c">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_f4c90b6d5c">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> 
+kubectl apply -f ~/ansible-operator/ansible-operator-frontend/deploy/crds/ansiblelab.ibm.com_v1beta1_myansiblelabdemo_cr.yaml 
+	
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
 </li>
 <li>
 <p>Check that the Operator has picked up the modification in the CustomResource and that the version of the deployed Image has been changed by the Operator to 1.0.1</p>
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_779060b88c">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_779060b88c">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> 
+kubectl describe deployment k8sdemo | grep Image
+	
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext">&gt; Image:      niklaushirt/k8sdemo:1.0.1
+</code></pre></div><p>``</p>
+</li>
+<li>
+<p>And if you reload the browser you should see some nice orange peppers&hellip;.</p>
 </li>
 </ol>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl describe deployment k8sdemo | grep Image
-
-&gt; Image:      niklaushirt/k8sdemo:1.0.1
-</code></pre></div><ol start="5">
-<li>And if you reload the browser you should see some nice orange peppers&hellip;.</li>
-</ol>
-<p>​</p>
+<p>​	&gt; Congratulations!!! This concludes the Lab</p>
 
 
     
@@ -530,10 +914,8 @@ The <code>k8sdemo</code> application listens on port 3000.</p>
                     <div class="row"><div class="position-relative mx-auto col-lg-9">
                           <div class="bg-primary overflow-hidden p-3 mt-5 shadow">
 
-    <h4 class="text-white text-center">Read more</h4>
 
-    <div class="d-flex justify-content-center"><a class="p-1 mr-3 d-inline-block text-white" href="/k8s_training_web/jtc14/lab2/" title="Lab 2: Create the Lab Operator Project"><i class="fas fa-chevron-left p-1"></i>Lab 2: Create the Lab Operator Project</a>
-        <a class="p-1 ml-3 d-inline-block text-white text-right" href="/k8s_training_web/jtc14/lab4/" title="Lab 4: Cleanup">Lab 4: Cleanup<i class="fas fa-chevron-right p-1"></i></a>
+    <div class="d-flex justify-content-center"><a class="p-1 ml-3 d-inline-block text-white text-right" href="/k8s_training_web/jtc14/lab4/" title="Lab 4: Cleanup">Lab 4: Cleanup<i class="fas fa-chevron-right p-1"></i></a>
     </div>
 </div>
 

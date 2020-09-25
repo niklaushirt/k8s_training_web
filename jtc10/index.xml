@@ -29,9 +29,9 @@ Istio, a joint collaboration between IBM, Google and Lyft provides an easy way t
       <guid>https://niklaushirt.github.io/k8s_training_web/jtc10/lab2/</guid>
       <description>In this module, you download and install Istio.
   Execute the following command to get the latest ISTIO source:
-cd #Linux (Lab VM) wget https://github.com/istio/istio/releases/download/1.6.4/istio-1.6.4-linux-amd64.tar.gz tar xfvz istio-1.6.4-linux-amd64.tar.gz #Mac wget https://github.com/istio/istio/releases/download/1.6.4/istio-1.6.4-osx.tar.gz tar xfvz istio-1.6.4-osx.tar.gz #Windows Download https://github.com/istio/istio/releases/download/1.6.4/istio-1.6.4-win.zip   Add the istioctl client to your executables.
-export PATH=./istio-1.6.4/bin:$PATH   Install Istio into the cluster:
-istioctl install --set profile=demo &amp;gt; Detected that your cluster does not support third party JWT authentication.</description>
+Copy   cd #Linux (Lab VM) wget https://github.com/istio/istio/releases/download/1.6.4/istio-1.6.4-linux-amd64.tar.gz tar xfvz istio-1.6.4-linux-amd64.tar.gz #Mac wget https://github.com/istio/istio/releases/download/1.6.4/istio-1.6.4-osx.tar.gz tar xfvz istio-1.6.4-osx.tar.gz #Windows Download https://github.com/istio/istio/releases/download/1.6.4/istio-1.6.4-win.zip      Add the istioctl client to your executables.
+Copy   export PATH=./istio-1.6.4/bin:$PATH      Install Istio into the cluster:
+Copy   istioctl install --set profile=demo    &amp;gt; Detected that your cluster does not support third party JWT authentication.</description>
     </item>
     
     <item>
@@ -52,8 +52,7 @@ Envoys are deployed as sidecars on each microservice.</description>
       <guid>https://niklaushirt.github.io/k8s_training_web/jtc10/lab4/</guid>
       <description>Kiali is an open-source project that installs on top of Istio to visualize your service mesh. It provides deeper insight into how your microservices interact with one another, and provides features such as circuit breakers and request rates for your services
   In order to create some more sustained traffic, execute the following command:
-kubectl apply -f ~/training/istio/createTraffic.yaml ``
-This starts a Pod that makes requests to the productpage.</description>
+Copy   kubectl apply -f ~/training/istio/createTraffic.yaml    This starts a Pod that makes requests to the productpage.</description>
     </item>
     
     <item>
@@ -106,9 +105,7 @@ Traffic monitoring works in the following way:
       <description>To test microservices for resiliency, Istio allows us to inject delays and errors between services.
 Let&amp;rsquo;s start the Lab.
   Let&amp;rsquo;s create a VirtualService that creates 50% of 501 errors when the details service is called.
-apiVersion: networking.istio.io/v1alpha3 kind: VirtualService metadata: name: details spec: hosts: - details http: - fault: abort: httpStatus: 500 percentage: value: 50 route: - destination: host: details subset: v1 ... ``
-Run the following:
-kubectl apply -f ~/training/istio/samples/bookinfo/networking/fault-injection-details-v1.</description>
+Copy   apiVersion: networking.istio.io/v1alpha3 kind: VirtualService metadata: name: details spec: hosts: - details http: - fault: abort: httpStatus: 500 percentage: value: 50 route: - destination: host: details subset: v1 ...    Run the following:</description>
     </item>
     
     <item>
@@ -119,7 +116,7 @@ kubectl apply -f ~/training/istio/samples/bookinfo/networking/fault-injection-de
       <guid>https://niklaushirt.github.io/k8s_training_web/jtc10/lab10/</guid>
       <description>To delete the BookInfo app and its route-rules:  ~/training/istio/samples/bookinfo/platform/kube/cleanup.sh
   To delete Istio from your cluster
-  kubectl delete -f ~/training/istio/createTraffic.yaml kubectl delete -f ~/training/istio/samples/bookinfo/platform/kube/bookinfo.yaml kubectl delete -f ~/training/istio/samples/bookinfo/networking/bookinfo-gateway.yaml kubectl delete -f ~/training/istio/samples/bookinfo/networking/destination-rule-reviews.yaml kubectl delete -f ~/training/istio/samples/bookinfo/networking/virtual-service-reviews-80-20.yaml istioctl manifest generate --set profile=demo | kubectl delete -f - kubectl delete ns istio-system Congratulations!!! This concludes the Istio Lab</description>
+  Copy   kubectl delete -f ~/training/istio/createTraffic.yaml kubectl delete -f ~/training/istio/samples/bookinfo/platform/kube/bookinfo.yaml kubectl delete -f ~/training/istio/samples/bookinfo/networking/bookinfo-gateway.yaml kubectl delete -f ~/training/istio/samples/bookinfo/networking/destination-rule-reviews.yaml kubectl delete -f ~/training/istio/samples/bookinfo/networking/virtual-service-reviews-80-20.yaml istioctl manifest generate --set profile=demo | kubectl delete -f - kubectl delete ns istio-system     Congratulations!!! This concludes the Lab and the Course.</description>
     </item>
     
   </channel>

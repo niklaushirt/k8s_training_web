@@ -403,24 +403,79 @@
 <li><code>kubectl</code> provides a <code>scale</code> subcommand to change the size of an existing deployment. Let&rsquo;s increase our capacity from a single running instance of
 <code>k8sdemo</code> up to 10 instances:</li>
 </ol>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> kubectl scale --replicas<span style="color:#f92672">=</span><span style="color:#ae81ff">4</span> deployment k8sdemo-backend -n default
- 
- &gt; deployment <span style="color:#e6db74">&#34;k8sdemo&#34;</span> scaled
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_9f1149dc0d">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_9f1149dc0d">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> 
+kubectl scale --replicas<span style="color:#f92672">=</span><span style="color:#ae81ff">4</span> deployment k8sdemo-backend -n default
+  
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext"> &gt; deployment &#34;k8sdemo&#34; scaled
 </code></pre></div><p>Kubernetes will now try to make reality match the desired state of 4 replicas by starting 2 new pods with the same configuration as the first.</p>
-<ol start="4">
+<ol start="2">
 <li>To verify that your changes have been rolled out, you can run:</li>
 </ol>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> kubectl get pods -n default
- 
- &gt; NAME                              READY     STATUS    RESTARTS   AGE
-  &gt; k8sdemo-7d46f69d68-xcgcw          1/1       Running   <span style="color:#ae81ff">0</span>          19m
-  &gt; k8sdemo-backend-9c777544b-cp59q   1/1       Running   <span style="color:#ae81ff">0</span>          12m
-  &gt; k8sdemo-backend-9c777544b-jqjz9   1/1       Running   <span style="color:#ae81ff">0</span>          12m
-  &gt; k8sdemo-backend-9c777544b-lwssx   1/1       Running   <span style="color:#ae81ff">0</span>          12m
-  &gt; k8sdemo-backend-9c777544b-t5mlq   1/1       Running   <span style="color:#ae81ff">0</span>          12m
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_d2864f3a95">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_d2864f3a95">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> 
+kubectl get pods -n default
+  
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext">  &gt; NAME                              READY     STATUS    RESTARTS   AGE
+  &gt; k8sdemo-7d46f69d68-xcgcw          1/1       Running   0          19m
+  &gt; k8sdemo-backend-9c777544b-cp59q   1/1       Running   0          12m
+  &gt; k8sdemo-backend-9c777544b-jqjz9   1/1       Running   0          12m
+  &gt; k8sdemo-backend-9c777544b-lwssx   1/1       Running   0          12m
+  &gt; k8sdemo-backend-9c777544b-t5mlq   1/1       Running   0          12m
 </code></pre></div><p>You should see output listing 4 replicas of your deployment.</p>
-<p>**Congratulations!!! This concludes Lab 4 on scaling and updating Deployments
-**</p>
+<blockquote>
+<p>Congratulations!!! This concludes the Lab</p>
+</blockquote>
 
 
     
@@ -430,10 +485,8 @@
                     <div class="row"><div class="position-relative mx-auto col-lg-9">
                           <div class="bg-primary overflow-hidden p-3 mt-5 shadow">
 
-    <h4 class="text-white text-center">Read more</h4>
 
-    <div class="d-flex justify-content-center"><a class="p-1 mr-3 d-inline-block text-white" href="/k8s_training_web/jtc02/lab3/" title="Lab 3: Deploy your first application"><i class="fas fa-chevron-left p-1"></i>Lab 3: Deploy your first application</a>
-        <a class="p-1 ml-3 d-inline-block text-white text-right" href="/k8s_training_web/jtc02/lab5/" title="Lab 5: Stateful Deployments">Lab 5: Stateful Deployments<i class="fas fa-chevron-right p-1"></i></a>
+    <div class="d-flex justify-content-center"><a class="p-1 ml-3 d-inline-block text-white text-right" href="/k8s_training_web/jtc02/lab5/" title="Lab 5: Stateful Deployments">Lab 5: Stateful Deployments<i class="fas fa-chevron-right p-1"></i></a>
     </div>
 </div>
 

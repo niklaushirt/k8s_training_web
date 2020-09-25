@@ -42,7 +42,7 @@ APod can be killed and restarted whenever the system has/wants to.</description>
 Once your client is configured, you are ready to deploy your first application, k8sdemo.
 The frontend example application In this part of the lab we will deploy an application called k8sdemo that has already been built and uploaded to DockerHub under the name niklaushirt/k8sdemo.
 We will use the following yaml:
-kind: Deployment metadata: name: k8sdemo namespace: default spec: replicas: 1 template: metadata: labels: app: k8sdemo spec: containers: - name: k8sdemo image: niklaushirt/k8sdemo:1.</description>
+Copy   kind: Deployment metadata: name: k8sdemo namespace: default spec: replicas: 1 template: metadata: labels: app: k8sdemo spec: containers: - name: k8sdemo image: niklaushirt/k8sdemo:1.</description>
     </item>
     
     <item>
@@ -74,8 +74,8 @@ So let&amp;rsquo;s have a look on how how can we deploy a stateful application w
       <guid>https://niklaushirt.github.io/k8s_training_web/jtc02/lab6/</guid>
       <description>Delete the elements that we have deployed in order to go back to normal.
   Delete the demo app and the mysql deployment
-kubectl delete -f ~/training/deployment/demoapp.yaml kubectl delete -f ~/training/deployment/demoapp-service.yaml kubectl delete -f ~/training/deployment/demoapp-backend.yaml kubectl delete -f ~/training/deployment/demoapp-backend-service.yaml kubectl delete -f ~/training/volumes/3-simple-mysql-deployment.yaml ``
-  </description>
+Copy   kubectl delete -f ~/training/deployment/demoapp.yaml kubectl delete -f ~/training/deployment/demoapp-service.yaml kubectl delete -f ~/training/deployment/demoapp-backend.yaml kubectl delete -f ~/training/deployment/demoapp-backend-service.yaml kubectl delete -f ~/training/volumes/3-simple-mysql-deployment.yaml       Congratulations!!! This concludes the Lab and the Course. Hope to see you soon!!!
+ </description>
     </item>
     
   </channel>

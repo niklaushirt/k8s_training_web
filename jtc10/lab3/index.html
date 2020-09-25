@@ -397,48 +397,184 @@
 <p>In this part, we will be using the sample BookInfo Application that comes as default with Istio code base. As mentioned above, the application that is composed of four microservices, written in different languages for each of its microservices namely Python, Java, Ruby, and Node.js. The default application doesn&rsquo;t use a database and all the microservices store their data in the local file system.</p>
 <p><img src="../../../images/bookinfo.png" alt="kiali"></p>
 <p>Envoys are deployed as sidecars on each microservice. Injecting Envoy into your microservice means that the Envoy sidecar would manage the ingoing and outgoing calls for the service. To inject an Envoy sidecar to an existing microservice configuration, do:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl apply -f ~/training/istio/samples/bookinfo/platform/kube/bookinfo.yaml
 
-&gt; service/details created
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_834a082fc4">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_834a082fc4">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> 
+kubectl apply -f ~/training/istio/samples/bookinfo/platform/kube/bookinfo.yaml
+
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext">&gt; service/details created
 &gt; serviceaccount/bookinfo-details created
 &gt; deployment.apps/details-v1 created
 &gt; service/ratings created
 &gt; ...
 </code></pre></div><p>After a few minutes, you should now have your Kubernetes Pods running and have an Envoy sidecar in each of them alongside the microservice. The microservices are <strong>productpage, details, ratings, and reviews</strong>. Note that you&rsquo;ll have three versions of the reviews microservice.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl get pods 
 
 
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_867dd64d6d">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_867dd64d6d">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> 
+kubectl get pods 
+
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext">
 &gt; NAME                                        READY     STATUS    RESTARTS   AGE
-&gt; details-v1-1520924117-48z17                 2/2       Running   <span style="color:#ae81ff">0</span>          6m
-&gt; productpage-v1-560495357-jk1lz              2/2       Running   <span style="color:#ae81ff">0</span>          6m
-&gt; ratings-v1-734492171-rnr5l                  2/2       Running   <span style="color:#ae81ff">0</span>          6m
-&gt; reviews-v1-874083890-f0qf0                  2/2       Running   <span style="color:#ae81ff">0</span>          6m
-&gt; reviews-v2-1343845940-b34q5                 2/2       Running   <span style="color:#ae81ff">0</span>          6m
-&gt; reviews-v3-1813607990-8ch52                 2/2       Running   <span style="color:#ae81ff">0</span>          6m
+&gt; details-v1-1520924117-48z17                 2/2       Running   0          6m
+&gt; productpage-v1-560495357-jk1lz              2/2       Running   0          6m
+&gt; ratings-v1-734492171-rnr5l                  2/2       Running   0          6m
+&gt; reviews-v1-874083890-f0qf0                  2/2       Running   0          6m
+&gt; reviews-v2-1343845940-b34q5                 2/2       Running   0          6m
+&gt; reviews-v3-1813607990-8ch52                 2/2       Running   0          6m
 </code></pre></div><h3 id="expose-the-application-via-ingress-gateway">Expose the Application via Ingress Gateway</h3>
 <p>The components deployed on the service mesh by default are not exposed outside the cluster. External access to individual services so far has been provided by creating an external load balancer or node port on each service.</p>
 <p>An Ingress Gateway resource can be created to allow external requests through the Istio Ingress Gateway to the backing services.</p>
 <ol>
 <li>
 <p>Create an Istio ingress gateway to access your services over a public IP address.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl apply -f  ~/training/istio/samples/bookinfo/networking/bookinfo-gateway.yaml
-   
-&gt; gateway.networking.istio.io/bookinfo-gateway created
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_3153ce90d6">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_3153ce90d6">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> 
+kubectl apply -f  ~/training/istio/samples/bookinfo/networking/bookinfo-gateway.yaml
+	
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext">&gt; gateway.networking.istio.io/bookinfo-gateway created
 &gt; virtualservice.networking.istio.io/bookinfo created
-   
 </code></pre></div><p>``</p>
 </li>
 <li>
 <p>Open the webpage</p>
 <p><img src="../../../images/vm.png" alt=""> <strong>Training VM</strong></p>
 <p>If you are using the training VM, you can open the webpage directly by typing:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">firefox --new-tab http://<span style="color:#66d9ef">$(</span>minikube ip<span style="color:#66d9ef">)</span>:30762/productpage
-</code></pre></div><hr>
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_ca18146daf">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_ca18146daf">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> 
+firefox --new-tab http://<span style="color:#66d9ef">$(</span>minikube ip<span style="color:#66d9ef">)</span>:30762/productpage
+    
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
+<hr>
 <p><img src="../../../images/cloud.png" alt=""> <strong>Cloud/Standalone</strong></p>
 <p>If you are <strong>NOT</strong> using the training VM, you can open the webpage by forwarding a local port to the service in your Cluster.</p>
 <p>Execute this in a separate Terminal Window/Tab in order to be able to access the web page:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl port-forward --namespace istio-system <span style="color:#66d9ef">$(</span>kubectl get po -n istio-system | grep istio-ingressgateway| <span style="color:#ae81ff">\a</span>wk <span style="color:#e6db74">&#39;{print $1;}&#39;</span><span style="color:#66d9ef">)</span> 8080:8080 
-</code></pre></div><p>Now you can access your application via <a href="http://localhost:8080/productpage?u=normal">http://localhost:8080/productpage</a></p>
+<p>
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_fb2571bb26">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_fb2571bb26">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> 
+kubectl port-forward --namespace istio-system <span style="color:#66d9ef">$(</span>kubectl get po -n istio-system | grep istio-ingressgateway| <span style="color:#ae81ff">\a</span>wk <span style="color:#e6db74">&#39;{print $1;}&#39;</span><span style="color:#66d9ef">)</span> 8080:8080 
+    
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
+Now you can access your application via <a href="http://localhost:8080/productpage?u=normal">http://localhost:8080/productpage</a></p>
 </li>
 </ol>
 <p>If you refresh the page multiple times, you&rsquo;ll see that the <em>reviews</em> section of the page changes. That&rsquo;s because there are 3 versions of <strong>reviews</strong><em>(reviews-v1, reviews-v2, reviews-v3)</em> deployment for our <strong>reviews</strong> service. Istio’s load-balancer is using a round-robin algorithm to iterate through the 3 instances of this service</p>
@@ -450,6 +586,9 @@
 <p><img src="../../../images/red.png" alt="productpage"></p>
 <h2 id="sidecar-injection">Sidecar injection</h2>
 <p>In Kubernetes, a sidecar is a utility container in the pod, and its purpose is to support the main container. For Istio to work, Envoy proxies must be deployed as sidecars to each pod of the deployment. There are two ways of injecting the Istio sidecar into a pod: manually using the istioctl CLI tool or automatically using the Istio Initializer. In this exercise, we will use the manual injection. Manual injection modifies the controller configuration, e.g. deployment. It does this by modifying the pod template spec such that all pods for that deployment are created with the injected sidecar.</p>
+<blockquote>
+<p>Congratulations!!! This concludes the Lab</p>
+</blockquote>
 
 
     
@@ -459,10 +598,8 @@
                     <div class="row"><div class="position-relative mx-auto col-lg-9">
                           <div class="bg-primary overflow-hidden p-3 mt-5 shadow">
 
-    <h4 class="text-white text-center">Read more</h4>
 
-    <div class="d-flex justify-content-center"><a class="p-1 mr-3 d-inline-block text-white" href="/k8s_training_web/jtc10/lab2/" title="Lab 2: Installing Istio "><i class="fas fa-chevron-left p-1"></i>Lab 2: Installing Istio </a>
-        <a class="p-1 ml-3 d-inline-block text-white text-right" href="/k8s_training_web/jtc10/lab4/" title="Lab 4: Monitoring with Kiali">Lab 4: Monitoring with Kiali<i class="fas fa-chevron-right p-1"></i></a>
+    <div class="d-flex justify-content-center"><a class="p-1 ml-3 d-inline-block text-white text-right" href="/k8s_training_web/jtc10/lab4/" title="Lab 4: Monitoring with Kiali">Lab 4: Monitoring with Kiali<i class="fas fa-chevron-right p-1"></i></a>
     </div>
 </div>
 

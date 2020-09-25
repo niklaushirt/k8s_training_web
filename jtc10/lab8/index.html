@@ -398,55 +398,164 @@
 <ol>
 <li>
 <p>Create a Virtual Service that sends all traffic to v1 of the <code>reviews</code> service</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">apiVersion</span>: networking.istio.io/v1alpha3
-<span style="color:#66d9ef">kind</span>: VirtualService
-<span style="color:#66d9ef">metadata</span>:
-  <span style="color:#66d9ef">name</span>: reviews
-<span style="color:#66d9ef">spec</span>:
-  <span style="color:#66d9ef">hosts</span>:
-  - reviews
-  <span style="color:#66d9ef">http</span>:
-  - <span style="color:#66d9ef">route</span>:
-    - <span style="color:#66d9ef">destination</span>:
-        <span style="color:#66d9ef">host</span>: reviews
-        <span style="color:#66d9ef">subset</span>: v1
-</code></pre></div><p>``</p>
-<p>Run the following:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl apply -f ~/training/istio/samples/bookinfo/networking/virtual-service-all-v1.yaml
- 
-&gt; virtualservice.networking.istio.io/reviews configured
 
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_1d9dcfb35d">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_1d9dcfb35d">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"> 
+	<span style="color:#66d9ef">apiVersion</span>: networking.istio.io/v1alpha3
+	<span style="color:#66d9ef">kind</span>: VirtualService
+	<span style="color:#66d9ef">metadata</span>:
+		<span style="color:#66d9ef">name</span>: reviews
+	<span style="color:#66d9ef">spec</span>:
+		<span style="color:#66d9ef">hosts</span>:
+		- reviews
+		<span style="color:#66d9ef">http</span>:
+		- <span style="color:#66d9ef">route</span>:
+			- <span style="color:#66d9ef">destination</span>:
+					<span style="color:#66d9ef">host</span>: reviews
+					<span style="color:#66d9ef">subset</span>: v1
+	
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
+<p>Run the following:</p>
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_e23278dd05">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_e23278dd05">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> 
+kubectl apply -f ~/training/istio/samples/bookinfo/networking/virtual-service-all-v1.yaml
+		
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext">    &gt; virtualservice.networking.istio.io/reviews configured
 </code></pre></div><p>``</p>
 </li>
 <li>
 <p>Create a Virtual Service that sends all traffic to v1 and mirrors it to v2 of the <code>reviews</code> service</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">apiVersion</span>: networking.istio.io/v1alpha3
-<span style="color:#66d9ef">kind</span>: VirtualService
-<span style="color:#66d9ef">metadata</span>:
-  <span style="color:#66d9ef">name</span>: reviews
-<span style="color:#66d9ef">spec</span>:
-  <span style="color:#66d9ef">hosts</span>:
-  - reviews
-  <span style="color:#66d9ef">http</span>:
-  - <span style="color:#66d9ef">route</span>:
-    - <span style="color:#66d9ef">destination</span>:
-        <span style="color:#66d9ef">host</span>: reviews
-        <span style="color:#66d9ef">subset</span>: v1
-    <span style="color:#66d9ef">mirror</span>:
-      <span style="color:#66d9ef">host</span>: nginx
-      <span style="color:#66d9ef">subset</span>: v2
-<span style="color:#66d9ef">mirror_percent</span>: <span style="color:#ae81ff">100</span>
-</code></pre></div><p>``</p>
-<p>Run the following:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl apply -f ~/training/istio/samples/bookinfo/networking/virtual-service-mirror-v1-v2.yaml
- 
-&gt; virtualservice.networking.istio.io/reviews configured
 
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_99c501f73a">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_99c501f73a">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"> 
+	<span style="color:#66d9ef">apiVersion</span>: networking.istio.io/v1alpha3
+	<span style="color:#66d9ef">kind</span>: VirtualService
+	<span style="color:#66d9ef">metadata</span>:
+		<span style="color:#66d9ef">name</span>: reviews
+	<span style="color:#66d9ef">spec</span>:
+		<span style="color:#66d9ef">hosts</span>:
+		- reviews
+		<span style="color:#66d9ef">http</span>:
+		- <span style="color:#66d9ef">route</span>:
+			- <span style="color:#66d9ef">destination</span>:
+					<span style="color:#66d9ef">host</span>: reviews
+					<span style="color:#66d9ef">subset</span>: v1
+			<span style="color:#66d9ef">mirror</span>:
+				<span style="color:#66d9ef">host</span>: nginx
+				<span style="color:#66d9ef">subset</span>: v2
+		<span style="color:#66d9ef">mirror_percent</span>: <span style="color:#ae81ff">100</span>
+	
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
+<p>Run the following:</p>
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_4144a13ea1">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_4144a13ea1">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> 
+kubectl apply -f ~/training/istio/samples/bookinfo/networking/virtual-service-mirror-v1-v2.yaml
+		
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext">    &gt; virtualservice.networking.istio.io/reviews configured
 </code></pre></div><p>``</p>
+<p>After a short while you should see traffic starting to flow from <code>reviews</code> (v2) to <code>ratings</code>, because <code>reviews</code> (v2) is receiving the mirrored traffic.</p>
 </li>
 </ol>
-<p>After a short while you should see traffic starting to flow from <code>reviews</code> (v2) to <code>ratings</code>, because <code>reviews</code> (v2) is receiving the mirrored traffic.</p>
 <p><img src="../../../images/istio0.png" alt=""></p>
+<blockquote>
+<p>Congratulations!!! This concludes the Lab</p>
+</blockquote>
 
 
     
@@ -456,10 +565,8 @@
                     <div class="row"><div class="position-relative mx-auto col-lg-9">
                           <div class="bg-primary overflow-hidden p-3 mt-5 shadow">
 
-    <h4 class="text-white text-center">Read more</h4>
 
-    <div class="d-flex justify-content-center"><a class="p-1 mr-3 d-inline-block text-white" href="/k8s_training_web/jtc10/lab7/" title="Lab 7: End-user authentication"><i class="fas fa-chevron-left p-1"></i>Lab 7: End-user authentication</a>
-        <a class="p-1 ml-3 d-inline-block text-white text-right" href="/k8s_training_web/jtc10/lab9/" title="Lab 9: Fault Injection">Lab 9: Fault Injection<i class="fas fa-chevron-right p-1"></i></a>
+    <div class="d-flex justify-content-center"><a class="p-1 ml-3 d-inline-block text-white text-right" href="/k8s_training_web/jtc10/lab9/" title="Lab 9: Fault Injection">Lab 9: Fault Injection<i class="fas fa-chevron-right p-1"></i></a>
     </div>
 </div>
 

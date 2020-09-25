@@ -393,7 +393,27 @@
 <p>To delete Istio from your cluster</p>
 </li>
 </ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_b17a43ce48">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_b17a43ce48">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> 
+
 kubectl delete -f ~/training/istio/createTraffic.yaml
 kubectl delete -f ~/training/istio/samples/bookinfo/platform/kube/bookinfo.yaml
 kubectl delete -f  ~/training/istio/samples/bookinfo/networking/bookinfo-gateway.yaml
@@ -404,7 +424,18 @@ istioctl manifest generate --set profile<span style="color:#f92672">=</span>demo
 
 kubectl delete ns istio-system
 
-</code></pre></div><p><strong>Congratulations!!! This concludes the Istio Lab</strong></p>
+
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
+<blockquote>
+<p>Congratulations!!! This concludes the Lab and the Course.
+Hope to see you soon!!!</p>
+</blockquote>
 
 
     
@@ -414,10 +445,8 @@ kubectl delete ns istio-system
                     <div class="row"><div class="position-relative mx-auto col-lg-9">
                           <div class="bg-primary overflow-hidden p-3 mt-5 shadow">
 
-    <h4 class="text-white text-center">Read more</h4>
 
-    <div class="d-flex justify-content-center"><a class="p-1 mr-3 d-inline-block text-white" href="/k8s_training_web/jtc10/lab9/" title="Lab 9: Fault Injection"><i class="fas fa-chevron-left p-1"></i>Lab 9: Fault Injection</a>
-        <a class="p-1 ml-3 d-inline-block text-white text-right" href="/k8s_training_web/jtc14/" title="JTC14 Kubernetes Ansible Operators">JTC14 Kubernetes Ansible Operators<i class="fas fa-chevron-right p-1"></i></a>
+    <div class="d-flex justify-content-center"><a class="p-1 ml-3 d-inline-block text-white text-right" href="/k8s_training_web/jtc14/" title="JTC14 Kubernetes Ansible Operators">JTC14 Kubernetes Ansible Operators<i class="fas fa-chevron-right p-1"></i></a>
     </div>
 </div>
 

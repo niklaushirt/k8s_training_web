@@ -425,11 +425,37 @@ First we can observe that the <code>k8sdemo-backend</code> server is open to any
 <ol>
 <li>
 <p><strong>Open a new Terminal Window or Tab</strong> and run (this can take some time):</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl run -it --rm --restart<span style="color:#f92672">=</span>Never alpine -n default --image<span style="color:#f92672">=</span>alpine sh
-   
-&gt; If you don<span style="color:#960050;background-color:#1e0010">&#39;</span>t see a command prompt, try pressing enter.
-&gt; / # 
 
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_ff6ad2071d">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_ff6ad2071d">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> 
+kubectl run -it --rm --restart<span style="color:#f92672">=</span>Never alpine -n default --image<span style="color:#f92672">=</span>alpine sh
+	
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext">&gt; If you don&#39;t see a command prompt, try pressing enter.
+&gt; / # 
 </code></pre></div><p>``</p>
 </li>
 <li>
@@ -437,22 +463,75 @@ First we can observe that the <code>k8sdemo-backend</code> server is open to any
 </li>
 <li>
 <p>The <code>alpine~&gt; prompt</code> indicates that the commands must be executed inside the running Pod.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">alpine~&gt; wget -O-  k8sdemo-backend-service.default.svc:3000
-   
-&gt; Connecting to k8sdemo-backend-service.default.svc:3000 <span style="color:#f92672">(</span>10.103.242.14:3000<span style="color:#f92672">)</span>
-&gt; K8s Demo Backend                   100% |**************************************************************|   <span style="color:#ae81ff">197</span>  0:00:00 ETA
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_a8f2a09804">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_a8f2a09804">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> 
+alpine~&gt; wget -O-  k8sdemo-backend-service.default.svc:3000
+	
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext">&gt; Connecting to k8sdemo-backend-service.default.svc:3000 (10.103.242.14:3000)
+&gt; K8s Demo Backend                   100% |**************************************************************|   197  0:00:00 ETA
 </code></pre></div><p>``</p>
 <p>You should get the HTML response from the backend server.</p>
 </li>
 <li>
 <p>And you should be able to ping external adresses  (45.55.44.56 is Google)</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">alpine~&gt; ping 45.55.44.56
-   
-&gt; PING 45.55.44.56 <span style="color:#f92672">(</span>45.55.44.56<span style="color:#f92672">)</span>: <span style="color:#ae81ff">56</span> data bytes
-&gt; <span style="color:#ae81ff">64</span> bytes from 45.55.44.56: seq<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span> ttl<span style="color:#f92672">=</span><span style="color:#ae81ff">59</span> time<span style="color:#f92672">=</span>133.476 ms
-&gt; <span style="color:#ae81ff">64</span> bytes from 45.55.44.56: seq<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span> ttl<span style="color:#f92672">=</span><span style="color:#ae81ff">59</span> time<span style="color:#f92672">=</span>136.036 ms
-&gt; <span style="color:#ae81ff">64</span> bytes from 45.55.44.56: seq<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span> ttl<span style="color:#f92672">=</span><span style="color:#ae81ff">59</span> time<span style="color:#f92672">=</span>125.471 ms
-   
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_e6726ae5e3">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_e6726ae5e3">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> 
+alpine~&gt; ping 45.55.44.56
+	
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext">&gt; PING 45.55.44.56 (45.55.44.56): 56 data bytes
+&gt; 64 bytes from 45.55.44.56: seq=0 ttl=59 time=133.476 ms
+&gt; 64 bytes from 45.55.44.56: seq=1 ttl=59 time=136.036 ms
+&gt; 64 bytes from 45.55.44.56: seq=2 ttl=59 time=125.471 ms
 </code></pre></div><p>``</p>
 </li>
 </ol>
@@ -462,37 +541,145 @@ First we can observe that the <code>k8sdemo-backend</code> server is open to any
 <ol>
 <li>
 <p>Run the following command</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl create -f ~/training/networkpolicies/deny-all-ingress.yaml
-</code></pre></div><p>``</p>
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_613757c960">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_613757c960">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> 
+kubectl create -f ~/training/networkpolicies/deny-all-ingress.yaml
+	
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
 <p>This creates the following <code>NetworkPolicy</code> which blocks incoming traffic to all Pods.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">apiVersion</span>: networking.k8s.io/v1
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_8a3e28ea1b">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_8a3e28ea1b">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"> 
+<span style="color:#66d9ef">apiVersion</span>: networking.k8s.io/v1
 <span style="color:#66d9ef">kind</span>: NetworkPolicy
 <span style="color:#66d9ef">metadata</span>:
-  <span style="color:#66d9ef">name</span>: default-deny-ingress
-  <span style="color:#66d9ef">namespace</span>: default
+	<span style="color:#66d9ef">name</span>: default-deny-ingress
+	<span style="color:#66d9ef">namespace</span>: default
 <span style="color:#66d9ef">spec</span>:
-  <span style="color:#66d9ef">podSelector</span>: {}
-  <span style="color:#66d9ef">policyTypes</span>:
-  - Ingress
-</code></pre></div><p>``</p>
+	<span style="color:#66d9ef">podSelector</span>: {}
+	<span style="color:#66d9ef">policyTypes</span>:
+	- Ingress
+	
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
 </li>
 <li>
 <p>Now from inside the Pod run:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">alpine~&gt; wget -O-  k8sdemo-backend-service.default.svc:3000
-   
-&gt; Connecting to k8sdemo-backend-service.default.svc:3000 <span style="color:#f92672">(</span>10.103.242.14:3000<span style="color:#f92672">)</span>
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_a8f2a09804">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_a8f2a09804">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> 
+alpine~&gt; wget -O-  k8sdemo-backend-service.default.svc:3000
+	
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext">&gt; Connecting to k8sdemo-backend-service.default.svc:3000 (10.103.242.14:3000)
 ...
 </code></pre></div><p>``</p>
 <p>You should get no response from <code>k8sdemo-backend</code>.</p>
 </li>
 <li>
 <p>But you should still be able to ping external adresses</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">alpine~&gt; ping 45.55.44.56
-   
-&gt; PING 45.55.44.56 <span style="color:#f92672">(</span>45.55.44.56<span style="color:#f92672">)</span>: <span style="color:#ae81ff">56</span> data bytes
-&gt; <span style="color:#ae81ff">64</span> bytes from 45.55.44.56: seq<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span> ttl<span style="color:#f92672">=</span><span style="color:#ae81ff">59</span> time<span style="color:#f92672">=</span>133.476 ms
-&gt; <span style="color:#ae81ff">64</span> bytes from 45.55.44.56: seq<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span> ttl<span style="color:#f92672">=</span><span style="color:#ae81ff">59</span> time<span style="color:#f92672">=</span>136.036 ms
-&gt; <span style="color:#ae81ff">64</span> bytes from 45.55.44.56: seq<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span> ttl<span style="color:#f92672">=</span><span style="color:#ae81ff">59</span> time<span style="color:#f92672">=</span>125.471 ms
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_e6726ae5e3">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_e6726ae5e3">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> 
+alpine~&gt; ping 45.55.44.56
+	
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext">&gt; PING 45.55.44.56 (45.55.44.56): 56 data bytes
+&gt; 64 bytes from 45.55.44.56: seq=0 ttl=59 time=133.476 ms
+&gt; 64 bytes from 45.55.44.56: seq=1 ttl=59 time=136.036 ms
+&gt; 64 bytes from 45.55.44.56: seq=2 ttl=59 time=125.471 ms
 </code></pre></div><p>``</p>
 </li>
 <li>
@@ -506,107 +693,383 @@ Trying to reach backend &hellip;.</strong></p>
 <p><img src="../../../images/np3.png" alt="K8s CNI"></p>
 <h3 id="clean-up">Clean-up</h3>
 <p>Delete the <code>NetworkPolicy</code> in order to go back to normal.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl delete NetworkPolicy -n default default-deny-ingress
-</code></pre></div><h2 id="control-outgoing-traffic">Control outgoing traffic</h2>
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_c8ffbe3184">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_c8ffbe3184">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> 
+kubectl delete NetworkPolicy -n default default-deny-ingress
+
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
+<h2 id="control-outgoing-traffic">Control outgoing traffic</h2>
 <p>Now let&rsquo;s create a <code>NetworkPolicy</code> that simply blocks all outgoing traffic from all pods.</p>
 <ol>
 <li>
 <p>Run the following command</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl create -f ~/training/networkpolicies/deny-all-egress.yaml
-</code></pre></div><p>``</p>
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_6c6d649686">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_6c6d649686">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> 
+kubectl create -f ~/training/networkpolicies/deny-all-egress.yaml
+	
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
 <p>This creates the following <code>NetworkPolicy</code> which blocks all outgoing traffic from an Pod.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">apiVersion</span>: networking.k8s.io/v1
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_980f88060e">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_980f88060e">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"> 
+<span style="color:#66d9ef">apiVersion</span>: networking.k8s.io/v1
 <span style="color:#66d9ef">kind</span>: NetworkPolicy
 <span style="color:#66d9ef">metadata</span>:
-  <span style="color:#66d9ef">name</span>: default-deny-egress
-  <span style="color:#66d9ef">namespace</span>: default
+	<span style="color:#66d9ef">name</span>: default-deny-egress
+	<span style="color:#66d9ef">namespace</span>: default
 <span style="color:#66d9ef">spec</span>:
-  <span style="color:#66d9ef">podSelector</span>: {}
-  <span style="color:#66d9ef">policyTypes</span>:
-  - Egress
-</code></pre></div><p>``</p>
+	<span style="color:#66d9ef">podSelector</span>: {}
+	<span style="color:#66d9ef">policyTypes</span>:
+	- Egress
+	
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
 </li>
 <li>
 <p>Now from inside the Pod run:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">alpine~&gt; wget -O-  k8sdemo-backend-service.default.svc:3000
-   
-&gt; Connecting to k8sdemo-backend-service.default.svc:3000 <span style="color:#f92672">(</span>10.103.242.14:3000<span style="color:#f92672">)</span>
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_a8f2a09804">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_a8f2a09804">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> 
+alpine~&gt; wget -O-  k8sdemo-backend-service.default.svc:3000
+	
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext">&gt; Connecting to k8sdemo-backend-service.default.svc:3000 (10.103.242.14:3000)
 ...
-</code></pre></div><p>``
-You should get no response from the <code>k8sdemo-backend</code> as the web frontend <code>k8sdemo</code> outgoing traffic is blocked.</p>
+</code></pre></div><p>``</p>
+<p>You should get no response from the <code>k8sdemo-backend</code> as the web frontend <code>k8sdemo</code> outgoing traffic is blocked.</p>
 </li>
 <li>
 <p>And you should not be able to ping external adresses as the <code>alpine</code> pod outgoing traffic is blocked.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">alpine~&gt; ping 45.55.44.56
-   
-...
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_e6726ae5e3">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_e6726ae5e3">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> 
+alpine~&gt; ping 45.55.44.56
+	
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext">...
 </code></pre></div><p>``</p>
 </li>
 <li>
 <p>Reload the web application. It should load again, but still with the error from the backend:</p>
-<p><strong>Testing DEMO_API
-STATUS: ERROR
-Trying to reach backend &hellip;.</strong></p>
+<pre><code> ```plaintext
+ **Testing DEMO_API
+ STATUS: ERROR	
+ Trying to reach backend ....**
+ ```	
+</code></pre>
 </li>
 </ol>
 <p>We have just blocked all traffic going out of the pods, but not the incoming.</p>
 <p><img src="../../../images/np4.png" alt="K8s CNI"></p>
 <h3 id="clean-up-1">Clean-up</h3>
 <p>Delete the <code>NetworkPolicy</code> in order to go back to normal.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl delete NetworkPolicy -n default default-deny-egress
-</code></pre></div><h2 id="control-pod-to-pod-communication">Control Pod to Pod communication</h2>
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_1c78aad265">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_1c78aad265">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> 
+kubectl delete NetworkPolicy -n default default-deny-egress
+
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
+<h2 id="control-pod-to-pod-communication">Control Pod to Pod communication</h2>
 <p>Now let&rsquo;s create a <code>NetworkPolicy</code> that simply blocks all incoming traffic for the backend (<code>k8sdemo-backend</code>) except the one coming from the web frontend (<code>k8sdemo</code>).</p>
 <ol>
 <li>
 <p>Run the following command</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl create -f ~/training/networkpolicies/deny-except-web.yaml
-</code></pre></div><p>``</p>
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_340bddf8fb">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_340bddf8fb">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> 
+kubectl create -f ~/training/networkpolicies/deny-except-web.yaml
+	
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
 <p>This creates the following <code>NetworkPolicy</code>. This policy allows for all traffic, except incoming for the backend Pod.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">apiVersion</span>: networking.k8s.io/v1
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_2eb71a4e4d">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_2eb71a4e4d">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"> 
+<span style="color:#66d9ef">apiVersion</span>: networking.k8s.io/v1
 <span style="color:#66d9ef">kind</span>: NetworkPolicy
 <span style="color:#66d9ef">metadata</span>:
-  <span style="color:#66d9ef">name</span>: k8sdemo-web-backend
-  <span style="color:#66d9ef">namespace</span>: default
+	<span style="color:#66d9ef">name</span>: k8sdemo-web-backend
+	<span style="color:#66d9ef">namespace</span>: default
 <span style="color:#66d9ef">spec</span>:
-  <span style="color:#66d9ef">podSelector</span>:
-    <span style="color:#66d9ef">matchLabels</span>:
-      <span style="color:#66d9ef">app</span>: k8sdemo-backend
-  <span style="color:#66d9ef">policyTypes</span>:
-  - Ingress
-  <span style="color:#66d9ef">ingress</span>:
-  - <span style="color:#66d9ef">from</span>:
-    - <span style="color:#66d9ef">podSelector</span>:
-        <span style="color:#66d9ef">matchLabels</span>:
-          <span style="color:#66d9ef">app</span>: k8sdemo
-</code></pre></div><p>``</p>
+	<span style="color:#66d9ef">podSelector</span>:
+		<span style="color:#66d9ef">matchLabels</span>:
+			<span style="color:#66d9ef">app</span>: k8sdemo-backend
+	<span style="color:#66d9ef">policyTypes</span>:
+	- Ingress
+	<span style="color:#66d9ef">ingress</span>:
+	- <span style="color:#66d9ef">from</span>:
+		- <span style="color:#66d9ef">podSelector</span>:
+				<span style="color:#66d9ef">matchLabels</span>:
+					<span style="color:#66d9ef">app</span>: k8sdemo
+	
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
 </li>
 <li>
 <p>Now from inside the Pod run:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># wget -O-  k8sdemo-backend-service.default.svc:3000</span>
-       
-&gt; Connecting to k8sdemo-backend-service.default.svc:3000 <span style="color:#f92672">(</span>10.103.242.14:3000<span style="color:#f92672">)</span>
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_98618d9d3b">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_98618d9d3b">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> 
+wget -O-  k8sdemo-backend-service.default.svc:3000
+	
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext">&gt; Connecting to k8sdemo-backend-service.default.svc:3000 (10.103.242.14:3000)
 ...
 </code></pre></div><p>``</p>
 <p>You should get no response from <code>k8sdemo-backend</code> as only <code>k8sdemo</code> is allowed to access it.</p>
 </li>
 <li>
 <p>You should be able to ping external adresses as outgoing traffic is not blocked.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># ping 45.55.44.56</span>
-   
-&gt; PING 45.55.44.56 <span style="color:#f92672">(</span>45.55.44.56<span style="color:#f92672">)</span>: <span style="color:#ae81ff">56</span> data bytes
-&gt; <span style="color:#ae81ff">64</span> bytes from 45.55.44.56: seq<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span> ttl<span style="color:#f92672">=</span><span style="color:#ae81ff">59</span> time<span style="color:#f92672">=</span>143.152 ms
-&gt; <span style="color:#ae81ff">64</span> bytes from 45.55.44.56: seq<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span> ttl<span style="color:#f92672">=</span><span style="color:#ae81ff">59</span> time<span style="color:#f92672">=</span>120.875 ms
-&gt; <span style="color:#ae81ff">64</span> bytes from 45.55.44.56: seq<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span> ttl<span style="color:#f92672">=</span><span style="color:#ae81ff">59</span> time<span style="color:#f92672">=</span>130.981 ms
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_3aa6d2e81f">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_3aa6d2e81f">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> 
+ping 45.55.44.56
+	
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext">&gt; PING 45.55.44.56 (45.55.44.56): 56 data bytes
+&gt; 64 bytes from 45.55.44.56: seq=0 ttl=59 time=143.152 ms
+&gt; 64 bytes from 45.55.44.56: seq=1 ttl=59 time=120.875 ms
+&gt; 64 bytes from 45.55.44.56: seq=2 ttl=59 time=130.981 ms
 </code></pre></div><p>``</p>
 </li>
 <li>
 <p>Reload the web application. It should load, without error from the backend:</p>
-<p><strong>Testing DEMO_API
-STATUS: OK
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext">**Testing DEMO_API
+STATUS: OK	
 Message from the Backend
-<!-- raw HTML omitted -->
+&lt;Some Message&gt;
 The IP Address is
-&lt;IP_ADDRESS&gt;</strong></p>
+&lt;IP_ADDRESS&gt;**
+</code></pre></div><p>``</p>
 </li>
 </ol>
 <p>We have just blocked all traffic going to <code>k8sdemo-backend</code>, except the one coming from <code>k8sdemo</code> thus isolating and securing the communication.</p>
@@ -614,10 +1077,37 @@ The IP Address is
 <p>In this Lab we have seen how NetworkPolicies enable us to isolate and control access to and from Pods in the Cluster.</p>
 <h3 id="clean-up-2">Clean-up</h3>
 <p>Delete the <code>NetworkPolicy</code> in order to go back to normal.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl delete NetworkPolicy -n default k8sdemo-web-backend
-</code></pre></div><blockquote>
-<h1 id="congratulations">Congratulations!!!</h1>
-<h1 id="this-concludes-lab-1-on-network-policies">This concludes Lab 1 on Network Policies</h1>
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_889cfb7fe2">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_889cfb7fe2">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> 
+kubectl delete NetworkPolicy -n default k8sdemo-web-backend
+
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
+<blockquote>
+<p>Congratulations!!! This concludes the Lab</p>
 </blockquote>
 
 
@@ -628,10 +1118,8 @@ The IP Address is
                     <div class="row"><div class="position-relative mx-auto col-lg-9">
                           <div class="bg-primary overflow-hidden p-3 mt-5 shadow">
 
-    <h4 class="text-white text-center">Read more</h4>
 
-    <div class="d-flex justify-content-center"><a class="p-1 mr-3 d-inline-block text-white" href="/k8s_training_web/jtc16/" title="JTC16 Kubernetes Security Labs"><i class="fas fa-chevron-left p-1"></i>JTC16 Kubernetes Security Labs</a>
-        <a class="p-1 ml-3 d-inline-block text-white text-right" href="/k8s_training_web/jtc16/lab2/" title="Lab 2: Security Tooling">Lab 2: Security Tooling<i class="fas fa-chevron-right p-1"></i></a>
+    <div class="d-flex justify-content-center"><a class="p-1 ml-3 d-inline-block text-white text-right" href="/k8s_training_web/jtc16/lab2/" title="Lab 2: Security Tooling">Lab 2: Security Tooling<i class="fas fa-chevron-right p-1"></i></a>
     </div>
 </div>
 

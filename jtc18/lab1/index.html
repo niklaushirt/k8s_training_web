@@ -416,19 +416,75 @@
 <h3 id="liveness-probes">Liveness Probes</h3>
 <p>Liveness probes will attempt to restart a container if it fails and starts to respond to the probe.</p>
 <p>Example of a liveness probe that monitors the /health URL on port 3000.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">livenessProbe</span>:
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_6b3599f2f7">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_6b3599f2f7">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"> 
+<span style="color:#66d9ef">livenessProbe</span>:
   <span style="color:#66d9ef">httpGet</span>:
     <span style="color:#66d9ef">path</span>: /health
     <span style="color:#66d9ef">port</span>: <span style="color:#ae81ff">3000</span>
-</code></pre></div><h3 id="readiness-probes">Readiness Probes</h3>
+
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
+<h3 id="readiness-probes">Readiness Probes</h3>
 <p>Updating deployments without readiness probes can result in downtime as old <code>Pods</code> are replaced by new pods and traffic might be sent to the <code>Pod</code> that is not ready to process requests yet (for example because the webserver is still initializing).</p>
 <p>With readiness probes, Kubernetes will not send traffic to a <code>Pod</code> until the probe is successful.</p>
 <p>Example of a readiness probe that monitors the /ready URL on port 3000.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"> <span style="color:#66d9ef">readinessProbe</span>:
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_99e6a30d60">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_99e6a30d60">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">   
+<span style="color:#66d9ef">readinessProbe</span>:
   <span style="color:#66d9ef">httpGet</span>:
     <span style="color:#66d9ef">path</span>: /ready
     <span style="color:#66d9ef">port</span>: <span style="color:#ae81ff">3000</span>
-</code></pre></div><h3 id="usage">Usage</h3>
+
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
+<h3 id="usage">Usage</h3>
 <p>A typical sequence migth look like this:</p>
 <ol>
 <li>Readiness probe fails</li>
@@ -439,7 +495,27 @@
 <li>Kubernetes starts sending traffic to the pod again</li>
 </ol>
 <p>Additional parameters are available in order to get better control over the triggering of the probes:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">readinessProbe</span>:
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_20128ba07a">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_20128ba07a">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">   
+<span style="color:#66d9ef">readinessProbe</span>:
   <span style="color:#66d9ef">httpGet</span>:
     <span style="color:#66d9ef">path</span>: /monitoring/alive
     <span style="color:#66d9ef">port</span>: <span style="color:#ae81ff">3401</span>
@@ -448,7 +524,15 @@
   <span style="color:#66d9ef">periodSeconds</span>: <span style="color:#ae81ff">15</span> 
   <span style="color:#66d9ef">successThreshold</span>: <span style="color:#ae81ff">1</span> 
   <span style="color:#66d9ef">failureThreshold</span>: <span style="color:#ae81ff">3</span> 
-</code></pre></div><p><strong>initialDelaySeconds</strong>: How long to wait before starting to probe after a container starts. For liveness probes this should be longer than the time your app usually takes to start up. Otherwise you might get stuck in a reboot loop.</p>
+
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
+<p><strong>initialDelaySeconds</strong>: How long to wait before starting to probe after a container starts. For liveness probes this should be longer than the time your app usually takes to start up. Otherwise you might get stuck in a reboot loop.</p>
 <p><strong>timeoutSeconds</strong>: How long a probe can take to respond before it’s considered a failure.</p>
 <p><strong>periodSeconds</strong>: How often a probe will be sent. In most cases you can settle for a value between 10 and 20 seconds.</p>
 <p><strong>successThreshold</strong>: How many successes are needed before the probe is considered a success again</p>
@@ -465,7 +549,27 @@ that check for more elaboreate scenarios, like:</p>
 <li>&hellip;</li>
 </ul>
 <p>The example is the following:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">apiVersion</span>: apps/v1
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_6b5be571e9">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_6b5be571e9">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"> 
+<span style="color:#66d9ef">apiVersion</span>: apps/v1
 <span style="color:#66d9ef">kind</span>: Deployment
 <span style="color:#66d9ef">metadata</span>:
   <span style="color:#66d9ef">name</span>: open-liberty
@@ -497,13 +601,48 @@ that check for more elaboreate scenarios, like:</p>
           <span style="color:#66d9ef">successThreshold</span>: <span style="color:#ae81ff">1</span> 
           <span style="color:#66d9ef">failureThreshold</span>: <span style="color:#ae81ff">1</span>
 ...
-</code></pre></div><p>As you can see, we will set the initialDelaySeconds way to low and just give it the possibility to fail once (failureThreshold=1) before triggering a failure.</p>
+
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
+<p>As you can see, we will set the initialDelaySeconds way to low and just give it the possibility to fail once (failureThreshold=1) before triggering a failure.</p>
 <p>So we will have the readiness probe triggering almost immediately and the liveness probe 5 seconds later (initialDelaySeconds: 5).</p>
 <ol>
 <li>
 <p>Now let&rsquo;s create the deployment</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl apply -f ./training/probes/open-liberty-fail.yaml
-</code></pre></div><p>``</p>
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_16e9246feb">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_16e9246feb">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> 
+kubectl apply -f ./training/probes/open-liberty-fail.yaml
+	
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
 </li>
 </ol>
 <h3 id="examine-what-happened">Examine what happened</h3>
@@ -527,7 +666,27 @@ After a while you will see the number of restarts going up and the dreaded <code
 </ol>
 <h2 id="adapt-probe-values">Adapt Probe values</h2>
 <p>Let&rsquo;s try to find some more realistic values:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">apiVersion</span>: apps/v1
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_f00851a018">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_f00851a018">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"> 
+<span style="color:#66d9ef">apiVersion</span>: apps/v1
 <span style="color:#66d9ef">kind</span>: Deployment
 <span style="color:#66d9ef">metadata</span>:
   <span style="color:#66d9ef">name</span>: open-liberty
@@ -559,13 +718,49 @@ After a while you will see the number of restarts going up and the dreaded <code
           <span style="color:#66d9ef">timeoutSeconds</span>: <span style="color:#ae81ff">3</span>
           <span style="color:#66d9ef">failureThreshold</span>: <span style="color:#ae81ff">1</span>
 ...
-</code></pre></div><p>So with this values for the readiness probe we give the container the time to internally start up the open-liberty server (initialDelaySeconds: 30) - knowing that it takes about 15-20 seconds to initialize - while checking every 10 seconds (periodSeconds: 10).</p>
+
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
+<p>So with this values for the readiness probe we give the container the time to internally start up the open-liberty server (initialDelaySeconds: 30) - knowing that it takes about 15-20 seconds to initialize - while checking every 10 seconds (periodSeconds: 10).</p>
 <p>As for the liveness probe we give the container plenty time to settle (initialDelaySeconds: 60) while checking every 10 seconds (periodSeconds: 10).</p>
 <ol>
 <li>So let&rsquo;s update the deployment</li>
 </ol>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl apply -f ./training/probes/open-liberty-ok.yaml
-</code></pre></div><h3 id="examine-what-happened-1">Examine what happened</h3>
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_6f3c4109d5">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_6f3c4109d5">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> 
+kubectl apply -f ./training/probes/open-liberty-ok.yaml
+
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
+<h3 id="examine-what-happened-1">Examine what happened</h3>
 <p>Let&rsquo;s examine what happened.</p>
 <ol>
 <li>
@@ -589,7 +784,7 @@ This mechanism ensures, that existing deployments get deleted only when the new 
 </li>
 </ol>
 <blockquote>
-<h1 id="congratulations-this-concludes-the-lab-on-probes">Congratulations!!! This concludes the Lab on Probes</h1>
+<p>Congratulations!!! This concludes the Lab</p>
 </blockquote>
 
 
@@ -600,10 +795,8 @@ This mechanism ensures, that existing deployments get deleted only when the new 
                     <div class="row"><div class="position-relative mx-auto col-lg-9">
                           <div class="bg-primary overflow-hidden p-3 mt-5 shadow">
 
-    <h4 class="text-white text-center">Read more</h4>
 
-    <div class="d-flex justify-content-center"><a class="p-1 mr-3 d-inline-block text-white" href="/k8s_training_web/jtc18/" title="JTC18 Kubernetes Advanced Labs"><i class="fas fa-chevron-left p-1"></i>JTC18 Kubernetes Advanced Labs</a>
-        <a class="p-1 ml-3 d-inline-block text-white text-right" href="/k8s_training_web/jtc18/lab2/" title="Lab 2: Init Containers">Lab 2: Init Containers<i class="fas fa-chevron-right p-1"></i></a>
+    <div class="d-flex justify-content-center"><a class="p-1 ml-3 d-inline-block text-white text-right" href="/k8s_training_web/jtc18/lab2/" title="Lab 2: Init Containers">Lab 2: Init Containers<i class="fas fa-chevron-right p-1"></i></a>
     </div>
 </div>
 
