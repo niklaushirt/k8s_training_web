@@ -247,7 +247,7 @@
         <li data-nav-id="/k8s_training_web/jtc14/lab3/" class="nav-item my-1">
                 
                  <a href="/k8s_training_web/jtc14/lab3/" class="nav-link p-0">
-                    Lab 3: Deploy the Lab Operator
+                    Lab 3: Deploy the Custom Resource
                 </a>
         </li>
         <li data-nav-id="/k8s_training_web/jtc14/lab4/" class="nav-item my-1">
@@ -690,11 +690,11 @@ nano ~/ansible-operator/ansible-operator-frontend/roles/myansiblelabdemo/tasks/m
 
 <div class="position-relative">
     <div class="position-absolute" style="right:0;">
-        <button class="btn btn-light" data-clipboard-target="#clipboard_28fe10feb5">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_4f5dc97ba3">
         Copy
         </button>
     </div>
-    <div id="clipboard_28fe10feb5">
+    <div id="clipboard_4f5dc97ba3">
     <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"> 
 - <span style="color:#66d9ef">name</span>: Create the k8sdemo deployment
   <span style="color:#66d9ef">community.kubernetes.k8s</span>:
@@ -746,7 +746,7 @@ nano ~/ansible-operator/ansible-operator-frontend/roles/myansiblelabdemo/tasks/m
             <span style="color:#66d9ef">port</span>: <span style="color:#ae81ff">3000</span>
             <span style="color:#66d9ef">targetPort</span>: <span style="color:#ae81ff">3000</span>
             <span style="color:#66d9ef">nodePort</span>: <span style="color:#ae81ff">32123</span>
-      	<span style="color:#66d9ef">type</span>: NodePort  
+				<span style="color:#66d9ef">type</span>: NodePort 
 	
 </code></pre></div>
     </div>
@@ -1210,7 +1210,7 @@ kubectl logs -c operator ansible-operator-frontend-fd78bcf5-zxgws
                           <div class="bg-primary overflow-hidden p-3 mt-5 shadow">
 
 
-    <div class="d-flex justify-content-center"><a class="p-1 ml-3 d-inline-block text-white text-right" href="/k8s_training_web/jtc14/lab3/" title="Lab 3: Deploy the Lab Operator">Lab 3: Deploy the Lab Operator<i class="fas fa-chevron-right p-1"></i></a>
+    <div class="d-flex justify-content-center"><a class="p-1 ml-3 d-inline-block text-white text-right" href="/k8s_training_web/jtc14/lab3/" title="Lab 3: Deploy the Custom Resource">Lab 3: Deploy the Custom Resource<i class="fas fa-chevron-right p-1"></i></a>
     </div>
 </div>
 

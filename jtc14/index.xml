@@ -48,7 +48,7 @@ Copy   operator-sdk new ansible-operator-frontend --type=ansible --api-version=a
     </item>
     
     <item>
-      <title>Lab 3: Deploy the Lab Operator</title>
+      <title>Lab 3: Deploy the Custom Resource</title>
       <link>https://niklaushirt.github.io/k8s_training_web/jtc14/lab3/</link>
       <pubDate>Wed, 23 Sep 2020 09:12:06 +0200</pubDate>
       

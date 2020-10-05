@@ -8,7 +8,7 @@
 
     <title>
         
-        Lab 3: Deploy the Lab Operator | Kubernetes Training
+        Lab 3: Deploy the Custom Resource | Kubernetes Training
         
     </title>
 
@@ -247,7 +247,7 @@
         <li data-nav-id="/k8s_training_web/jtc14/lab3/" class="nav-item my-1 active">
                 
                  <a href="/k8s_training_web/jtc14/lab3/" class="nav-link p-0">
-                    Lab 3: Deploy the Lab Operator
+                    Lab 3: Deploy the Custom Resource
                 </a>
         </li>
         <li data-nav-id="/k8s_training_web/jtc14/lab4/" class="nav-item my-1">
@@ -332,7 +332,7 @@
                 <div class="main col-12 order-1 col-md-9 col-lg-10 col-xl-8 py-3">
                 
 
-<h1>Lab 3: Deploy the Lab Operator</h1>
+<h1>Lab 3: Deploy the Custom Resource</h1>
 
 <h2 id="deploy-the-custom-resource">Deploy the Custom Resource</h2>
 <ol>
@@ -383,21 +383,21 @@ kubectl create -f  ~/ansible-operator/ansible-operator-frontend/deploy/crds/ansi
 
 <div class="position-relative">
     <div class="position-absolute" style="right:0;">
-        <button class="btn btn-light" data-clipboard-target="#clipboard_4d0bb317f7">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_ca468b5c3c">
         Copy
         </button>
     </div>
-    <div id="clipboard_4d0bb317f7">
+    <div id="clipboard_ca468b5c3c">
     <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"> 
 <span style="color:#66d9ef">apiVersion</span>: ansiblelab.ibm.com/v1beta1
 <span style="color:#66d9ef">kind</span>: MyAnsibleLabDemo
 <span style="color:#66d9ef">metadata</span>:
-	<span style="color:#66d9ef">name</span>: example-MyAnsibleLabDemo
+  <span style="color:#66d9ef">name</span>: example-MyAnsibleLabDemo
 <span style="color:#66d9ef">spec</span>:
-	<span style="color:#75715e"># Add fields here</span>
-	<span style="color:#66d9ef">size</span>: <span style="color:#ae81ff">3</span>
-	<span style="color:#66d9ef">demo</span>:
-		<span style="color:#66d9ef">image</span>: niklaushirt/k8sdemo:<span style="color:#ae81ff">1.0.0</span>
+  <span style="color:#75715e"># Add fields here</span>
+  <span style="color:#66d9ef">size</span>: <span style="color:#ae81ff">3</span>
+  <span style="color:#66d9ef">demo</span>:
+    <span style="color:#66d9ef">image</span>: niklaushirt/k8sdemo:<span style="color:#ae81ff">1.0.0</span>
 		
 </code></pre></div>
     </div>
@@ -717,13 +717,13 @@ sed -i <span style="color:#e6db74">&#39;&#39;</span> <span style="color:#e6db74"
 
 <div class="position-relative">
     <div class="position-absolute" style="right:0;">
-        <button class="btn btn-light" data-clipboard-target="#clipboard_de3db5c610">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_b12690b07f">
         Copy
         </button>
     </div>
-    <div id="clipboard_de3db5c610">
+    <div id="clipboard_b12690b07f">
     <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> 
-more ~/ansible-operator/ansible-operator-frontend/deploy/crds/ansiblelab_v1beta1_myansiblelabdemo_cr.yaml 
+more ~/ansible-operator/ansible-operator-frontend/deploy/crds/ansiblelab.ibm.com_v1beta1_myansiblelabdemo_cr.yaml
 	
 </code></pre></div>
     </div>
@@ -747,21 +747,21 @@ more ~/ansible-operator/ansible-operator-frontend/deploy/crds/ansiblelab_v1beta1
 
 <div class="position-relative">
     <div class="position-absolute" style="right:0;">
-        <button class="btn btn-light" data-clipboard-target="#clipboard_48e3b9058c">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_b1d6120c9b">
         Copy
         </button>
     </div>
-    <div id="clipboard_48e3b9058c">
+    <div id="clipboard_b1d6120c9b">
     <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"> 
 <span style="color:#66d9ef">apiVersion</span>: ansiblelab.ibm.com/v1beta1
 <span style="color:#66d9ef">kind</span>: MyAnsibleLabDemo
 <span style="color:#66d9ef">metadata</span>:
-	<span style="color:#66d9ef">name</span>: example-myansiblelabdemo
+  <span style="color:#66d9ef">name</span>: example-myansiblelabdemo
 <span style="color:#66d9ef">spec</span>:
-	<span style="color:#75715e"># Add fields here</span>
-	<span style="color:#66d9ef">size</span>: <span style="color:#ae81ff">3</span>
-	<span style="color:#66d9ef">demo</span>:
-		<span style="color:#66d9ef">image</span>: niklaushirt/k8sdemo:<span style="color:#ae81ff">1.0.1</span>
+  <span style="color:#75715e"># Add fields here</span>
+  <span style="color:#66d9ef">size</span>: <span style="color:#ae81ff">3</span>
+  <span style="color:#66d9ef">demo</span>:
+    <span style="color:#66d9ef">image</span>: niklaushirt/k8sdemo:<span style="color:#ae81ff">1.0.1</span>
  	
 </code></pre></div>
     </div>
