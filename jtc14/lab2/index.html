@@ -577,21 +577,21 @@ nano ~/ansible-operator/ansible-operator-frontend/deploy/crds/ansiblelab.ibm.com
 
 <div class="position-relative">
     <div class="position-absolute" style="right:0;">
-        <button class="btn btn-light" data-clipboard-target="#clipboard_7c0e3cad36">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_4bcd0230d4">
         Copy
         </button>
     </div>
-    <div id="clipboard_7c0e3cad36">
+    <div id="clipboard_4bcd0230d4">
     <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"> 
 <span style="color:#66d9ef">apiVersion</span>: ansiblelab.ibm.com/v1beta1
 <span style="color:#66d9ef">kind</span>: MyAnsibleLabDemo
 <span style="color:#66d9ef">metadata</span>:
-	<span style="color:#66d9ef">name</span>: example-MyAnsibleLabDemo
+  <span style="color:#66d9ef">name</span>: example-MyAnsibleLabDemo
 <span style="color:#66d9ef">spec</span>:
-	--&gt; Add fields here
-	<span style="color:#66d9ef">size</span>: <span style="color:#ae81ff">3</span>
-	<span style="color:#66d9ef">demo</span>:
-		<span style="color:#66d9ef">image</span>: niklaushirt/k8sdemo:<span style="color:#ae81ff">1.0.0</span>
+  <span style="color:#75715e">#Add fields here</span>
+  <span style="color:#66d9ef">size</span>: <span style="color:#ae81ff">3</span>
+  <span style="color:#66d9ef">demo</span>:
+    <span style="color:#66d9ef">image</span>: niklaushirt/k8sdemo:<span style="color:#ae81ff">1.0.0</span>
 	
 </code></pre></div>
     </div>
@@ -605,8 +605,7 @@ nano ~/ansible-operator/ansible-operator-frontend/deploy/crds/ansiblelab.ibm.com
 <p>Save and quit</p>
 </li>
 </ol>
-<p>**We have now finished setting up the API and CRDs
-**</p>
+<p><strong>We have now finished setting up the API and CRDs</strong></p>
 <h2 id="create-the-lab-operator-controller">Create the Lab Operator Controller</h2>
 <p>By default, an Ansible role executes the tasks defined at <code>roles/tasks/main.yml</code>.
 For defining our deployment we will use the k8s module of Ansible.</p>
@@ -691,63 +690,63 @@ nano ~/ansible-operator/ansible-operator-frontend/roles/myansiblelabdemo/tasks/m
 
 <div class="position-relative">
     <div class="position-absolute" style="right:0;">
-        <button class="btn btn-light" data-clipboard-target="#clipboard_dfb8e9960b">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_28fe10feb5">
         Copy
         </button>
     </div>
-    <div id="clipboard_dfb8e9960b">
+    <div id="clipboard_28fe10feb5">
     <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"> 
 - <span style="color:#66d9ef">name</span>: Create the k8sdemo deployment
-	<span style="color:#66d9ef">community.kubernetes.k8s</span>:
-		<span style="color:#66d9ef">definition</span>:
-			<span style="color:#66d9ef">apiVersion</span>: apps/v1
-			<span style="color:#66d9ef">kind</span>: Deployment
-			<span style="color:#66d9ef">metadata</span>:
-				<span style="color:#66d9ef">name</span>: k8sdemo
-				<span style="color:#66d9ef">namespace</span>: default
-			<span style="color:#66d9ef">labels</span>:
-				<span style="color:#66d9ef">app</span>: k8sdemo
-			<span style="color:#66d9ef">spec</span>:
-				<span style="color:#66d9ef">selector</span>:
-						<span style="color:#66d9ef">matchLabels</span>:
-							<span style="color:#66d9ef">app</span>: k8sdemo
-				<span style="color:#66d9ef">replicas</span>: <span style="color:#ae81ff">1</span>
-				<span style="color:#66d9ef">template</span>:
-					<span style="color:#66d9ef">metadata</span>:
-						<span style="color:#66d9ef">labels</span>:
-							<span style="color:#66d9ef">app</span>: k8sdemo
-					<span style="color:#66d9ef">spec</span>:
-						<span style="color:#66d9ef">containers</span>:
-						- <span style="color:#66d9ef">name</span>: k8sdemo
-							<span style="color:#66d9ef">image</span>: <span style="color:#e6db74">&#34;{{demo.image}}&#34;</span>
-							<span style="color:#66d9ef">imagePullPolicy</span>: IfNotPresent 
-							<span style="color:#66d9ef">ports</span>:
-							- <span style="color:#66d9ef">containerPort</span>: <span style="color:#ae81ff">3000</span>
-							<span style="color:#66d9ef">env</span>:
-								- <span style="color:#66d9ef">name</span>: PORT
-									<span style="color:#66d9ef">value </span>: <span style="color:#e6db74">&#34;3000&#34;</span>
-								- <span style="color:#66d9ef">name</span>: APPLICATION_NAME
-									<span style="color:#66d9ef">value</span>: k8sdemo
-								- <span style="color:#66d9ef">name</span>: BACKEND_URL
-									<span style="color:#66d9ef">value</span>: http://k8sdemo-backend-service.default.svc:<span style="color:#ae81ff">3000</span>/api
+  <span style="color:#66d9ef">community.kubernetes.k8s</span>:
+    <span style="color:#66d9ef">definition</span>:
+      <span style="color:#66d9ef">apiVersion</span>: apps/v1
+      <span style="color:#66d9ef">kind</span>: Deployment
+      <span style="color:#66d9ef">metadata</span>:
+        <span style="color:#66d9ef">name</span>: k8sdemo
+        <span style="color:#66d9ef">namespace</span>: default
+      <span style="color:#66d9ef">labels</span>:
+        <span style="color:#66d9ef">app</span>: k8sdemo
+      <span style="color:#66d9ef">spec</span>:
+        <span style="color:#66d9ef">selector</span>:
+            <span style="color:#66d9ef">matchLabels</span>:
+              <span style="color:#66d9ef">app</span>: k8sdemo
+        <span style="color:#66d9ef">replicas</span>: <span style="color:#ae81ff">1</span>
+        <span style="color:#66d9ef">template</span>:
+          <span style="color:#66d9ef">metadata</span>:
+            <span style="color:#66d9ef">labels</span>:
+              <span style="color:#66d9ef">app</span>: k8sdemo
+          <span style="color:#66d9ef">spec</span>:
+            <span style="color:#66d9ef">containers</span>:
+            - <span style="color:#66d9ef">name</span>: k8sdemo
+              <span style="color:#66d9ef">image</span>: <span style="color:#e6db74">&#34;{{demo.image}}&#34;</span>
+              <span style="color:#66d9ef">imagePullPolicy</span>: IfNotPresent 
+              <span style="color:#66d9ef">ports</span>:
+              - <span style="color:#66d9ef">containerPort</span>: <span style="color:#ae81ff">3000</span>
+              <span style="color:#66d9ef">env</span>:
+                - <span style="color:#66d9ef">name</span>: PORT
+                  <span style="color:#66d9ef">value </span>: <span style="color:#e6db74">&#34;3000&#34;</span>
+                - <span style="color:#66d9ef">name</span>: APPLICATION_NAME
+                  <span style="color:#66d9ef">value</span>: k8sdemo
+                - <span style="color:#66d9ef">name</span>: BACKEND_URL
+                  <span style="color:#66d9ef">value</span>: http://k8sdemo-backend-service.default.svc:<span style="color:#ae81ff">3000</span>/api
 
 - <span style="color:#66d9ef">name</span>: Create the k8sdemo service
-	<span style="color:#66d9ef">community.kubernetes.k8s</span>:
-		<span style="color:#66d9ef">definition</span>:
-			<span style="color:#66d9ef">apiVersion</span>: v1
-			<span style="color:#66d9ef">kind</span>: Service
-			<span style="color:#66d9ef">metadata</span>:
-				<span style="color:#66d9ef">name</span>: k8sdemo-service
-				<span style="color:#66d9ef">namespace</span>: default
-			<span style="color:#66d9ef">spec</span>:
-				<span style="color:#66d9ef">selector</span>:
-					<span style="color:#66d9ef">app</span>: k8sdemo
-				<span style="color:#66d9ef">ports</span>:
-					- <span style="color:#66d9ef">protocol</span>: TCP
-						<span style="color:#66d9ef">port</span>: <span style="color:#ae81ff">3000</span>
-						<span style="color:#66d9ef">targetPort</span>: <span style="color:#ae81ff">3000</span>
-						<span style="color:#66d9ef">nodePort</span>: <span style="color:#ae81ff">32123</span>
-				<span style="color:#66d9ef">type</span>: NodePort  
+  <span style="color:#66d9ef">community.kubernetes.k8s</span>:
+    <span style="color:#66d9ef">definition</span>:
+      <span style="color:#66d9ef">apiVersion</span>: v1
+      <span style="color:#66d9ef">kind</span>: Service
+      <span style="color:#66d9ef">metadata</span>:
+        <span style="color:#66d9ef">name</span>: k8sdemo-service
+        <span style="color:#66d9ef">namespace</span>: default
+      <span style="color:#66d9ef">spec</span>:
+        <span style="color:#66d9ef">selector</span>:
+          <span style="color:#66d9ef">app</span>: k8sdemo
+        <span style="color:#66d9ef">ports</span>:
+          - <span style="color:#66d9ef">protocol</span>: TCP
+            <span style="color:#66d9ef">port</span>: <span style="color:#ae81ff">3000</span>
+            <span style="color:#66d9ef">targetPort</span>: <span style="color:#ae81ff">3000</span>
+            <span style="color:#66d9ef">nodePort</span>: <span style="color:#ae81ff">32123</span>
+      	<span style="color:#66d9ef">type</span>: NodePort  
 	
 </code></pre></div>
     </div>
@@ -982,19 +981,19 @@ You can ignore this as we will be using a version already provided on Docker hub
 
 <div class="position-relative">
     <div class="position-absolute" style="right:0;">
-        <button class="btn btn-light" data-clipboard-target="#clipboard_f639205896">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_286cff7448">
         Copy
         </button>
     </div>
-    <div id="clipboard_f639205896">
+    <div id="clipboard_286cff7448">
     <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> 
 cp ~/ansible-operator/ansible-operator-frontend/deploy/operator.yaml ~/ansible-operator/ansible-operator-frontend/deploy/operator.yaml.bak
 
-sed -i <span style="color:#e6db74">&#39;s|REPLACE_IMAGE|niklaushirt/ansible-operator-frontend:ansible|g&#39;</span> ~/ansible-operator/ansible-operator-frontend/deploy/operator.yaml
+sed -i <span style="color:#e6db74">&#39;s|REPLACE_IMAGE|niklaushirt/ansible-operator-frontend:lab001|g&#39;</span> ~/ansible-operator/ansible-operator-frontend/deploy/operator.yaml
 sed -i <span style="color:#e6db74">&#39;s|{{ pull_policy.* }}|Always|g&#39;</span> ~/ansible-operator/ansible-operator-frontend/deploy/operator.yaml
 
 On Mac please use:
-sed -i <span style="color:#e6db74">&#39;&#39;</span> <span style="color:#e6db74">&#39;s|REPLACE_IMAGE|niklaushirt/ansible-operator-frontend:ansible|g&#39;</span> ~/ansible-operator/ansible-operator-frontend/deploy/operator.yaml
+sed -i <span style="color:#e6db74">&#39;&#39;</span> <span style="color:#e6db74">&#39;s|REPLACE_IMAGE|niklaushirt/ansible-operator-frontend:lab001|g&#39;</span> ~/ansible-operator/ansible-operator-frontend/deploy/operator.yaml
 sed -i <span style="color:#e6db74">&#39;&#39;</span> <span style="color:#e6db74">&#39;s|{{ pull_policy.* }}|Always|g&#39;</span> ~/ansible-operator/ansible-operator-frontend/deploy/operator.yaml
 
 more ~/ansible-operator/ansible-operator-frontend/deploy/operator.yaml
@@ -1007,8 +1006,7 @@ more ~/ansible-operator/ansible-operator-frontend/deploy/operator.yaml
 
 
 <blockquote>
-<p>To the attentive observer, we&rsquo;re using the prepared image from the docker hub, due to some routing issues for Kubernetes to pull the image internally - thanks minikube.
-The Training VM also uses a slightly older</p>
+<p>To the attentive observer, we&rsquo;re using the prepared image from the docker hub, due to some routing issues for Kubernetes to pull the image internally - thanks minikube.</p>
 </blockquote>
 <h3 id="2-deploy-the-lab-operator">2) Deploy the Lab Operator</h3>
 <ol>
