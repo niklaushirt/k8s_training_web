@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>JTC20 IBM CloudPak for Multicloud Management on Kubernetes Training</title>
+    <link>https://niklaushirt.github.io/k8s_training_web/jtc20/</link>
+    <description>Recent content in JTC20 IBM CloudPak for Multicloud Management on Kubernetes Training</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 23 Sep 2020 09:12:06 +0200</lastBuildDate>
+    
+	<atom:link href="https://niklaushirt.github.io/k8s_training_web/jtc20/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Lab 0: Preparation</title>
+      <link>https://niklaushirt.github.io/k8s_training_web/jtc20/lab0/</link>
+      <pubDate>Wed, 23 Sep 2020 09:12:06 +0200</pubDate>
+      
+      <guid>https://niklaushirt.github.io/k8s_training_web/jtc20/lab0/</guid>
+      <description>Open a Terminal window by clicking on the Termnial icon in the left sidebar - we will use this extensively later as well
+  Start the demo application
+Copy   kubectl create -f ~/training/deployment/demoapp.yaml kubectl create -f ~/training/deployment/demoapp-service.yaml kubectl create -f ~/training/deployment/demoapp-backend.yaml kubectl create -f ~/training/deployment/demoapp-backend-service.yaml      Wait for the demo application to be available (the status must be 1/1)
+Copy   kubectl get pods    &amp;gt; NAME READY STATUS RESTARTS AGE &amp;gt; k8sdemo-backend-5b779f567f-2rbgj 1/1 Running 0 21s &amp;gt; k8sdemo-backend-5b779f567f-p6j76 1/1 Running 0 21s &amp;gt; k8sdemo-bd6bbd548-jcb6r 1/1 Running 0 21s   Open the demo application in the browser</description>
+    </item>
+    
+    <item>
+      <title>Lab 1: Import a cluster</title>
+      <link>https://niklaushirt.github.io/k8s_training_web/jtc20/lab1/</link>
+      <pubDate>Wed, 23 Sep 2020 09:12:06 +0200</pubDate>
+      
+      <guid>https://niklaushirt.github.io/k8s_training_web/jtc20/lab1/</guid>
+      <description>IBM Cloud Pak for Multicloud Manager Labs Lab #1: Import a cluster in the Hub Philippe Thomas - Novembre 2020
+Introduction During this lab, we are going to manipulate some basic aspects of the console of IBM Cloud Pak for Multicloud Manager (CP4M for short in this document) and especially the import feature to get access to some managed clusters.
+Task 1 - Access CP4M console Be sure to use the latest Firefox internet browser.</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,1064 @@
+<!DOCTYPE html>
+<html><head>
+
+    <meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="canonical" href="https://niklaushirt.github.io/k8s_training_web/workshop/prereq/">
+
+    <title>
+        
+        Students Prerequisite | Kubernetes Training
+        
+    </title>
+
+    
+    <link href="https://niklaushirt.github.io/k8s_training_web/css/fontawesome.min.css" rel="stylesheet">
+
+    
+    <link rel="stylesheet" href="https://niklaushirt.github.io/k8s_training_web/css/ace.min.css">
+
+    
+    
+        
+    
+
+</head>
+<body><nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow sticky-top" id="navbarMain">
+    <div class="container">
+        <div>
+            <a class="navbar-brand" href="/k8s_training_web">
+                
+                Kubernetes Training
+            </a>
+        </div>
+        
+            <button class="navbar-toggler navbar-toggler-right collapsed" type="button" data-toggle="collapse" data-target="#navbarMainCollapse" aria-controls="navbarMainCollapse" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarMainCollapse">
+              <ul class="navbar-nav ml-auto">
+                            <li class="nav-item">
+                                <a class="nav-link" href="https://github.com/niklaushirt/training" >
+                                  <i class='fab fa-github'></i>
+                                </a>
+                            </li>
+              </ul>
+            </div>
+    </div>
+</nav>
+<div class="container-fluid">
+            <div class="row">
+
+                <div class="docs-sidenav order-0 col-12 col-md-3 col-lg-2 col-xl-2 position-sticky border-right"><nav class="navbar navbar-expand-md navbar-light pl-0">
+    <button class="navbar-toggler navbar-toggler-right collapsed" type="button" data-toggle="collapse" data-target="#sidenav-left-collapse" aria-controls="sidenav-left-collapse" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+     <div class="collapse navbar-collapse align-items-start flex-column" id="sidenav-left-collapse">
+            <form class="form-inline my-2 my-lg-0 searchbox">
+                <input class="form-control mr-sm-2 w-100" data-search-input id="search-by" type="text" placeholder="Search">
+            </form>
+         <ul class="navbar-nav flex-column pt-3">
+    <li data-nav-id="/k8s_training_web/jtc00/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/k8s_training_web/jtc00/"><h6>Introduction</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/k8s_training_web/jtc00/lab1/" class="nav-item my-1">
+                
+                 <a href="/k8s_training_web/jtc00/lab1/" class="nav-link p-0">
+                    Getting set up
+                </a>
+        </li>
+        <li data-nav-id="/k8s_training_web/jtc00/lab2/" class="nav-item my-1">
+                
+                 <a href="/k8s_training_web/jtc00/lab2/" class="nav-link p-0">
+                    Lab Information and Semantics
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/k8s_training_web/jtc01/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/k8s_training_web/jtc01/"><h6>JTC01 Docker</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/k8s_training_web/jtc01/lab1/" class="nav-item my-1">
+                
+                 <a href="/k8s_training_web/jtc01/lab1/" class="nav-link p-0">
+                    Lab 1: Get to know Docker
+                </a>
+        </li>
+        <li data-nav-id="/k8s_training_web/jtc01/lab2/" class="nav-item my-1">
+                
+                 <a href="/k8s_training_web/jtc01/lab2/" class="nav-link p-0">
+                    Lab 2: Docker Basics
+                </a>
+        </li>
+        <li data-nav-id="/k8s_training_web/jtc01/lab3/" class="nav-item my-1">
+                
+                 <a href="/k8s_training_web/jtc01/lab3/" class="nav-link p-0">
+                    Lab 3: Docker Internals
+                </a>
+        </li>
+        <li data-nav-id="/k8s_training_web/jtc01/lab4/" class="nav-item my-1">
+                
+                 <a href="/k8s_training_web/jtc01/lab4/" class="nav-link p-0">
+                    Lab 4: Cleanup
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/k8s_training_web/jtc02/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/k8s_training_web/jtc02/"><h6>JTC02 Kubernetes Labs</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/k8s_training_web/jtc02/lab1/" class="nav-item my-1">
+                
+                 <a href="/k8s_training_web/jtc02/lab1/" class="nav-link p-0">
+                    Lab 1: Get to know Kubernetes
+                </a>
+        </li>
+        <li data-nav-id="/k8s_training_web/jtc02/lab2/" class="nav-item my-1">
+                
+                 <a href="/k8s_training_web/jtc02/lab2/" class="nav-link p-0">
+                    Lab 2: Deploy your first Pod
+                </a>
+        </li>
+        <li data-nav-id="/k8s_training_web/jtc02/lab3/" class="nav-item my-1">
+                
+                 <a href="/k8s_training_web/jtc02/lab3/" class="nav-link p-0">
+                    Lab 3: Deploy your first application
+                </a>
+        </li>
+        <li data-nav-id="/k8s_training_web/jtc02/lab4/" class="nav-item my-1">
+                
+                 <a href="/k8s_training_web/jtc02/lab4/" class="nav-link p-0">
+                    Lab 4: Scale and Update Deployments
+                </a>
+        </li>
+        <li data-nav-id="/k8s_training_web/jtc02/lab5/" class="nav-item my-1">
+                
+                 <a href="/k8s_training_web/jtc02/lab5/" class="nav-link p-0">
+                    Lab 5: Stateful Deployments
+                </a>
+        </li>
+        <li data-nav-id="/k8s_training_web/jtc02/lab6/" class="nav-item my-1">
+                
+                 <a href="/k8s_training_web/jtc02/lab6/" class="nav-link p-0">
+                    Lab 6: Cleanup
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/k8s_training_web/jtc10/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/k8s_training_web/jtc10/"><h6>JTC10 Istio</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/k8s_training_web/jtc10/lab1/" class="nav-item my-1">
+                
+                 <a href="/k8s_training_web/jtc10/lab1/" class="nav-link p-0">
+                    Lab 1: Get to know ISTIO
+                </a>
+        </li>
+        <li data-nav-id="/k8s_training_web/jtc10/lab2/" class="nav-item my-1">
+                
+                 <a href="/k8s_training_web/jtc10/lab2/" class="nav-link p-0">
+                    Lab 2: Installing Istio 
+                </a>
+        </li>
+        <li data-nav-id="/k8s_training_web/jtc10/lab3/" class="nav-item my-1">
+                
+                 <a href="/k8s_training_web/jtc10/lab3/" class="nav-link p-0">
+                    Lab 3: Deploy BookInfo application 
+                </a>
+        </li>
+        <li data-nav-id="/k8s_training_web/jtc10/lab4/" class="nav-item my-1">
+                
+                 <a href="/k8s_training_web/jtc10/lab4/" class="nav-link p-0">
+                    Lab 4: Monitoring with Kiali
+                </a>
+        </li>
+        <li data-nav-id="/k8s_training_web/jtc10/lab5/" class="nav-item my-1">
+                
+                 <a href="/k8s_training_web/jtc10/lab5/" class="nav-link p-0">
+                    Lab 5: Traffic flow management
+                </a>
+        </li>
+        <li data-nav-id="/k8s_training_web/jtc10/lab6/" class="nav-item my-1">
+                
+                 <a href="/k8s_training_web/jtc10/lab6/" class="nav-link p-0">
+                    Lab 6: Telemetry data
+                </a>
+        </li>
+        <li data-nav-id="/k8s_training_web/jtc10/lab7/" class="nav-item my-1">
+                
+                 <a href="/k8s_training_web/jtc10/lab7/" class="nav-link p-0">
+                    Lab 7: End-user authentication
+                </a>
+        </li>
+        <li data-nav-id="/k8s_training_web/jtc10/lab8/" class="nav-item my-1">
+                
+                 <a href="/k8s_training_web/jtc10/lab8/" class="nav-link p-0">
+                    Lab 8: Traffic Mirroring
+                </a>
+        </li>
+        <li data-nav-id="/k8s_training_web/jtc10/lab9/" class="nav-item my-1">
+                
+                 <a href="/k8s_training_web/jtc10/lab9/" class="nav-link p-0">
+                    Lab 9: Fault Injection
+                </a>
+        </li>
+        <li data-nav-id="/k8s_training_web/jtc10/lab10/" class="nav-item my-1">
+                
+                 <a href="/k8s_training_web/jtc10/lab10/" class="nav-link p-0">
+                    Lab 10: Cleanup
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/k8s_training_web/jtc14/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/k8s_training_web/jtc14/"><h6>JTC14 Kubernetes Ansible Operators</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/k8s_training_web/jtc14/lab0/" class="nav-item my-1">
+                
+                 <a href="/k8s_training_web/jtc14/lab0/" class="nav-link p-0">
+                    Lab 0: Prepare the Lab environment
+                </a>
+        </li>
+        <li data-nav-id="/k8s_training_web/jtc14/lab1/" class="nav-item my-1">
+                
+                 <a href="/k8s_training_web/jtc14/lab1/" class="nav-link p-0">
+                    Lab 1: Kubernetes Operators
+                </a>
+        </li>
+        <li data-nav-id="/k8s_training_web/jtc14/lab2/" class="nav-item my-1">
+                
+                 <a href="/k8s_training_web/jtc14/lab2/" class="nav-link p-0">
+                    Lab 2: Create the Lab Operator Project
+                </a>
+        </li>
+        <li data-nav-id="/k8s_training_web/jtc14/lab3/" class="nav-item my-1">
+                
+                 <a href="/k8s_training_web/jtc14/lab3/" class="nav-link p-0">
+                    Lab 3: Deploy the Custom Resource
+                </a>
+        </li>
+        <li data-nav-id="/k8s_training_web/jtc14/lab4/" class="nav-item my-1">
+                
+                 <a href="/k8s_training_web/jtc14/lab4/" class="nav-link p-0">
+                    Lab 4: Cleanup
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/k8s_training_web/jtc16/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/k8s_training_web/jtc16/"><h6>JTC16 Kubernetes Security Labs</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/k8s_training_web/jtc16/lab1/" class="nav-item my-1">
+                
+                 <a href="/k8s_training_web/jtc16/lab1/" class="nav-link p-0">
+                    Lab 1: Network Policies
+                </a>
+        </li>
+        <li data-nav-id="/k8s_training_web/jtc16/lab2/" class="nav-item my-1">
+                
+                 <a href="/k8s_training_web/jtc16/lab2/" class="nav-link p-0">
+                    Lab 2: Security Tooling
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/k8s_training_web/jtc17/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/k8s_training_web/jtc17/"><h6>JTC17 Kubernetes Advanced Security</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/k8s_training_web/jtc17/lab0/" class="nav-item my-1">
+                
+                 <a href="/k8s_training_web/jtc17/lab0/" class="nav-link p-0">
+                    Lab 0: Preparation
+                </a>
+        </li>
+        <li data-nav-id="/k8s_training_web/jtc17/lab1/" class="nav-item my-1">
+                
+                 <a href="/k8s_training_web/jtc17/lab1/" class="nav-link p-0">
+                    Lab 1: RBAC - Users, Roles and RoleBindings
+                </a>
+        </li>
+        <li data-nav-id="/k8s_training_web/jtc17/lab2/" class="nav-item my-1">
+                
+                 <a href="/k8s_training_web/jtc17/lab2/" class="nav-link p-0">
+                    Lab 2: Service Accounts
+                </a>
+        </li>
+        <li data-nav-id="/k8s_training_web/jtc17/lab3/" class="nav-item my-1">
+                
+                 <a href="/k8s_training_web/jtc17/lab3/" class="nav-link p-0">
+                    Lab 3: RBAC Tooling
+                </a>
+        </li>
+        <li data-nav-id="/k8s_training_web/jtc17/lab4/" class="nav-item my-1">
+                
+                 <a href="/k8s_training_web/jtc17/lab4/" class="nav-link p-0">
+                    Lab 4: Image Scanning
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/k8s_training_web/jtc20/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/k8s_training_web/jtc20/"><h6>JTC20 IBM CloudPak for Multicloud Management</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/k8s_training_web/jtc20/lab0/" class="nav-item my-1">
+                
+                 <a href="/k8s_training_web/jtc20/lab0/" class="nav-link p-0">
+                    Lab 0: Preparation
+                </a>
+        </li>
+        <li data-nav-id="/k8s_training_web/jtc20/lab1/" class="nav-item my-1">
+                
+                 <a href="/k8s_training_web/jtc20/lab1/" class="nav-link p-0">
+                    Lab 1: Import a cluster
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/k8s_training_web/workshop/" class="nav-item my-1 parent haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/k8s_training_web/workshop/"><h6>Delivering a Workshop - Overview</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/k8s_training_web/workshop/prereq/" class="nav-item my-1 active">
+                
+                 <a href="/k8s_training_web/workshop/prereq/" class="nav-link p-0">
+                    Students Prerequisite
+                </a>
+        </li>
+        <li data-nav-id="/k8s_training_web/workshop/preparation/" class="nav-item my-1">
+                
+                 <a href="/k8s_training_web/workshop/preparation/" class="nav-link p-0">
+                    Environment Preparation
+                </a>
+        </li>
+        <li data-nav-id="/k8s_training_web/workshop/clustermgmt/" class="nav-item my-1">
+                
+                 <a href="/k8s_training_web/workshop/clustermgmt/" class="nav-link p-0">
+                    WiaB - Multicluster Management
+                </a>
+        </li>
+        <li data-nav-id="/k8s_training_web/workshop/appmgmt/" class="nav-item my-1">
+                
+                 <a href="/k8s_training_web/workshop/appmgmt/" class="nav-link p-0">
+                    WiaB Lab - Application Management
+                </a>
+        </li>
+        <li data-nav-id="/k8s_training_web/workshop/" class="nav-item my-1">
+                
+                 <a href="/k8s_training_web/workshop/" class="nav-link p-0">
+                    Delivering a Workshop - Overview
+                </a>
+        </li>
+        </ul>
+    </li>
+        </ul>
+    </div>
+</nav>
+
+
+</div>
+                <div class="docs-toc large order-lg-2 order-md-0 order-xs-1 col-12 col-lg-2 col-xl-2 position-sticky border-left"><div class="docs-toc">
+	<nav id="TableOfContents">
+  <ul>
+    <li><a href="#creating-a-free-iks-clusters">Creating a free IKS clusters</a></li>
+    <li><a href="#installing-cli-tools">Installing CLI Tools</a></li>
+    <li><a href="#accessing-the-iks-cluster">Accessing the IKS Cluster</a></li>
+  </ul>
+</nav>
+</div>
+</div>
+                <div class="main col-12 order-1 col-md-9 col-lg-10 col-xl-8 py-3">
+                
+
+<h1>Students Prerequisite</h1>
+
+<!-- raw HTML omitted -->
+<hr>
+<h2 id="creating-a-free-iks-clusters">Creating a free IKS clusters</h2>
+<p>In this section, you will learn how to create your free IBM Cloud Kubernetes Service (IKS) Cluster. This cluster will be a Managed cluster in the IBM Cloud Pak for Multicloud Management Workshop. In IBM Cloud, you can have 1 free cluster at a time in IBM Cloud Kubernetes Service, and each free cluster expires in 30 days. Free clusters have <a href="https://cloud.ibm.com/docs/containers?topic=containers-cs_ov#cluster_types">select capabilities</a>, minimal 2x4 compute resources, select single zone locations, and support only the Kubernetes container platform and IBM Cloud classic infrastructure provider. Free clusters are ideal for testing out Kubernetes deployments and getting familiar with the IBM Cloud Kubernetes Service API, CLI, and console tools.</p>
+<p><strong>Note:</strong> to create a free cluster, you need to have an <a href="https://cloud.ibm.com/registration">IBM Cloud account</a> and upgrade your account to a <a href="https://cloud.ibm.com/docs/account?topic=account-upgrading-account">Pay-As-You-Go or Subscription account</a>, where you are the owner or have (full Administrator access)[https://cloud.ibm.com/docs/account?topic=account-assign-access-resources].</p>
+<ol>
+<li>Now that you have your IBM Cloud account ready to create a free IKS Cluster. In the <a href="https://cloud.ibm.com/catalog?category=containers#services">IBM Cloud Catalog</a>, select <strong>Kubernetes Service</strong>.</li>
+</ol>
+<p><img src="images/1-free-iks.png" alt=""></p>
+<ol start="2">
+<li>Select the <strong>Free</strong> cluster option (1). You can keep the default name: mycluster-free (2).</li>
+</ol>
+<p><img src="images/2-free-iks.png" alt=""></p>
+<ol start="3">
+<li>Click <strong>Create Cluster</strong>. A worker pool is created that contains one worker node.</li>
+</ol>
+<p><img src="images/3-free-iks.png" alt=""></p>
+<p>The worker node can take a few minutes to provision, but you can see the progress in the <strong>Worker nodes</strong> tab. When the status reaches Ready, you can start working with your cluster.</p>
+<hr>
+<h2 id="installing-cli-tools">Installing CLI Tools</h2>
+<p>CLI tools provide the ability to manage applications, containers, infrastructures, services, and other resources. In this section you will install all the necessary CLI tool in your local machine to be able to complete the Labs.</p>
+<p><em>Note:</em> If you have already installed all CLIs in your local machine, you can skip this page.</p>
+<!-- raw HTML omitted -->
+<p>1.You should be on your CP4MCM Web Console, if not, check how to access it in <a href="../beforestart/">Before Start</a> page.</p>
+<p>From the CP4MCM Web Console page, select the <strong>user icon</strong>, then click <strong>Configure client</strong>.</p>
+<p><img src="images/2-cloudpak-cli.png" alt=""></p>
+<p>2.Click <strong>Install CLI tools</strong>.</p>
+<p><img src="images/3-cloudpak-cli.png" alt=""></p>
+<p>3.Expand <strong>Install IBM Cloud Pak CLI (cloudctl)</strong>. Read the text, then copy and run the curl command for your operating system.</p>
+<p><img src="images/4-cloudpak-cli.png" alt=""></p>
+<p><img src="images/5-cloudpak-cli.png" alt=""></p>
+<p>4.After you run the curl command for your operating system, continue to install the IBM Cloud Pak® CLI.</p>
+<p>To install the IBM Cloud Pak® CLI, run the command that matches your client computer operating system, where &lt;path_to_installer&gt; is the path to the directory where you downloaded the cloudctl file, and &lt;install_file&gt; is the downloaded file name.</p>
+<p>For example, for Linux and macOS, run the following commands to change and move the file. Remember that the curl command for your cluster is located in the console:</p>
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_3f37e767ec">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_3f37e767ec">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> 
+chmod <span style="color:#ae81ff">755</span> &lt;path_to_installer&gt;/&lt;install_file&gt;
+sudo mv &lt;path_to_installer&gt;/&lt;install_file&gt; /usr/local/bin/cloudctl
+
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
+<p>For Windows, rename the downloaded file to cloudctl and place the file on the PATH environment variable.</p>
+<p><img src="images/6-cloudpak-cli.png" alt=""></p>
+<p>5.Confirm that cloudctl is installed:</p>
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_921484194e">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_921484194e">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> 
+cloudctl --help
+
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
+<p><img src="images/7-cloudpak-cli.png" alt=""></p>
+<p>6.Log in to your cluster with the following command:</p>
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_a910d27b6f">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_a910d27b6f">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> 
+cloudctl login -a &lt;CP4MCM_Console_URL&gt;  --skip-ssl-validation
+
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
+<p>Where <code>CP4MCM_Console_URL</code> is the hostname of your CP4MCM console, something like <em><a href="https://icp-console.playgroth-mcm...appdomain.cloud">https://icp-console.playgroth-mcm...appdomain.cloud</a></em></p>
+<p>After the command, you need to enter your CP4MCM <strong>admin user</strong> (1), your admin <strong>password</strong> (32 charecters password that you defined in the CP4MCM installation) and enter <strong>default</strong> as namespace.</p>
+<p><img src="images/7_2-cluster-mgmt-img.png" alt=""></p>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<p>1.Let&rsquo;s set up the kubectl CLI. Expand Install Kubernetes CLI to download the installer by using a curl command. Copy and run the curl command for your operating system, then continue the installation procedure in the product documentation.</p>
+<p><img src="images/8-cloudpak-cli.png" alt=""></p>
+<p>2.Change the file to an executable, then move the file to a directory that is included in your PATH environment variable. See the following commands where &lt;path_to_installer&gt; is the location of the file that you downloaded and &lt;install_file&gt; is the name of the file:</p>
+<p>For Linux and macOS, run the following commands to change the permissions of the file and move the file to a directory that is included in your PATH environment variable:</p>
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_22a73cc281">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_22a73cc281">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> 
+chmod <span style="color:#ae81ff">755</span> &lt;path_to_installer&gt;/&lt;install_file&gt;
+sudo mv &lt;path_to_installer&gt;/&lt;install_file&gt; /usr/local/bin/kubectl
+
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
+<p>For Windows, rename the downloaded file to kubectl and place the file in a directory that is listed in the PATH environment variable.
+<!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
+<p>You can use the Red Hat OpenShift on IBM Cloud command line interface (CLI) plug-in (ibmcloud oc) to create and manage your OpenShift cluster infrastructure, such as creating clusters and worker nodes. Then, you can use the OpenShift CLI (oc) to manage the resources within your OpenShift cluster, such as projects, pods, and deployments.</p>
+<p>Run the command below to install the IBM Cloud CLI.</p>
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_6aa80ee3f2">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_6aa80ee3f2">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> 
+curl -sL https://ibm.biz/idt-installer | bash
+
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
+<p><img src="images/17-cloudpak-cli.png" alt=""></p>
+<p>2.To verify that the CLI and Developer Tools were installed successfully, run the help command:</p>
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_711a38c3a3">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_711a38c3a3">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> 
+ibmcloud dev help
+
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
+<p><img src="images/18-cloudpak-cli.png" alt=""></p>
+<p>3.Log in to IBM Cloud with your IBMid using the command below to guarantee that you will select your personal account (not DTE account).</p>
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_c0229968cd">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_c0229968cd">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> 
+ibmcloud login -a cloud.ibm.com -g default
+
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
+<p>Follow the instructions to log in your IBM Cloud account.</p>
+<p><em>If your IBMid has SSO implemented, use: ibmcloud login -sso.</em></p>
+<p>4.To avoid the login or SSO extra steps, you can generate an IBM Cloud API Key. Let&rsquo;s do it!  Create an IBM Cloud API Key by running the follow command:</p>
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_30c9c42f88">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_30c9c42f88">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> 
+ibmcloud iam api-key-create myibmcloudkey --file myic.key
+
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
+<p>5.Let&rsquo;s test the new key. First logout from IBM Cloud.</p>
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_3efe70ca4f">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_3efe70ca4f">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> 
+ibmcloud logout
+
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
+<p>6.Now, log in using the command below:</p>
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_2e212423f1">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_2e212423f1">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> 
+ibmcloud login --apikey @myic.key -r &lt;your_region&gt; -g default -c &lt;your_ibm_id&gt;
+
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<p>1.Now open your OpenShift console (there is a link available in email that you received from IBM Cloud, after your Environment Request).</p>
+<p>2.On Openshift Console, open the Help menu and select the Command Line Tools link.</p>
+<p><img src="images/19-cloudpak-cli.png" alt=""></p>
+<p>3.On the  OpenShift Command Line Interface section, download the OC CLI specific for your operational system.</p>
+<p><img src="images/20-cloudpak-cli.png" alt=""></p>
+<p>4.If you are using Linux or macOS, run the following commands to change and move the file.</p>
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_3f37e767ec">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_3f37e767ec">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> 
+chmod <span style="color:#ae81ff">755</span> &lt;path_to_installer&gt;/&lt;install_file&gt;
+sudo mv &lt;path_to_installer&gt;/&lt;install_file&gt; /usr/local/bin/cloudctl
+
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
+<p>5.To verify that the CLI was installed successfully, run the follow command:</p>
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_ee87db0c40">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_ee87db0c40">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> 
+oc get nodes
+
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<p>You will need Git CLI to clone some YAML files as part of the Application Management Lab. Follow the installation steps described in the page below <a href="https://git-scm.com/downloads">Git site</a> , based in your operational system.</p>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<hr>
+<h2 id="accessing-the-iks-cluster">Accessing the IKS Cluster</h2>
+<p>1.Back to the <a href="https://cloud.ibm.com/">IBM Cloud Dashboard page</a>.</p>
+<p><img src="images/25-cloudpak-cli.png" alt=""></p>
+<p>2.On IBM Cloud Dashboard, click <strong>Clusters</strong> to see your IKS Free Cluster.</p>
+<p><img src="images/27-cloudpak-cli.png" alt=""></p>
+<p>4.Click the IKS Free cluster to open the cluster view.</p>
+<p><img src="images/28-cloudpak-cli.png" alt=""></p>
+<p>5.To configure your CLI to access this cluster, you will need the cluster name, take note of it.</p>
+<p><img src="images/29-cloudpak-cli.png" alt=""></p>
+<p>6.Open a Terminal window, if you are not logged in IBM Cloud CLI, go ahead and log in using your IBM Cloud API Key (check IBM Cloud CLI section on <a href="../installcli">Install CLI Tools page</a> to know how to create an API key)</p>
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_ec08071ca2">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_ec08071ca2">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> 
+ibmcloud login --apikey @myic.key -r us-south -g default -c &lt;your_ibm_id&gt;
+
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
+<p>7.Set the Kubernetes context to your cluster for this terminal session.</p>
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_2b0082063f">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_2b0082063f">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> 
+ibmcloud ks cluster config --cluster mycluster-free
+
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
+<p><img src="images/30-cloudpak-cli.png" alt=""></p>
+<p>8.Check the Kubernetes context available, running the command below:</p>
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_d3eda42647">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_d3eda42647">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> 
+kubectl config get-contexts
+
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
+<p>You should have a mycluster-free that point to your IKS cluster.</p>
+<p><img src="images/39-cloudpak-cli.png" alt=""></p>
+<p>Next step, you will rename this context to simplify how you interact with your IKS server during our lab. Copy the full name of your mycluster-free context.</p>
+<p>9.Rename your context, running the command below:</p>
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_baca992b3e">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_baca992b3e">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> 
+kubectl config rename-context &lt;mycluster-free/full_name&gt; iks-free-cluster
+
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
+<p>10.Now, let&rsquo;s set the current Kubernetes context</p>
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_21b14866b3">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_21b14866b3">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> 
+kubectl config use-context iks-free-cluster
+
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
+<blockquote>
+<p>Note: Anytime that you want to connect to your IKS Free cluster, you just need to run the command above.</p>
+</blockquote>
+<p>11.Let&rsquo;s test the new context configuration. Run the command below to get the cluster nodes.</p>
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_f1300d3c0c">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_f1300d3c0c">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> 
+kubectl get nodes
+
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
+<p><img src="images/31-cloudpak-cli.png" alt=""></p>
+<p>Great, your IKS cluster is configured and ready to use.</p>
+
+
+    
+
+
+                    
+                    <div class="row"><div class="position-relative mx-auto col-lg-9">
+                          <div class="bg-primary overflow-hidden p-3 mt-5 shadow">
+
+
+    <div class="d-flex justify-content-center"><a class="p-1 ml-3 d-inline-block text-white text-right" href="/k8s_training_web/workshop/preparation/" title="Environment Preparation">Environment Preparation<i class="fas fa-chevron-right p-1"></i></a>
+    </div>
+</div>
+
+
+                        </div></div> 
+
+                </div>
+
+            </div> 
+
+        </div> 
+<script src="https://niklaushirt.github.io/k8s_training_web/lib/jquery.min.js"></script> 
+<script src="https://niklaushirt.github.io/k8s_training_web/lib/popper.min.js"></script> 
+
+<script src="https://niklaushirt.github.io/k8s_training_web/js/bootstrap.min.js"></script> 
+
+
+<script type="text/javascript" src="/k8s_training_web/plugins/lunr.min.js"></script>
+<script type="text/javascript" src="/k8s_training_web/plugins/auto-complete.js"></script>
+<link href="/k8s_training_web/plugins/auto-complete.css" rel="stylesheet">
+<script type="text/javascript">
+  
+      var baseurl = "https:\/\/niklaushirt.github.io\/k8s_training_web\/";
+  
+</script>
+<script type="text/javascript" src="/k8s_training_web/plugins/search.js"></script>
+
+
+<script type="text/javascript" src="/k8s_training_web/plugins/clipboard.js"></script>
+<script>
+  new ClipboardJS('.btn');
+</script>
+</body>
+</html>

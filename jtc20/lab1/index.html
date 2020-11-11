@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html><head>
+
+    <meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="canonical" href="https://niklaushirt.github.io/k8s_training_web/jtc20/lab1/">
+
+    <title>
+        
+        Lab 1: Import a cluster | Kubernetes Training
+        
+    </title>
+
+    
+    <link href="https://niklaushirt.github.io/k8s_training_web/css/fontawesome.min.css" rel="stylesheet">
+
+    
+    <link rel="stylesheet" href="https://niklaushirt.github.io/k8s_training_web/css/ace.min.css">
+
+    
+    
+        
+    
+
+</head>
+<body><nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow sticky-top" id="navbarMain">
+    <div class="container">
+        <div>
+            <a class="navbar-brand" href="/k8s_training_web">
+                
+                Kubernetes Training
+            </a>
+        </div>
+        
+            <button class="navbar-toggler navbar-toggler-right collapsed" type="button" data-toggle="collapse" data-target="#navbarMainCollapse" aria-controls="navbarMainCollapse" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarMainCollapse">
+              <ul class="navbar-nav ml-auto">
+                            <li class="nav-item">
+                                <a class="nav-link" href="https://github.com/niklaushirt/training" >
+                                  <i class='fab fa-github'></i>
+                                </a>
+                            </li>
+              </ul>
+            </div>
+    </div>
+</nav>
+<div class="container-fluid">
+            <div class="row">
+
+                <div class="docs-sidenav order-0 col-12 col-md-3 col-lg-2 col-xl-2 position-sticky border-right"><nav class="navbar navbar-expand-md navbar-light pl-0">
+    <button class="navbar-toggler navbar-toggler-right collapsed" type="button" data-toggle="collapse" data-target="#sidenav-left-collapse" aria-controls="sidenav-left-collapse" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+     <div class="collapse navbar-collapse align-items-start flex-column" id="sidenav-left-collapse">
+            <form class="form-inline my-2 my-lg-0 searchbox">
+                <input class="form-control mr-sm-2 w-100" data-search-input id="search-by" type="text" placeholder="Search">
+            </form>
+         <ul class="navbar-nav flex-column pt-3">
+    <li data-nav-id="/k8s_training_web/jtc00/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/k8s_training_web/jtc00/"><h6>Introduction</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/k8s_training_web/jtc00/lab1/" class="nav-item my-1">
+                
+                 <a href="/k8s_training_web/jtc00/lab1/" class="nav-link p-0">
+                    Getting set up
+                </a>
+        </li>
+        <li data-nav-id="/k8s_training_web/jtc00/lab2/" class="nav-item my-1">
+                
+                 <a href="/k8s_training_web/jtc00/lab2/" class="nav-link p-0">
+                    Lab Information and Semantics
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/k8s_training_web/jtc01/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/k8s_training_web/jtc01/"><h6>JTC01 Docker</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/k8s_training_web/jtc01/lab1/" class="nav-item my-1">
+                
+                 <a href="/k8s_training_web/jtc01/lab1/" class="nav-link p-0">
+                    Lab 1: Get to know Docker
+                </a>
+        </li>
+        <li data-nav-id="/k8s_training_web/jtc01/lab2/" class="nav-item my-1">
+                
+                 <a href="/k8s_training_web/jtc01/lab2/" class="nav-link p-0">
+                    Lab 2: Docker Basics
+                </a>
+        </li>
+        <li data-nav-id="/k8s_training_web/jtc01/lab3/" class="nav-item my-1">
+                
+                 <a href="/k8s_training_web/jtc01/lab3/" class="nav-link p-0">
+                    Lab 3: Docker Internals
+                </a>
+        </li>
+        <li data-nav-id="/k8s_training_web/jtc01/lab4/" class="nav-item my-1">
+                
+                 <a href="/k8s_training_web/jtc01/lab4/" class="nav-link p-0">
+                    Lab 4: Cleanup
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/k8s_training_web/jtc02/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/k8s_training_web/jtc02/"><h6>JTC02 Kubernetes Labs</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/k8s_training_web/jtc02/lab1/" class="nav-item my-1">
+                
+                 <a href="/k8s_training_web/jtc02/lab1/" class="nav-link p-0">
+                    Lab 1: Get to know Kubernetes
+                </a>
+        </li>
+        <li data-nav-id="/k8s_training_web/jtc02/lab2/" class="nav-item my-1">
+                
+                 <a href="/k8s_training_web/jtc02/lab2/" class="nav-link p-0">
+                    Lab 2: Deploy your first Pod
+                </a>
+        </li>
+        <li data-nav-id="/k8s_training_web/jtc02/lab3/" class="nav-item my-1">
+                
+                 <a href="/k8s_training_web/jtc02/lab3/" class="nav-link p-0">
+                    Lab 3: Deploy your first application
+                </a>
+        </li>
+        <li data-nav-id="/k8s_training_web/jtc02/lab4/" class="nav-item my-1">
+                
+                 <a href="/k8s_training_web/jtc02/lab4/" class="nav-link p-0">
+                    Lab 4: Scale and Update Deployments
+                </a>
+        </li>
+        <li data-nav-id="/k8s_training_web/jtc02/lab5/" class="nav-item my-1">
+                
+                 <a href="/k8s_training_web/jtc02/lab5/" class="nav-link p-0">
+                    Lab 5: Stateful Deployments
+                </a>
+        </li>
+        <li data-nav-id="/k8s_training_web/jtc02/lab6/" class="nav-item my-1">
+                
+                 <a href="/k8s_training_web/jtc02/lab6/" class="nav-link p-0">
+                    Lab 6: Cleanup
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/k8s_training_web/jtc10/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/k8s_training_web/jtc10/"><h6>JTC10 Istio</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/k8s_training_web/jtc10/lab1/" class="nav-item my-1">
+                
+                 <a href="/k8s_training_web/jtc10/lab1/" class="nav-link p-0">
+                    Lab 1: Get to know ISTIO
+                </a>
+        </li>
+        <li data-nav-id="/k8s_training_web/jtc10/lab2/" class="nav-item my-1">
+                
+                 <a href="/k8s_training_web/jtc10/lab2/" class="nav-link p-0">
+                    Lab 2: Installing Istio 
+                </a>
+        </li>
+        <li data-nav-id="/k8s_training_web/jtc10/lab3/" class="nav-item my-1">
+                
+                 <a href="/k8s_training_web/jtc10/lab3/" class="nav-link p-0">
+                    Lab 3: Deploy BookInfo application 
+                </a>
+        </li>
+        <li data-nav-id="/k8s_training_web/jtc10/lab4/" class="nav-item my-1">
+                
+                 <a href="/k8s_training_web/jtc10/lab4/" class="nav-link p-0">
+                    Lab 4: Monitoring with Kiali
+                </a>
+        </li>
+        <li data-nav-id="/k8s_training_web/jtc10/lab5/" class="nav-item my-1">
+                
+                 <a href="/k8s_training_web/jtc10/lab5/" class="nav-link p-0">
+                    Lab 5: Traffic flow management
+                </a>
+        </li>
+        <li data-nav-id="/k8s_training_web/jtc10/lab6/" class="nav-item my-1">
+                
+                 <a href="/k8s_training_web/jtc10/lab6/" class="nav-link p-0">
+                    Lab 6: Telemetry data
+                </a>
+        </li>
+        <li data-nav-id="/k8s_training_web/jtc10/lab7/" class="nav-item my-1">
+                
+                 <a href="/k8s_training_web/jtc10/lab7/" class="nav-link p-0">
+                    Lab 7: End-user authentication
+                </a>
+        </li>
+        <li data-nav-id="/k8s_training_web/jtc10/lab8/" class="nav-item my-1">
+                
+                 <a href="/k8s_training_web/jtc10/lab8/" class="nav-link p-0">
+                    Lab 8: Traffic Mirroring
+                </a>
+        </li>
+        <li data-nav-id="/k8s_training_web/jtc10/lab9/" class="nav-item my-1">
+                
+                 <a href="/k8s_training_web/jtc10/lab9/" class="nav-link p-0">
+                    Lab 9: Fault Injection
+                </a>
+        </li>
+        <li data-nav-id="/k8s_training_web/jtc10/lab10/" class="nav-item my-1">
+                
+                 <a href="/k8s_training_web/jtc10/lab10/" class="nav-link p-0">
+                    Lab 10: Cleanup
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/k8s_training_web/jtc14/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/k8s_training_web/jtc14/"><h6>JTC14 Kubernetes Ansible Operators</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/k8s_training_web/jtc14/lab0/" class="nav-item my-1">
+                
+                 <a href="/k8s_training_web/jtc14/lab0/" class="nav-link p-0">
+                    Lab 0: Prepare the Lab environment
+                </a>
+        </li>
+        <li data-nav-id="/k8s_training_web/jtc14/lab1/" class="nav-item my-1">
+                
+                 <a href="/k8s_training_web/jtc14/lab1/" class="nav-link p-0">
+                    Lab 1: Kubernetes Operators
+                </a>
+        </li>
+        <li data-nav-id="/k8s_training_web/jtc14/lab2/" class="nav-item my-1">
+                
+                 <a href="/k8s_training_web/jtc14/lab2/" class="nav-link p-0">
+                    Lab 2: Create the Lab Operator Project
+                </a>
+        </li>
+        <li data-nav-id="/k8s_training_web/jtc14/lab3/" class="nav-item my-1">
+                
+                 <a href="/k8s_training_web/jtc14/lab3/" class="nav-link p-0">
+                    Lab 3: Deploy the Custom Resource
+                </a>
+        </li>
+        <li data-nav-id="/k8s_training_web/jtc14/lab4/" class="nav-item my-1">
+                
+                 <a href="/k8s_training_web/jtc14/lab4/" class="nav-link p-0">
+                    Lab 4: Cleanup
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/k8s_training_web/jtc16/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/k8s_training_web/jtc16/"><h6>JTC16 Kubernetes Security Labs</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/k8s_training_web/jtc16/lab1/" class="nav-item my-1">
+                
+                 <a href="/k8s_training_web/jtc16/lab1/" class="nav-link p-0">
+                    Lab 1: Network Policies
+                </a>
+        </li>
+        <li data-nav-id="/k8s_training_web/jtc16/lab2/" class="nav-item my-1">
+                
+                 <a href="/k8s_training_web/jtc16/lab2/" class="nav-link p-0">
+                    Lab 2: Security Tooling
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/k8s_training_web/jtc17/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/k8s_training_web/jtc17/"><h6>JTC17 Kubernetes Advanced Security</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/k8s_training_web/jtc17/lab0/" class="nav-item my-1">
+                
+                 <a href="/k8s_training_web/jtc17/lab0/" class="nav-link p-0">
+                    Lab 0: Preparation
+                </a>
+        </li>
+        <li data-nav-id="/k8s_training_web/jtc17/lab1/" class="nav-item my-1">
+                
+                 <a href="/k8s_training_web/jtc17/lab1/" class="nav-link p-0">
+                    Lab 1: RBAC - Users, Roles and RoleBindings
+                </a>
+        </li>
+        <li data-nav-id="/k8s_training_web/jtc17/lab2/" class="nav-item my-1">
+                
+                 <a href="/k8s_training_web/jtc17/lab2/" class="nav-link p-0">
+                    Lab 2: Service Accounts
+                </a>
+        </li>
+        <li data-nav-id="/k8s_training_web/jtc17/lab3/" class="nav-item my-1">
+                
+                 <a href="/k8s_training_web/jtc17/lab3/" class="nav-link p-0">
+                    Lab 3: RBAC Tooling
+                </a>
+        </li>
+        <li data-nav-id="/k8s_training_web/jtc17/lab4/" class="nav-item my-1">
+                
+                 <a href="/k8s_training_web/jtc17/lab4/" class="nav-link p-0">
+                    Lab 4: Image Scanning
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/k8s_training_web/jtc20/" class="nav-item my-1 parent haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/k8s_training_web/jtc20/"><h6>JTC20 IBM CloudPak for Multicloud Management</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/k8s_training_web/jtc20/lab0/" class="nav-item my-1">
+                
+                 <a href="/k8s_training_web/jtc20/lab0/" class="nav-link p-0">
+                    Lab 0: Preparation
+                </a>
+        </li>
+        <li data-nav-id="/k8s_training_web/jtc20/lab1/" class="nav-item my-1 active">
+                
+                 <a href="/k8s_training_web/jtc20/lab1/" class="nav-link p-0">
+                    Lab 1: Import a cluster
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/k8s_training_web/workshop/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/k8s_training_web/workshop/"><h6>Delivering a Workshop - Overview</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/k8s_training_web/workshop/prereq/" class="nav-item my-1">
+                
+                 <a href="/k8s_training_web/workshop/prereq/" class="nav-link p-0">
+                    Students Prerequisite
+                </a>
+        </li>
+        <li data-nav-id="/k8s_training_web/workshop/preparation/" class="nav-item my-1">
+                
+                 <a href="/k8s_training_web/workshop/preparation/" class="nav-link p-0">
+                    Environment Preparation
+                </a>
+        </li>
+        <li data-nav-id="/k8s_training_web/workshop/clustermgmt/" class="nav-item my-1">
+                
+                 <a href="/k8s_training_web/workshop/clustermgmt/" class="nav-link p-0">
+                    WiaB - Multicluster Management
+                </a>
+        </li>
+        <li data-nav-id="/k8s_training_web/workshop/appmgmt/" class="nav-item my-1">
+                
+                 <a href="/k8s_training_web/workshop/appmgmt/" class="nav-link p-0">
+                    WiaB Lab - Application Management
+                </a>
+        </li>
+        <li data-nav-id="/k8s_training_web/workshop/" class="nav-item my-1">
+                
+                 <a href="/k8s_training_web/workshop/" class="nav-link p-0">
+                    Delivering a Workshop - Overview
+                </a>
+        </li>
+        </ul>
+    </li>
+        </ul>
+    </div>
+</nav>
+
+
+</div>
+                <div class="docs-toc large order-lg-2 order-md-0 order-xs-1 col-12 col-lg-2 col-xl-2 position-sticky border-left"><div class="docs-toc">
+	<nav id="TableOfContents"></nav>
+</div>
+</div>
+                <div class="main col-12 order-1 col-md-9 col-lg-10 col-xl-8 py-3">
+                
+
+<h1>Lab 1: Import a cluster</h1>
+
+<h1 id="ibm-cloud-pak-for-multicloud-manager-labs">IBM Cloud Pak for Multicloud Manager Labs</h1>
+<h1 id="lab-1-import-a-cluster-in-the-hub">Lab #1: Import a cluster in the Hub</h1>
+<p><img src="../../../images/mcm/image-20201008083020566-2138620.png" alt="image-20201008083020566"></p>
+<p>Philippe Thomas - Novembre 2020</p>
+<h1 id="introduction">Introduction</h1>
+<p>During this lab, we are going to manipulate some basic aspects of the <strong>console</strong> of IBM Cloud Pak for Multicloud Manager (CP4M for short in this document) and especially the <strong>import</strong> feature to get access to some managed clusters.</p>
+<h1 id="task-1---access-cp4m-console">Task 1 - Access CP4M console</h1>
+<p>Be sure to use the latest <strong>Firefox</strong> internet browser.</p>
+<p>To get access the CP4M console, the instructor will give you a URL similar to the one below:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-http" data-lang="http"><span style="color:#960050;background-color:#1e0010">https://cp-console.nicebe-ba36b2ed0b6b09dbc627b56ceec2f2a4-0000.eu-de.containers.appdomain.cloud
+</span></code></pre></div><p>The Credentials are <strong>admin</strong> and a password given by the instructor.</p>
+<p>Then you should see the following sign on page:</p>
+<p><img src="../../../images/mcm/image-20201008083929253-2139169.png" alt="image-20201008083929253"></p>
+<p>For this exercise, we want to get access to the <strong>Cluster Administrator</strong> role, so click on the Default authentication link in the page:</p>
+<p><img src="../../../images/mcm/image-20201008084141669-2139301.png" alt="image-20201008084141669"></p>
+<p>Then type <strong>admin</strong> and the  password from the instructor.</p>
+<p><img src="../../../images/mcm/image-20201008084539168-2139539.png" alt="image-20201008084539168"></p>
+<p>Click <strong>Log in</strong> and here it is : the welcome page should appear:</p>
+<p><img src="../../../images/mcm/image-20201008084642985-2139603.png" alt="image-20201008084642985"></p>
+<p>From this page, you can navigate to the different parts of the <strong>documentation</strong>: for instance, click on the Automate cloud provisioning documentation blue link:</p>
+<p><img src="../../../images/mcm/image-20201008085010738-2139810.png" alt="image-20201008085010738"></p>
+<p>You will get access to the documentation:</p>
+<p><img src="../../../images/mcm/image-20201008085215557-2139935.png" alt="image-20201008085215557"></p>
+<p>Come back to the welcome page and now look at the bottom of the page:</p>
+<p><img src="../../../images/mcm/image-20201008085319061-2139999.png" alt="image-20201008085319061"></p>
+<p>Here is the place where you can download the CLI tools:</p>
+<p><img src="../../../images/mcm/image-20201008085424169-2140064.png" alt="image-20201008085424169"></p>
+<p>You can see some of the commands that are necessary for your day to day management activity:</p>
+<p><img src="../../../images/mcm/image-20201008085719931-2140239.png" alt="image-20201008085719931"></p>
+<p>The IBM Cloud Pak CLI is one of the most important command line tool that you can use to control a Cloud Pak : <strong>cloudctl</strong></p>
+<p>To use the command line, you must access a RHEL VM where we already installed the several commands.</p>
+<p>Use Putty or ssh to get access to that VM (please specify the <strong>IP and password</strong> given by the instructor)</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ssh root@&lt;IP&gt;
+</code></pre></div><p>Check that you have cloudctl already installed:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">cloudctl
+</code></pre></div><p>Results:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">cloudctl
+NAME:
+   cloudctl - A command line tool to interact with IBM Cloud Platform Common Services and IBM Cloud Private
+
+USAGE:
+<span style="color:#f92672">[</span>environment variables<span style="color:#f92672">]</span> cloudctl <span style="color:#f92672">[</span>global options<span style="color:#f92672">]</span> command <span style="color:#f92672">[</span>arguments...<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>command options<span style="color:#f92672">]</span>
+
+VERSION:
+   v3.4.2-1808+e5ed7d09f67f2cc044e15edcd7a92f79bbb996e3
+
+COMMANDS:
+   api          View the API endpoint and API version <span style="color:#66d9ef">for</span> the service.
+   <span style="color:#66d9ef">case</span>         <span style="color:#f92672">[</span>Cloud Platform Common Services only<span style="color:#f92672">]</span> Manage CASE.
+   catalog      Manage catalog.
+   cm           Manage cluster.
+   completion   Generate an auto-completion script <span style="color:#66d9ef">for</span> the specified shell <span style="color:#f92672">(</span>bash or zsh<span style="color:#f92672">)</span>.
+   config       Write default values to the configuration.
+   helm-init    Prints the configuration of the HELM_HOST setting <span style="color:#66d9ef">for</span> Helm.
+   iam          Manage identities and access to resources.
+   login        Log user in.
+   logout       Log user out.
+   metering     Download metering reports.
+   plugin       Manage plugins.
+   pm           Manage passwords.
+   target       Set or view the targeted namespace.
+   tokens       Display the OAuth tokens <span style="color:#66d9ef">for</span> the current session. Run <span style="color:#e6db74">`</span>cloudctl login<span style="color:#e6db74">`</span> to retrieve the tokens.
+   version      Check CLI and API version compatibility.
+   help         
+   
+Enter <span style="color:#e6db74">&#39;cloudctl help [command]&#39;</span> <span style="color:#66d9ef">for</span> more information about a command.
+
+ENVIRONMENT VARIABLES:
+   CLOUDCTL_COLOR<span style="color:#f92672">=</span>false                     Do not colorize output
+   CLOUDCTL_HOME<span style="color:#f92672">=</span>path/to/dir                Path to config directory
+   CLOUDCTL_TRACE<span style="color:#f92672">=</span>true                      Print API request diagnostics to stdout
+   CLOUDCTL_TRACE<span style="color:#f92672">=</span>path/to/trace.log         Append API request diagnostics to a log file
+
+GLOBAL OPTIONS:
+   --help, -h                         Show help
+
+</code></pre></div><p>This command is very usefull to control the security aspects, the catalog, the clusters, helm init variables, metering and finally password and tokens in CP4M.</p>
+<p>If you want to get access to the OpenShift Console, go to <a href="https://cloud.ibm.com">https://cloud.ibm.com</a></p>
+<p>Use the <strong>credentials</strong> given by the instructor:</p>
+<p><img src="../../../images/mcm/image-20201103194840604-4429320.png" alt="image-20201103194840604"></p>
+<p>Once connected, be sure to use the KEVIN account on the top right side:</p>
+<p><img src="../../../images/mcm/image-20201103195054416-4429454.png" alt="image-20201103195054416"></p>
+<p>Then Select the unique cluster:</p>
+<p><img src="../../../images/mcm/image-20201103195132004-4429492.png" alt="image-20201103195132004"></p>
+<p>Then select again the openshift cluster:</p>
+<p><img src="../../../images/mcm/image-20201103195226644-4429546.png" alt="image-20201103195226644"></p>
+<p>Then select the blue button :</p>
+<p><img src="../../../images/mcm/image-20201103195343141-4429623.png" alt="image-20201103195343141"></p>
+<p>At this point, you should see the OpenShift Console :</p>
+<p><img src="../../../images/mcm/image-20201103195447356-4429687.png" alt="image-20201103195447356"></p>
+<p>This console is the Cluster HUB OpenShift Console.</p>
+<h1 id="task-2---navigate-in-the-cp4m-console">Task 2 - Navigate in the CP4M console</h1>
+<p>Go back to the console:</p>
+<p><img src="../../../images/mcm/image-20201008093935282-2142775.png" alt="image-20201008093935282"></p>
+<p>In the top right corner, you can see your identity and the default account.</p>
+<p><img src="../../../images/mcm/image-20201008094027328-2142827.png" alt="image-20201008094027328"></p>
+<blockquote>
+<p>You can create several accounts and several users but you need to connect to a LDAP</p>
+</blockquote>
+<p>Then you can navigate to the exclamation mark to look at different options to help you to implement the CP4M solutions :</p>
+<p><img src="../../../images/mcm/image-20201008094342814-2143022.png" alt="image-20201008094342814"></p>
+<p>For example, for support, you can also use Slack.</p>
+<p>Now you can also go to the Web Terminal if you don&rsquo;t have access to some CLI environment:</p>
+<p><img src="../../../images/mcm/image-20201008094708143-2143228.png" alt="image-20201008094708143"></p>
+<p>Click on <strong>getting started</strong> link:</p>
+<p><img src="../../../images/mcm/image-20201008094806927-2143286.png" alt="image-20201008094806927"></p>
+<p>Results:</p>
+<p><img src="../../../images/mcm/image-20201008094913338-2143353.png" alt="image-20201008094913338"></p>
+<p>You can directly use the following commands <strong>without sign on</strong>:</p>
+<ul>
+<li>cloudctl</li>
+<li>kubectl</li>
+<li>helm</li>
+<li>istioctl</li>
+<li>oc</li>
+</ul>
+<p>For example:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">oc get nodes
+</code></pre></div><p>Results:</p>
+<p><img src="../../../images/mcm/image-20201008095415547-2143655.png" alt="image-20201008095415547"></p>
+<p>Part of the magic, you can click on the resulting table to see a specific item. For instance, click on the IP address of a specific node:</p>
+<p><img src="../../../images/mcm/image-20201008095728833-2143848.png" alt="image-20201008095728833"></p>
+<p>On the the right part of the screen (in black), you should see some information about this node.</p>
+<p>The second magic aspect of the back side, this is also clickable !</p>
+<p>You can click on different tabs (raw and events in this case) and you can click inside the display.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">oc get pods
+</code></pre></div><p>Results</p>
+<p><img src="../../../images/mcm/image-20201008100258359-2144178.png" alt="image-20201008100258359"></p>
+<p>Click on Ansible Tower POD and then click on Containers tab:</p>
+<p><img src="../../../images/mcm/image-20201008100349447-2144229.png" alt="image-20201008100349447"></p>
+<p>Then click on some containers to look at their logs:</p>
+<p><img src="../../../images/mcm/image-20201008100529831-2144329.png" alt="image-20201008100529831"></p>
+<p>Let&rsquo;s move on the next step and look at the creation of resources in your HUB cluster:</p>
+<p><img src="../../../images/mcm/image-20201008100829216-2144509.png" alt="image-20201008100829216"></p>
+<p>You can just cut and past your YAML content directly in here:</p>
+<p><img src="../../../images/mcm/image-20201008100933225-2144573.png" alt="image-20201008100933225"></p>
+<p>Now let&rsquo;s go to the catalog:</p>
+<p><img src="../../../images/mcm/image-20201008101953073-2145193.png" alt="image-20201008101953073"></p>
+<p>Results:</p>
+<p><img src="../../../images/mcm/image-20201008102016349-2145216.png" alt="image-20201008102016349"></p>
+<p>In the filtering tab, you can select what you want to see:</p>
+<p><img src="../../../images/mcm/image-20201008102142248-2145302.png" alt="image-20201008102142248"></p>
+<p>or</p>
+<p><img src="../../../images/mcm/image-20201008102249994-2145370.png" alt="image-20201008102249994"></p>
+<p>Most of the applications are <strong>helm charts</strong>: for example, find all the node.js applications available in the catalog:</p>
+<p><img src="../../../images/mcm/image-20201008102507808-2145507.png" alt="image-20201008102507808"></p>
+<p>Click on the ibm-nodes-express tile:</p>
+<p><img src="../../../images/mcm/image-20201008102545573-2145545.png" alt="image-20201008102545573"></p>
+<p>You can the detailled information about this helm chart and you can also configure and launch this application:</p>
+<p><img src="../../../images/mcm/image-20201008102731165-2145651.png" alt="image-20201008102731165"></p>
+<p>Click on configuration to see the parameters:</p>
+<p><img src="../../../images/mcm/image-20201008102808641-2145688.png" alt="image-20201008102808641"></p>
+<p>This application can be launched on <strong>any cluster</strong> that is managed by CP4M cluster HUB.</p>
+<p>Finally, you can navigate in the different item and capabilities on the <strong>humberger menu</strong> (referenced as the <strong>MENU</strong> later on in this document):</p>
+<p><img src="../../../images/mcm/image-20201008103146378-2145906.png" alt="image-20201008103146378"></p>
+<p>Then :</p>
+<p><img src="../../../images/mcm/image-20201103195807106-4429887.png" alt="image-20201103195807106"></p>
+<h1 id="task-3---import-a-new-cluster">Task 3 - Import a new cluster</h1>
+<p>From the <strong>menu</strong>, Click on <strong>Automate Infrastructure</strong>, and the <strong>Clusters</strong>:</p>
+<p><img src="../../../images/mcm/image-20201103200141210-4430101.png" alt="image-20201103200141210"></p>
+<p>At this point, you should have only one cluster: the <strong>local cluster</strong> (this is the HUB cluster) or none if you didn&rsquo;t import any cluster yet:</p>
+<p><img src="../../../images/mcm/image-20201008104050521-2146450.png" alt="image-20201008104050521"></p>
+<p>The local cluster is the OCP cluster where you installed CP4M main features.</p>
+<p>Normally it should <strong>not</strong> be used to hold some applications : the best practice is to use remode clusters to deploy your applications. However for the purpose of this lab, we are going to deploy some applications on it.</p>
+<p>To import a new (remote) cluster, click on <strong>Add Cluster button</strong>:</p>
+<p><img src="../../../images/mcm/image-20201008123655964-2153416.png" alt="image-20201008123655964"></p>
+<p>Click <strong>Import</strong>  and fill the name with <strong>cluster-niceremotecluster<!-- raw HTML omitted --></strong> where <strong>xx</strong> is the <strong>number assigned</strong> to you by the instructor:</p>
+<p>As an example:</p>
+<p><img src="../../../images/mcm/image-20201008123917545-2153557.png" alt="image-20201008123917545"></p>
+<p>Click on <strong>Generate Command</strong> button:</p>
+<p><img src="../../../images/mcm/image-20201008124144239-2153704.png" alt="image-20201008124144239"></p>
+<p>A curl command has been generated for you.</p>
+<p>Clcick on the copy button <img src="../../../images/mcm/image-20201008124248960-2153769.png" alt="image-20201008124248960"></p>
+<p>Go to you terminal window (the one that you already open in task 1). If not done, login with ssh or putty to the remote cluster :</p>
+<blockquote>
+<p>You need the IP address and the password that will be given by the instructor</p>
+</blockquote>
+<ul>
+<li>IP address of the remote cluster master</li>
+<li>Password of this VM</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ssh root@161.156.96.200
+root@161.156.96.200<span style="color:#960050;background-color:#1e0010">&#39;</span>s password: 
+Last failed login: Thu Oct  <span style="color:#ae81ff">8</span> 06:24:21 CDT <span style="color:#ae81ff">2020</span> from lfbn-nic-1-189-121.w2-15.abo.wanadoo.fr on ssh:notty
+There were <span style="color:#ae81ff">2</span> failed login attempts since the last successful login.
+Last login: Thu Oct  <span style="color:#ae81ff">8</span> 06:10:07 <span style="color:#ae81ff">2020</span> from niceremotecluster01.ibm.ws
+<span style="color:#f92672">[</span>root@niceremotecluster01 ~<span style="color:#f92672">]</span># 
+</code></pre></div><p>Once you are connected, check your remote cluster is up and running:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">
+kubectl get nodes
+NAME             STATUS   ROLES                                 AGE   VERSION
+161.156.96.200   Ready    etcd,management,master,proxy,worker   68m   v1.13.9+icp
+</code></pre></div><p>This remote cluster is a All in One Cluster (only one VM running master and worker).</p>
+<p>If you are not connected, use <code>./connect.sh</code>to re-connect to the local cluster.</p>
+<p>Now paste the curl command that you got from the IMPORT process (as an example):</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">curl -k -H <span style="color:#e6db74">&#34;Authorization: Bearer b18374512ef1d4402f27b9818e8c31ffdb7916bd6533abbeced1eca5974c0e234f947888c6326ff3ae5c7308b7461136a2aeb57918f9099517cbd3ab3e37dbd6edb6cd9c84cdc87fbea61566d436febfc9c036fc2eee147ac35eae9f69bc2827ea01391c1522d6733eaeee277af55e19b911f61e84113f1055f76f179d7c33717c0cb2a3e9019346f0b124bf4722d6d25a0370505dc11ade0ea1100a28ce33d1ba8fd2632fe77682c1a5f9a742f15785c0a6694e9af31468aaf14d3008892995e803d0f54bca7bad214bd2d762892242a7de279940c00334ca9b9fe08f85af481135a4f3f009cccb1ed6798a61daa6384633c82c1f3745ebe1dba2ba1beb5c0412d40619a2035c3e4935c3662b80205447a35d5f9be1af88c68370eaf04fbfd7fdc377decc263897bb2f69c7727e8d006f2576904aa5e81087d6f801d7d8fa54397823337ef6544f62c4c36bea4e94ee6d557e228f15390e7556c8f7df48bbbd6752a49a92ee658cfe998b4571176f42e76068235b691ea92dab6df79ad397f46704a14ac3007788ee945376920ba51eb6d03363f82c67be0b04522ab0889400ecbc62bffa8295c3851ce11361ede9de5ca40ab27acb80ad8d61804b053703552f8048b98ce06d3361c536a81bbca84598eadbdca318f3282c6d7cfe0c35c2cfd9b64a7edf9a6f18f0ac1db59917eb22b004ff006644241814584ae4623b2cfe&#34;</span> https://cp-console.niceaz-ba36b2ed0b6b09dbc627b56ceec2f2a4-0000.ams03.containers.appdomain.cloud:443/rcm/v1/clusters/cluster-niceremotecluster01/cluster-niceremotecluster01/import.yaml | kubectl apply -f -
+</code></pre></div><p>Results:</p>
+<pre><code>  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100  5825    0  5825    0     0  14652      0 --:--:-- --:--:-- --:--:-- 14709
+customresourcedefinition.apiextensions.k8s.io/endpoints.multicloud.ibm.com created
+Warning: kubectl apply should be used on resource created by either kubectl create --save-config or kubectl apply
+namespace/multicluster-endpoint configured
+secret/klusterlet-bootstrap created
+serviceaccount/ibm-multicluster-endpoint-operator created
+clusterrolebinding.rbac.authorization.k8s.io/ibm-multicluster-endpoint-operator created
+deployment.apps/ibm-multicluster-endpoint-operator created
+endpoint.multicloud.ibm.com/endpoint created
+[root@niceremotecluster01 ~]# 
+
+</code></pre><p>Check carefully the result (if any error, then retry the curl command)</p>
+<p>Check the pods with the command:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl get pods -n multicluster-endpoint
+</code></pre></div><p>Results after 3 minutes:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># kubectl get pods -n multicluster-endpoint</span>
+NAME                                                  READY   STATUS    RESTARTS   AGE
+endpoint-appmgr-56c98d5fc8-dmvrz                      2/2     Running   <span style="color:#ae81ff">0</span>          2m
+endpoint-component-operator-7766bb57bd-2xtmk          1/1     Running   <span style="color:#ae81ff">0</span>          2m39s
+endpoint-connmgr-f49784c8c-9wfnx                      1/1     Running   <span style="color:#ae81ff">0</span>          2m10s
+endpoint-policyctrl-bdc55d96-659d4                    2/2     Running   <span style="color:#ae81ff">0</span>          2m
+endpoint-search-76c86558f-s5h2r                       1/1     Running   <span style="color:#ae81ff">0</span>          2m
+endpoint-svcreg-698d8b46c4-xrmvj                      1/1     Running   <span style="color:#ae81ff">0</span>          2m
+endpoint-svcreg-coredns-55987575fb-nmpcx              1/1     Running   <span style="color:#ae81ff">0</span>          2m10s
+endpoint-workmgr-7649d857cb-hk7rx                     1/1     Running   <span style="color:#ae81ff">0</span>          2m
+ibm-multicluster-endpoint-operator-7bbcb6dcd9-bqn6d   1/1     Running   <span style="color:#ae81ff">0</span>          3m
+</code></pre></div><p>Now go back to the CP4M console and click on <strong>Clusters</strong>: you should see your new remote cluster in the list.</p>
+<p><img src="../../../images/mcm/image-20201008134245363-2157365.png" alt="image-20201008134245363"></p>
+<p>You notice that your remote cluster  is added to the list.</p>
+<p>Now visualize your clusters in the <strong>overview</strong>:</p>
+<p><img src="../../../images/mcm/image-20201008135201521-2157921.png" alt="image-20201008135201521"></p>
+<p><img src="../../../images/mcm/image-20201008135332657-2158012.png" alt="image-20201008135332657"></p>
+<h1 id="task-4---deploy-an-application">Task 4 - Deploy an application</h1>
+<p>Open the <strong>Menu</strong> (1) and click on <strong>Administer</strong> (2) <strong>&gt; Helm repository</strong> (3).</p>
+<p><img src="../../../images/mcm/image-20201008135742665-2158262.png" alt="image-20201008135742665"></p>
+<p>On the Helm Repositories page, click <strong>Add Repository</strong> to register a new Helm Repository.</p>
+<p><img src="../../../images/mcm/image-20201008135915970-2158356.png" alt="image-20201008135915970"></p>
+<p>Type <strong>coc-charts</strong> (1) as repository Name, and enter <strong><a href="https://ibm-icp-coc.github.io/charts/repo/stable">https://ibm-icp-coc.github.io/charts/repo/stable</a></strong> as URL (2). Click <strong>Add</strong> (3).</p>
+<p><img src="../../../images/mcm/image-20201008135946574-2158386.png" alt="image-20201008135946574"></p>
+<p>After few seconds, you should see Sync Status as <strong>Completed</strong>. Now, let’s deploy an application from this new Helm repository. Click <strong>Catalog</strong> on upper right corner of the page to view the list of helm charts that you can deploy.</p>
+<p><img src="../../../images/mcm/image-20201008140135880-2158495.png" alt="image-20201008140135880"></p>
+<p>In the catalog, search for <strong>sum</strong>  and select the <strong>sumapp</strong></p>
+<p><img src="../../../images/mcm/image-20201008140301042-2158581.png" alt="image-20201008140301042"></p>
+<p>The chart deploys a simple Liberty web application for demonstration purposes. Click <strong>Configure</strong> to continue.</p>
+<p><img src="../../../images/mcm/image-20201008140335978-2158616.png" alt="image-20201008140335978"></p>
+<p>Enter <strong>mysum</strong> as Helm release name (1), select <strong>default</strong> as Target namespace (2). On Target cluster, select both <strong>local-cluster</strong> and <strong>managed-cluster</strong> (3). Then click <strong>Install</strong> (4).</p>
+<p><img src="../../../images/mcm/image-20201008140404731-2158644.png" alt="image-20201008140404731"></p>
+<p>The installation starts immediately but it take a few minutes to deploy the application to remote cluster. Click <strong>View Helm Releases</strong> to view the status.</p>
+<p><img src="../../../images/mcm/image-20201008144311711-2160991.png" alt="image-20201008144311711"></p>
+<p>On the Helm releases page, you can check that <strong>mysumapp</strong> helm is deployed to your clusters.</p>
+<p><img src="../../../images/mcm/image-20201008144349113-2161029.png" alt="image-20201008144349113"></p>
+<h1 id="task-5---find-resources-on-multiple-clusters">Task 5 - Find resources on multiple clusters</h1>
+<p>One feature that is very interesting in CP4M is the search feature (loop) on the top right part of the screen:</p>
+<p><img src="../../../images/mcm/image-20201009093736545-2229056.png" alt="image-20201009093736545"></p>
+<p>When you click on that feature, you see some predefined search that are very interesting for everyday:</p>
+<p><img src="../../../images/mcm/image-20201009093911173-2229151.png" alt="image-20201009093911173"></p>
+<p>Especially the <strong>workloads</strong> first search is very popular, then <strong>click on the tile</strong>:</p>
+<p><img src="../../../images/mcm/image-20201009094024046-2229224.png" alt="image-20201009094024046"></p>
+<p>The findings are shown:</p>
+<p><img src="../../../images/mcm/image-20201009094130098-2229290.png" alt="image-20201009094130098"></p>
+<p>What is important to notice, the search is executed <strong>across all clusters</strong> ! And the answer is very quick.</p>
+<p>You can then select the tile related to <strong>all pods</strong> across all clusters :</p>
+<p><img src="../../../images/mcm/image-20201009094351688-2229431.png" alt="image-20201009094351688"></p>
+<p>Results:</p>
+<p><img src="../../../images/mcm/image-20201009094453381-2229493.png" alt="image-20201009094453381"></p>
+<p>Another feature is the filtering of different values. First go to the search zone:</p>
+<p><img src="../../../images/mcm/image-20201009094643873-2229603.png" alt="image-20201009094643873"></p>
+<p>Start to type name and choose namespace in the filtering list:</p>
+<p><img src="../../../images/mcm/image-20201009094852081-2229732.png" alt="image-20201009094852081"></p>
+<p>This should result to this (a long list of all namespaces across clusters):</p>
+<p><img src="../../../images/mcm/image-20201009094934813-2229774.png" alt="image-20201009094934813"></p>
+<p>Pick the default namespace in the list and continue with <strong>kind:pod</strong> then you sould see all the pods running on all clusters in the default namespaces:</p>
+<p><img src="../../../images/mcm/image-20201009095348853-2230028.png" alt="image-20201009095348853"></p>
+<p>Now you can save your search by clicking the <strong>blue diskette</strong>:</p>
+<p><img src="../../../images/mcm/image-20201009095753198-2230273.png" alt="image-20201009095753198"></p>
+<h1 id="congrats">Congrats</h1>
+<p>You successfully accessed the CP4M console, you imported a new clusted that has been already created, you deployed an application across clusters, you installed the cloudctl command line, and you touched all the main features including the seach function.</p>
+<p>Thanks.</p>
+<hr>
+
+
+    
+
+
+                    
+                    <div class="row"><div class="position-relative mx-auto col-lg-9">
+                          <div class="bg-primary overflow-hidden p-3 mt-5 shadow">
+
+
+    <div class="d-flex justify-content-center"><a class="p-1 ml-3 d-inline-block text-white text-right" href="/k8s_training_web/workshop/" title="Delivering a Workshop - Overview">Delivering a Workshop - Overview<i class="fas fa-chevron-right p-1"></i></a>
+    </div>
+</div>
+
+
+                        </div></div> 
+
+                </div>
+
+            </div> 
+
+        </div> 
+<script src="https://niklaushirt.github.io/k8s_training_web/lib/jquery.min.js"></script> 
+<script src="https://niklaushirt.github.io/k8s_training_web/lib/popper.min.js"></script> 
+
+<script src="https://niklaushirt.github.io/k8s_training_web/js/bootstrap.min.js"></script> 
+
+
+<script type="text/javascript" src="/k8s_training_web/plugins/lunr.min.js"></script>
+<script type="text/javascript" src="/k8s_training_web/plugins/auto-complete.js"></script>
+<link href="/k8s_training_web/plugins/auto-complete.css" rel="stylesheet">
+<script type="text/javascript">
+  
+      var baseurl = "https:\/\/niklaushirt.github.io\/k8s_training_web\/";
+  
+</script>
+<script type="text/javascript" src="/k8s_training_web/plugins/search.js"></script>
+
+
+<script type="text/javascript" src="/k8s_training_web/plugins/clipboard.js"></script>
+<script>
+  new ClipboardJS('.btn');
+</script>
+</body>
+</html>

@@ -130,6 +130,46 @@ Copy   apiVersion: networking.istio.io/v1alpha3 kind: VirtualService metadata: n
     </item>
     
     <item>
+      <title>Students Prerequisite</title>
+      <link>https://niklaushirt.github.io/k8s_training_web/workshop/prereq/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://niklaushirt.github.io/k8s_training_web/workshop/prereq/</guid>
+      <description>Creating a free IKS clusters In this section, you will learn how to create your free IBM Cloud Kubernetes Service (IKS) Cluster. This cluster will be a Managed cluster in the IBM Cloud Pak for Multicloud Management Workshop. In IBM Cloud, you can have 1 free cluster at a time in IBM Cloud Kubernetes Service, and each free cluster expires in 30 days. Free clusters have select capabilities, minimal 2x4 compute resources, select single zone locations, and support only the Kubernetes container platform and IBM Cloud classic infrastructure provider.</description>
+    </item>
+    
+    <item>
+      <title>Environment Preparation</title>
+      <link>https://niklaushirt.github.io/k8s_training_web/workshop/preparation/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://niklaushirt.github.io/k8s_training_web/workshop/preparation/</guid>
+      <description>Installing CLI Tools CLI tools provide the ability to manage applications, containers, infrastructures, services, and other resources. In this section you will install all the necessary CLI tool in your local machine to be able to complete the Labs.
+Note: If you have already installed all CLIs in your local machine, you can skip this page.
+1.You should be on your CP4MCM Web Console, if not, check how to access it in Before Start page.</description>
+    </item>
+    
+    <item>
+      <title>WiaB - Multicluster Management</title>
+      <link>https://niklaushirt.github.io/k8s_training_web/workshop/clustermgmt/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://niklaushirt.github.io/k8s_training_web/workshop/clustermgmt/</guid>
+      <description>&amp;lt;FeatureCard title=&amp;quot;WiaB - Multicluster Management with IBM Cloud Pak for Multicloud Management&amp;rdquo; color=&amp;quot;dark&amp;rdquo;
+   Multicluster Management Overview  Lab Overview IBM Cloud Pak for Multicloud Management provides consistent visibility, automation, and governance across a range of multicloud management capabilities such as cost and asset management, infrastructure management, application management, multi-cluster management, edge management, and integration with existing tools and processes. Customers can leverage Cloud Pak for Multicloud Management to simplify their IT and application ops management, while increasing flexibility and cost savings with intelligent data analysis driven by predictive signals.</description>
+    </item>
+    
+    <item>
+      <title>WiaB Lab - Application Management</title>
+      <link>https://niklaushirt.github.io/k8s_training_web/workshop/appmgmt/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://niklaushirt.github.io/k8s_training_web/workshop/appmgmt/</guid>
+      <description>&amp;lt;FeatureCard title=&amp;quot;Application Management with IBM Cloud Pak for Multicloud Management&amp;rdquo; color=&amp;quot;dark&amp;rdquo;
+   Lab Overview IBM Cloud Pak for Multicloud Management provides consistent visibility, automation, and governance across a range of multicloud management capabilities such as cost and asset management, infrastructure management, application management, multi-cluster management, edge management, and integration with existing tools and processes. Customers can leverage Cloud Pak for Multicloud Management to simplify their IT and application ops management, while increasing flexibility and cost savings with intelligent data analysis driven by predictive signals.</description>
+    </item>
+    
+    <item>
       <title>Lab 10: Cleanup</title>
       <link>https://niklaushirt.github.io/k8s_training_web/jtc10/lab10/</link>
       <pubDate>Wed, 23 Sep 2020 09:12:06 +0200</pubDate>
@@ -146,6 +186,18 @@ Copy   apiVersion: networking.istio.io/v1alpha3 kind: VirtualService metadata: n
       <pubDate>Wed, 23 Sep 2020 09:12:06 +0200</pubDate>
       
       <guid>https://niklaushirt.github.io/k8s_training_web/jtc17/lab0/</guid>
+      <description>Open a Terminal window by clicking on the Termnial icon in the left sidebar - we will use this extensively later as well
+  Start the demo application
+Copy   kubectl create -f ~/training/deployment/demoapp.yaml kubectl create -f ~/training/deployment/demoapp-service.yaml kubectl create -f ~/training/deployment/demoapp-backend.yaml kubectl create -f ~/training/deployment/demoapp-backend-service.yaml      Wait for the demo application to be available (the status must be 1/1)
+Copy   kubectl get pods    &amp;gt; NAME READY STATUS RESTARTS AGE &amp;gt; k8sdemo-backend-5b779f567f-2rbgj 1/1 Running 0 21s &amp;gt; k8sdemo-backend-5b779f567f-p6j76 1/1 Running 0 21s &amp;gt; k8sdemo-bd6bbd548-jcb6r 1/1 Running 0 21s   Open the demo application in the browser</description>
+    </item>
+    
+    <item>
+      <title>Lab 0: Preparation</title>
+      <link>https://niklaushirt.github.io/k8s_training_web/jtc20/lab0/</link>
+      <pubDate>Wed, 23 Sep 2020 09:12:06 +0200</pubDate>
+      
+      <guid>https://niklaushirt.github.io/k8s_training_web/jtc20/lab0/</guid>
       <description>Open a Terminal window by clicking on the Termnial icon in the left sidebar - we will use this extensively later as well
   Start the demo application
 Copy   kubectl create -f ~/training/deployment/demoapp.yaml kubectl create -f ~/training/deployment/demoapp-service.yaml kubectl create -f ~/training/deployment/demoapp-backend.yaml kubectl create -f ~/training/deployment/demoapp-backend-service.yaml      Wait for the demo application to be available (the status must be 1/1)
@@ -183,6 +235,17 @@ Docker provides the ability to package and run an application in a loosely isola
       <guid>https://niklaushirt.github.io/k8s_training_web/jtc02/lab1/</guid>
       <description>Kubernetes was developed by Google as part of the Borg project and handed off to the open source community in 2015. Kubernetes combines more than 15 years of Google research in running a containerized infrastructure with production work loads, open source contributions, and Docker container management tools to provide an isolated and secure app platform that is portable, extensible, and self-healing in case of failovers.
 Kubernetes is a solution that automates the orchestration of Container workloads.</description>
+    </item>
+    
+    <item>
+      <title>Lab 1: Import a cluster</title>
+      <link>https://niklaushirt.github.io/k8s_training_web/jtc20/lab1/</link>
+      <pubDate>Wed, 23 Sep 2020 09:12:06 +0200</pubDate>
+      
+      <guid>https://niklaushirt.github.io/k8s_training_web/jtc20/lab1/</guid>
+      <description>IBM Cloud Pak for Multicloud Manager Labs Lab #1: Import a cluster in the Hub Philippe Thomas - Novembre 2020
+Introduction During this lab, we are going to manipulate some basic aspects of the console of IBM Cloud Pak for Multicloud Manager (CP4M for short in this document) and especially the import feature to get access to some managed clusters.
+Task 1 - Access CP4M console Be sure to use the latest Firefox internet browser.</description>
     </item>
     
     <item>
@@ -407,6 +470,15 @@ Copy   kubectl delete -f ~/training/deployment/demoapp.yaml kubectl delete -f ~/
       
       <guid>https://niklaushirt.github.io/k8s_training_web/images/estet/</guid>
       <description></description>
+    </item>
+    
+    <item>
+      <title>Delivering a Workshop - Overview</title>
+      <link>https://niklaushirt.github.io/k8s_training_web/workshop/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://niklaushirt.github.io/k8s_training_web/workshop/</guid>
+      <description>Coming Soon </description>
     </item>
     
   </channel>
