@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>JTC20 IBM CloudPak for Multicloud Management on Kubernetes Training</title>
+    <title>JTC20 Kubernetes - Step by step on Kubernetes Training</title>
     <link>https://niklaushirt.github.io/k8s_training_web/jtc20/</link>
-    <description>Recent content in JTC20 IBM CloudPak for Multicloud Management on Kubernetes Training</description>
+    <description>Recent content in JTC20 Kubernetes - Step by step on Kubernetes Training</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Wed, 23 Sep 2020 09:12:06 +0200</lastBuildDate>
@@ -12,42 +12,23 @@
     
     
     <item>
-      <title>Lab 0: Preparation</title>
-      <link>https://niklaushirt.github.io/k8s_training_web/jtc20/lab0/</link>
-      <pubDate>Wed, 23 Sep 2020 09:12:06 +0200</pubDate>
-      
-      <guid>https://niklaushirt.github.io/k8s_training_web/jtc20/lab0/</guid>
-      <description>Open a Terminal window by clicking on the Termnial icon in the left sidebar - we will use this extensively later as well
-  Start the demo application
-Copy   kubectl create -f ~/training/deployment/demoapp.yaml kubectl create -f ~/training/deployment/demoapp-service.yaml kubectl create -f ~/training/deployment/demoapp-backend.yaml kubectl create -f ~/training/deployment/demoapp-backend-service.yaml      Wait for the demo application to be available (the status must be 1/1)
-Copy   kubectl get pods    &amp;gt; NAME READY STATUS RESTARTS AGE &amp;gt; k8sdemo-backend-5b779f567f-2rbgj 1/1 Running 0 21s &amp;gt; k8sdemo-backend-5b779f567f-p6j76 1/1 Running 0 21s &amp;gt; k8sdemo-bd6bbd548-jcb6r 1/1 Running 0 21s   Open the demo application in the browser</description>
-    </item>
-    
-    <item>
-      <title>Lab 1: Import a cluster</title>
+      <title>Lab 1: Build a container</title>
       <link>https://niklaushirt.github.io/k8s_training_web/jtc20/lab1/</link>
       <pubDate>Wed, 23 Sep 2020 09:12:06 +0200</pubDate>
       
       <guid>https://niklaushirt.github.io/k8s_training_web/jtc20/lab1/</guid>
-      <description>Philippe Thomas - Novembre 2020
-Lab 1 - Access CP4M console Be sure to use the latest Firefox internet browser.
-To get access the CP4M console, the instructor will give you a URL similar to the one below:
-Copy   https://cp-console.nicebe-ba36b2ed0b6b09dbc627b56ceec2f2a4-0000.eu-de.containers.appdomain.cloud    The Credentials are admin and a password given by the instructor.
-Then you should see the following sign on page:
-For this exercise, we want to get access to the Cluster Administrator role, so click on the Default authentication link in the page:</description>
+      <description>Getting the sources First we need to assemble the elements that we will package in the container.
+The minimum components you need to create a container:
+ Code: already built application (jar, war, &amp;hellip;) or source (NodeJS, Java, Golang, …) Dockerfile: Use the right base image for your app Configuration files if they exist  Copy   # Using the base image for NodeJS FROM node:8-stretch # Change working directory WORKDIR &amp;#34;/app&amp;#34; # Update packages and install dependency packages for services RUN apt-get update \ &amp;amp;&amp;amp; apt-get dist-upgrade -y \ &amp;amp;&amp;amp; apt-get clean \ &amp;amp;&amp;amp; echo &amp;#39;Finished installing dependencies&amp;#39; # Install npm production packages COPY package.</description>
     </item>
     
     <item>
-      <title>Lab 2: Navigate in the CP4M console</title>
+      <title>Lab 2: A first Kubernetes Manifest</title>
       <link>https://niklaushirt.github.io/k8s_training_web/jtc20/lab2/</link>
       <pubDate>Wed, 23 Sep 2020 09:12:06 +0200</pubDate>
       
       <guid>https://niklaushirt.github.io/k8s_training_web/jtc20/lab2/</guid>
-      <description>Lab 2 - Navigate in the CP4M console Go back to the console:
-In the top right corner, you can see your identity and the default account.
- You can create several accounts and several users but you need to connect to a LDAP
- Then you can navigate to the exclamation mark to look at different options to help you to implement the CP4M solutions :
-For example, for support, you can also use Slack.</description>
+      <description>Basic structure of a deployment manifest Copy   apiVersion: apps/v1 kind: Deployment metadata: name: k8s-demo-deployment labels: app: k8s-demo spec: replicas: 3 selector: matchLabels: app: k8s-demo template: metadata: labels: app: k8s-demo spec: containers: - name: k8s-demo imagePullPolicy: Always image: niklaushirt/k8s-demo:1.0 ports: - containerPort: 80    Structural parts of a deployment manifest Deployment Copy   apiVersion: apps/v1 kind: Deployment metadata: name: k8s-demo-deployment labels: app: k8s-demo    ReplicaSet Copy   spec: replicas: 3 selector: matchLabels: app: k8s-demo    Pod Copy   template: metadata: labels: app: k8s-demo spec: containers: - name: k8s-demo imagePullPolicy: Always image: niklaushirt/k8s-demo:1.</description>
     </item>
     
     <item>
@@ -56,10 +37,7 @@ For example, for support, you can also use Slack.</description>
       <pubDate>Wed, 23 Sep 2020 09:12:06 +0200</pubDate>
       
       <guid>https://niklaushirt.github.io/k8s_training_web/jtc20/lab3/</guid>
-      <description>Lab 3 - Import a new cluster From the menu, Click on Automate Infrastructure, and the Clusters:
-At this point, you should have only one cluster: the local cluster (this is the HUB cluster) or none if you didn&amp;rsquo;t import any cluster yet:
-The local cluster is the OCP cluster where you installed CP4M main features.
-Normally it should not be used to hold some applications : the best practice is to use remode clusters to deploy your applications.</description>
+      <description></description>
     </item>
     
     <item>
@@ -68,10 +46,7 @@ Normally it should not be used to hold some applications : the best practice is 
       <pubDate>Wed, 23 Sep 2020 09:12:06 +0200</pubDate>
       
       <guid>https://niklaushirt.github.io/k8s_training_web/jtc20/lab4/</guid>
-      <description>Lab 4 - Deploy an application Open the Menu (1) and click on Administer (2) &amp;gt; Helm repository (3).
-On the Helm Repositories page, click Add Repository to register a new Helm Repository.
-Type coc-charts (1) as repository Name, and enter https://ibm-icp-coc.github.io/charts/repo/stable as URL (2). Click Add (3).
-After few seconds, you should see Sync Status as Completed. Now, let’s deploy an application from this new Helm repository. Click Catalog on upper right corner of the page to view the list of helm charts that you can deploy.</description>
+      <description></description>
     </item>
     
     <item>
@@ -80,11 +55,7 @@ After few seconds, you should see Sync Status as Completed. Now, let’s deploy 
       <pubDate>Wed, 23 Sep 2020 09:12:06 +0200</pubDate>
       
       <guid>https://niklaushirt.github.io/k8s_training_web/jtc20/lab5/</guid>
-      <description>Lab 5 - Find resources on multiple clusters One feature that is very interesting in CP4M is the search feature (loop) on the top right part of the screen:
-When you click on that feature, you see some predefined search that are very interesting for everyday:
-Especially the workloads first search is very popular, then click on the tile:
-The findings are shown:
-What is important to notice, the search is executed across all clusters !</description>
+      <description></description>
     </item>
     
   </channel>

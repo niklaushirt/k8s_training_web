@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html><head>
+
+    <meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="canonical" href="https://niklaushirt.github.io/k8s_training_web/jtc30/lab1/">
+
+    <title>
+        
+        Lab 1: Import a cluster | Kubernetes Training
+        
+    </title>
+
+    
+    <link href="https://niklaushirt.github.io/k8s_training_web/css/fontawesome.min.css" rel="stylesheet">
+
+    
+    <link rel="stylesheet" href="https://niklaushirt.github.io/k8s_training_web/css/ace.min.css">
+
+    
+    
+        
+    
+
+</head>
+<body><nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow sticky-top" id="navbarMain">
+    <div class="container">
+        <div>
+            <a class="navbar-brand" href="/k8s_training_web">
+                
+                Kubernetes Training
+            </a>
+        </div>
+        
+            <button class="navbar-toggler navbar-toggler-right collapsed" type="button" data-toggle="collapse" data-target="#navbarMainCollapse" aria-controls="navbarMainCollapse" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarMainCollapse">
+              <ul class="navbar-nav ml-auto">
+                            <li class="nav-item">
+                                <a class="nav-link" href="https://github.com/niklaushirt/training" >
+                                  <i class='fab fa-github'></i>
+                                </a>
+                            </li>
+              </ul>
+            </div>
+    </div>
+</nav>
+<div class="container-fluid">
+            <div class="row">
+
+                <div class="docs-sidenav order-0 col-12 col-md-3 col-lg-2 col-xl-2 position-sticky border-right"><nav class="navbar navbar-expand-md navbar-light pl-0">
+    <button class="navbar-toggler navbar-toggler-right collapsed" type="button" data-toggle="collapse" data-target="#sidenav-left-collapse" aria-controls="sidenav-left-collapse" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+     <div class="collapse navbar-collapse align-items-start flex-column" id="sidenav-left-collapse">
+            <form class="form-inline my-2 my-lg-0 searchbox">
+                <input class="form-control mr-sm-2 w-100" data-search-input id="search-by" type="text" placeholder="Search">
+            </form>
+         <ul class="navbar-nav flex-column pt-3">
+    <li data-nav-id="/k8s_training_web/jtc00/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/k8s_training_web/jtc00/"><h6>Introduction</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/k8s_training_web/jtc00/lab1/" class="nav-item my-1">
+                
+                 <a href="/k8s_training_web/jtc00/lab1/" class="nav-link p-0">
+                    Getting set up
+                </a>
+        </li>
+        <li data-nav-id="/k8s_training_web/jtc00/lab2/" class="nav-item my-1">
+                
+                 <a href="/k8s_training_web/jtc00/lab2/" class="nav-link p-0">
+                    Lab Information and Semantics
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/k8s_training_web/jtc01/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/k8s_training_web/jtc01/"><h6>JTC01 Docker</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/k8s_training_web/jtc01/lab1/" class="nav-item my-1">
+                
+                 <a href="/k8s_training_web/jtc01/lab1/" class="nav-link p-0">
+                    Lab 1: Get to know Docker
+                </a>
+        </li>
+        <li data-nav-id="/k8s_training_web/jtc01/lab2/" class="nav-item my-1">
+                
+                 <a href="/k8s_training_web/jtc01/lab2/" class="nav-link p-0">
+                    Lab 2: Docker Basics
+                </a>
+        </li>
+        <li data-nav-id="/k8s_training_web/jtc01/lab3/" class="nav-item my-1">
+                
+                 <a href="/k8s_training_web/jtc01/lab3/" class="nav-link p-0">
+                    Lab 3: Docker Internals
+                </a>
+        </li>
+        <li data-nav-id="/k8s_training_web/jtc01/lab4/" class="nav-item my-1">
+                
+                 <a href="/k8s_training_web/jtc01/lab4/" class="nav-link p-0">
+                    Lab 4: Cleanup
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/k8s_training_web/jtc02/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/k8s_training_web/jtc02/"><h6>JTC02 Kubernetes Labs</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/k8s_training_web/jtc02/lab1/" class="nav-item my-1">
+                
+                 <a href="/k8s_training_web/jtc02/lab1/" class="nav-link p-0">
+                    Lab 1: Get to know Kubernetes
+                </a>
+        </li>
+        <li data-nav-id="/k8s_training_web/jtc02/lab2/" class="nav-item my-1">
+                
+                 <a href="/k8s_training_web/jtc02/lab2/" class="nav-link p-0">
+                    Lab 2: Deploy your first Pod
+                </a>
+        </li>
+        <li data-nav-id="/k8s_training_web/jtc02/lab3/" class="nav-item my-1">
+                
+                 <a href="/k8s_training_web/jtc02/lab3/" class="nav-link p-0">
+                    Lab 3: Deploy your first application
+                </a>
+        </li>
+        <li data-nav-id="/k8s_training_web/jtc02/lab4/" class="nav-item my-1">
+                
+                 <a href="/k8s_training_web/jtc02/lab4/" class="nav-link p-0">
+                    Lab 4: Scale and Update Deployments
+                </a>
+        </li>
+        <li data-nav-id="/k8s_training_web/jtc02/lab5/" class="nav-item my-1">
+                
+                 <a href="/k8s_training_web/jtc02/lab5/" class="nav-link p-0">
+                    Lab 5: Stateful Deployments
+                </a>
+        </li>
+        <li data-nav-id="/k8s_training_web/jtc02/lab6/" class="nav-item my-1">
+                
+                 <a href="/k8s_training_web/jtc02/lab6/" class="nav-link p-0">
+                    Lab 6: Cleanup
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/k8s_training_web/jtc10/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/k8s_training_web/jtc10/"><h6>JTC10 Istio</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/k8s_training_web/jtc10/lab1/" class="nav-item my-1">
+                
+                 <a href="/k8s_training_web/jtc10/lab1/" class="nav-link p-0">
+                    Lab 1: Get to know ISTIO
+                </a>
+        </li>
+        <li data-nav-id="/k8s_training_web/jtc10/lab2/" class="nav-item my-1">
+                
+                 <a href="/k8s_training_web/jtc10/lab2/" class="nav-link p-0">
+                    Lab 2: Installing Istio 
+                </a>
+        </li>
+        <li data-nav-id="/k8s_training_web/jtc10/lab3/" class="nav-item my-1">
+                
+                 <a href="/k8s_training_web/jtc10/lab3/" class="nav-link p-0">
+                    Lab 3: Deploy BookInfo application 
+                </a>
+        </li>
+        <li data-nav-id="/k8s_training_web/jtc10/lab4/" class="nav-item my-1">
+                
+                 <a href="/k8s_training_web/jtc10/lab4/" class="nav-link p-0">
+                    Lab 4: Monitoring with Kiali
+                </a>
+        </li>
+        <li data-nav-id="/k8s_training_web/jtc10/lab5/" class="nav-item my-1">
+                
+                 <a href="/k8s_training_web/jtc10/lab5/" class="nav-link p-0">
+                    Lab 5: Traffic flow management
+                </a>
+        </li>
+        <li data-nav-id="/k8s_training_web/jtc10/lab6/" class="nav-item my-1">
+                
+                 <a href="/k8s_training_web/jtc10/lab6/" class="nav-link p-0">
+                    Lab 6: Telemetry data
+                </a>
+        </li>
+        <li data-nav-id="/k8s_training_web/jtc10/lab7/" class="nav-item my-1">
+                
+                 <a href="/k8s_training_web/jtc10/lab7/" class="nav-link p-0">
+                    Lab 7: End-user authentication
+                </a>
+        </li>
+        <li data-nav-id="/k8s_training_web/jtc10/lab8/" class="nav-item my-1">
+                
+                 <a href="/k8s_training_web/jtc10/lab8/" class="nav-link p-0">
+                    Lab 8: Traffic Mirroring
+                </a>
+        </li>
+        <li data-nav-id="/k8s_training_web/jtc10/lab9/" class="nav-item my-1">
+                
+                 <a href="/k8s_training_web/jtc10/lab9/" class="nav-link p-0">
+                    Lab 9: Fault Injection
+                </a>
+        </li>
+        <li data-nav-id="/k8s_training_web/jtc10/lab10/" class="nav-item my-1">
+                
+                 <a href="/k8s_training_web/jtc10/lab10/" class="nav-link p-0">
+                    Lab 10: Cleanup
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/k8s_training_web/jtc14/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/k8s_training_web/jtc14/"><h6>JTC14 Kubernetes Ansible Operators</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/k8s_training_web/jtc14/lab0/" class="nav-item my-1">
+                
+                 <a href="/k8s_training_web/jtc14/lab0/" class="nav-link p-0">
+                    Lab 0: Prepare the Lab environment
+                </a>
+        </li>
+        <li data-nav-id="/k8s_training_web/jtc14/lab1/" class="nav-item my-1">
+                
+                 <a href="/k8s_training_web/jtc14/lab1/" class="nav-link p-0">
+                    Lab 1: Kubernetes Operators
+                </a>
+        </li>
+        <li data-nav-id="/k8s_training_web/jtc14/lab2/" class="nav-item my-1">
+                
+                 <a href="/k8s_training_web/jtc14/lab2/" class="nav-link p-0">
+                    Lab 2: Create the Lab Operator Project
+                </a>
+        </li>
+        <li data-nav-id="/k8s_training_web/jtc14/lab3/" class="nav-item my-1">
+                
+                 <a href="/k8s_training_web/jtc14/lab3/" class="nav-link p-0">
+                    Lab 3: Deploy the Custom Resource
+                </a>
+        </li>
+        <li data-nav-id="/k8s_training_web/jtc14/lab4/" class="nav-item my-1">
+                
+                 <a href="/k8s_training_web/jtc14/lab4/" class="nav-link p-0">
+                    Lab 4: Cleanup
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/k8s_training_web/jtc16/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/k8s_training_web/jtc16/"><h6>JTC16 Kubernetes Security Labs</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/k8s_training_web/jtc16/lab1/" class="nav-item my-1">
+                
+                 <a href="/k8s_training_web/jtc16/lab1/" class="nav-link p-0">
+                    Lab 1: Network Policies
+                </a>
+        </li>
+        <li data-nav-id="/k8s_training_web/jtc16/lab2/" class="nav-item my-1">
+                
+                 <a href="/k8s_training_web/jtc16/lab2/" class="nav-link p-0">
+                    Lab 2: Security Tooling
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/k8s_training_web/jtc17/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/k8s_training_web/jtc17/"><h6>JTC17 Kubernetes Advanced Security</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/k8s_training_web/jtc17/lab0/" class="nav-item my-1">
+                
+                 <a href="/k8s_training_web/jtc17/lab0/" class="nav-link p-0">
+                    Lab 0: Preparation
+                </a>
+        </li>
+        <li data-nav-id="/k8s_training_web/jtc17/lab1/" class="nav-item my-1">
+                
+                 <a href="/k8s_training_web/jtc17/lab1/" class="nav-link p-0">
+                    Lab 1: RBAC - Users, Roles and RoleBindings
+                </a>
+        </li>
+        <li data-nav-id="/k8s_training_web/jtc17/lab2/" class="nav-item my-1">
+                
+                 <a href="/k8s_training_web/jtc17/lab2/" class="nav-link p-0">
+                    Lab 2: Service Accounts
+                </a>
+        </li>
+        <li data-nav-id="/k8s_training_web/jtc17/lab3/" class="nav-item my-1">
+                
+                 <a href="/k8s_training_web/jtc17/lab3/" class="nav-link p-0">
+                    Lab 3: RBAC Tooling
+                </a>
+        </li>
+        <li data-nav-id="/k8s_training_web/jtc17/lab4/" class="nav-item my-1">
+                
+                 <a href="/k8s_training_web/jtc17/lab4/" class="nav-link p-0">
+                    Lab 4: Image Scanning
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/k8s_training_web/jtc18/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/k8s_training_web/jtc18/"><h6>JTC18 Kubernetes Advanced Labs</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/k8s_training_web/jtc18/lab1/" class="nav-item my-1">
+                
+                 <a href="/k8s_training_web/jtc18/lab1/" class="nav-link p-0">
+                    Lab 1: Liveness and Readiness Probes
+                </a>
+        </li>
+        <li data-nav-id="/k8s_training_web/jtc18/lab2/" class="nav-item my-1">
+                
+                 <a href="/k8s_training_web/jtc18/lab2/" class="nav-link p-0">
+                    Lab 2: Init Containers
+                </a>
+        </li>
+        <li data-nav-id="/k8s_training_web/jtc18/lab3/" class="nav-item my-1">
+                
+                 <a href="/k8s_training_web/jtc18/lab3/" class="nav-link p-0">
+                    Lab 3: Persistent Volumes
+                </a>
+        </li>
+        <li data-nav-id="/k8s_training_web/jtc18/lab4/" class="nav-item my-1">
+                
+                 <a href="/k8s_training_web/jtc18/lab4/" class="nav-link p-0">
+                    Lab 4: Dynamic NFS provisioning
+                </a>
+        </li>
+        <li data-nav-id="/k8s_training_web/jtc18/lab5/" class="nav-item my-1">
+                
+                 <a href="/k8s_training_web/jtc18/lab5/" class="nav-link p-0">
+                    Lab 5: Cleanup
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/k8s_training_web/jtc19/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/k8s_training_web/jtc19/"><h6>JTC19 CloudNative DevOps</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/k8s_training_web/jtc19/lab1/" class="nav-item my-1">
+                
+                 <a href="/k8s_training_web/jtc19/lab1/" class="nav-link p-0">
+                    Lab 1: Tekton
+                </a>
+        </li>
+        <li data-nav-id="/k8s_training_web/jtc19/lab5/" class="nav-item my-1">
+                
+                 <a href="/k8s_training_web/jtc19/lab5/" class="nav-link p-0">
+                    Lab 5: Cleanup
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/k8s_training_web/jtc20/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/k8s_training_web/jtc20/"><h6>JTC20 Kubernetes - Step by step</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/k8s_training_web/jtc20/lab1/" class="nav-item my-1">
+                
+                 <a href="/k8s_training_web/jtc20/lab1/" class="nav-link p-0">
+                    Lab 1: Build a container
+                </a>
+        </li>
+        <li data-nav-id="/k8s_training_web/jtc20/lab2/" class="nav-item my-1">
+                
+                 <a href="/k8s_training_web/jtc20/lab2/" class="nav-link p-0">
+                    Lab 2: A first Kubernetes Manifest
+                </a>
+        </li>
+        <li data-nav-id="/k8s_training_web/jtc20/lab3/" class="nav-item my-1">
+                
+                 <a href="/k8s_training_web/jtc20/lab3/" class="nav-link p-0">
+                    Lab 3: Import a new cluster
+                </a>
+        </li>
+        <li data-nav-id="/k8s_training_web/jtc20/lab4/" class="nav-item my-1">
+                
+                 <a href="/k8s_training_web/jtc20/lab4/" class="nav-link p-0">
+                    Lab 4: Deploy an application
+                </a>
+        </li>
+        <li data-nav-id="/k8s_training_web/jtc20/lab5/" class="nav-item my-1">
+                
+                 <a href="/k8s_training_web/jtc20/lab5/" class="nav-link p-0">
+                    Lab 5: Find resources on multiple clusters
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/k8s_training_web/jtc30/" class="nav-item my-1 parent haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/k8s_training_web/jtc30/"><h6>JTC30 IBM CloudPak for Multicloud Management</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/k8s_training_web/jtc30/lab0/" class="nav-item my-1">
+                
+                 <a href="/k8s_training_web/jtc30/lab0/" class="nav-link p-0">
+                    Lab 0: Preparation
+                </a>
+        </li>
+        <li data-nav-id="/k8s_training_web/jtc30/lab1/" class="nav-item my-1 active">
+                
+                 <a href="/k8s_training_web/jtc30/lab1/" class="nav-link p-0">
+                    Lab 1: Import a cluster
+                </a>
+        </li>
+        <li data-nav-id="/k8s_training_web/jtc30/lab2/" class="nav-item my-1">
+                
+                 <a href="/k8s_training_web/jtc30/lab2/" class="nav-link p-0">
+                    Lab 2: Navigate in the CP4M console
+                </a>
+        </li>
+        <li data-nav-id="/k8s_training_web/jtc30/lab3/" class="nav-item my-1">
+                
+                 <a href="/k8s_training_web/jtc30/lab3/" class="nav-link p-0">
+                    Lab 3: Import a new cluster
+                </a>
+        </li>
+        <li data-nav-id="/k8s_training_web/jtc30/lab4/" class="nav-item my-1">
+                
+                 <a href="/k8s_training_web/jtc30/lab4/" class="nav-link p-0">
+                    Lab 4: Deploy an application
+                </a>
+        </li>
+        <li data-nav-id="/k8s_training_web/jtc30/lab5/" class="nav-item my-1">
+                
+                 <a href="/k8s_training_web/jtc30/lab5/" class="nav-link p-0">
+                    Lab 5: Find resources on multiple clusters
+                </a>
+        </li>
+        </ul>
+    </li>
+        </ul>
+    </div>
+</nav>
+
+
+</div>
+                <div class="docs-toc large order-lg-2 order-md-0 order-xs-1 col-12 col-lg-2 col-xl-2 position-sticky border-left"><div class="docs-toc">
+	<nav id="TableOfContents">
+  <ul>
+    <li><a href="#lab-1---access-cp4m-console">Lab 1 - Access CP4M console</a></li>
+  </ul>
+</nav>
+</div>
+</div>
+                <div class="main col-12 order-1 col-md-9 col-lg-10 col-xl-8 py-3">
+                
+
+<h1>Lab 1: Import a cluster</h1>
+
+<p><img src="../../images/image-20201008083020566-2138620.png" alt="image-20201008083020566"></p>
+<p>Philippe Thomas - Novembre 2020</p>
+<h2 id="lab-1---access-cp4m-console">Lab 1 - Access CP4M console</h2>
+<p>Be sure to use the latest <strong>Firefox</strong> internet browser.</p>
+<p>To get access the CP4M console, the instructor will give you a URL similar to the one below:</p>
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_8f7328689f">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_8f7328689f">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-http" data-lang="http"><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010">https://cp-console.nicebe-ba36b2ed0b6b09dbc627b56ceec2f2a4-0000.eu-de.containers.appdomain.cloud
+</span><span style="color:#960050;background-color:#1e0010">
+</span></code></pre></div>
+    </div>
+</div>
+
+
+
+
+<p>The Credentials are <strong>admin</strong> and a password given by the instructor.</p>
+<p>Then you should see the following sign on page:</p>
+<p><img src="../../images/image-20201008083929253-2139169.png" alt="image-20201008083929253"></p>
+<p>For this exercise, we want to get access to the <strong>Cluster Administrator</strong> role, so click on the Default authentication link in the page:</p>
+<p><img src="../../images/image-20201008084141669-2139301.png" alt="image-20201008084141669"></p>
+<p>Then type <strong>admin</strong> and the  password from the instructor.</p>
+<p><img src="../../images/image-20201008084539168-2139539.png" alt="image-20201008084539168"></p>
+<p>Click <strong>Log in</strong> and here it is : the welcome page should appear:</p>
+<p><img src="../../images/image-20201008084642985-2139603.png" alt="image-20201008084642985"></p>
+<p>From this page, you can navigate to the different parts of the <strong>documentation</strong>: for instance, click on the Automate cloud provisioning documentation blue link:</p>
+<p><img src="../../images/image-20201008085010738-2139810.png" alt="image-20201008085010738"></p>
+<p>You will get access to the documentation:</p>
+<p><img src="../../images/image-20201008085215557-2139935.png" alt="image-20201008085215557"></p>
+<p>Come back to the welcome page and now look at the bottom of the page:</p>
+<p><img src="../../images/image-20201008085319061-2139999.png" alt="image-20201008085319061"></p>
+<p>Here is the place where you can download the CLI tools:</p>
+<p><img src="../../images/image-20201008085424169-2140064.png" alt="image-20201008085424169"></p>
+<p>You can see some of the commands that are necessary for your day to day management activity:</p>
+<p><img src="../../images/image-20201008085719931-2140239.png" alt="image-20201008085719931"></p>
+<p>The IBM Cloud Pak CLI is one of the most important command line tool that you can use to control a Cloud Pak : <strong>cloudctl</strong></p>
+<p>To use the command line, you must access a RHEL VM where we already installed the several commands.</p>
+<p>Use Putty or ssh to get access to that VM (please specify the <strong>IP and password</strong> given by the instructor)</p>
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_bb391d5246">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_bb391d5246">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">
+ssh root@&lt;IP&gt;
+
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
+<p>Check that you have cloudctl already installed:</p>
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_8a0883c80f">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_8a0883c80f">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">
+cloudctl
+
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
+<p>Results:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext">NAME:
+   cloudctl - A command line tool to interact with IBM Cloud Platform Common Services and IBM Cloud Private
+
+USAGE:
+[environment variables] cloudctl [global options] command [arguments...] [command options]
+
+VERSION:
+   v3.4.2-1808+e5ed7d09f67f2cc044e15edcd7a92f79bbb996e3
+
+COMMANDS:
+   api          View the API endpoint and API version for the service.
+   case         [Cloud Platform Common Services only] Manage CASE.
+   catalog      Manage catalog.
+   cm           Manage cluster.
+   completion   Generate an auto-completion script for the specified shell (bash or zsh).
+   config       Write default values to the configuration.
+   helm-init    Prints the configuration of the HELM_HOST setting for Helm.
+   iam          Manage identities and access to resources.
+   login        Log user in.
+   logout       Log user out.
+   metering     Download metering reports.
+   plugin       Manage plugins.
+   pm           Manage passwords.
+   target       Set or view the targeted namespace.
+   tokens       Display the OAuth tokens for the current session. Run `cloudctl login` to retrieve the tokens.
+   version      Check CLI and API version compatibility.
+   help         
+   
+Enter &#39;cloudctl help [command]&#39; for more information about a command.
+
+ENVIRONMENT VARIABLES:
+   CLOUDCTL_COLOR=false                     Do not colorize output
+   CLOUDCTL_HOME=path/to/dir                Path to config directory
+   CLOUDCTL_TRACE=true                      Print API request diagnostics to stdout
+   CLOUDCTL_TRACE=path/to/trace.log         Append API request diagnostics to a log file
+
+GLOBAL OPTIONS:
+   --help, -h                         Show help
+
+</code></pre></div><p>This command is very usefull to control the security aspects, the catalog, the clusters, helm init variables, metering and finally password and tokens in CP4M.</p>
+<p>If you want to get access to the OpenShift Console, go to <a href="https://cloud.ibm.com">https://cloud.ibm.com</a></p>
+<p>Use the <strong>credentials</strong> given by the instructor:</p>
+<p><img src="../../images/image-20201103194840604-4429320.png" alt="image-20201103194840604"></p>
+<p>Once connected, be sure to use the KEVIN account on the top right side:</p>
+<p><img src="../../images/image-20201103195054416-4429454.png" alt="image-20201103195054416"></p>
+<p>Then Select the unique cluster:</p>
+<p><img src="../../images/image-20201103195132004-4429492.png" alt="image-20201103195132004"></p>
+<p>Then select again the openshift cluster:</p>
+<p><img src="../../images/image-20201103195226644-4429546.png" alt="image-20201103195226644"></p>
+<p>Then select the blue button :</p>
+<p><img src="../../images/image-20201103195343141-4429623.png" alt="image-20201103195343141"></p>
+<p>At this point, you should see the OpenShift Console :</p>
+<p><img src="../../images/image-20201103195447356-4429687.png" alt="image-20201103195447356"></p>
+<p>This console is the Cluster HUB OpenShift Console.</p>
+
+
+    
+
+
+                    
+                    <div class="row"><div class="position-relative mx-auto col-lg-9">
+                          <div class="bg-primary overflow-hidden p-3 mt-5 shadow">
+
+
+    <div class="d-flex justify-content-center"><a class="p-1 ml-3 d-inline-block text-white text-right" href="/k8s_training_web/jtc30/lab2/" title="Lab 2: Navigate in the CP4M console">Lab 2: Navigate in the CP4M console<i class="fas fa-chevron-right p-1"></i></a>
+    </div>
+</div>
+
+
+                        </div></div> 
+
+                </div>
+
+            </div> 
+
+        </div> 
+<script src="https://niklaushirt.github.io/k8s_training_web/lib/jquery.min.js"></script> 
+<script src="https://niklaushirt.github.io/k8s_training_web/lib/popper.min.js"></script> 
+
+<script src="https://niklaushirt.github.io/k8s_training_web/js/bootstrap.min.js"></script> 
+
+
+<script type="text/javascript" src="/k8s_training_web/plugins/lunr.min.js"></script>
+<script type="text/javascript" src="/k8s_training_web/plugins/auto-complete.js"></script>
+<link href="/k8s_training_web/plugins/auto-complete.css" rel="stylesheet">
+<script type="text/javascript">
+  
+      var baseurl = "https:\/\/niklaushirt.github.io\/k8s_training_web\/";
+  
+</script>
+<script type="text/javascript" src="/k8s_training_web/plugins/search.js"></script>
+
+
+<script type="text/javascript" src="/k8s_training_web/plugins/clipboard.js"></script>
+<script>
+  new ClipboardJS('.btn');
+</script>
+</body>
+</html>

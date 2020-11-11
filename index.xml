@@ -154,10 +154,10 @@ Copy   kubectl get pods    &amp;gt; NAME READY STATUS RESTARTS AGE &amp;gt; k8sd
     
     <item>
       <title>Lab 0: Preparation</title>
-      <link>https://niklaushirt.github.io/k8s_training_web/jtc20/lab0/</link>
+      <link>https://niklaushirt.github.io/k8s_training_web/jtc30/lab0/</link>
       <pubDate>Wed, 23 Sep 2020 09:12:06 +0200</pubDate>
       
-      <guid>https://niklaushirt.github.io/k8s_training_web/jtc20/lab0/</guid>
+      <guid>https://niklaushirt.github.io/k8s_training_web/jtc30/lab0/</guid>
       <description>Open a Terminal window by clicking on the Termnial icon in the left sidebar - we will use this extensively later as well
   Start the demo application
 Copy   kubectl create -f ~/training/deployment/demoapp.yaml kubectl create -f ~/training/deployment/demoapp-service.yaml kubectl create -f ~/training/deployment/demoapp-backend.yaml kubectl create -f ~/training/deployment/demoapp-backend-service.yaml      Wait for the demo application to be available (the status must be 1/1)
@@ -174,6 +174,17 @@ Copy   kubectl get pods    &amp;gt; NAME READY STATUS RESTARTS AGE &amp;gt; k8sd
  Download the Lab VM Install a Hypervisor on your PC (VMWare, VirtualBox, KVM, &amp;hellip;) Start the VM Test that it works in your setting  You can find detailed instructions here: https://github.com/niklaushirt/training
 Install the Operator SDK
 Copy   RELEASE_VERSION=v1.0.1 curl -LO https://github.com/operator-framework/operator-sdk/releases/download/${RELEASE_VERSION}/operator-sdk-${RELEASE_VERSION}-x86_64-linux-gnu chmod +x operator-sdk-${RELEASE_VERSION}-x86_64-linux-gnu sudo mv operator-sdk-${RELEASE_VERSION}-x86_64-linux-gnu /usr/local/bin/operator-sdk    Using your own environment These are two methods to perform the Labs without downloading and starting the VM.</description>
+    </item>
+    
+    <item>
+      <title>Lab 1: Build a container</title>
+      <link>https://niklaushirt.github.io/k8s_training_web/jtc20/lab1/</link>
+      <pubDate>Wed, 23 Sep 2020 09:12:06 +0200</pubDate>
+      
+      <guid>https://niklaushirt.github.io/k8s_training_web/jtc20/lab1/</guid>
+      <description>Getting the sources First we need to assemble the elements that we will package in the container.
+The minimum components you need to create a container:
+ Code: already built application (jar, war, &amp;hellip;) or source (NodeJS, Java, Golang, …) Dockerfile: Use the right base image for your app Configuration files if they exist  Copy   # Using the base image for NodeJS FROM node:8-stretch # Change working directory WORKDIR &amp;#34;/app&amp;#34; # Update packages and install dependency packages for services RUN apt-get update \ &amp;amp;&amp;amp; apt-get dist-upgrade -y \ &amp;amp;&amp;amp; apt-get clean \ &amp;amp;&amp;amp; echo &amp;#39;Finished installing dependencies&amp;#39; # Install npm production packages COPY package.</description>
     </item>
     
     <item>
@@ -199,10 +210,10 @@ Kubernetes is a solution that automates the orchestration of Container workloads
     
     <item>
       <title>Lab 1: Import a cluster</title>
-      <link>https://niklaushirt.github.io/k8s_training_web/jtc20/lab1/</link>
+      <link>https://niklaushirt.github.io/k8s_training_web/jtc30/lab1/</link>
       <pubDate>Wed, 23 Sep 2020 09:12:06 +0200</pubDate>
       
-      <guid>https://niklaushirt.github.io/k8s_training_web/jtc20/lab1/</guid>
+      <guid>https://niklaushirt.github.io/k8s_training_web/jtc30/lab1/</guid>
       <description>Philippe Thomas - Novembre 2020
 Lab 1 - Access CP4M console Be sure to use the latest Firefox internet browser.
 To get access the CP4M console, the instructor will give you a URL similar to the one below:
@@ -224,6 +235,17 @@ The Operator Framework is an open source toolkit to manage Kubernetes native app
     </item>
     
     <item>
+      <title>Lab 1: Liveness and Readiness Probes</title>
+      <link>https://niklaushirt.github.io/k8s_training_web/jtc18/lab1/</link>
+      <pubDate>Wed, 23 Sep 2020 09:12:06 +0200</pubDate>
+      
+      <guid>https://niklaushirt.github.io/k8s_training_web/jtc18/lab1/</guid>
+      <description>Introduction If you want to turn your Kubernetes deployments into auto healing wonders you only have to add a few lines of YAML.
+The right combination of liveness and readiness probes used with Kubernetes deployments can:
+ Enable zero downtime deploys Prevent deployment of broken images Ensure that failed containers are automatically restarted  Liveness Probes Liveness probes will attempt to restart a container if it fails and starts to respond to the probe.</description>
+    </item>
+    
+    <item>
       <title>Lab 1: Network Policies</title>
       <link>https://niklaushirt.github.io/k8s_training_web/jtc16/lab1/</link>
       <pubDate>Wed, 23 Sep 2020 09:12:06 +0200</pubDate>
@@ -242,6 +264,24 @@ The following network traffic is allowed by default:
       <guid>https://niklaushirt.github.io/k8s_training_web/jtc17/lab1/</guid>
       <description>RBAC policies are vital for the correct management of your cluster, as they allow you to specify which types of actions are permitted depending on the user and their role in your organization. Examples include:
 Secure your cluster by granting privileged operations (accessing secrets, for example) only to admin users. Force user authentication in your cluster. Limit resource creation (such as pods, persistent volumes, deployments) to specific namespaces. You can also use quotas to ensure that resource usage is limited and under control.</description>
+    </item>
+    
+    <item>
+      <title>Lab 1: Tekton</title>
+      <link>https://niklaushirt.github.io/k8s_training_web/jtc19/lab1/</link>
+      <pubDate>Wed, 23 Sep 2020 09:12:06 +0200</pubDate>
+      
+      <guid>https://niklaushirt.github.io/k8s_training_web/jtc19/lab1/</guid>
+      <description>Copy   kubectl apply -f ~/training/devops/tekton/install/tekton.yaml kubectl apply -n tekton-pipelines -f ~/training/devops/tekton/install/tekton-dashboard.yaml kubectl apply -n tekton-pipelines -f ~/training/devops/tekton/install/triggers.yaml minikube service -n tekton-pipelines tekton-dashboard kubectl apply -n tekton-pipelines -f ~/training/devops/tekton/pipeline/tekton-init.yaml kubectl create -n tekton-pipelines secret docker-registry regcred --docker-server=docker.io --docker-username=niklaushirt --docker-password=cool97 --docker-email=niklaushirt@gmail.com kubectl create ns training-pipeline kubectl create -n training-pipeline secret docker-registry regcred --docker-server=docker.io --docker-username=niklaushirt --docker-password=cool97 --docker-email=niklaushirt@gmail.com kubectl create -n training-pipeline secret docker-registry regcred --docker-server=docker.io --docker-username=niklaushirt --docker-password=cool97 --docker-email=niklaushirt@gmail.com kubectl create ns training-dev kubectl create ns training-test kubectl create ns training-prod kubectl apply -n training-pipeline -f ~/training/devops/tekton/pipeline/tekton-init.</description>
+    </item>
+    
+    <item>
+      <title>Lab 2: A first Kubernetes Manifest</title>
+      <link>https://niklaushirt.github.io/k8s_training_web/jtc20/lab2/</link>
+      <pubDate>Wed, 23 Sep 2020 09:12:06 +0200</pubDate>
+      
+      <guid>https://niklaushirt.github.io/k8s_training_web/jtc20/lab2/</guid>
+      <description>Basic structure of a deployment manifest Copy   apiVersion: apps/v1 kind: Deployment metadata: name: k8s-demo-deployment labels: app: k8s-demo spec: replicas: 3 selector: matchLabels: app: k8s-demo template: metadata: labels: app: k8s-demo spec: containers: - name: k8s-demo imagePullPolicy: Always image: niklaushirt/k8s-demo:1.0 ports: - containerPort: 80    Structural parts of a deployment manifest Deployment Copy   apiVersion: apps/v1 kind: Deployment metadata: name: k8s-demo-deployment labels: app: k8s-demo    ReplicaSet Copy   spec: replicas: 3 selector: matchLabels: app: k8s-demo    Pod Copy   template: metadata: labels: app: k8s-demo spec: containers: - name: k8s-demo imagePullPolicy: Always image: niklaushirt/k8s-demo:1.</description>
     </item>
     
     <item>
@@ -278,11 +318,24 @@ Copy   FROM node:8-stretch # Change working directory WORKDIR &amp;#34;/app&amp;
     </item>
     
     <item>
-      <title>Lab 2: Navigate in the CP4M console</title>
-      <link>https://niklaushirt.github.io/k8s_training_web/jtc20/lab2/</link>
+      <title>Lab 2: Init Containers</title>
+      <link>https://niklaushirt.github.io/k8s_training_web/jtc18/lab2/</link>
       <pubDate>Wed, 23 Sep 2020 09:12:06 +0200</pubDate>
       
-      <guid>https://niklaushirt.github.io/k8s_training_web/jtc20/lab2/</guid>
+      <guid>https://niklaushirt.github.io/k8s_training_web/jtc18/lab2/</guid>
+      <description>Init containers are specialized containers that run before or after app containers in a Pod. They can contain utilities or setup scripts not present in an app image.
+Init containers are exactly like regular containers, except:
+  Init containers always run to completion.
+  Each init container must complete successfully before the next one starts.
+  If you specify multiple init containers for a Pod, Kubelet runs each init container sequentially.</description>
+    </item>
+    
+    <item>
+      <title>Lab 2: Navigate in the CP4M console</title>
+      <link>https://niklaushirt.github.io/k8s_training_web/jtc30/lab2/</link>
+      <pubDate>Wed, 23 Sep 2020 09:12:06 +0200</pubDate>
+      
+      <guid>https://niklaushirt.github.io/k8s_training_web/jtc30/lab2/</guid>
       <description>Lab 2 - Navigate in the CP4M console Go back to the console:
 In the top right corner, you can see your identity and the default account.
  You can create several accounts and several users but you need to connect to a LDAP
@@ -356,10 +409,28 @@ Copy   docker top k8sdemo    &amp;gt; UID PID PPID C STIME TTY TIME CMD &amp;gt;
       <pubDate>Wed, 23 Sep 2020 09:12:06 +0200</pubDate>
       
       <guid>https://niklaushirt.github.io/k8s_training_web/jtc20/lab3/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Lab 3: Import a new cluster</title>
+      <link>https://niklaushirt.github.io/k8s_training_web/jtc30/lab3/</link>
+      <pubDate>Wed, 23 Sep 2020 09:12:06 +0200</pubDate>
+      
+      <guid>https://niklaushirt.github.io/k8s_training_web/jtc30/lab3/</guid>
       <description>Lab 3 - Import a new cluster From the menu, Click on Automate Infrastructure, and the Clusters:
 At this point, you should have only one cluster: the local cluster (this is the HUB cluster) or none if you didn&amp;rsquo;t import any cluster yet:
 The local cluster is the OCP cluster where you installed CP4M main features.
 Normally it should not be used to hold some applications : the best practice is to use remode clusters to deploy your applications.</description>
+    </item>
+    
+    <item>
+      <title>Lab 3: Persistent Volumes</title>
+      <link>https://niklaushirt.github.io/k8s_training_web/jtc18/lab3/</link>
+      <pubDate>Wed, 23 Sep 2020 09:12:06 +0200</pubDate>
+      
+      <guid>https://niklaushirt.github.io/k8s_training_web/jtc18/lab3/</guid>
+      <description>Introduction As you know a Pod is mortal, meaning it can be destroyed by Kubernetes anytime, and with it it&amp;rsquo;s local data, memory, etc. So it&amp;rsquo;s perfect for stateless applications. Of course, in the real world we need a way to store our data, and we need this data to be persistent in time. You have alread had a first contact with PersistentVolumes in JTC02, but now let&amp;rsquo;s have a closer look on how how can we dynamically create PersistentVolumes and deploy a Wordpress/MySQL Application with dynamic persistent storage.</description>
     </item>
     
     <item>
@@ -404,10 +475,32 @@ Copy   kubectl delete -f ~/ansible-operator/ansible-operator-frontend/deploy/crd
       <pubDate>Wed, 23 Sep 2020 09:12:06 +0200</pubDate>
       
       <guid>https://niklaushirt.github.io/k8s_training_web/jtc20/lab4/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Lab 4: Deploy an application</title>
+      <link>https://niklaushirt.github.io/k8s_training_web/jtc30/lab4/</link>
+      <pubDate>Wed, 23 Sep 2020 09:12:06 +0200</pubDate>
+      
+      <guid>https://niklaushirt.github.io/k8s_training_web/jtc30/lab4/</guid>
       <description>Lab 4 - Deploy an application Open the Menu (1) and click on Administer (2) &amp;gt; Helm repository (3).
 On the Helm Repositories page, click Add Repository to register a new Helm Repository.
 Type coc-charts (1) as repository Name, and enter https://ibm-icp-coc.github.io/charts/repo/stable as URL (2). Click Add (3).
 After few seconds, you should see Sync Status as Completed. Now, let’s deploy an application from this new Helm repository. Click Catalog on upper right corner of the page to view the list of helm charts that you can deploy.</description>
+    </item>
+    
+    <item>
+      <title>Lab 4: Dynamic NFS provisioning</title>
+      <link>https://niklaushirt.github.io/k8s_training_web/jtc18/lab4/</link>
+      <pubDate>Wed, 23 Sep 2020 09:12:06 +0200</pubDate>
+      
+      <guid>https://niklaushirt.github.io/k8s_training_web/jtc18/lab4/</guid>
+      <description>In this Lab we will install, configure and test a dynamic NFS provisioner.
+This is the easiest way of implementing dynamic provisioning into a cluster.
+There are many more solutions:
+ Rook/Ceph GlusterFS &amp;hellip;  Prepare Minikube to run dynamic NFS provisioning   Install the NFS server into the VM
+Copy   sudo apt install nfs-kernel-server -y    &amp;gt; Reading package lists... Done &amp;gt; Building dependency tree &amp;gt; Reading state information.</description>
     </item>
     
     <item>
@@ -433,11 +526,43 @@ Clair is an open source project for the static analysis of vulnerabilities in ap
     </item>
     
     <item>
+      <title>Lab 5: Cleanup</title>
+      <link>https://niklaushirt.github.io/k8s_training_web/jtc18/lab5/</link>
+      <pubDate>Wed, 23 Sep 2020 09:12:06 +0200</pubDate>
+      
+      <guid>https://niklaushirt.github.io/k8s_training_web/jtc18/lab5/</guid>
+      <description>Delete the elements that we have deployed in order to go back to normal.
+  Delete the demo app and the mysql deployment
+Copy   kubectl delete -f ~/training/deployment/demoapp.yaml kubectl delete -f ~/training/deployment/demoapp-service.yaml kubectl delete -f ~/training/deployment/demoapp-backend.yaml kubectl delete -f ~/training/deployment/demoapp-backend-service.yaml kubectl delete -f ~/training/volumes/3-simple-mysql-deployment.yaml       Congratulations!!! This concludes the Lab and the Course. Hope to see you soon!!!
+ </description>
+    </item>
+    
+    <item>
+      <title>Lab 5: Cleanup</title>
+      <link>https://niklaushirt.github.io/k8s_training_web/jtc19/lab5/</link>
+      <pubDate>Wed, 23 Sep 2020 09:12:06 +0200</pubDate>
+      
+      <guid>https://niklaushirt.github.io/k8s_training_web/jtc19/lab5/</guid>
+      <description>Delete the elements that we have deployed in order to go back to normal.
+  Delete the demo app and the mysql deployment
+Copy   kubectl delete -f ~/training/deployment/demoapp.yaml kubectl delete -f ~/training/deployment/demoapp-service.yaml kubectl delete -f ~/training/deployment/demoapp-backend.yaml kubectl delete -f ~/training/deployment/demoapp-backend-service.yaml kubectl delete -f ~/training/volumes/3-simple-mysql-deployment.yaml      </description>
+    </item>
+    
+    <item>
       <title>Lab 5: Find resources on multiple clusters</title>
       <link>https://niklaushirt.github.io/k8s_training_web/jtc20/lab5/</link>
       <pubDate>Wed, 23 Sep 2020 09:12:06 +0200</pubDate>
       
       <guid>https://niklaushirt.github.io/k8s_training_web/jtc20/lab5/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Lab 5: Find resources on multiple clusters</title>
+      <link>https://niklaushirt.github.io/k8s_training_web/jtc30/lab5/</link>
+      <pubDate>Wed, 23 Sep 2020 09:12:06 +0200</pubDate>
+      
+      <guid>https://niklaushirt.github.io/k8s_training_web/jtc30/lab5/</guid>
       <description>Lab 5 - Find resources on multiple clusters One feature that is very interesting in CP4M is the search feature (loop) on the top right part of the screen:
 When you click on that feature, you see some predefined search that are very interesting for everyday:
 Especially the workloads first search is very popular, then click on the tile:
