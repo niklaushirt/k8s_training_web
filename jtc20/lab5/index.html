@@ -1,15 +1,14 @@
 <!DOCTYPE html>
 <html><head>
-	<meta name="generator" content="Hugo 0.74.3" />
 
     <meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <link rel="canonical" href="https://niklaushirt.github.io/k8s_training_web/">
+    <link rel="canonical" href="https://niklaushirt.github.io/k8s_training_web/jtc20/lab5/">
 
     <title>
         
-        Welcome to the Kubernetes Course | Kubernetes Training
+        Lab 5: Find resources on multiple clusters | Kubernetes Training
         
     </title>
 
@@ -315,7 +314,7 @@
         </li>
         </ul>
     </li>
-    <li data-nav-id="/k8s_training_web/jtc20/" class="nav-item my-1 haschildren
+    <li data-nav-id="/k8s_training_web/jtc20/" class="nav-item my-1 parent haschildren
         ">
         
         <a class="nav-link p-0" href="/k8s_training_web/jtc20/"><h6>JTC20 IBM CloudPak for Multicloud Management</h6></a>
@@ -350,7 +349,7 @@
                     Lab 4: Deploy an application
                 </a>
         </li>
-        <li data-nav-id="/k8s_training_web/jtc20/lab5/" class="nav-item my-1">
+        <li data-nav-id="/k8s_training_web/jtc20/lab5/" class="nav-item my-1 active">
                 
                  <a href="/k8s_training_web/jtc20/lab5/" class="nav-link p-0">
                     Lab 5: Find resources on multiple clusters
@@ -367,29 +366,47 @@
                 <div class="docs-toc large order-lg-2 order-md-0 order-xs-1 col-12 col-lg-2 col-xl-2 position-sticky border-left"><div class="docs-toc">
 	<nav id="TableOfContents">
   <ul>
-    <li><a href="#welcome-to-my-courses-around-kubernetes">Welcome to my courses around Kubernetes.</a></li>
+    <li><a href="#lab-5---find-resources-on-multiple-clusters">Lab 5 - Find resources on multiple clusters</a></li>
   </ul>
 </nav>
 </div>
 </div>
                 <div class="main col-12 order-1 col-md-9 col-lg-10 col-xl-8 py-3">
                 
-	
 
-	<h1>Welcome to the Kubernetes Course</h1>
+<h1>Lab 5: Find resources on multiple clusters</h1>
 
-	<h2 id="welcome-to-my-courses-around-kubernetes">Welcome to my courses around Kubernetes.</h2>
-<p>I have developed them over the last year and have held several online and in-person meetups to teach fellow geeks about the awesome world of containers and orchestration.</p>
-<p>You can find the sources here</p>
-<p>Videos
-<a href="https://www.youtube.com/channel/UCIS0jmGOQrG2AKKPkTJYj9w/">https://www.youtube.com/channel/UCIS0jmGOQrG2AKKPkTJYj9w/</a></p>
-<p>Training Documents 
-<a href="https://github.com/niklaushirt/k8s_training_public">https://github.com/niklaushirt/k8s_training_public</a></p>
-<p>Training files
-<a href="https://github.com/niklaushirt/training.git">https://github.com/niklaushirt/training.git</a></p>
-<p>©2020 Niklaus Hirt</p>
+<h2 id="lab-5---find-resources-on-multiple-clusters">Lab 5 - Find resources on multiple clusters</h2>
+<p>One feature that is very interesting in CP4M is the search feature (loop) on the top right part of the screen:</p>
+<p><img src="images/image-20201009093736545-2229056.png" alt="image-20201009093736545"></p>
+<p>When you click on that feature, you see some predefined search that are very interesting for everyday:</p>
+<p><img src="images/image-20201009093911173-2229151.png" alt="image-20201009093911173"></p>
+<p>Especially the <strong>workloads</strong> first search is very popular, then <strong>click on the tile</strong>:</p>
+<p><img src="images/image-20201009094024046-2229224.png" alt="image-20201009094024046"></p>
+<p>The findings are shown:</p>
+<p><img src="images/image-20201009094130098-2229290.png" alt="image-20201009094130098"></p>
+<p>What is important to notice, the search is executed <strong>across all clusters</strong> ! And the answer is very quick.</p>
+<p>You can then select the tile related to <strong>all pods</strong> across all clusters :</p>
+<p><img src="images/image-20201009094351688-2229431.png" alt="image-20201009094351688"></p>
+<p>Results:</p>
+<p><img src="images/image-20201009094453381-2229493.png" alt="image-20201009094453381"></p>
+<p>Another feature is the filtering of different values. First go to the search zone:</p>
+<p><img src="images/image-20201009094643873-2229603.png" alt="image-20201009094643873"></p>
+<p>Start to type name and choose namespace in the filtering list:</p>
+<p><img src="images/image-20201009094852081-2229732.png" alt="image-20201009094852081"></p>
+<p>This should result to this (a long list of all namespaces across clusters):</p>
+<p><img src="images/image-20201009094934813-2229774.png" alt="image-20201009094934813"></p>
+<p>Pick the default namespace in the list and continue with <strong>kind:pod</strong> then you sould see all the pods running on all clusters in the default namespaces:</p>
+<p><img src="images/image-20201009095348853-2230028.png" alt="image-20201009095348853"></p>
+<p>Now you can save your search by clicking the <strong>blue diskette</strong>:</p>
+<p><img src="images/image-20201009095753198-2230273.png" alt="image-20201009095753198"></p>
+<h1 id="congrats">Congrats</h1>
+<p>You successfully accessed the CP4M console, you imported a new clusted that has been already created, you deployed an application across clusters, you installed the cloudctl command line, and you touched all the main features including the seach function.</p>
+<p>Thanks.</p>
+<hr>
 
-	
+
+    
 
 
                     
@@ -397,7 +414,7 @@
                           <div class="bg-primary overflow-hidden p-3 mt-5 shadow">
 
 
-    <div class="d-flex justify-content-center"><a class="p-1 ml-3 d-inline-block text-white text-right" href="/k8s_training_web/jtc00/" title="Introduction">Introduction<i class="fas fa-chevron-right p-1"></i></a>
+    <div class="d-flex justify-content-center"><a class="p-1 ml-3 d-inline-block text-white text-right" href="/k8s_training_web/jtc20/lab0/" title="Lab 0: Preparation">Lab 0: Preparation<i class="fas fa-chevron-right p-1"></i></a>
     </div>
 </div>
 
