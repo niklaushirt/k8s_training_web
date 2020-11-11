@@ -378,23 +378,23 @@
 
 <h2 id="lab-4---deploy-an-application">Lab 4 - Deploy an application</h2>
 <p>Open the <strong>Menu</strong> (1) and click on <strong>Administer</strong> (2) <strong>&gt; Helm repository</strong> (3).</p>
-<p><img src="../../../images/image-20201008135742665-2158262.png" alt="image-20201008135742665"></p>
+<p><img src="../../images/image-20201008135742665-2158262.png" alt="image-20201008135742665"></p>
 <p>On the Helm Repositories page, click <strong>Add Repository</strong> to register a new Helm Repository.</p>
-<p><img src="../../../images/image-20201008135915970-2158356.png" alt="image-20201008135915970"></p>
+<p><img src="../../images/image-20201008135915970-2158356.png" alt="image-20201008135915970"></p>
 <p>Type <strong>coc-charts</strong> (1) as repository Name, and enter <strong><a href="https://ibm-icp-coc.github.io/charts/repo/stable">https://ibm-icp-coc.github.io/charts/repo/stable</a></strong> as URL (2). Click <strong>Add</strong> (3).</p>
-<p><img src="../../../images/image-20201008135946574-2158386.png" alt="image-20201008135946574"></p>
+<p><img src="../../images/image-20201008135946574-2158386.png" alt="image-20201008135946574"></p>
 <p>After few seconds, you should see Sync Status as <strong>Completed</strong>. Now, let’s deploy an application from this new Helm repository. Click <strong>Catalog</strong> on upper right corner of the page to view the list of helm charts that you can deploy.</p>
-<p><img src="../../../images/image-20201008140135880-2158495.png" alt="image-20201008140135880"></p>
+<p><img src="../../images/image-20201008140135880-2158495.png" alt="image-20201008140135880"></p>
 <p>In the catalog, search for <strong>sum</strong>  and select the <strong>sumapp</strong></p>
-<p><img src="../../../images/image-20201008140301042-2158581.png" alt="image-20201008140301042"></p>
+<p><img src="../../images/image-20201008140301042-2158581.png" alt="image-20201008140301042"></p>
 <p>The chart deploys a simple Liberty web application for demonstration purposes. Click <strong>Configure</strong> to continue.</p>
-<p><img src="../../../images/image-20201008140335978-2158616.png" alt="image-20201008140335978"></p>
+<p><img src="../../images/image-20201008140335978-2158616.png" alt="image-20201008140335978"></p>
 <p>Enter <strong>mysum</strong> as Helm release name (1), select <strong>default</strong> as Target namespace (2). On Target cluster, select both <strong>local-cluster</strong> and <strong>managed-cluster</strong> (3). Then click <strong>Install</strong> (4).</p>
-<p><img src="../../../images/image-20201008140404731-2158644.png" alt="image-20201008140404731"></p>
+<p><img src="../../images/image-20201008140404731-2158644.png" alt="image-20201008140404731"></p>
 <p>The installation starts immediately but it take a few minutes to deploy the application to remote cluster. Click <strong>View Helm Releases</strong> to view the status.</p>
-<p><img src="../../../images/image-20201008144311711-2160991.png" alt="image-20201008144311711"></p>
+<p><img src="../../images/image-20201008144311711-2160991.png" alt="image-20201008144311711"></p>
 <p>On the Helm releases page, you can check that <strong>mysumapp</strong> helm is deployed to your clusters.</p>
-<p><img src="../../../images/image-20201008144349113-2161029.png" alt="image-20201008144349113"></p>
+<p><img src="../../images/image-20201008144349113-2161029.png" alt="image-20201008144349113"></p>
 
 
     
