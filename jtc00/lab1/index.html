@@ -468,8 +468,7 @@
     </li>
     <li><a href="#part-2---download-the-lab-vm-on-your-pc">Part 2 - Download the Lab VM on your PC</a>
       <ul>
-        <li><a href="#option-1-download-with-aspera-recommended">Option 1: Download with Aspera (recommended)</a></li>
-        <li><a href="#option-2-download-from-google-drive-not-recommended">Option 2: Download from Google Drive (not recommended)</a></li>
+        <li><a href="#download-from-google-drive">Download from Google Drive</a></li>
       </ul>
     </li>
     <li><a href="#part-3---starting-the-vm">Part 3 - Starting the VM</a>
@@ -511,7 +510,7 @@
 <p>Before we dive into the Labs, you need to be able to run the provided Lab VM. It contains a Minikube cluster and all the configurations for the subsequent labs.</p>
 <blockquote>
 <p>VMWare is the preferred option as it handles nested virtualization that we need for this lab very well.
-VirtualBox has this option in the latest releases but might prove unstable on certain PCs/Macs (especially the MacBook Pro 16&rsquo; seems to run into problems).</p>
+VirtualBox has this option in the latest releases but might prove unstable on certain PCs/Macs (especially the MacBook Pro 16' seems to run into problems).</p>
 </blockquote>
 <h3 id="option-1-installing-vmware-preferred">Option 1: Installing VMWare (preferred)</h3>
 <p>If you do not already have VMWare installed, install a 60 days trial for your OS now:</p>
@@ -529,16 +528,10 @@ VirtualBox has this option in the latest releases but might prove unstable on ce
 </ul>
 <h2 id="part-2---download-the-lab-vm-on-your-pc">Part 2 - Download the Lab VM on your PC</h2>
 <p>The VM is an 13GB zip file that has to be downloaded.</p>
-<h3 id="option-1-download-with-aspera-recommended">Option 1: Download with Aspera (recommended)</h3>
-<p>The easiest way to download the file is with IBM Aspera high-speed transfer solution.</p>
-<p>Download it here:</p>
-<p><a href="https://aspera.pub/zM7YiFk/k8s_training">Aspera VMWare</a></p>
-<p><a href="https://aspera.pub/zM7YiFk/k8s_training">Aspera VirtualBox</a></p>
-<p><a href="https://aspera.pub/zM7YiFk/k8s_training">Aspera OVA</a></p>
-<h3 id="option-2-download-from-google-drive-not-recommended">Option 2: Download from Google Drive (not recommended)</h3>
-<p>You can also download it from Google Drive, which is <strong>much</strong> slower.</p>
-<p>Download it here (VirtualBox only):</p>
+<h3 id="download-from-google-drive">Download from Google Drive</h3>
+<p>Download it here (VirtualBox and VMWare):</p>
 <p><a href="https://drive.google.com/drive/folders/12YFacjjc92Ens-XEecqgmOG9d0YCz4IQ?usp=sharing">Google Drive VirtualBox</a></p>
+<p><a href="https://drive.google.com/drive/folders/12YFacjjc92Ens-XEecqgmOG9d0YCz4IQ?usp=sharing">Google Drive VMWare</a></p>
 <h2 id="part-3---starting-the-vm">Part 3 - Starting the VM</h2>
 <h3 id="vmware">VMWare</h3>
 <ol>
@@ -594,7 +587,7 @@ If you have Docker Desktop running please shut it down first, we&rsquo;ll use Do
         </button>
     </div>
     <div id="clipboard_dc70affa22">
-    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> 
+    <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> 
 ./welcome.sh
 	
 </code></pre></div>
@@ -665,7 +658,7 @@ This is <strong><code>untested</code></strong> and I cannot guarantee that all t
         </button>
     </div>
     <div id="clipboard_0e136ce986">
-    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> 
+    <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> 
 minikube ip
 	
 </code></pre></div>
@@ -697,7 +690,7 @@ minikube ip
         </button>
     </div>
     <div id="clipboard_878f8cf495">
-    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> 
+    <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> 
 http://&lt;MY-CLUSTER-IP&gt;:31222
 	
 </code></pre></div>
@@ -760,7 +753,7 @@ http://&lt;MY-CLUSTER-IP&gt;:31222
         </button>
     </div>
     <div id="clipboard_a2a5c258d3">
-    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> 
+    <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> 
 kubectl get nodes                                                                                                                           
 		
 </code></pre></div>
@@ -770,7 +763,7 @@ kubectl get nodes
 
 
 
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext">&gt; NAME           STATUS   ROLES    AGE   VERSION
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext">&gt; NAME           STATUS   ROLES    AGE   VERSION
 &gt; w.x.y.z.       Ready    &lt;none&gt;   24d   v1.17.6+IKS
 </code></pre></div></li>
 <li>
@@ -822,7 +815,7 @@ This is <strong>untested</strong> and I cannot guarantee that all the Labs will 
         </button>
     </div>
     <div id="clipboard_0bdfeb1144">
-    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> 
+    <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> 
 ibmcloud ks worker ls --cluster mycluster-free
 	
 </code></pre></div>
@@ -855,7 +848,7 @@ ibmcloud ks worker ls --cluster mycluster-free
         </button>
     </div>
     <div id="clipboard_878f8cf495">
-    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> 
+    <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> 
 http://&lt;MY-CLUSTER-IP&gt;:31222
 	
 </code></pre></div>
@@ -878,8 +871,8 @@ http://&lt;MY-CLUSTER-IP&gt;:31222
 <li>
 <p>Problems on Windows 10</p>
 <p>Can be fixed in most cases by turning off Hyper-V by running (as admin):
-<code>bcdedit /set hypervisorlaunchtype off</code> and rebooting.</p>
-<p>This disables Hyper-V and allows Virtualbox to support nested virtualisation.</p>
+<code>bcdedit /set hypervisorlaunchtype off</code> and rebooting. </p>
+<p>This disables Hyper-V and allows Virtualbox to support nested virtualisation.</p>
 <p>You can turn it back on again with <code>bcdedit /set hypervisorlaunchtype auto</code></p>
 </li>
 </ol>
