@@ -15,4 +15,3 @@ Training files [https://github.com/niklaushirt/training.git](https://github.com
 
 ©2023 Niklaus Hirt
 
-
