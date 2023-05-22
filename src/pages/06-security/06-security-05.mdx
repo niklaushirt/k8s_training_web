@@ -24,7 +24,7 @@ metadata:
 Run the following command:
 
 ```bash
-kubectl apply -f ~/training/rbac/service-accounts.yaml
+kubectl apply -f ./training/rbac/service-accounts.yaml
 ```    
     
 ```output
@@ -59,7 +59,7 @@ spec:
 Run the following command:
 
 ```bash
-kubectl apply -f ~/training/rbac/service-account-kubectl.yaml
+kubectl apply -f ./training/rbac/service-account-kubectl.yaml
 ```    
 
 ```output
@@ -135,7 +135,7 @@ The following configuration will create a `Role` and a `RoleBinding` for jus
     The `Role` has the rights to list the `Services`.
     
     ```bash
-    kubectl create -f ~/training/rbac/service-accounts-role.yaml
+    kubectl create -f ./training/rbac/service-accounts-role.yaml
     ```    	
         
     ```output
@@ -165,7 +165,7 @@ The following configuration will create a `Role` and a `RoleBinding` for jus
     Create the RoleBinding
     
     ```bash
-    kubectl create -f ~/training/rbac/service-accounts-role-binding.yaml
+    kubectl create -f ./training/rbac/service-accounts-role-binding.yaml
     ```        	
         
     ```output

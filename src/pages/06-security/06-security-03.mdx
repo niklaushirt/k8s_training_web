@@ -16,7 +16,7 @@ You can get more details [here](https://github.com/FairwindsOps/polaris).
 1.  Install Polaris Dashboard by running:
     
     ```bash
-    kubectl apply -f ~/training/tools/polaris.yaml
+    kubectl apply -f ./training/tools/polaris.yaml
     ```
 
     ```output
@@ -72,7 +72,7 @@ You can get more details [here](https://github.com/FairwindsOps/polaris).
 6.  Let’s deploy a version of `k8sdemo` that has some more problems by running:
     
     ```bash
-    kubectl create -f ~/training/deployment/demoapp-errors.yaml
+    kubectl create -f ./training/deployment/demoapp-errors.yaml
     ```        
     
     This action will take a bit of time. To check the status of the running application, you can use `kubectl get pods`.
@@ -85,8 +85,8 @@ You can get more details [here](https://github.com/FairwindsOps/polaris).
 1.  Clean-up by running:
     
     ```bash
-    kubectl delete -f ~/training/deployment/demoapp-errors.yaml
-    kubectl delete -f ~/training/tools/polaris.yaml
+    kubectl delete -f ./training/deployment/demoapp-errors.yaml
+    kubectl delete -f ./training/tools/polaris.yaml
     ```        
     
 
@@ -236,7 +236,7 @@ Yu have to install `KubeSec` as described here: [https://github.com/controlpl
 1.  Launch a test against the demo application
     
     ```bash
-    kubesec scan ~/training/deployment/demoapp.yaml
+    kubesec scan ./training/deployment/demoapp.yaml
     ```
 
     
@@ -300,7 +300,7 @@ Yu have to install `KubeSec` as described here: [https://github.com/controlpl
 2.  Launch a test against a really vulnerable app
     
     ```bash
-    kubesec scan ~/training/kubesec/critical.yaml 
+    kubesec scan ./training/kubesec/critical.yaml 
     ```        
     
     The output is in JSON format that can easily be integrated into a CI/CD process.
@@ -342,7 +342,7 @@ You have to install `ConfTest` as described here: [https://www.conftest.dev/i
 1.  Launch a test against the demo application
     
     ```bash
-    conftest test -p ~/training/conftest/src/examples/kubernetes/policy ~/training/deployment/demoapp.yaml
+    conftest test -p ./training/conftest/src/examples/kubernetes/policy ./training/deployment/demoapp.yaml
     ```
 
     ```output       
@@ -357,7 +357,7 @@ You have to install `ConfTest` as described here: [https://www.conftest.dev/i
     The output format here is set to TAP ([Test Anything Protocol](https://testanything.org/))
     
     ```bash
-    conftest test -p ~/training/conftest/src/examples/kubernetes/policy --output=tap ~/training/deployment/*.yaml
+    conftest test -p ./training/conftest/src/examples/kubernetes/policy --output=tap ./training/deployment/*.yaml
     ```
 
     ```output   
@@ -387,7 +387,7 @@ You have to install `ConfTest` as described here: [https://www.conftest.dev/i
     The output format here is set to JSON.
     
     ```bash
-    conftest test -p ~/training/conftest/src/examples/docker/policy --output=json ~/training/conftest/src/examples/docker/Dockerfile 
+    conftest test -p ./training/conftest/src/examples/docker/policy --output=json ./training/conftest/src/examples/docker/Dockerfile 
     ```        
     
     A blakclisted base image has been detected:
