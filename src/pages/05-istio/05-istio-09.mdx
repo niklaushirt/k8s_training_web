@@ -1,0 +1,49 @@
+---
+title: "Fault Injection"
+---
+
+To test microservices for resiliency, Istio allows us to inject delays and errors between services.
+
+Let’s start the Lab.
+
+1.  Let’s create a VirtualService that creates 50% of 501 errors when the `details` service is called.
+    
+    ```yaml
+        apiVersion: networking.istio.io/v1alpha3
+        kind: VirtualService
+        metadata:
+            name: details
+        spec:
+            hosts:
+            - details
+            http:
+            - fault:
+                abort:
+                httpStatus: 500
+                percentage:
+                    value: 50
+            route:
+            - destination:
+                host: details
+                subset: v1
+        ...
+    ```        	
+        
+    
+    Run the following:
+    
+    ```bash
+    kubectl apply -f ~/training/istio/samples/bookinfo/networking/fault-injection-details-v1.yaml
+    ```        	
+        
+    ```output
+    > virtualservice.networking.istio.io/details created
+    > destinationrule.networking.istio.io/details created
+    ```
+
+    
+2.  In Kiali click on the productpage (orange) box and after a short while you should see 500 errors appearing. In the right side dtail panel you will see additional information about the problem in your communication between microservices.
+    
+    ![](./../images/istio1.png)
+    
+

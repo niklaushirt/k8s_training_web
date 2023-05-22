@@ -1,0 +1,74 @@
+---
+title: "Create your first Image"
+---
+## 🚀 TASK: Install on Mac or PC Create your first Image
+
+![K8s CNI](./../images/cont04.png)
+
+1. Let’s create our first image (the `k8sdemo-backend` image) from this `Dockerfile`:
+
+    ```yaml   
+    FROM node:8-stretch
+
+    # Change working directory
+    WORKDIR "/app"
+
+    # Update packages and install dependency packages for services
+    RUN apt-get update \
+        && apt-get dist-upgrade -y \
+        && apt-get clean \
+        && echo 'Finished installing dependencies'
+
+    # Install npm production packages
+    COPY package.json /app/
+    RUN cd /app; npm install --production
+
+    COPY . /app
+
+    ENV NODE_ENV production
+    ENV BACKEND_MESSAGE HelloWorld
+
+    ENV PORT 3000
+
+    EXPOSE 3000
+
+    CMD ["npm", "start"]
+    ```
+
+2. Run the following command:
+
+    ```shell   
+    cd ./demo-app/k8sdemo_backend
+    podman build -t k8sdemo-backend:lab .
+    cd -
+    ```
+
+    ```output   
+    > STEP 1/11: FROM node:8-stretch
+    > Resolved "node" as an alias (/etc/containers/registries.conf.d/000-shortnames.conf)
+    > Trying to pull docker.io/library/node:8-stretch...
+    > Getting image source signatures
+    > Copying blob sha256:403697a3e152c7a38ddb9175a90ed2dac97d780421c35949ff80cd67a7d4e596
+    > Copying blob sha256:b4f31062581dadb1f69c43e9441040dd46788bf13ae51f20c66929fac82b506b
+    ...
+    > Copying config sha256:50c57a9369c7f4cec5075389125ea0c9fb23f58efae84747b726cc9452844926
+    > Writing manifest to image destination
+    > Storing signatures
+    > STEP 2/11: WORKDIR "/app"
+    > --> Pushing cache []:cec39e53196cc7f6b113b07369b3af75a6b3ee33be396b6eaac074e142e9166c
+    > --> 9eac8ae6a7b
+    > STEP 3/11: RUN apt-get update  && apt-get dist-upgrade -y  && apt-get clean  && echo 'Finished installing dependencies'
+    > Get:1 http://security.debian.org/debian-security stretch/updates InRelease [59.1 kB]
+    > Ign:2 http://deb.debian.org/debian stretch InRelease
+    > Get:3 http://deb.debian.org/debian stretch-updates InRelease [93.6 kB]
+    > Get:4 http://deb.debian.org/debian stretch Release [118 kB]
+    ...
+    > STEP 11/11: CMD ["npm", "start"]
+    > COMMIT k8sdemo-backend:lab
+    > --> Pushing cache []:b481126bf4cfbf2c54ec61a601a731b1ac7eec94471fd12a9dc8e4351707f9c7
+    > --> d1a9d0aeb27
+    > Successfully tagged localhost/k8sdemo-backend:lab
+    > d1a9d0aeb27b2d0541a95ece18f1a84a9635740c1a6452465bdd1d039b67b0c7
+    ```
+
+        

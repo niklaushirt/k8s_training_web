@@ -1,0 +1,271 @@
+---
+title: "Traffic flow management"
+---
+
+
+## Using rules to manage traffic
+
+The core component used for traffic management in Istio is Pilot, which manages and configures all the Envoy proxy instances deployed in a particular Istio service mesh. It lets you specify what rules you want to use to route traffic between Envoy proxies, which run as sidecars to each service in the mesh. Each service consists of any number of instances running on pods, containers, VMs etc. Each service can have any number of versions (a.k.a. subsets). There can be distinct subsets of service instances running different variants of the app binary. These variants are not necessarily different API versions. They could be iterative changes to the same service, deployed in different environments (prod, staging, dev, etc.). Pilot translates high-level rules into low-level configurations and distributes this config to Envoy instances. Pilot uses three types of configuration resources to manage traffic within its service mesh: Virtual Services, Destination Rules, and Service Entries.
+
+### Virtual Services
+
+A [VirtualService](https://istio.io/docs/reference/config/istio.networking.v1alpha3/#VirtualService) defines a set of traffic routing rules to apply when a host is addressed. Each routing rule defines matching criteria for traffic of a specific protocol. If the traffic is matched, then it is sent to a named [destination](https://istio.io/docs/reference/config/istio.networking.v1alpha3.html#Destination) service (or [subset](https://istio.io/docs/reference/config/istio.networking.v1alpha3/#Subset) or version of it) defined in the service registry.
+
+### Destination Rules
+
+A [DestinationRule](https://istio.io/docs/reference/config/istio.networking.v1alpha3/#Destination) defines policies that apply to traffic intended for a service after routing has occurred. These rules specify configuration for load balancing, connection pool size from the sidecar, and outlier detection settings to detect and evict unhealthy hosts from the load balancing pool. Any destination `host` and `subset` referenced in a `VirtualService` rule must be defined in a corresponding `DestinationRule`.
+
+### Service Entries
+
+A [ServiceEntry](https://istio.io/docs/reference/config/istio.networking.v1alpha3.html#ServiceEntry) configuration enables services within the mesh to access a service not necessarily managed by Istio. The rule describes the endpoints, ports and protocols of a white-listed set of mesh-external domains and IP blocks that services in the mesh are allowed to access.
+
+* * *
+
+## The Bookinfo Application
+
+In this section, Istio will be configured to dynamically modify the network traffic between some of the components of our application. In this case we have 2 versions of the “reviews” component (v1 and v2) but we don’t want to replace review-v1 with review-v2 immediately. In most cases, when components are upgraded it’s useful to deploy the new version but only have a small subset of network traffic routed to it so that it can be tested before the old version is removed. This is often referred to as “canary testing”.
+
+![kiali](./../images/bookinfo.png)
+
+There are multiple ways in which we can control this routing. It can be based on which user or type of device that is accessing it, or a certain percentage of the traffic can be configured to flow to one version.
+
+This step shows you how to configure where you want your service requests to go based on weights and HTTP Headers. You would need to be in the root directory of the Istio release you have downloaded on the Prerequisites section.
+
+* * *
+
+## Set default Destination Rules
+
+Before moving on, we have to define the destination rules. The destination rules tell Istio what versions (subsets in Istio terminology) are available for routing. This step is required before fine-grained traffic shaping is possible.
+
+```bash
+kubectl apply -f ~/training/istio/samples/bookinfo/networking/destination-rule-reviews.yaml
+```
+
+```output
+> destinationrule.networking.istio.io/reviews created
+```
+ 
+    
+
+For more details, see the [Istio documentation](https://istio.io/docs/tasks/traffic-management/traffic-shifting/).
+
+* * *
+
+## A/B testing with Istio
+
+A/B testing is a method of performing identical tests against two separate service versions in order to determine which performs better.
+
+Set Default Routes to `reviews-v1` for all microservices
+
+This would set all incoming routes on the services (indicated in the line `destination: <service>`) to the deployment with a tag `version: v1`. To set the default routes, run:
+
+```bash
+kubectl create -f ~/training/istio/samples/bookinfo/networking/virtual-service-all-v1.yaml
+```
+
+```output
+> virtualservice.networking.istio.io/reviews created
+```
+
+The definition yaml file that we have just applied looks like this
+
+```yaml
+kind: VirtualService
+metadata:
+    name: reviews
+spec:
+    hosts:
+    - reviews
+    http:
+    - route:
+    - destination:
+        host: reviews
+        subset: v1
+    ```
+  
+    
+
+Observe in the Kiali Dashboard. After a short while you should see that all traffic is going to V1.
+
+**This may take some time to settle!**
+
+![](./../images/traffic1.png)
+
+**After the deployment of v2:**
+
+Route 100% of the traffic to the `version: v2` of the **reviews microservices**
+
+This will direct/switch all incoming traffic to version v2 of the reviews microservice. Run:
+
+Copy
+
+     
+    kubectl apply -f ~/training/istio/samples/bookinfo/networking/virtual-service-all-v2.yaml
+      
+    
+
+    > virtualservice.networking.istio.io/reviews configured
+    
+
+The new definition yaml file that we have just applied looks like this
+
+```yaml
+kind: VirtualService
+metadata:
+    name: reviews
+spec:
+    hosts:
+    - reviews
+    http:
+    - route:
+    - destination:
+        host: reviews
+        subset: v2
+```    
+    
+
+Observe in the Kiali Dashboard. After a short wile you should see that all traffic is going to V2.
+
+![](./../images/traffic2.png)
+
+* * *
+
+## Canary deployment
+
+In `Canary Deployments`, newer versions of services are incrementally rolled out to users to minimize the risk and impact of any bugs introduced by the newer version. To begin incrementally routing traffic to the newer version of the guestbook service, modify the original `VirtualService` rule.
+
+Route 80% of traffic on **reviews microservice** to `reviews-v1` and 20% to `reviews-v2`.
+
+This is indicated by the `weight: 80 and 20` in the yaml file.
+
+> Using `replace` should allow you to edit existing route-rules.
+
+```bash
+kubectl apply -f ~/training/istio/samples/bookinfo/networking/virtual-service-reviews-80-20.yaml
+```
+    
+
+The new definition yaml file that we have just applied looks like this
+
+```yaml
+kind: VirtualService
+metadata:
+    name: reviews
+spec:
+    hosts:
+    - reviews
+    http:
+    - route:
+    - destination:
+        host: reviews
+        subset: v1
+        weight: 80
+    - destination:
+        host: reviews
+        subset: v2
+        weight: 20
+```
+    
+
+Observe in the Kiali Dashboard. After a short wile you should see that 80% of the traffic is going to V1 and 80% of the traffic is going to V2.
+
+![](./../images/traffic3.png)
+
+* * *
+
+## Navigating Kiali
+
+Go back to the Kiali Dashboard and select the `reviews` service in the graph.
+
+![](./../images/traffic31.png)
+
+To the right you can observe specific metrics for this service. Then open the `reviews` service overview:
+
+![](./../images/traffic32.png)
+
+In this view you can get details about the service, like averall Health, assigned `Workloads` and much more.
+
+![](./../images/traffic33.png)
+
+**Feel free to browse some more to get familiar with the interface.**
+
+Now open the `reviews` service details by selecting the `Virtual Services` tab and selecting `reviews`.
+
+![](./../images/traffic34.png)
+
+Here you get more detailed information about the service, like the weight distribution:
+
+![](./../images/traffic35.png)
+
+* * *
+
+## Gradual Rollout
+
+In order to gradually roll out a new release we have to change the weight distribution.
+
+*   Click on the `YAML` tab
+*   Modify the weight to 20%/80%
+*   Click `Save`
+
+![](./../images/traffic36.png)
+
+Observe in the Kiali Dashboard. After a short wile you should see that about 20% of the traffic is going to V1 and 90% of the traffic is going to V2.
+
+![](./../images/traffic37.png)
+
+**Note:** The sum of the weights must be equal to 100%
+
+* * *
+
+## Traffic Steering / Dark Launch
+
+Define certain conditions (Username, type of phone, …) that will be using the new service.
+
+Set Route to `reviews-v2` of **reviews microservice** for a specific user
+
+This would set the route for the user `jason` (You can login as _jason_ with any password in your deploy web application) to see the `version: v3` of the reviews microservice.
+
+Run:
+
+```bash
+kubectl apply -f ~/training/istio/samples/bookinfo/networking/virtual-service-reviews-jason-v2-v3.yaml
+```
+    
+
+The new definition yaml file that we have just applied looks like this
+
+```yaml
+kind: VirtualService
+metadata:
+    name: reviews
+spec:
+    hosts:
+    - reviews
+    http:
+    - match:
+    - headers:
+        end-user:
+            exact: jason
+    route:
+    - destination:
+        host: reviews
+        subset: v3
+    - route:
+    - destination:
+        host: reviews
+        subset: v2
+```    
+    
+
+Go to the Bookinfo Application in your Browser.
+
+**Refresh several times** - You should see only black stars, meaning that you are using V2.
+
+![](./../images/traffic4.png)
+
+Now login to the Web Application as user jason with password jason and **refresh several times**. You should see only red stars, meaning that you are using V3.
+
+Observe in the Kiali Dashboard. After a short wile you should see that a small percentage of traffic is going to V3, which corresponds to your page refreshes.
+
+![](./../images/traffic5.png)
+

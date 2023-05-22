@@ -1,0 +1,113 @@
+- title: Introduction
+  pages:
+    - title: Introduction
+      path: /01-introduction/01-introduction
+    - title: Course Nomenclature
+      path: /01-introduction/02-nomenclature
+      
+- title: Prerequisites
+  pages:
+    - title: Install prerequisites for Mac
+      path: /02-prerequisites/02-prerequisites-01
+    - title: Install prerequisites for Windows
+      path: /02-prerequisites/02-prerequisites-01_w
+    - title: Get the code 
+      path: /02-prerequisites/02-prerequisites-02
+    - title: Additional Remarks
+      path: /02-prerequisites/02-prerequisites-03
+
+  hasDivider: true
+
+- title: Containers
+  pages:
+    - title: Container Basics
+      path: /03-containers/03-containers-01
+
+- title: Containers
+  pages:
+    - title: Container Basics
+      path: /03-containers/03-containers-01
+    - title: Create your first Image
+      path: /03-containers/03-containers-02
+    - title: Run your first Image
+      path: /03-containers/03-containers-03
+    - title: Creating and running the frontend Image
+      path: /03-containers/03-containers-04
+    - title: Container Registry
+      path: /03-containers/03-containers-05
+    - title: Run from the registry
+      path: /03-containers/03-containers-06
+    - title: Use Portainer
+      path: /03-containers/03-containers-07
+    - title: Container Internals
+      path: /03-containers/03-containers-08
+    - title: Cleanup
+      path: /03-containers/03-containers-09
+
+
+
+- title: Kubernetes
+  pages:
+    - title: Container Basics
+      path: /04-kubernetes-basics/04-kubernetes-basics-01
+
+- title: Kubernetes Basics
+  pages:
+    - title: Kubernetes Basics
+      path: /04-kubernetes-basics/04-kubernetes-basics-01
+    - title: Deploy your first Pod
+      path: /04-kubernetes-basics/04-kubernetes-basics-02
+    - title: Deploy your first application
+      path: /04-kubernetes-basics/04-kubernetes-basics-03
+    - title: Scale and Update Deployments
+      path: /04-kubernetes-basics/04-kubernetes-basics-04
+    - title: Stateful Deployments
+      path: /04-kubernetes-basics/04-kubernetes-basics-05
+    - title: Cleanup
+      path: /04-kubernetes-basics/04-kubernetes-basics-06
+
+- title: Mesh Networking (Istio)
+  pages:
+    - title: Get to know ISTIO
+      path: /05-istio/05-istio-01
+    - title: Installing Istio
+      path: /05-istio/05-istio-02
+    - title: Deploy BookInfo application
+      path: /05-istio/05-istio-03
+    - title: Monitoring with Kiali
+      path: /05-istio/05-istio-04
+    - title: Traffic flow management
+      path: /05-istio/05-istio-05
+    - title: Telemetry data
+      path: /05-istio/05-istio-06
+    - title: End-user authentication
+      path: /05-istio/05-istio-07
+    - title: Traffic Mirroring
+      path: /05-istio/05-istio-08
+    - title: Fault Injection
+      path: /05-istio/05-istio-09
+    - title: Cleanup
+      path: /05-istio/05-istio-10
+
+
+
+- title: Kubernetes Security
+  pages:
+    - title: Prerequisites
+      path: /06-security/06-security-01
+    - title: Network Policies
+      path: /06-security/06-security-02
+    - title: Security Tooling
+      path: /06-security/06-security-03
+    - title: RBAC
+      path: /06-security/06-security-04
+    - title: Service Accounts
+      path: /06-security/06-security-05
+    - title: RBAC Tooling
+      path: /06-security/06-security-06
+    # - title: Image Scanning
+    #   path: /06-security/06-security-07
+
+
+
+

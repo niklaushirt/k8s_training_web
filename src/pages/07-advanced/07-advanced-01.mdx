@@ -1,0 +1,251 @@
+---
+title: "Liveness and Readiness Probes"
+---
+# Liveness and Readiness Probes
+
+## Introduction
+
+If you want to turn your Kubernetes deployments into auto healing wonders you only have to add a few lines of YAML.
+
+The right combination of `liveness and readiness probes` used with Kubernetes deployments can:
+
+*   Enable zero downtime deploys
+*   Prevent deployment of broken images
+*   Ensure that failed containers are automatically restarted
+
+### Liveness Probes
+
+Liveness probes will attempt to restart a container if it fails and starts to respond to the probe.
+
+Example of a liveness probe that monitors the /health URL on port 3000.
+
+Copy
+
+     
+    livenessProbe:
+      httpGet:
+        path: /health
+        port: 3000
+    
+    
+
+### Readiness Probes
+
+Updating deployments without readiness probes can result in downtime as old `Pods` are replaced by new pods and traffic might be sent to the `Pod` that is not ready to process requests yet (for example because the webserver is still initializing).
+
+With readiness probes, Kubernetes will not send traffic to a `Pod` until the probe is successful.
+
+Example of a readiness probe that monitors the /ready URL on port 3000.
+
+Copy
+
+       
+    readinessProbe:
+      httpGet:
+        path: /ready
+        port: 3000
+    
+    
+
+### Usage
+
+A typical sequence migth look like this:
+
+1.  Readiness probe fails
+2.  Kubernetes stops sending traffic to the pod
+3.  Liveness probe fails
+4.  Kubernetes restarts the failed container
+5.  Readiness probe succeeds again (hopefully)
+6.  Kubernetes starts sending traffic to the pod again
+
+Additional parameters are available in order to get better control over the triggering of the probes:
+
+Copy
+
+       
+    readinessProbe:
+      httpGet:
+        path: /monitoring/alive
+        port: 3401
+      initialDelaySeconds: 5
+      timeoutSeconds: 1
+      periodSeconds: 15 
+      successThreshold: 1 
+      failureThreshold: 3 
+    
+    
+
+**initialDelaySeconds**: How long to wait before starting to probe after a container starts. For liveness probes this should be longer than the time your app usually takes to start up. Otherwise you might get stuck in a reboot loop.
+
+**timeoutSeconds**: How long a probe can take to respond before it’s considered a failure.
+
+**periodSeconds**: How often a probe will be sent. In most cases you can settle for a value between 10 and 20 seconds.
+
+**successThreshold**: How many successes are needed before the probe is considered a success again
+
+**failureThreshold**: How many failures are needed before the probe is considered failed
+
+## Create a Probe
+
+In this Lab we will create a websphere open-liberty deployment. Openliberty takes some time to initialize, which will allow us to trigger the probes.
+
+We will be using the root URL (/) to check for the probes, which is a quick and dirty solution.
+
+In more advanced scenarios you should code two separate and specific URLs (for example /ready and /health) that check for more elaboreate scenarios, like:
+
+*   Is the webserver up and running
+*   Is the backend (e.g. database reachable)
+*   …
+
+The example is the following:
+
+Copy
+
+     
+    apiVersion: apps/v1
+    kind: Deployment
+    metadata:
+      name: open-liberty
+      namespace: default
+    ...
+    spec:
+    ...
+      template:
+    ...  
+        spec:
+          containers:
+          - name: open-liberty
+            image: open-liberty:full
+            imagePullPolicy: IfNotPresent 
+            livenessProbe:
+              httpGet:
+                path: /
+                port: 9080
+              initialDelaySeconds: 5
+              periodSeconds: 1
+              successThreshold: 1 
+              failureThreshold: 1
+            readinessProbe:
+              httpGet:
+                path: /
+                port: 9080
+              initialDelaySeconds: 0
+              periodSeconds: 1
+              successThreshold: 1 
+              failureThreshold: 1
+    ...
+    
+    
+
+As you can see, we will set the initialDelaySeconds way to low and just give it the possibility to fail once (failureThreshold=1) before triggering a failure.
+
+So we will have the readiness probe triggering almost immediately and the liveness probe 5 seconds later (initialDelaySeconds: 5).
+
+1.  Now let’s create the deployment
+    
+    Copy
+    
+         
+        kubectl apply -f ./training/probes/open-liberty-fail.yaml
+        	
+        
+    
+
+### Examine what happened
+
+Let’s examine what happened.
+
+1.  Run `k9s`, select the open-liberty Pod and hit `d` for Describe
+    
+    ![](https://niklaushirt.github.io/images/probe1.png)
+    
+2.  You can see that both probes (readiness and liveness) have been triggered.
+    
+    The readiness probe checks immediately and allows for only one error before triggering. The liveness probe checks after 5 seconds and allows for only one error before triggering.
+    
+    ![](https://niklaushirt.github.io/images/probe4.png)
+    
+3.  Run `k9s` After a while you will see the number of restarts going up and the dreaded `CrashLoopBackOff` Status
+    
+    ![](https://niklaushirt.github.io/images/probe3.png)
+    
+
+## Adapt Probe values
+
+Let’s try to find some more realistic values:
+
+Copy
+
+     
+    apiVersion: apps/v1
+    kind: Deployment
+    metadata:
+      name: open-liberty
+      namespace: default
+    ...
+    spec:
+    ...
+      template:
+    ...  
+        spec:
+          containers:
+          - name: open-liberty
+            image: open-liberty:full
+            imagePullPolicy: IfNotPresent 
+            readinessProbe:
+              httpGet:
+                path: /
+                port: 9080
+              initialDelaySeconds: 30
+              periodSeconds: 10
+              timeoutSeconds: 3
+              failureThreshold: 1
+            livenessProbe:
+              httpGet:
+                path: /
+                port: 9080
+              initialDelaySeconds: 60
+              periodSeconds: 10
+              timeoutSeconds: 3
+              failureThreshold: 1
+    ...
+    
+    
+
+So with this values for the readiness probe we give the container the time to internally start up the open-liberty server (initialDelaySeconds: 30) - knowing that it takes about 15-20 seconds to initialize - while checking every 10 seconds (periodSeconds: 10).
+
+As for the liveness probe we give the container plenty time to settle (initialDelaySeconds: 60) while checking every 10 seconds (periodSeconds: 10).
+
+1.  So let’s update the deployment
+
+Copy
+
+     
+    kubectl apply -f ./training/probes/open-liberty-ok.yaml
+    
+    
+
+### Examine what happened
+
+Let’s examine what happened.
+
+1.  Run `k9s`, select the new open-liberty Pod and hit `d` for Describe (the one that says Running)
+    
+    ![](https://niklaushirt.github.io/images/probe5.png)
+    
+2.  You can see that no probe (readiness and liveness) has been triggered.
+    
+    ![](https://niklaushirt.github.io/images/probe7.png)
+    
+3.  Hit `ESC` to go back and you can see that while Kubernetes waits for the new Pod to become available, the old one is kept in place
+    
+    Here we have to wait for the 30 seconds (initialDelaySeconds=30) until the Pod becomes ready, even if it would be able to already accept requests. So it is very important to finely tune this parameter in order to avoid to much startup-lag.
+    
+    ![](https://niklaushirt.github.io/images/probe5.png)
+    
+4.  Once the new Pod is ready, the old one is being terminated This mechanism ensures, that existing deployments get deleted only when the new one can take over.
+    
+    ![](https://niklaushirt.github.io/images/probe6.png)
+    
+
+> Congratulations!!! This concludes the Lab

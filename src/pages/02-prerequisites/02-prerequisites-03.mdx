@@ -1,0 +1,25 @@
+---
+title: "Additional remarks"
+
+---
+
+If you get Pull Errors (Pull rate exceded) then you have to use your Docker account 
+
+```bash
+export DOCKER_USER=your-docker-user
+export DOCKER_PWD=your-docker-password
+
+kubectl create secret docker-registry mypullsecret -n default --docker-username=$DOCKER_USER --docker-password=$DOCKER_PWD --docker-email=demo@demo.com
+kubectl patch -n default serviceaccount default -p '{"imagePullSecrets": [{"name": "mypullsecret"}]}'
+
+kubectl create secret docker-registry mypullsecret -n kube-system --docker-username=$DOCKER_USER --docker-password=$DOCKER_PWD --docker-email=demo@demo.com
+kubectl patch -n kube-system serviceaccount default -p '{"imagePullSecrets": [{"name": "mypullsecret"}]}'
+
+kubectl create secret docker-registry mypullsecret -n istio-system --docker-username=$DOCKER_USER --docker-password=$DOCKER_PWD --docker-email=demo@demo.com
+kubectl patch -n istio-system serviceaccount default -p '{"imagePullSecrets": [{"name": "mypullsecret"}]}'
+kubectl patch -n istio-system serviceaccount prometheus -p '{"imagePullSecrets": [{"name": "mypullsecret"}]}'
+kubectl patch -n istio-system serviceaccount grafana -p '{"imagePullSecrets": [{"name": "mypullsecret"}]}'
+kubectl patch -n istio-system serviceaccount kiali -p '{"imagePullSecrets": [{"name": "mypullsecret"}]}'
+```
+
+

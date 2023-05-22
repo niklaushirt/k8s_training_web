@@ -1,0 +1,77 @@
+---
+title: "Container Basics"
+---
+
+
+## Containers - benefits
+
+
+Containers are a revolutionary technology that has transformed the way software applications are developed, deployed, and managed. They provide a lightweight and efficient method of packaging, distributing, and running applications in a consistent and portable manner across various environments.
+
+The value of containers can be attributed to the following benefits:
+
+1. **Isolation**: Containers package an application along with its dependencies in a self-contained environment, ensuring that the application runs consistently across different systems. This isolation reduces conflicts between different applications and their dependencies.
+
+2. **Portability**: Containers can run on any platform that supports containerization, making it easier to move applications between development, testing, and production environments or across different cloud providers without making changes to the application.
+
+3. **Scalability**: Containers can be quickly and easily scaled up or down to meet the demands of an application. This provides better resource utilization and improves application performance.
+
+4. **Efficiency**: Containers share the host operating system's kernel, which allows them to consume fewer resources compared to traditional virtualization methods, such as virtual machines. This results in faster startup times, lower resource usage, and better overall performance.
+
+5. **Versioning and Rollback**: Containers make it easy to manage different versions of an application and its dependencies, allowing for smoother updates and rollbacks when needed.
+
+6. **Improved Development Workflow**: Containers enable a consistent environment for developers, testers, and operators, streamlining the entire development pipeline and reducing the time spent on resolving environment-related issues.
+
+In summary, containers have revolutionized the way software applications are developed and deployed, providing a consistent, portable, and scalable solution that increases efficiency and improves the overall software development lifecycle.
+
+
+## Containers - underlying technology 
+
+Containers work by leveraging several key features and concepts of the Linux operating system, including Control Groups (cgroups), chroot, and Namespaces. These features enable containers to isolate applications and their dependencies while sharing the host's kernel and resources efficiently.
+
+1.  **Control Groups** (cgroups): Control Groups are a Linux kernel feature that allows the allocation, prioritization, and management of system resources such as CPU, memory, and I/O for a group of processes. Cgroups provide resource isolation and ensure that each container gets its fair share of resources without interfering with other containers running on the same system. By utilizing cgroups, containers can limit the resource usage of applications, preventing a single application from consuming all available resources and affecting the performance of other applications on the system.
+    
+2.  **chroot**: chroot is a Unix command and system call that allows changing the root directory of a process and its children to a new location in the filesystem. This creates an isolated environment where the process has restricted access to only the new root directory and its subdirectories. Containers leverage this concept to isolate the filesystem of each container from the host and other containers. This ensures that each container has its own separate filesystem view, containing only the files and directories required for the application to run, improving security and reducing conflicts between different applications and their dependencies.
+    
+3.  **Namespaces**: Namespaces are another Linux kernel feature that provides isolation and virtualization for various system resources. Namespaces allow processes running in different namespaces to have their own isolated view of specific system resources, such as process IDs (PID), user IDs (UID), network interfaces, and mount points. Containers use multiple namespaces to isolate various aspects of the container's environment from the host and other containers, ensuring that each container has its own unique and isolated view of the system. This isolation enables containers to run multiple instances of the same application without interfering with each other, while still sharing the host's kernel for efficiency.
+    
+
+In summary, containers work by combining Control Groups, chroot, and Namespaces to create isolated, resource-managed, and lightweight environments for applications. These features enable containers to efficiently share the host's kernel and resources while maintaining isolation and security, making them an ideal solution for packaging, distributing, and running applications across various environments.
+
+
+## Dockerfile
+
+A `Dockerfile` is a text document that contains all the commands a user could call on the command line to assemble an image. You can think of it as a sort of Recipe.
+
+```yaml
+​FROM node:8-stretch
+​    
+# Change working directory
+WORKDIR "/app"
+
+# Update packages and install dependency packages for services
+RUN apt-get update \
+    && apt-get dist-upgrade -y \
+    && apt-get clean \
+    && echo 'Finished installing dependencies'
+
+# Install npm production packages
+COPY package.json /app/
+RUN cd /app; npm install --production
+
+COPY . /app
+
+ENV NODE_ENV production
+ENV BACKEND_URL https://api.nasa.gov/planetary/apod\?api_key\=DEMO_KEY
+ENV PORT 3000
+
+EXPOSE 3000
+
+CMD ["npm", "start"]
+```
+
+​    
+
+The `build` command creates the container from the `Dockerfile`.
+
+More details on Dockerfiles can be found [here](https://docs.docker.com/engine/reference/builder/).

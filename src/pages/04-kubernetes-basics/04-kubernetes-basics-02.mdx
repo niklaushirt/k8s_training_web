@@ -1,0 +1,121 @@
+---
+title: "Deploy your first Pod"
+---
+
+## Introduction
+
+You will learn what a pod is, deploy your first container, configure Kubernetes, and interact with Kubernetes in the command line.
+
+The base elements of Kubernetes are pods. Kubernetes will choose how and where to run them. You can also see a `Pod` as an object that requests some CPU and RAM. Kubernetes will take those requirements and decide where to run them.
+
+A`Pod` can be killed and restarted whenever the system has/wants to. So a `Pod` is **ephemeral** and it **will** be destroyed at some point.
+
+## 🚀 TASK: Create the Pod
+
+Let’s start to deploy the `nginx` docker image. It’s a simple webserver that is used widely in the Kubernetes world.
+
+```bash         
+kubectl run nginx --image=nginx     
+```
+
+```output   
+> kubectl run --generator=deployment/apps.v1 is DEPRECATED and will be removed in a future version. Use kubectl run --generator=run-pod/v1 or kubectl create instead.
+> deployment.apps/nginx created
+```   
+
+## 🚀 TASK: List the Pods
+
+Now list all the `Pods` running in Kubernetes. `kubectl get` is the `ls` of Kubernetes.
+
+```bash     
+kubectl get pods
+```
+
+```output   
+> NAME                     READY   STATUS              RESTARTS   AGE
+> nginx-755464dd6c-2rbgj   0/1     ContainerCreating   0          32s
+```
+
+**Note the name of the Pod which is randomly generated!**
+
+## 🚀 TASK: Get the yaml manifest
+
+Now we can have a look at the `yaml` description of our `Pod`
+
+```bash     
+kubectl get pods <name of pod from step 2> -o yaml
+```
+
+```output   
+> apiVersion: v1
+> kind: Pod
+> metadata:
+>   creationTimestamp: "2019-11-14T08:51:33Z"
+>   generateName: nginx-755464dd6c-
+>   labels:
+>     pod-template-hash: 755464dd6c
+>     run: nginx
+>   name: nginx-755464dd6c-2rbgj
+>   namespace: default
+>   ownerReferences:
+...
+```
+
+**Use the name of the Pod that you wrote down in step #2.**
+
+Here is a simplified version that contains the main elements:
+
+```yaml     
+apiVersion: v1
+kind: Pod
+metadata:
+    name: nginx-755464dd6c-2rbgj
+spec:
+    containers:
+    - name: nginx
+    image: nginx  #hosted on hub.docker.com
+```
+
+The Kubernetes manifest represents a desired state. We do not write the steps to achieve this state. Kubernetes will handle it for us.
+
+Let’s have a look at the most important fields:
+
+*   `apiVersion`: the version of the Kubernetes API we will be using, `v1` here
+*   `kind`: what resource this object represents, `Pod` for this example
+*   `metadata`: some metadata about this pod, like its name.
+*   `spec`: specification of the desired behavior of this `Pod`
+    *   `containers`: the list of containers to start in this `Pod`
+        *   `name`: the name of the container
+        *   `image`: which image to start
+
+## 🚀 TASK: Describe the Pod
+
+`Describe` gives us a lot of information about the status and events of a Kubernetes object.
+
+```bash     
+kubectl describe pods <name of pod from step 2>
+```
+
+```output   
+
+> Events:
+>  Type    Reason     Age   From               Message
+>
+> ----    ------     ----  ----               -------
+>
+>  Normal  Scheduled  90s   default-scheduler  Successfully assigned default/nginx-755464dd6c-2rbgj to minikube
+>  Normal  Pulling    82s   kubelet, minikube  Pulling image "nginx"
+>  Normal  Pulled     36s   kubelet, minikube  Successfully pulled image "nginx"
+>  Normal  Created    36s   kubelet, minikube  Created container nginx
+>  Normal  Started    34s   kubelet, minikube  Started container nginx
+```    
+
+
+## 🚀 TASK: Clean-up
+
+Now to wrap this up, let’s delete the `Pod`
+
+```bash     
+kubectl delete pod nginx
+```  
+

@@ -1,0 +1,37 @@
+---
+title: "Run your first Image"
+---
+
+## 🚀 TASK: Run your first Image
+
+![K8s CNI](./../images/cont05.png)
+
+1. Run the following command:
+
+    ```shell     
+    podman run --rm --name k8sdemo-backend -p 3001:3000 k8sdemo-backend:lab
+    ```
+
+    ```output   
+    > test@0.0.0 start /app
+    > node ./bin/www
+    ```
+
+    This command runs the backend server:
+
+    *   `–rm` makes sure that the container is deleted once it’s stopped
+    *   `–name` gives the container a fixed name (otherwise you get some pretty funny, automatically generated names - think drunken-weasel)
+    *   `-p` exposes the container port 3000 to the outside port 3001 (we do this so that it does not conflict with port 3000 of the k8sdemo web application we will start later)
+    *   `k8sdemo-backend:lab` is the image we created before
+
+
+    
+2. Open the Backend API
+
+    Click [here](http://localhost:3001/) or run the following:
+
+    ```shell   
+    open http://localhost:3001/
+    ```
+
+3. Stop the Container by hitting several times `CTRL-C`

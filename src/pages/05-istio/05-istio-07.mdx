@@ -1,0 +1,238 @@
+---
+title: "End-user authentication"
+---
+
+
+Istio provides two types of authentication:
+
+*   **Peer authentication**: used for service-to-service authentication to verify the client making the connection. Istio offers mutual TLS for transport authentication, which can be enabled without requiring service code changes.
+    
+    *   Provides each service with a strong identity representing its role to enable interoperability across clusters and clouds.
+    *   Secures service-to-service communication.
+    *   Provides a key management system to automate key and certificate generation, distribution, and rotation.
+*   **Request authentication**: Used for end-user authentication to verify the credential attached to the request. Istio enables request-level authentication with JSON Web Token (JWT) validation and custom authentication via any OpenID Connect providers, for example:
+    
+    *   Keycloak
+    *   Auth0
+    *   Google Auth
+
+Istio stores the authentication policies in Customresources.
+
+Request authentication policies specify the values needed to validate a JSON Web Token (JWT). These values include, among others, the following:
+
+*   The location of the token in the request
+*   The issuer or the request
+*   The public JSON Web Key Set (JWKS)
+
+Istio checks the presented token, if presented against the rules in the request authentication policy, and rejects requests with invalid tokens. **When requests carry no token, they are accepted by default**. To reject requests without tokens, you have to provide authorization rules that specify the restrictions for specific operations.
+
+You can find mor information here: [https://istio.io/latest/docs/tasks/security/authentication/authn-policy/](https://istio.io/latest/docs/tasks/security/authentication/authn-policy/)
+
+For this lab we use the test tokens from [https://raw.githubusercontent.com/istio/istio/release-1.6/security/tools/jwt/samples/](https://raw.githubusercontent.com/istio/istio/release-1.6/security/tools/jwt/samples/jwks.json).
+
+## Request Authentication
+
+1.  Get the Cluster IP (MY-CLUSTER-IP)
+    
+    Use the adequate method for this:
+    
+    Minikube in the training VM
+    
+    ```bash
+    minikube ip
+    ```        
+    
+        	
+        
+    
+2.  Try to access the productpage:
+    
+    ```bash
+    export INGRESS_HOST=http://MY-CLUSTER-IP:30762
+    curl $INGRESS_HOST/productpage -s -o /dev/null -w "%{http_code}\n"
+    ```
+        
+    ```output
+    > 200
+    ```
+    
+    You should get an HTTP Code 200 - which means that the access is working. You can also try to refresh the productpage, it should load perfectly.
+    
+3.  Create the `RequestAuthentication` Object
+    
+    ```bash
+    kubectl apply -f - <<EOF
+    apiVersion: "security.istio.io/v1beta1"
+    kind: "RequestAuthentication"
+    metadata:
+        name: "jwt-example"
+        namespace: istio-system
+    spec:
+        selector:
+            matchLabels:
+                istio: ingressgateway
+        jwtRules:
+        - issuer: "testing@secure.istio.io"
+            jwksUri: "https://raw.githubusercontent.com/istio/istio/release-1.6/security/tools/jwt/samples/jwks.json"
+    EOF
+    ```        
+    
+        > requestauthentication.security.istio.io/jwt-example created
+        
+    
+    Here we create the RequestAuthentication Object based on the test/demo tokens provided by Istio: [https://raw.githubusercontent.com/istio/istio/release-1.6/security/tools/jwt/samples/](https://raw.githubusercontent.com/istio/istio/release-1.6/security/tools/jwt/samples/jwks.json).
+    
+    The JSON Web Key Set (JWKS) is a set of keys which contains the public keys used to verify any JSON Web Token (JWT).
+    
+4.  Try to access the productpage again:
+    
+    ```bash
+    curl $INGRESS_HOST/productpage -s -o /dev/null -w "%{http_code}\n"
+    ```        	
+        
+    ```output
+    > 200
+    ```
+        
+    
+    You should still get an HTTP Code 200 - which means that the access is working, because requests that carry no token, are accepted by default.
+    
+5.  However trying to access the productpage with an invalid token should not work:
+    
+    ```bash
+    curl --header "Authorization: Bearer my-invalid-token" $INGRESS_HOST/productpage -s -o /dev/null -w "%{http_code}\n"
+    ```
+    
+    ```output
+    > 401
+    ```        
+    
+    You should get an HTTP Code 401 (Unauthorized) - which means that the access is blocked if you use an invalid token.
+    
+
+## Autorisation Policy
+
+1.  Create the `AutorisationPolicy` So to reject requests that carry no token, we have to provide authorization rules that specify the restrictions for specific operations, for example paths or actions. The following `AuthorizationPolicy` contains a rule specifying a DENY action for requests without request principals:
+    
+    ```bash
+    kubectl apply -f - <<EOF
+    apiVersion: "security.istio.io/v1beta1"
+    kind: "AuthorizationPolicy"
+    metadata:
+        name: "frontend-ingress"
+        namespace: istio-system
+    spec:
+        selector:
+            matchLabels:
+                istio: ingressgateway
+        action: DENY
+        rules:
+        - from:
+            - source:
+                    notRequestPrincipals: ["*"]
+    EOF
+    ```          
+        
+    ```output
+    > authorizationpolicy.security.istio.io/frontend-ingress created
+    ```
+
+2.  Try to access the productpage again:
+    
+    ```bash
+    curl $INGRESS_HOST/productpage -s -o /dev/null -w "%{http_code}\n"
+    ```        	
+        
+    ```output
+    > 403
+    ```        
+    
+    You should get an HTTP Code 403 (Forbidden) - which means that the access is now blocked if you provide no token.
+    
+
+## Autorisation with JWT
+
+Now, to validate that the access works with a valid JWT token, we call the URL with the JWT token provided by Istio: [https://raw.githubusercontent.com/istio/istio/release-1.6/security/tools/jwt/samples/](https://raw.githubusercontent.com/istio/istio/release-1.6/security/tools/jwt/samples/demo.jwt) that will be validated by the JWKS public key defined in the `RequestAuthentication`.
+
+```bash
+TOKEN=$(curl https://raw.githubusercontent.com/istio/istio/release-1.6/security/tools/jwt/samples/demo.jwt -s)
+curl --header "Authorization: Bearer $TOKEN" $INGRESS_HOST/productpage -s -o /dev/null -w "%{http_code}\n"
+```    
+
+```output
+> 200
+```
+    
+
+You should get an HTTP Code 200 - which means that the access is working, because the JWT token has been validated againts the JWKS.
+
+## Autorisation with custom JWT
+
+In the previous example we have been using a pre-created JWT token provided by Istio. In this Lab we are going to create a custom JWT token based on the same private key that has been used for the previous one and that is being validated by the JWKS.
+
+1.  Install the needed componenets and libraries
+    
+    ```bash
+    sudo apt install python3-pip
+    pip3 install jwcrypto
+    ```        
+    
+2.  Install the python-based tool to generate valid JWT tokens
+    
+    ```bash
+    wget https://raw.githubusercontent.com/istio/istio/release-1.6/security/tools/jwt/samples/gen-jwt.py
+    chmod +x gen-jwt.py
+    ```        
+    
+3.  Get the private key from the Istio Git repository that we will use to sign the token
+    
+    ```bash
+    wget https://raw.githubusercontent.com/istio/istio/release-1.6/security/tools/jwt/samples/key.pem
+    ```        	
+        
+    
+4.  Create a JWT token to access the application
+    
+    ```bash
+    TOKEN=$(./gen-jwt.py ./key.pem --expire 500000)
+    echo $TOKEN 
+    
+    curl --header "Authorization: Bearer $TOKEN" $INGRESS_HOST/productpage -s -o /dev/null -w "%{http_code}\n"
+    ```        	
+        
+    
+    ```output
+    > 200
+    ```
+        
+    
+
+You should get an HTTP Code 200 - which means that the access is working, because our JWT token has been validated againts the JWKS.
+
+1.  Create a JWT token with 5 seconds expiry to access the application
+    
+    ```bash
+    TOKEN=$(./gen-jwt.py ./key.pem --expire 5)
+    for i in `seq 1 10`; do curl --header "Authorization: Bearer $TOKEN" $INGRESS_HOST/productpage -s -o /dev/null -w "%{http_code}\n"; sleep 1; done
+    ```        	
+        
+    
+    ```output
+    > 200
+    > 200
+    > 200
+    > 200
+    > 200
+    > 200
+    > 401
+    > 401
+    > 401
+    > 401
+        ...
+
+    ```
+        
+    
+    You should get an HTTP Code 200 for about 5 seconds until the token expires, after which you will get a 401 error.
+    
+

@@ -1,0 +1,82 @@
+---
+title: "Traffic Mirroring"
+---
+
+
+
+Traffic mirroring, also called shadowing, is a powerful concept that provides a risk-free method of testing your releases in the production environment without impacting your end users.
+
+Instead of using traditional pre-production environments which used to be a replica of production, mirroring can provide synthetic traffic to mimic the live environment.
+
+Traffic monitoring works in the following way:
+
+*   You deploy a new version of your component (v2)
+*   The existing version (v1) works loke before but sends an asynchronous copy to the new version
+*   The new version (v2) processes the incoming traffic but does not respond to the user (fire-and-forget)
+*   The Dev and Ops teams can monitor the new version in order to identify potential problems before starting the rollout
+
+Let’s start the Lab.
+
+1.  Create a Virtual Service that sends all traffic to v1 of the `reviews` service
+    
+    ```yaml
+    apiVersion: networking.istio.io/v1alpha3
+    kind: VirtualService
+    metadata:
+        name: reviews
+    spec:
+        hosts:
+        - reviews
+        http:
+        - route:
+            - destination:
+                    host: reviews
+                    subset: v1     	
+    ```
+    
+    Run the following:
+    
+    ```bash
+    kubectl apply -f ~/training/istio/samples/bookinfo/networking/virtual-service-all-v1.yaml
+    ```        		
+        
+    ```output
+    > virtualservice.networking.istio.io/reviews configured
+    ```
+    
+2.  Create a Virtual Service that sends all traffic to v1 and mirrors it to v2 of the `reviews` service
+    
+    ```yaml
+    apiVersion: networking.istio.io/v1alpha3
+    kind: VirtualService
+    metadata:
+        name: reviews
+    spec:
+        hosts:
+        - reviews
+        http:
+        - route:
+            - destination:
+                    host: reviews
+                    subset: v1
+            mirror:
+                host: nginx
+                subset: v2
+        mirror_percent: 100
+    ```
+        
+    
+    Run the following:
+    
+    ```bash
+    kubectl apply -f ~/training/istio/samples/bookinfo/networking/virtual-service-mirror-v1-v2.yaml
+    ```        		
+        
+    ```output
+    > virtualservice.networking.istio.io/reviews configured
+    ```        
+    
+    After a short while you should see traffic starting to flow from `reviews` (v2) to `ratings`, because `reviews` (v2) is receiving the mirrored traffic.
+    
+
+![](./../images/istio0.png)

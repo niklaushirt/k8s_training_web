@@ -1,0 +1,23 @@
+---
+title: "Cleanup"
+---
+
+# Cleanup
+
+Delete the elements that we have deployed in order to go back to normal.
+
+1.  Delete the demo app and the mysql deployment
+    
+    Copy
+    
+         
+        	kubectl delete -f ~/training/deployment/demoapp.yaml
+        	kubectl delete -f ~/training/deployment/demoapp-service.yaml
+        	kubectl delete -f ~/training/deployment/demoapp-backend.yaml
+        	kubectl delete -f ~/training/deployment/demoapp-backend-service.yaml
+        	kubectl delete -f ~/training/volumes/3-simple-mysql-deployment.yaml
+        	
+        
+    
+
+> Congratulations!!! This concludes the Lab and the Course. Hope to see you soon!!!

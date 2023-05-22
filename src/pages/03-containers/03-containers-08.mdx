@@ -1,0 +1,125 @@
+---
+title: "Container Internals"
+---
+
+
+
+Now let’s have a more in depth look at the running containers.
+
+## Container process inspection
+
+Container `top` gives you the running processes inside a container. We can see that we have the node server running inside the container.
+
+```bash
+podman top k8sdemo
+```
+
+```output   
+>USER        PID         PPID        %CPU        ELAPSED       TTY         TIME        COMMAND
+>root        1           0           0.000       6.271110421s  ?           0s          npm
+>root        12          1           0.000       6.271156588s  ?           0s          sh -c node ./bin/www
+>root        13          12          0.000       6.271178838s  ?           0s          node ./bin/www```
+```
+
+Container `inspect` outputs the detailed configuration of the running container.
+
+```bash
+podman inspect k8sdemo
+```
+
+```output   
+> [
+>     {
+>         "Id": "48f5cd2708b27da27b0edcc1aaa3b6308249e6de94d45c0b123bf5fc7f2efbbf",
+>         "Created": "2020-05-19T08:48:03.867340977Z",
+>         "Path": "podman-entrypoint.sh",
+>         "Args": [
+>             "npm",
+>             "start"
+>         ],
+>         "State": {
+>             "Status": "running",
+>  ...
+```
+
+
+## Container logs
+
+In order to access the logs of the container (especially if it runs in the background with the `-d` option) you can use podman `logs`.
+
+```bash
+podman logs k8sdemo
+```
+
+```output   
+> test@0.0.0 start /app
+> node ./bin/www
+```
+
+
+## Container exec
+
+Container `exec` allows to run commands inside already running containers. This is very useful for debugging.
+
+```bash
+podman exec -it k8sdemo /bin/bash
+```    
+
+You get a prompt inside the container. Now you can explore the content of the running container.
+
+1.  List the files in the home directory (execute at the container prompt)
+    
+    ```bash
+    ls -al
+    ```
+
+    ```output   
+    >total 52
+    >drwxr-xr-x. 1 root root   165 Apr 11 11:04 .
+    >dr-xr-xr-x. 1 root root    40 Apr 11 12:09 ..
+    >-rw-r--r--. 1 root root   496 Mar 29 09:08 Dockerfile
+    >-rw-r--r--. 1 root root    78 Mar 29 09:08 README
+    >-rw-r--r--. 1 root root  1226 Mar 29 09:08 app.js
+    >drwxr-xr-x. 2 root root    17 Mar 29 09:08 bin
+    >-rw-r--r--. 1 root root   306 Mar 29 09:08 build.sh
+    >drwxr-xr-x. 1 root root  4096 Mar 29 09:08 node_modules
+    >-rw-r--r--. 1 root root 26382 Mar 29 09:08 package-lock.json
+    >-rw-r--r--. 1 root root   307 Mar 29 09:08 package.json
+    >drwxr-xr-x. 5 root root   136 Mar 29 09:08 public
+    >drwxr-xr-x. 2 root root    69 Mar 29 09:08 routes
+    >drwxr-xr-x. 2 root root    61 Mar 29 09:08 views
+    ```        
+    
+2.  List the web files for the node application (execute at the container prompt)
+    
+    ```bash
+    cd public/
+    ls -al
+    ```
+
+    ```output   
+        > total 144
+        > drwxrwxr-x 1 root root  4096 May 14 06:55 .
+        > drwxr-xr-x 1 root root  4096 May 14 07:25 ..
+        > -rw-rw-r-- 1 root root  6148 May 14 06:55 .DS_Store
+        > -rw-rw-r-- 1 root root 32939 May 14 06:55 404.html
+        > -rw-rw-r-- 1 root root 55515 May 14 06:55 500.html
+        > drwxrwxr-x 2 root root  4096 May 14 06:55 images
+        > -rwxrwxr-x 1 root root  6240 May 19 08:22 index.html
+        > -rwxrwxr-x 1 root root  1188 May 14 06:55 index.js
+        > drwxrwxr-x 4 root root  4096 May 14 06:55 public
+        > -rwxrwxr-x 1 root root  1157 May 14 06:55 style.css
+        > drwxrwxr-x 2 root root  4096 May 14 06:55 stylesheets
+    ```
+    
+3.  Modify the HTML code for the running container (execute at the container prompt)
+        
+    ```bash
+    echo '<H1 style="background-color: #ff0000">HELLO</H1>' >> index.html 
+    ```     	
+        	
+        
+    
+4.  Reload the Web App and look for the HELLO text displayed in the lower left part of the page.
+    
+5.  Type `exit` in order to get back to the commandline

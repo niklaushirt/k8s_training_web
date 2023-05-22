@@ -1,0 +1,131 @@
+---
+title: "RBAC Tooling"
+---
+
+
+## Rakkess
+
+Have you ever wondered what access rights you have on a provided kubernetes cluster? For single resources you can use kubectl auth can-i list deployments, but maybe you are looking for a complete overview? This is what rakkess is for. It lists access rights for the current user and all server resources.
+
+You can get more details [here](https://github.com/corneliusweig/rakkess).
+
+1.  Install Rakkess for [your platform](https://github.com/corneliusweig/rakkess#installation)   
+    
+2.  Let’s examine the RBAC for the default Namespace:
+    
+    ```bash
+    rakkess -n default
+    ```        
+    
+    ![](./../images/rbac1.png)
+    
+3.  And now the RBAC for the ServiceAccount that we have created earlier:
+    
+    ```bash
+    rakkess --sa service-account-1 -n default
+    ```        	
+        
+    
+    ![](./../images/rbac2.png)
+    
+    We can see that the `ServiceAccount` has the rights to list `Services` and to create `ConfigMaps`. This corresponds to the `api-role` `Role` that we have defined earlier:
+    
+    ```yaml
+    ...
+    - apiGroups: [""]
+        resources: ["services"]
+        verbs: ["get", "list"]
+    - apiGroups: [""]
+        resources: ["configmaps"]
+        verbs: ["create"]
+        ...
+    ```        
+    
+
+## rbac-view
+
+Polaris runs a variety of checks to ensure that Kubernetes pods and controllers are configured using best practices, helping you avoid problems in the future.
+
+![](./../images/rbac3.png)
+
+You can get more details [here](https://github.com/jasonrichardsmith/rbac-view).
+
+1.  Install rbac-view
+    
+    ```bash
+    #Linux
+    wget https://github.com/jasonrichardsmith/rbac-view/releases/download/v0.2.1/rbac-view.v0.2.1.linux.tar.gz
+    tar xf rbac-view.v0.2.1.linux.tar.gz
+    chmod +x ./bin/linux/rbac-view
+    sudo mv -i ./bin/linux/rbac-view $GOPATH/bin/rbac-view
+    
+    
+    #Mac
+    wget https://github.com/jasonrichardsmith/rbac-view/releases/download/v0.2.1/rbac-view.v0.2.1.darwin.tar.gz
+    tar xf rbac-view.v0.2.1.darwin.tar.gz
+    chmod +x ./bin/darwin/rbac-view
+    sudo mv -i ./bin/linux/rbac-view /usr/local/bin/rbac-view
+    ```        
+    
+2.  Run the following in your Terminal:
+    
+    ```bash
+    rbac-view 
+    ```        	
+        
+    ```output
+    > INFO[0000] Getting K8s client                           
+    > INFO[0000] serving RBAC View and http://localhost:8800            
+    ```        
+    
+3.  Open the followin URL in your browser: [http://localhost:8800](http://localhost:8800/)
+    
+4.  Rbac-view will then run some initialization which may take some time.
+
+
+    ```output
+    > INFO[0000] Getting K8s client                           
+    > INFO[0000] serving RBAC View and http://localhost:8800  
+    ...
+    > INFO[0039] Building full matrix for json                
+    > INFO[0039] Building Matrix for Roles                    
+    > INFO[0039] Retrieving RoleBindings                      
+    > INFO[0039] Building Matrix for ClusterRoles             
+    > INFO[0039] Retrieving ClusterRoleBindings               
+    > INFO[0039] Retrieved 49 ClusterRoleBindings             
+    > INFO[0039] Retrieving ClusterRole system:volume-scheduler 
+    > INFO[0039] Retrieving ClusterRole system:controller:horizontal-pod-autoscaler 
+    > INFO[0039] Retrieving ClusterRole system:controller:generic-garbage-collector 
+    > INFO[0039] Retrieving ClusterRole system:controller:job-controller 
+    > INFO[0039] Retrieving ClusterRole cilium  
+    ... 
+    > INFO[0048] Retrieving Role system:controller:bootstrap-signer in namespace kube-public 
+    > INFO[0048] Retrieving Role kubernetes-dashboard in namespace kubernetes-dashboard 
+    > INFO[0048] Retrieving Role deployment-manager in namespace rbactest 
+    > INFO[0051] Built Matrix for Roles                       
+    > INFO[0051] Matrix for json built           
+    ```        
+    
+5.  Enter `cluster` in the `SearchRoles` field and examine the `cluster-admin` `Role`. The `*` means that it has all access rights to all ressources with all verbs.
+    
+    ![](./../images/rbac5.png)
+    
+6.  Switch to the Roles tab and enter `api-role` in the `SearchRoles` field and examine it. We can see the access rights previously discussed, notably `get` and `list` rights to `Services`.
+    
+    ![](./../images/rbac6.png)
+    
+7.  When you click on the Subjects button you will get the list of Subjects for this `Role`. In this cas we can see the `ServiceAccount` `service-account-1` that is a subject of the Role.
+    
+    ![](./../images/rbac7.png)
+    
+
+
+<InlineNotification kind="success">
+
+**You have successfully finished this Lab**
+
+You are now done with the chapter on Kubernetes Basics.
+
+Please continue to the next Lab.
+
+</InlineNotification>

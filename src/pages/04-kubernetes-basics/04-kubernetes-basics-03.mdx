@@ -1,0 +1,202 @@
+---
+title: "Deploy your first application"
+---
+
+Learn how to deploy an application to a Kubernetes cluster.
+
+Once your client is configured, you are ready to deploy your first application, `k8sdemo`.
+
+## 💡 INFO: The frontend example application
+
+In this part of the lab we will deploy an application called `k8sdemo` that has already been built and uploaded to DockerHub under the name `niklaushirt/k8sdemo`.
+
+We will use the following yaml:
+
+```yaml
+kind: Deployment
+metadata:
+    name: k8sdemo
+    namespace: default
+spec:
+    replicas: 1
+    template:
+    metadata:
+        labels:
+        app: k8sdemo
+    spec:
+        containers:
+        - name: k8sdemo
+        image: niklaushirt/k8sdemo:1.0.0
+    ...
+            env:   
+            - name: PORT
+            value : "3000"
+            - name: APPLICATION_NAME
+            value: k8sdemo
+            - name: BACKEND_URL
+            value: http://k8sdemo-backend-service.default.svc:3000/api
+```    
+
+It defines the Container image to deploy (with 1 instances/replicas) and an environment variable BACKEND\_URL that points to the backend servcie we will be deploying in the next section.
+
+
+    
+
+## 🚀 TASK: Deploy the frontend application
+
+1.  Start by running `k8sdemo`
+    
+    ```bash
+    kubectl create -f ./deployment/demoapp.yaml
+    ```
+
+    This action will take a bit of time. To check the status of the running application, you can use 
+    
+    ```bash
+        kubectl get pods -n default 
+    ```
+
+    You should see output similar to the following:
+
+    ```output   
+        > NAME                       READY     STATUS    RESTARTS   AGE
+        > k8sdemo-7d46f69d68-bd2cw   0/1       Running   0          17s  
+    ```
+
+
+2.  Eventually, the status should show up as `1/1 Running`.
+    
+    ```bash
+    kubectl get pods -n default     
+    ```
+
+    ```output   
+    > NAME                          READY     STATUS              RESTARTS   AGE
+    > k8sdemo-7d46f69d68-bd2cw      1/1       Running             0          5m
+    ```
+
+    The end result of the run command is to create a Deployment resource that manages the lifecycle of those pods.
+    
+3.  Once the status reads `Running`, we need to expose that deployment as a service so we can access it through the IP of the worker nodes. The `k8sdemo` application listens on port 3000.
+    
+    Run:
+    
+    ```bash
+    kubectl expose deployment k8sdemo --name k8sdemo-service -n default --type="NodePort" --port=3000
+    ```
+
+    ```output   
+    > service "k8sdemo-service" exposed
+    ```
+    
+4.  To find the port used on that worker node, examine your new service:
+    
+    ```bash
+    kubectl get service -n default k8sdemo-service
+    ```
+
+    ```output   
+    > NAME              TYPE       CLUSTER-IP      EXTERNAL-IP   PORT(S)          AGE
+    > k8sdemo-service   NodePort   10.109.30.227   <none>        3000:30931/TCP   11m
+    ```        
+    
+    We can see that our in this example`<nodeport>` is `31208`. We can see in the output the port mapping from 3000 inside the pod exposed to the cluster on port 30931. This port in the 31000 range is automatically chosen, and **will probably be different for you**.
+    
+5.  `k8sdemo` is now running on your cluster, and exposed to the internet.
+    
+
+
+
+
+
+6. You can open the webpage by forwarding a local port to the service in your Cluster:
+    
+    ```bash
+    kubectl port-forward --namespace default $(kubectl get po -n default -l app=k8sdemo | grep k8sdemo | \awk '{print $1;}') 3000:3000
+   ```         
+
+    And then navigating to [http://localhost:3000/](http://localhost:3000/) in your browser.
+    
+6.  Your `k8sdemo` should now be open in the your default browser. However it will show an error, because we have not yet deployed the backend.
+    
+    **Testing DEMO\_API STATUS: ERROR Trying to reach backend ….**
+    
+8. Hit `CTRL-C` several times to cancel the port forward
+
+
+## 🚀 TASK: Deploy the application backend
+
+In this part of the lab we will deploy the application backend called `k8sdemo-backend` that has already been built and uploaded to DockerHub under the name `niklaushirt/k8sdemo-backend`.
+
+1.  Start by running `k8sdemo-backend`
+    
+    ```bash
+    kubectl create -f ./deployment/demoapp-backend.yaml
+    ```        
+    
+    This action will take a bit of time. To check the status of the running application, you can use `kubectl get pods`.
+    
+    You should see output similar to the following:
+    
+    ```bash
+    kubectl get pods -n default
+    ```
+
+    ```output   
+    > NAME                              READY     STATUS    RESTARTS   AGE
+    > k8sdemo-7d46f69d68-xcgcw          0/1       Running   0          13m
+    > k8sdemo-backend-9c777544b-cp59q   0/1       Running   0          1m
+    > k8sdemo-backend-9c777544b-jqjz9   0/1       Running   0          1m  
+    ```
+    
+    Eventually, the status should show up as `1/1 Running`.
+    
+    ```bash
+    kubectl get pods -n default
+    ```
+
+    ```output   
+    > NAME                              READY     STATUS    RESTARTS   AGE
+    > k8sdemo-7d46f69d68-xcgcw          1/1       Running   0          13m
+    > k8sdemo-backend-9c777544b-cp59q   1/1       Running   0          6m35s
+    > k8sdemo-backend-9c777544b-jqjz9   1/1       Running   0          6m35s
+    ```
+
+    The end result of the run command is to create a Deployment resource that manages the lifecycle of those pods.
+    
+2.  Once the status reads `Running`, we need to expose that deployment as a service so we can access it through the IP of the worker nodes. The `k8sdemo` application listens on port 3000. Run:
+    
+    ```bash
+    kubectl expose deployment k8sdemo-backend --name k8sdemo-backend-service -n default --type="NodePort" --port=3000
+    ```
+
+    ```output   
+    > service "k8sdemo-service" exposed
+    ```
+
+6. Forward the local port again to the frontend service in your Cluster:
+    
+    ```bash
+    kubectl port-forward --namespace default $(kubectl get po -n default -l app=k8sdemo | grep k8sdemo | \awk '{print $1;}') 3000:3000
+   ```         
+
+    And then navigating to [http://localhost:3000/](http://localhost:3000/) in your browser.
+    
+    
+3.  Now reload the webpage and verify, that it shows
+    
+    **Testing DEMO\_API STATUS: OK ….**
+    
+4.  If you reload the webpage several times, you should see, tht the IP Address of the backend API Pod is changing between the two Pods that have been spun up.
+    
+8. Hit `CTRL-C` several times to cancel the port forward
+
+
+* * *
+
+
+<InlineNotification kind="warning">
+
+We will be using this deployment in the following Labs.
+
+</InlineNotification>

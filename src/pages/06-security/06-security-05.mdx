@@ -1,0 +1,212 @@
+---
+title: "Service Accounts"
+---
+
+
+## Create a ServiceAccount for a Deployment
+
+In this chapter we will start this `Pod` with a limited `ServiceAccount`.
+
+### Create the resources
+
+To create the `ServiceAccount`:
+
+```yaml
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+    name: service-account-1
+    labels:
+    app: tools-rbac
+```    
+    
+
+Run the following command:
+
+```bash
+kubectl apply -f ~/training/rbac/service-accounts.yaml
+```    
+    
+```output
+> serviceaccount "service-account-1" 
+```
+
+Now we will create a Deployment that runs under the `ServiceAccount` that we have just created. The `Pod` contains the `kubectl` executable, so that we can test the access rights from withing this `Pod`.
+
+To create the `Deployment`:
+
+```yaml
+kind: Deployment
+metadata:
+    name: kubectl
+    labels:
+    rbac: service-account-1
+spec:
+    replicas: 1
+    ...
+    template:
+    metadata:
+        labels:
+        rbac: service-account-1
+    spec:
+        serviceAccountName: service-account-1
+        containers:
+        - name: kubectl
+            image: "niklaushirt/kubectl:1.14"
+...
+```    
+
+Run the following command:
+
+```bash
+kubectl apply -f ~/training/rbac/service-account-kubectl.yaml
+```    
+
+```output
+> deployment.apps/kubectl configured 
+```
+
+Great, now lets see how our pod is doing:
+
+```bash
+kubectl get pods 
+```    
+
+
+```output
+> NAME                                     READY     STATUS         RESTARTS   AGE
+> alpine                                   1/1       Running       0          3h48m
+> k8sdemo-7d46f69d68-d5dwm                 1/1       Running       0          4h6m
+> k8sdemo-backend-9c777544b-knnth          1/1       Running       0          4h2m
+> k8sdemo-backend-9c777544b-tztr8          1/1       Running       0          4h2m
+> k8sdemo-nok-7b4c444454-h6w6r             1/1       Running       0          3h30m
+> kubectl-f8977f5d9-4mm69                  1/1       Running       0          25s
+> tools-service-account-7c4c798b7-x7rkv    1/1       Running       0          28m
+```
+
+
+### Test Access
+
+Now test the access from inside the Pod (**you will have to replace the Pod name**):
+
+```bash
+kubectl exec kubectl-f8977f5d9-4mm69 kubectl get services
+```    
+    
+```output
+> Error from server (Forbidden): services is forbidden: User "system:serviceaccount:default:service-account-1" cannot list resource "services" in API group "" in the namespace "default"
+> command terminated with exit code 1
+```
+
+
+So the access is forbidden for the Pod running under the `ServiceAccount` `service-account-1`, which makes sense, because the `ServiceAccount` has no rights assigned as of now.
+
+## Add Role and RoleBinding for Service Account
+
+We now are running the `kubectl` `Pod` under the `ServiceAccount` `service-account-1`.
+
+The following configuration will create a `Role` and a `RoleBinding` for just this service account.
+
+### Create Role and RoleBinding
+
+1.  Create Role
+    
+    ```yaml
+    kind: Role
+    apiVersion: rbac.authorization.k8s.io/v1
+    metadata:
+        name: api-role
+        namespace: default
+        labels:
+            app: tools-rbac
+    rules:
+    - apiGroups: [""]
+        resources: ["services"]
+        verbs: ["get", "list"]
+    - apiGroups: [""]
+        resources: ["configmaps"]
+        verbs: ["create"]
+    - apiGroups: [""]
+        resources: ["configmaps"]
+        resourceNames: ["mqtt-pub-address"]
+        verbs: ["update", "delete"]
+    ```        
+    
+    The `Role` has the rights to list the `Services`.
+    
+    ```bash
+    kubectl create -f ~/training/rbac/service-accounts-role.yaml
+    ```    	
+        
+    ```output
+    > role.rbac.authorization.k8s.io/api-role configured
+    ```        
+    
+2.  Now lets bind the Role to the `ServiceAccount` `service-account-1`
+    
+    ```yaml
+    kind: RoleBinding
+    apiVersion: rbac.authorization.k8s.io/v1
+    metadata:
+        name: service-account-rolebinding
+        namespace: default
+        labels:
+            app: tools-rbac
+    subjects:
+    - kind: ServiceAccount
+        name: service-account-1
+    roleRef:
+        kind: Role
+        name: api-role
+        apiGroup: ""
+    ```        	
+        
+    
+    Create the RoleBinding
+    
+    ```bash
+    kubectl create -f ~/training/rbac/service-accounts-role-binding.yaml
+    ```        	
+        
+    ```output
+    > rolebinding.rbac.authorization.k8s.io/service-account-rolebinding created
+    ```        
+    
+    Now the `ServiceAccount` `service-account-1` should have the rights to list the `Services`.
+    
+
+### Test Access
+
+Let’s try this again:
+
+```bash
+kubectl exec kubectl-f8977f5d9-4mm69 kubectl get services
+```    
+
+
+```output
+> NAME                      TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)          AGE
+> k8sdemo-backend-service   NodePort    10.109.88.37   <none>        3000:30601/TCP   4h9m
+> k8sdemo-service           NodePort    10.99.195.7    <none>        3000:30456/TCP   4h11m
+> kubernetes                ClusterIP   10.96.0.1      <none>        443/TCP          5h20m
+```
+
+
+We can see, that the Pod running under the `ServiceAccount` `service-account-1` can now access the list of `Services` because it is bound to a `Role` that allows for listing them.
+
+However this is still a **ReadOnly** access (the allowed `verbs` for Services being “get” and “list”).
+
+When trying to **modify** (delete) a `Service` we still get an error:
+
+```bash
+kubectl exec kubectl-f8977f5d9-4mm69 kubectl delete services k8sdemo-service
+```    
+
+
+```output
+> Error from server (Forbidden): services "k8sdemo-service" is forbidden: User "system:serviceaccount:default:service-account-1" cannot delete resource "services" in API group "" in the namespace "default"
+> command terminated with exit code 1
+```    
+
+We have now created a RBAC Policy that gives a `ServiceAccount` specific rights (in this case ReadOnly) to certain ressources.
+

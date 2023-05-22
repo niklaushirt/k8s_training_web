@@ -1,0 +1,137 @@
+---
+title: "Creating and running the frontend Image"
+---
+
+## 🚀 TASK: Create the frontend Image
+
+1. Let’s create our frontend image (the `k8sdemo` frontend image) from this `Dockerfile`:
+
+    ```yaml 
+    FROM node:8-stretch
+
+    # Change working directory
+    WORKDIR "/app"
+
+    # Update packages and install dependency packages for services
+    RUN apt-get update \
+        && apt-get dist-upgrade -y \
+        && apt-get clean \
+        && echo 'Finished installing dependencies'
+
+    # Install npm production packages
+    COPY package.json /app/
+    RUN cd /app; npm install --production
+
+    COPY . /app
+
+    ENV NODE_ENV production
+    ENV BACKEND_URL https://api.nasa.gov/planetary/apod\?api_key\=DEMO_KEY
+    ENV PORT 3000
+
+    EXPOSE 3000
+
+    CMD ["npm", "start"]
+    ```
+
+2. Run the following command:
+
+    ```bash 
+    cd ./demo-app/k8sdemo
+    podman build -t k8sdemo:lab .
+    cd -
+    ```
+
+    ```output   
+    > Sending build context to Docker daemon  13.23MB
+    > Step 1/11 : FROM node:8-stretch
+    >  ---> 7a9afc16a57f
+    > Step 2/11 : WORKDIR "/app"
+    >  ---> Using cache
+    >  ---> a2515f8a3ec5
+    ...
+    > Step 11/11 : CMD ["npm", "start"]
+    >  ---> Using cache
+    >  ---> 5293cb32d1f6
+    > Successfully built 5293cb32d1f6
+    > Successfully tagged k8sdemo:lab
+
+    ```
+
+## 🚀 TASK: Run the frontend Image
+
+1. First let’s create a shared network, so that the Pods can communicate between them
+
+    ```bash 
+    podman network create shared
+    ```
+
+    ```output   
+    > shared
+    ```
+
+
+2.  Now let’s run the backend container again, but this time in the background
+
+    ```bash 
+    podman run --rm -d --name k8sdemo-backend -p 3001:3000 --network shared k8sdemo-backend:lab
+    ```
+
+    ```output   
+    > 444b0570058b97f0532ef89c92963bb7da6aa1f2d3e27bf8c989da5fb8277fe0
+    ```   
+    
+    This command runs the backend server:
+    
+    *   `-d` runs the container in the background (as a daemon)
+    *   `--network` adds the container to the shared newtork
+
+
+3.  Then we start the new Web Frontend container
+    
+    
+    ```bash 
+    podman run --rm --name k8sdemo -p 3000:3000 --env BACKEND_URL=http://k8sdemo-backend:3000/api --network shared k8sdemo:lab
+    ```
+
+    ```output   
+    > test@0.0.0 start /app
+    > node ./bin/www
+    ```
+    
+    This command runs the frontend server:
+
+    *   `–rm` makes sure that the container is deleted once it’s stopped
+    *   `–name` gives the container a fixed name
+    *   `–env` defines the environment variable that points to the `k8sdemo-backend` server API (note that we use the internal port 3000 and not 3001 in this case)
+    *   `-p` exposes the container port 3000 to the outside port 3000
+    *   `--network` adds the container to the shared newtork
+    *   `k8sdemo:lab` is the image we created before
+
+
+4. Open the Backend API
+
+    Click [here](http://localhost:3000/) or run the following:
+
+    ```shell   
+    open http://localhost:3000/
+    ```
+
+    
+5.  Refresh several times and check in the terminal that some traffic is being generated
+    
+    ```output 
+
+    > GET / 304 6.314 ms - -
+    > GET /public/bootstrap.min.css 304 0.975 ms - -
+    > GET /public/bootstrap-theme.min.css 304 0.843 ms - -
+    > GET /public/stylesheets/style.css 304 2.568 ms - -
+    > GET /public/images/ibm_cloud.png 304 0.522 ms - -
+    > GET /public/images/cloud_private.png 304 1.057 ms - -
+    > GET /public/images/back.png 304 0.411 ms - -
+    > The value of BACKEND_URL is: http://k8sdemo-backend
+    > Error: getaddrinfo ENOTFOUND k8sdemo-backend k8sdemo-backend:80
+    
+    ```
+    
+6.  Stop the container by hitting `CTRL-C` in the terminal
+

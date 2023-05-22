@@ -1,0 +1,128 @@
+---
+title: "Installing Istio"
+---
+
+In this module, you download and install Istio.
+
+## 🚀 TASK: Install Istio 
+
+1.  Execute the following command to get the latest ISTIO source:
+    
+    ```bash       
+    cd ~/training
+    
+    #Linux (Lab VM)
+    wget https://github.com/istio/istio/releases/download/1.17.2/istio-1.17.2-linux-amd64.tar.gz
+    tar xfvz istio-1.17.2-linux-amd64.tar.gz     
+    
+    #Mac
+    wget https://github.com/istio/istio/releases/download/1.17.2/istio-1.17.2-osx.tar.gz
+    tar xfvz istio-1.17.2-osx.tar.gz
+    
+    #Windows
+    Download https://github.com/istio/istio/releases/download/1.17.2/istio-1.17.2-win.zip
+    ```      
+        
+    
+2.  Add the `istioctl` client to your executables.
+    
+    ```bash       
+    export PATH=~/training/istio-1.17.2/bin:$PATH
+    ```        
+        
+    
+3.  Install Istio into the cluster:
+    
+    
+    ```bash       
+    istioctl install --set profile=demo
+    ```
+
+    ```output   
+    > This will install the Istio 1.17.2 demo profile with ["Istio core" "Istiod" "Ingress gateways" "Egress gateways"] components into the cluster. Proceed? (y/N) y
+    > ✔ Istio core installed
+    >  Processing resources for Istiod. Waiting for Deployment/istio-system/istiod
+    > ...
+    > Making this installation the default for injection and validation.
+    > Thank you for installing Istio 1.17.  Please take a few minutes to tell us about your install/upgrade experience!  https://forms.gle/hMHGiwZHPU7UQRWe9
+    ```     
+        
+    
+4.  Label the default namespace for automatic sidecar injection
+    
+    ```bash       
+    kubectl label namespace default istio-injection=enabled                                                                                   
+    ```
+
+    ```output   
+    > namespace/default labeled
+     ```        
+       
+    
+5.  Check the labels
+    
+    ```bash       
+    kubectl get ns --show-labels                                                                                                              
+    ```
+
+    ```output   
+    > NAME                   STATUS   AGE   LABELS
+    > default                Active   66d   istio-injection=enabled
+    > istio-system           Active   62s   istio-injection=disabled,istio-operator-managed=Reconcile,operator.istio.io/	> component=Base,operator.istio.io/managed=Reconcile,operator.istio.io/version=1.4.0
+    > kube-node-lease        Active   66d   <none>
+    > kube-public            Active   66d   <none>
+    > kube-system            Active   66d   <none>
+    > kubernetes-dashboard   Active   66d   addonmanager.kubernetes.io/mode=Reconcile,kubernetes.io/minikube-addons=dashboard
+    ```
+    
+## 🚀 TASK: Install Addons
+
+1.  Run the following
+
+    ```shell script
+    kubectl apply -f ./istio-1.17.2/samples/addons/grafana.yaml
+    kubectl apply -f ./istio-1.17.2/samples/addons/prometheus.yaml
+    kubectl apply -f ./istio-1.17.2/samples/addons/jaeger.yaml
+    kubectl apply -f ./istio-1.17.2/samples/addons/kiali.yaml
+
+    ```
+
+
+
+1.  Ensure the corresponding pods are all in **`Running`** state before you continue.
+    
+    ```bash
+    kubectl get pods -n istio-system
+    ```
+
+    ```output   
+    > NAME                                    READY   STATUS    RESTARTS   AGE
+    > grafana-5dc4b4676c-dsdb5                1/1     Running   0          21m
+    > istio-egressgateway-5c7967cf9d-gnrpj    1/1     Running   0          21m
+    > istio-ingressgateway-676fbf789d-vldbf   1/1     Running   0          21m
+    > istio-tracing-8584b4d7f9-cj9p6          1/1     Running   0          21m
+    > istiod-55cd8455dd-4gq2j                 1/1     Running   0          23m
+    > kiali-6f457f5964-pvjw5                  1/1     Running   0          21m
+    > prometheus-7f54ff69cd-lf4xz             2/2     Running   0          21m
+    ```
+
+## 🚀 TASK: Make Istio Ingress available
+
+7.  Patch the NodePort of the Istio Ingress to 30762. Like that we are sure that the HTTP port is fixed and known.
+    
+    ```bash
+    kubectl patch service -n istio-system istio-ingressgateway -p '{"spec": {"ports": [{"nodePort": 30762,"port":80,"name": "http2"}],"type": "NodePort"}}'
+    ```
+
+    ```output   
+    > service/istio-ingressgateway patched
+    ```
+    
+
+​Before you continue, make sure all the pods are deployed and are either in the **`Running`** or **`Completed`** state. If they’re in `Pending` or `CrashLoopBackOff` state, wait a few minutes to let the deployment to settle.
+
+
+
+
+
+

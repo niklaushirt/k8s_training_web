@@ -1,0 +1,46 @@
+---
+title: "Prerequisites"
+---
+
+# Preparation
+
+1.  Open a Terminal window by clicking on the Termnial icon in the left sidebar - we will use this extensively later as well
+    
+2.  Start the demo application
+    
+    ```bash
+    kubectl create -f ~/training/deployment/demoapp.yaml
+    kubectl create -f ~/training/deployment/demoapp-service.yaml
+    kubectl create -f ~/training/deployment/demoapp-backend.yaml
+    kubectl create -f ~/training/deployment/demoapp-backend-service.yaml
+    ```
+        
+    
+3.  Wait for the demo application to be available (the status must be 1/1)
+    
+    ```bash
+    kubectl get pods
+    ```        
+    
+    ```output
+    > NAME                               READY   STATUS    RESTARTS   AGE
+    > k8sdemo-backend-5b779f567f-2rbgj   1/1     Running   0          21s
+    > k8sdemo-backend-5b779f567f-p6j76   1/1     Running   0          21s
+    > k8sdemo-bd6bbd548-jcb6r            1/1     Running   0          21s
+    ```        
+    
+4.  Open the demo application in the browser
+    
+    
+    Open the webpage directly by typing:
+    
+    ```bash
+    minikube service k8sdemo-service
+    ```            
+        
+    
+    where k8sdemo-service is the name of the exposed kubernetes service.
+    
+        
+    
+5. Navigate to [http://localhost:3000/](http://localhost:3000/) in your browser.

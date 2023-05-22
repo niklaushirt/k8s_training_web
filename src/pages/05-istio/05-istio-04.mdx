@@ -1,0 +1,58 @@
+---
+title: "Monitoring with Kiali"
+---
+
+
+
+[Kiali](https://www.kiali.io/) 
+is an open-source project that installs on top of Istio to visualize your service mesh. It provides deeper insight into how your microservices interact with one another, and provides features such as circuit breakers and request rates for your services
+
+1.  In order to create some more sustained traffic, execute the following command:
+    
+    ```bash
+    kubectl apply -f ~/training/istio/createTraffic.yaml
+    ```
+
+        
+    
+    This starts a Pod that makes requests to the productpage.
+    
+2.  You can open Kiali with
+    
+    ```bash
+    istioctl dashboard kiali > /dev/null &
+   ```
+     	
+        
+    
+    > Just hit enter a few times to get back the prompt if neeed.
+    
+
+**The login is:**
+
+```output
+User: admin
+Password: admin
+```
+
+
+And you should now see the Dashboard
+
+![kiali](./../images/kiali_3.png)
+
+1.  Select `Graph` in the left hand menu.
+2.  Then select `default` from the Namespaces drop-down menu
+3.  Make sure that you select `Versoned App Graph` from the second drop-down menu
+4.  Select `Requests Percentage` and `Traffic Animation` from the \`Display drop-down menu
+5.  And make sure that you check all types from the `Display` drop-down menu
+6.  If you see no objects, there might be no traffic flowing through your mesh network yet (you chan change the seeting to display inactive objects too)
+7.  You might want to change the refresh rate to 10s to more easily observe the changes in traffic
+
+You can then observe traffic flowing through your mesh network.
+
+![kiali](./../images/kiali_0.png)
+
+Get more info on the [Kiali](https://www.kiali.io/documentation/overview/) website.
+
+[Visualizing Your Mesh](https://istio.io/docs/tasks/telemetry/kiali/)
+

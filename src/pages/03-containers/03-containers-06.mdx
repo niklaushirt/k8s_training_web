@@ -1,0 +1,29 @@
+---
+title: "Run from the registry"
+---
+
+## 🚀 TASK: Run the frontend Image from the registry
+
+1.  Now let’s start the Web Frontend container with the image from the registry
+    
+    
+    ```bash       
+    podman run -d --rm --name k8sdemo -p 3000:3000 --env BACKEND_URL=http://k8sdemo-backend:3000/api --network shared  $(minikube ip):5000/k8sdemo:lab
+    ```
+
+    ```output   
+    > b6e46d8bd60978af7e9e45260111e938da63a64247c9cff3b4e398a6498670a6
+
+    ```
+
+    This command runs the frontend server:
+
+    *   `–rm` makes sure that the container is deleted once it’s stopped
+    *   `–name` gives the container a fixed name
+    *   `–env` defines the environment variable that points to the `k8sdemo-backend` server API
+    *   `-p` exposes the container port 3000 to the outside port 3000
+    *   `-d` runs the container in the background (as a daemon)
+    *   `localhost:5000/k8sdemo:lab` is the image we have pushed to the registry before
+
+
+2.  Go back to your browser and refresh the `k8sdemo` web application to make sure that the container has been started.

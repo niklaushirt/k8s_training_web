@@ -1,0 +1,73 @@
+---
+title: "Telemetry data"
+---
+
+
+
+## Challenges with microservices
+
+We all know that microservice architecture is the perfect fit for cloud native applications and it increases the delivery velocities greatly. Envision you have many microservices that are delivered by multiple teams, how do you observe the the overall platform and each of the service to find out exactly what is going on with each of the services? When something goes wrong, how do you know which service or which communication among the few services are causing the problem?
+
+## Istio telemetry
+
+Istio’s tracing and metrics features are designed to provide broad and granular insight into the health of all services. Istio’s role as a service mesh makes it the ideal data source for observability information, particularly in a microservices environment. As requests pass through multiple services, identifying performance bottlenecks becomes increasingly difficult using traditional debugging techniques. Distributed tracing provides a holistic view of requests transiting through multiple services, allowing for immediate identification of latency issues. With Istio, distributed tracing comes by default. This will expose latency, retry, and failure information for each hop in a request.
+
+You can read more about how [Istio mixer enables telemetry reporting](https://istio.io/docs/concepts/policy-and-control/mixer.html).
+
+## Collect metrics and logs using Prometheus and Grafana
+
+This step shows you how to configure [Istio Mixer](https://istio.io/docs/concepts/policy-and-control/mixer.html) to gather telemetry for services in your cluster.
+
+1.  Open the Grafana Dashboard
+    
+    ```bash
+    istioctl dashboard grafana > /dev/null &
+    ```
+	
+        
+    ```output
+    > Just hit enter a few times to get back the prompt if neeed.
+    ```
+   
+2.  Click on the `Home` button in the upper left hand corner
+    
+3.  Select `Istio Service Dashboard`
+    
+
+Your dashboard should look like this:  
+![Grafana-Dashboard](./../images/grafana_1.png)
+
+Play around and observe the different metrics being collected.
+
+[Collecting Metrics on Istio](https://istio.io/docs/tasks/telemetry/metrics/)
+
+[Collecting Logs on Istio](https://istio.io/docs/tasks/telemetry/logs/)
+
+## Collect request traces using Jaeger
+
+Jaeger is a distributed tracing tool that is available with Istio.
+
+1.  Access the Jaeger Dashboard
+    
+    ```bash
+    istioctl dashboard jaeger > /dev/null &
+    ``` 
+
+    ```output
+    > Just hit enter a few times to get back the prompt if neeed.
+    ```
+    
+2.  Select `productpage.default` in the left hand `Service` dropdown
+    
+3.  Click `Find Traces`
+    
+
+Your dashboard should look something like this:
+
+![jaeger](./../images/jaeger1.png)
+
+1.  Click on one of those traces and you will see the details of the traffic you sent to your BookInfo App. It shows how much time it took for the request on `productpage` to finish. It also shows how much time it took for the requests on the `details`,`reviews`, and `ratings` services.
+
+![jaeger](./../images/jaeger3.png)
+
+[Jaeger Tracing on Istio](https://istio.io/docs/tasks/telemetry/distributed-tracing/)

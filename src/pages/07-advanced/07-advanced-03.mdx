@@ -1,0 +1,559 @@
+---
+title: "Persistent Volumes"
+---
+
+# Persistent Volumes
+
+## Introduction
+
+As you know a `Pod` is mortal, meaning it can be destroyed by Kubernetes anytime, and with it it’s local data, memory, etc. So it’s perfect for stateless applications. Of course, in the real world we need a way to store our data, and we need this data to be persistent in time. You have alread had a first contact with PersistentVolumes in JTC02, but now let’s have a closer look on how how can we dynamically create PersistentVolumes and deploy a Wordpress/MySQL Application with dynamic persistent storage.
+
+![PVC](https://niklaushirt.github.io/images/pvc1.png)
+
+### Persistent Volumes - Refresher
+
+As stated above, the state of a `Pod` is destroyed with it, so it’s lost. For a database we need to be able to keep the data between restarts of the `Pods`.
+
+That’s where the `PersistentVolume` comes in.
+
+As we have seen, a `Pod` as something that requests CPU & RAM.
+
+A `PersistentVolume` as something that provides a storage on disk. Kubernetes handles a lot of different kinds of volumes. From local disk storage to s3, over 25 as of this writing.
+
+First we create the `PersistentVolume` where our data will be stored. It is a piece of storage in the cluster that has been provisioned by a cluster administrator or a dynamic provisioner. It is a resource in the cluster just like a node is a resource of the cluster.
+
+Copy
+
+     
+    apiVersion: v1
+    kind: PersistentVolume
+    metadata:
+      name: mysql-pv-volume
+    spec:
+      capacity:
+        storage: 1Gi
+      accessModes:
+        - ReadWriteOnce
+      hostPath:
+        path: "/mnt/data"
+    
+    
+
+Let’s review some parameters:
+
+*   `capacity`: the capacity of the volume
+    *   `storage`: the volume size - here `1Gb`
+*   `accessModes`: how this volume will be accessed, here ReadWriteOnce
+    *   `ReadWriteOnce`: the volume can be mounted as read-write by a single node
+    *   `ReadOnlyMany`: the volume can be mounted read-only by many nodes
+    *   `ReadWriteMany`: the volume can be mounted as read-write by many nodes
+*   `hostPath`: where the storage will be stored on the host, here `/mnt/data` (this is specific to the storage type)
+
+`hostPath` is a simple type of `Volume` but you should **never** use it in production environements because it is unable to move between Nodes!
+
+### PersistentVolumeClaims - Refresher
+
+Now that we have a storage, we need to claim it, make it available for our `Pods`. So we need a `PersistentVolumeClaim`. It is a request for storage by a user. It is similar to a pod. Pods consume node resources and `PersistentVolumeClaim` consume `PersistentVolume` resources.
+
+A `PersistentVolumeClaim` as something that requests a storage on disk and makes it available for the `Pod` think of it as an abstraction over the hard drives of the Kubernetes nodes - a fancy name for local hard drive.
+
+## Create a Persistent Volume Claim
+
+In this example we are going to create a PersistentVolumeClaim (PVC) that consumes the Block StorageClass.
+
+1.  Create the PVC
+    
+    Copy
+    
+         
+        apiVersion: v1
+        kind: PersistentVolumeClaim
+        metadata:
+        	name: simple-test-pvc
+        spec:
+        	accessModes:
+        		- ReadWriteMany 
+        	resources:
+        		requests:
+        			storage: 50Mi
+        	
+        
+    
+    Create it by running:
+    
+    Copy
+    
+         
+        kubectl create -f ~/training/volumes/simple-pvc.yaml
+        	
+        
+    
+        > persistentvolumeclaim/simple-test-pvc created
+        
+    
+2.  Check the PersistentVolumeClaim
+    
+    The STATUS must be `Bound`, which means that there has been a PersistentVolume created dynamically
+    
+    Copy
+    
+         
+        kubectl get pvc
+        	
+        
+    
+        > NAME            STATUS   VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS      AGE
+        > simple-test-pvc   Bound    pvc-ff3c6664-9d71-42e1-b403-277b3fcd532f   50Mi       RWX            standard           2s
+        
+    
+3.  Check the PersistentVolume
+    
+    The PersistentVolume has been created dynamically
+    
+    Copy
+    
+         
+        kubectl get pv
+        	
+        
+    
+        > NAME                                       CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS   CLAIM                   STORAGECLASS      REASON   AGE
+        > pvc-ff3c6664-9d71-42e1-b403-277b3fcd532f   50Mi       RWX            Delete           Bound    default/simple-test-pvc   standard                    48s
+        
+    
+4.  Cleanup: Delete the PersistentVolumeClaim
+    
+    Copy
+    
+         
+        kubectl delete pvc ~/training/volumes/simple-pvc.yaml
+        	
+        
+    
+        > persistentvolumeclaim "ceph-test-pvc" deleted
+        
+    
+5.  Check the PersistentVolume
+    
+    The PersistentVolume has been deleted automatically as well
+    
+    Copy
+    
+         
+        kubectl get pv
+        	
+        
+    
+        > No resources found in default namespace.
+        
+    
+
+## Dynamic Minikube default provisioner
+
+StorageClasses are at the heart of dynamic provisioning. By asking declaratively for a type of storage, your Dynamic Provisioner can decide how to fulfill that storage at runtime. This is what allows your application to run exactly the same on minikube as it would on other clouds or Container Management platforms.
+
+Minikube works with dynamic provisioning **out of the box.** And that the way it works is by defining a **provisioner.** In the example before we have seen that we can create a PersistentVolumeClaim without specifying a StorageClass. In this case the default StorageClass is chosen and the PersistentVolume is being created automatically.
+
+1.  List the available StorageClasses
+    
+    Copy
+    
+         
+        kubectl get sc
+        	
+        
+    
+        > NAME                         PROVISIONER                RECLAIMPOLICY   VOLUMEBINDINGMODE   ALLOWVOLUMEEXPANSION   AGE
+        > standard (default)           k8s.io/minikube-hostpath   Delete          Immediate           false                  7d20h
+        
+    
+2.  Get the YAML manifets for Minikubes standard StorageClass
+    
+    Copy
+    
+         
+        kubectl get sc standard -o yaml
+        	
+        
+    
+    The output looks something like this:
+    
+    Copy
+    
+         
+        apiVersion: storage.k8s.io/v1
+        kind: StorageClass
+        metadata:
+        	annotations:
+        		storageclass.kubernetes.io/is-default-class: "true"
+        	...
+        	name: standard
+        	...
+        provisioner: k8s.io/minikube-hostpath
+        reclaimPolicy: Delete
+        volumeBindingMode: Immediate
+        	
+        
+    
+    The important elements are:
+    
+    *   **name** : The name of the StorageClass
+    *   **is-default-class**: Tells the provisionor to use this class if nothing is specified
+    *   **provisioner**: Minikube includes a minikube-hostpath provisioner
+3.  Patch the StorageClass to not be defaulted anymore
+    
+    Copy
+    
+         
+        kubectl patch storageclass standard -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"false"}}}'
+        	
+        
+    
+        > storageclass.storage.k8s.io/standard patched
+        
+    
+4.  Let’s try again to create the PVC
+    
+    Copy
+    
+         
+        kubectl create -f ~/training/volumes/simple-pvc.yaml
+        	
+        
+    
+        > persistentvolumeclaim/simple-test-pvc created
+        
+    
+5.  Check the PersistentVolumeClaim
+    
+    The STATUS will be stuck at `Pending`, because Kubernetes can not determine the StorageClass to use.
+    
+    Copy
+    
+         
+        kubectl get pvc
+        	
+        
+    
+        > NAME            STATUS   VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS      AGE
+        
+    
+6.  Cleanup: Delete the PersistentVolumeClaim
+    
+    Copy
+    
+         
+        kubectl delete pvc ~/training/volumes/simple-pvc.yaml
+        	
+        
+    
+        > persistentvolumeclaim "ceph-test-pvc" deleted
+        
+    
+
+## Create a StorageClass
+
+In this example we are going to create a custom StorageClass called `my-storage-class` by using the Minikube dynamic provisioner.
+
+1.  Create the StorageClass
+    
+    Copy
+    
+         
+        kind: StorageClass
+        apiVersion: storage.k8s.io/v1
+        metadata:
+        	name: my-storage-class
+        	annotations:
+        		storageclass.beta.kubernetes.io/is-default-class: "true"
+        	labels:
+        		addonmanager.kubernetes.io/mode: Reconcile
+        provisioner: k8s.io/minikube-hostpath
+        	
+        
+    
+    Create it by running:
+    
+    Copy
+    
+         
+        kubectl create -f ~/training/volumes/storage-class.yaml
+        	
+        
+    
+        > storageclass.storage.k8s.io/my-storage-class created
+        
+    
+2.  List the StorageClasses
+    
+    Copy
+    
+         
+        kubectl get sc
+        	
+        
+    
+        > NAME                         PROVISIONER                RECLAIMPOLICY   VOLUMEBINDINGMODE   ALLOWVOLUMEEXPANSION   AGE
+        > my-storage-class (default)   k8s.io/minikube-hostpath   Delete          Immediate           false                  43s
+        > standard                     k8s.io/minikube-hostpath   Delete          Immediate           false                  7d21h
+        
+    
+
+We can see that the new StorageClass has been made the default, thanks to the annotation in the YAML manifest.
+
+## Create DB with Persistence
+
+Now let’s create a more complex application that consumes our new StorageClass. For this we use a MySQL/Wordpress Demo modified from the Rook/Ceph Git repository.
+
+First we create the MySQL Deployment.
+
+1.  Create the MySQL Database
+    
+    The manifest that we are going to apply looks like this:
+    
+    Copy
+    
+         
+        apiVersion: v1
+        kind: PersistentVolumeClaim
+        metadata:
+        	name: mysql-pv-claim
+        	labels:
+        		app: wordpress
+        spec:
+        	storageClassName: my-storage-class
+        	accessModes:
+        	- ReadWriteOnce
+        	resources:
+        		requests:
+        			storage: 20Gi
+        ---
+        apiVersion: apps/v1
+        kind: Deployment
+        metadata:
+        	name: wordpress-mysql
+        ...
+        spec:
+        	...
+        	template:
+        		...
+        		spec:
+        			...
+        			containers:
+        			- image: mysql:5.6
+        			...
+        				volumeMounts:
+        				- name: mysql-persistent-storage
+        					mountPath: /var/lib/mysql
+        			volumes:
+        			- name: mysql-persistent-storage
+        				persistentVolumeClaim:
+        					claimName: mysql-pv-claim
+        	
+        
+    
+    This creates a PersistentVolumeClaim called `mysql-pv-claim` that is being mapped into the MySQL Pod at `/var/lib/mysql`.
+    
+    Create it by running:
+    
+    Copy
+    
+         
+        kubectl create -f ~/training/volumes/mysql.yaml 
+        	
+        
+    
+        > service/wordpress-mysql created
+        > persistentvolumeclaim/mysql-pv-claim created
+        > deployment.apps/wordpress-mysql created
+        
+    
+2.  Check the PersistentVolumeClaim
+    
+    The STATUS must be `Bound`, which means that there has been a PersistentVolume created dynamically
+    
+    Copy
+    
+         
+        kubectl get pvc
+        	
+        
+    
+        > NAME            STATUS   VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS      AGE
+        > mysql-pv-claim    Bound     pvc-bccef708-10dc-4c02-992b-556179af3613   20Gi       RWO            standard           42m
+        
+    
+
+## Application with Persistence
+
+Now let’s create the Wordpress Deployment.
+
+1.  Create the MySQL Database
+    
+    The manifest that we are going to apply looks like this:
+    
+    Copy
+    
+         
+        apiVersion: v1
+        kind: PersistentVolumeClaim
+        metadata:
+        	name: wp-pv-claim
+        	labels:
+        		app: wordpress
+        spec:
+        	storageClassName: my-storage-class
+        	accessModes:
+        	- ReadWriteOnce
+        	resources:
+        		requests:
+        			storage: 20Gi
+        ---
+        apiVersion: apps/v1
+        kind: Deployment
+        metadata:
+        	name: wordpress
+        	labels:
+        		app: wordpress
+        		tier: frontend
+        spec:
+        	...
+        	template:
+        		...
+        		spec:
+        			containers:
+        			- image: wordpress:4.6.1-apache
+        				name: wordpress
+        				volumeMounts:
+        				- name: wordpress-persistent-storage
+        					mountPath: /var/www/html
+        			volumes:
+        			- name: wordpress-persistent-storage
+        				persistentVolumeClaim:
+        					claimName: wp-pv-claim
+        	
+        
+    
+    This creates a PersistentVolumeClaim called `wp-pv-claim` that is being mapped into the Wordpress Pod at `/var/www/html`.
+    
+    Create it by running:
+    
+    Copy
+    
+         
+        kubectl create -f ~/training/volumes/wordpress.yaml 
+        	
+        
+    
+        > service/wordpress created
+        > persistentvolumeclaim/wp-pv-claim created
+        > deployment.apps/wordpress created
+        
+    
+2.  Check the PersistentVolumeClaim
+    
+    The STATUS must be `Bound` on both PersistentVolumeClaims.
+    
+    Copy
+    
+         
+        kubectl get pvc
+        	
+        
+    
+        > NAME            STATUS   VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS      AGE
+        > mysql-pv-claim    Bound     pvc-bccef708-10dc-4c02-992b-556179af3613   20Gi       RWO            standard           42m
+        > wp-pv-claim       Bound     pvc-004f32e0-4a2c-447a-ae27-f7cd63ea9689   20Gi       RWO            standard           41m
+        
+    
+3.  You can now open Workdpress and play around a bit
+    
+    Copy
+    
+         
+        minikube service wordpress
+        	
+        
+    
+
+## Check persisted files
+
+Let’s have a look on how and where the data is being persisted.
+
+1.  Examine the PersistentVolumes
+    
+    Copy
+    
+         
+        kubectl get pv -o yaml
+        	
+        
+    
+    You’ll get something like this for the two PVs:
+    
+    Copy
+    
+         
+        ...
+        - apiVersion: v1
+        	kind: PersistentVolume
+        	metadata:
+        		...
+        	spec:
+        		accessModes:
+        		- ReadWriteOnce
+        		capacity:
+        			storage: 20Gi
+        		claimRef:
+        			apiVersion: v1
+        			kind: PersistentVolumeClaim
+        			name: mysql-pv-claim
+        			namespace: default
+        			resourceVersion: "112147"
+        			uid: bccef708-10dc-4c02-992b-556179af3613
+        		hostPath:
+        			path: /tmp/hostpath-provisioner/pvc-bccef708-10dc-4c02-992b-556179af3613
+        			type: ""
+        		persistentVolumeReclaimPolicy: Delete
+        		storageClassName: standard
+        		volumeMode: Filesystem
+        	...
+        	
+        
+    
+    The interesting part is the hostPath (/tmp/hostpath-provisioner/pvc-bccef708-10dc-4c02-992b-556179af3613). This is where the data for this PersistentVolume is stored.
+    
+2.  Copy the path.
+    
+3.  SSH into Minikube
+    
+    Copy
+    
+         
+        minikube ssh
+        	
+        
+    
+4.  Go to the storage location
+    
+    Copy
+    
+         
+        cd /tmp/hostpath-provisioner/pvc-bccef708-10dc-4c02-992b-556179af3613
+        	
+        
+    
+5.  Have a look at the files (can be MySQL or Workdpress, depending on the PV that you selected)
+    
+    Copy
+    
+         
+        ls
+        	
+        
+    
+        > auto.cnf  ib_logfile0  ib_logfile1  ibdata1  mysql  performance_schema  wordpress
+        
+    
+
+> Congratulations!!! This concludes the Lab

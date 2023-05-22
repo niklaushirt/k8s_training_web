@@ -1,0 +1,129 @@
+---
+title: "Kubernetes Basics"
+---
+
+
+## Kubernetes - benefits
+
+Kubernetes, also known as K8s, is an open-source container orchestration platform that automates the deployment, scaling, and management of containerized applications. 
+
+Developed by Google as part of the Borg project and handed off to the open source community in 2015, 
+
+Kubernetes has become the de facto standard for container orchestration, bringing significant value to organizations adopting container technologies.
+
+The value of Kubernetes can be attributed to the following benefits:
+
+1.  **Simplified Management**: Kubernetes abstracts the underlying infrastructure, allowing developers and operators to focus on deploying and managing applications without worrying about the complexities of container orchestration. It provides a rich set of features for deploying, updating, and scaling applications, making it easier to manage containerized workloads.
+    
+2.  **Scalability**: Kubernetes supports horizontal scaling, allowing applications to automatically scale up or down based on demand. This ensures optimal resource utilization and enhances application performance, especially during peak loads.
+    
+3.  **High Availability**: Kubernetes can detect and respond to failures, automatically restarting failed containers, rescheduling them to different nodes, and maintaining the desired state for your applications. This ensures that applications remain highly available and resilient, even in the face of infrastructure failures or other issues.
+    
+4.  Load Balancing: Kubernetes provides built-in load balancing and service discovery, automatically distributing traffic to containers based on their available resources and health status. This enhances application performance, resilience, and availability.
+    
+5.  **Multi-cloud and Hybrid-cloud Support**: Kubernetes can run on-premises, in the public cloud, or in hybrid environments, enabling organizations to adopt a multi-cloud strategy that best meets their needs. This flexibility allows organizations to avoid vendor lock-in and optimize costs, performance, and compliance.
+    
+6.  **Extensibility**: Kubernetes has a modular and extensible architecture, with a rich ecosystem of third-party tools, plugins, and integrations. This extensibility enables organizations to customize and extend Kubernetes to meet their specific requirements and adapt it to their existing workflows and tools.
+
+Kubernetes is a powerful container orchestration platform that simplifies the deployment, scaling, and management of containerized applications. By providing high availability, scalability, load balancing, multi-cloud support, and extensibility, Kubernetes adds significant value to organizations adopting container technologies, enabling them to build and operate modern, cloud-native applications more efficiently and effectively.
+
+
+## Kubernetes - underlying technology 
+
+Kubernetes works by providing a **declarative approach** to managing containerized applications, using a set of abstractions and resources that simplify the orchestration of complex systems. 
+
+The platform relies on a control loop mechanism to monitor the cluster's **current state and reconcile it with the desired state** defined by users. 
+
+In order to define the desired state, we use Resources (aka Objects). There are a lot of different types of Resources but the most important ones that we will be using are:
+
+*   Pods - Smallest deployment unit, usually runs one Container inside
+*   ReplicaSets - Controls the number of Pods running
+*   Deployment - defines the deployment of a certain Container - creates a ReplicaSet
+*   Service - defines how to expose the Container on the network
+
+![](./../images/kube1.png)
+
+Kubernetes works by using Pods, Deployments, and Services to manage containerized applications in a declarative and automated manner. Pods represent the basic unit for running processes, Deployments manage the lifecycle and desired state of these Pods, and Services provide stable network connectivity and load balancing. Together, these components enable users to deploy, scale, and manage containerized applications efficiently and reliably:
+
+### Pods
+A Pod is the smallest and most basic unit in the Kubernetes object model. It represents a single instance of a running process in a cluster and encapsulates one or more containers that share the same network namespace and storage. Containers within a Pod can communicate with each other using `localhost` and share data through shared volumes. Pods are ephemeral by nature, and when they fail or are terminated, they are not automatically rescheduled or restarted. Instead, higher-level abstractions like Deployments manage their lifecycle.
+    
+### Deployments
+
+A Deployment is a higher-level abstraction that manages the lifecycle of Pods and ensures that the desired number of replicas of an application is running at all times. Deployments can automatically create, update, scale, and delete Pods based on user-defined specifications. When creating a Deployment, you define the desired state (e.g., the container image, the number of replicas, and update strategy) for your application. Kubernetes then manages the underlying Pods to maintain this desired state. This process allows for easy rolling updates, rollbacks, and scaling of your application.
+    
+```yaml
+kind: Deployment
+metadata:
+    name: nginx-deployment
+spec:
+    replicas: 2
+    template:
+        metadata:
+        labels:
+            app: nginx
+        spec:
+        containers:
+        - name: nginx
+            image: nginx:1.7.9
+            ports:
+            - containerPort: 80
+```
+
+​    
+
+![](./../images/kube3.png)
+
+This yaml file defines (amongst others):
+
+| Field                               | Description                                 |
+| ----------------------------------- | ------------------------------------------- |
+| metadata.name                       | Name of the Deployment                      |
+| spec.replicas                       | The number of Pods to run simultaneuosly    |
+| spec.template.spec.containers.image | The Container image to run                  |
+| spec.template.spec.containers.ports | The networking ports that should be exposed |
+
+More information on Deployments can be found [here](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/).
+
+### Services
+
+A Service is a stable and persistent abstraction that provides network connectivity to a group of Pods, either within the cluster or externally. Services allow you to expose your applications to other components or external clients without having to worry about the ephemeral nature of Pods. Kubernetes uses labels and selectors to identify the target Pods for a Service, and it automatically load balances traffic between the matching Pods. Services can be exposed in different ways, such as ClusterIP (internal access within the cluster), NodePort (external access on specific nodes), or LoadBalancer (external access through a cloud provider's load balancer).
+
+With Kubernetes you don’t need to modify your application to use an unfamiliar service discovery mechanism. Kubernetes gives Pods their own IP addresses and a single DNS name for a set of Pods, and can load-balance across them.
+
+
+```yaml
+kind: Service
+metadata:
+    name: nginx-service
+spec:
+    ports:
+    - port: 8000
+    targetPort: 80
+    protocol: TCP
+    selector:
+    app: nginx
+```
+
+![](./../images/kube5.png)
+
+
+This yaml file defines (amongst others):
+
+| Field             | Description                                                  |
+| ----------------- | ------------------------------------------------------------ |
+| metadata.name     | Name of the Service                                          |
+| spec.ports        | Port mapping to be exposed (port 80 of the container is exposed as port 8080) |
+| spec.selector.app | Defines the Deployment to map the Servcie to                 |
+|                   |                                                              |
+
+
+
+More information on Services can be found [here](https://kubernetes.io/docs/concepts/services-networking/service/).
+
+​    
+
+
+
+
+

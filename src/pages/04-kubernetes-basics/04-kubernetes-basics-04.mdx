@@ -1,0 +1,52 @@
+---
+title: "Scale and Update Deployments"
+---
+
+In this lab, you’ll learn how to update the number of instances a deployment has and how to modify the API backend.
+
+> For this lab, you need a running deployment of the `k8sdemo` application from the previous lab. If you deleted it, recreate it.
+
+## 🚀 TASK: Scale apps with replicas
+
+A _replica_ is a copy of a pod that contains a running service. By having multiple replicas of a pod, you can ensure your deployment has the available resources to handle increasing load on your application.
+
+1.  `kubectl` provides a `scale` subcommand to change the size of an existing deployment. Let’s increase our capacity from a single running instance of `k8sdemo` up to 10 instances:
+
+    ```bash
+    kubectl scale --replicas=4 deployment k8sdemo-backend -n default
+    ```
+
+    ```output   
+     > deployment "k8sdemo" scaled
+    ```
+
+Kubernetes will now try to make reality match the desired state of 4 replicas by starting 2 new pods with the same configuration as the first.
+
+1.  To verify that your changes have been rolled out, you can run:
+
+    ```bash
+    kubectl get pods -n default
+    ```
+
+    ```output   
+    > NAME                              READY     STATUS    RESTARTS   AGE
+    > k8sdemo-7d46f69d68-xcgcw          1/1       Running   0          19m
+    > k8sdemo-backend-9c777544b-cp59q   1/1       Running   0          12m
+    > k8sdemo-backend-9c777544b-jqjz9   1/1       Running   0          12m
+    > k8sdemo-backend-9c777544b-lwssx   1/1       Running   0          12m
+    > k8sdemo-backend-9c777544b-t5mlq   1/1       Running   0          12m
+    ```
+
+You should see output listing 4 replicas of your deployment.
+
+6. Forward the local port again to the frontend service in your Cluster:
+    
+    ```bash
+    kubectl port-forward --namespace default $(kubectl get po -n default -l app=k8sdemo | grep k8sdemo | \awk '{print $1;}') 3000:3000
+   ```         
+
+    And then navigating to [http://localhost:3000/](http://localhost:3000/) in your browser.
+    
+4.  If you reload the webpage several times, you should see, tht the IP Address of the backend API Pod is changing between the four Pods that have been spun up.
+    
+8. Hit `CTRL-C` several times to cancel the port forward

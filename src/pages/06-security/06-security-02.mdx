@@ -1,0 +1,300 @@
+---
+title: "Network Policies"
+---
+
+# Network Policies
+
+Kubernetes network policies specify how pods can communicate with other pods and with external endpoints. By default, no network policies are set up. If you have unique security requirements, you can create your own network policies.
+
+The following network traffic is allowed by default:
+
+*   A pod accepts external traffic from any IP address to its NodePort or LoadBalancer service or its Ingress resource.
+*   A pod accepts internal traffic from any other pod in the same cluster.
+*   A pod is allowed outbound traffic to any IP address.
+
+Network policies let you create additional restrictions on what traffic is allowed. For example you may want to restrict external inbound or outbound traffic to certain IP addresses.
+
+For this lab we’ll use a network policy to restrict traffic between pods. Let’s say that we want to limit access to the `k8sdemo-backend` server to just expose the `k8sdemo` application. First we can observe that the `k8sdemo-backend` server is open to any pod by spinning up a Linux shell.
+
+![K8s CNI](./../images/np1.png)
+
+## Network Policies First Steps
+
+* * *
+
+First let’s create a `Pod` that will assist you in testing the reachability of the different elements.
+
+1.  **Open a new Terminal Window or Tab** and run (this can take some time):
+    
+    ```bash
+    kubectl run -it --rm --restart=Never alpine -n default --image=alpine sh
+    ```        	
+        
+    ```output
+    > If you don't see a command prompt, try pressing enter.
+    > / # 
+    ```
+    
+2.  Now from **inside** the Pod run the following commands.
+    
+3.  The `alpine~> prompt` indicates that the commands must be executed inside the running Pod.
+    
+    ```bash
+    alpine~> wget -O-  k8sdemo-backend-service.default.svc:3000
+    ```        	
+        
+    ```output
+    > Connecting to k8sdemo-backend-service.default.svc:3000 (10.103.242.14:3000)
+    > K8s Demo Backend                   100% |**************************************************************|   197  0:00:00 ETA    
+    ```
+
+    You should get the HTML response from the backend server.
+    
+4.  And you should be able to ping external adresses (45.55.44.56 is Google)
+    
+    ```bash
+    alpine~> ping 45.55.44.56
+    ```        	
+        
+    ```output
+    > PING 45.55.44.56 (45.55.44.56): 56 data bytes
+    > 64 bytes from 45.55.44.56: seq=0 ttl=59 time=133.476 ms
+    > 64 bytes from 45.55.44.56: seq=1 ttl=59 time=136.036 ms
+    > 64 bytes from 45.55.44.56: seq=2 ttl=59 time=125.471 ms
+    ```        
+    
+
+![K8s CNI](./../images/np2.png)
+
+## Control incoming traffic
+
+Now let’s create the first `NetworkPolicy` that simply blocks all traffic coming into all pods.
+
+1.  Run the following command
+    
+    ```bash
+    kubectl create -f ~/training/networkpolicies/deny-all-ingress.yaml
+    ```        	
+        
+    
+    This creates the following `NetworkPolicy` which blocks incoming traffic to all Pods.
+    
+    ```yaml
+    apiVersion: networking.k8s.io/v1
+    kind: NetworkPolicy
+    metadata:
+        name: default-deny-ingress
+        namespace: default
+    spec:
+        podSelector: {}
+        policyTypes:
+        - Ingress
+        	
+    ```        
+    
+2.  Now from inside the Pod run:
+    
+    ```bash
+    alpine~> wget -O-  k8sdemo-backend-service.default.svc:3000
+    ```        	
+        
+    ```output
+    > Connecting to k8sdemo-backend-service.default.svc:3000 (10.103.242.14:3000)
+    ...    
+    ```
+
+    You should get no response from `k8sdemo-backend`.
+    
+3.  But you should still be able to ping external adresses
+    
+    ```bash
+    alpine~> ping 45.55.44.56
+    ```        	
+        
+    ```output
+    > PING 45.55.44.56 (45.55.44.56): 56 data bytes
+    > 64 bytes from 45.55.44.56: seq=0 ttl=59 time=133.476 ms
+    > 64 bytes from 45.55.44.56: seq=1 ttl=59 time=136.036 ms
+    > 64 bytes from 45.55.44.56: seq=2 ttl=59 time=125.471 ms
+    ```
+
+    
+4.  Reload the web application. It load but the backend remains unreachable
+    
+    **Testing DEMO\_API STATUS: ERROR Trying to reach backend ….**
+    
+
+We have just blocked all traffic coming into the pods, but not the outgoing.
+
+![K8s CNI](./../images/np3.png)
+
+### Clean-up
+
+Delete the `NetworkPolicy` in order to go back to normal.
+
+```bash
+kubectl delete NetworkPolicy -n default default-deny-ingress
+```
+    
+
+## Control outgoing traffic
+
+Now let’s create a `NetworkPolicy` that simply blocks all outgoing traffic from all pods.
+
+1.  Run the following command
+    
+    ```bash
+    kubectl create -f ~/training/networkpolicies/deny-all-egress.yaml
+    ```        	
+        
+    
+    This creates the following `NetworkPolicy` which blocks all outgoing traffic from an Pod.
+    
+    ```yaml
+    apiVersion: networking.k8s.io/v1
+    kind: NetworkPolicy
+    metadata:
+        name: default-deny-egress
+        namespace: default
+    spec:
+        podSelector: {}
+        policyTypes:
+        - Egress    	
+    ```        
+    
+2.  Now from inside the Pod run:
+    
+    ```bash
+    alpine~> wget -O-  k8sdemo-backend-service.default.svc:3000
+    ```        	
+        
+    ```output
+    > Connecting to k8sdemo-backend-service.default.svc:3000 (10.103.242.14:3000)
+    ...
+    ```        
+    
+    You should get no response from the `k8sdemo-backend` as the web frontend `k8sdemo` outgoing traffic is blocked.
+    
+3.  And you should not be able to ping external adresses as the `alpine` pod outgoing traffic is blocked.
+    
+    ```bash
+    alpine~> ping 45.55.44.56
+    ```        	
+        
+    ```output
+    ...
+    ```
+
+    
+4.  Reload the web application. It should load again, but still with the error from the backend:
+    
+    ```bash
+    **Testing DEMO_API
+    STATUS: ERROR	
+    Trying to reach backend ....**
+    ```
+        
+    
+
+We have just blocked all traffic going out of the pods, but not the incoming.
+
+![K8s CNI](./../images/np4.png)
+
+### Clean-up
+
+Delete the `NetworkPolicy` in order to go back to normal.
+
+```bash
+kubectl delete NetworkPolicy -n default default-deny-egress
+```    
+    
+
+## Control Pod to Pod communication
+
+Now let’s create a `NetworkPolicy` that simply blocks all incoming traffic for the backend (`k8sdemo-backend`) except the one coming from the web frontend (`k8sdemo`).
+
+1.  Run the following command
+    
+    ```bash
+    kubectl create -f ~/training/networkpolicies/deny-except-web.yaml
+    ```        	
+        
+    
+    This creates the following `NetworkPolicy`. This policy allows for all traffic, except incoming for the backend Pod.
+    
+    ```yaml
+    apiVersion: networking.k8s.io/v1
+    kind: NetworkPolicy
+    metadata:
+        name: k8sdemo-web-backend
+        namespace: default
+    spec:
+        podSelector:
+            matchLabels:
+                app: k8sdemo-backend
+        policyTypes:
+        - Ingress
+        ingress:
+        - from:
+            - podSelector:
+                    matchLabels:
+                        app: k8sdemo
+    ```        	
+        
+    
+2.  Now from inside the Pod run:
+    
+    ```bash
+    wget -O-  k8sdemo-backend-service.default.svc:3000
+    ```        	
+        
+    ```output
+    > Connecting to k8sdemo-backend-service.default.svc:3000 (10.103.242.14:3000)
+    ...
+    ```        
+    
+    \`
+    
+    You should get no response from `k8sdemo-backend` as only `k8sdemo` is allowed to access it.
+    
+3.  You should be able to ping external adresses as outgoing traffic is not blocked.
+    
+    ```bash
+    ping 45.55.44.56
+    ```        	
+        
+    ```output
+    > PING 45.55.44.56 (45.55.44.56): 56 data bytes
+    > 64 bytes from 45.55.44.56: seq=0 ttl=59 time=143.152 ms
+    > 64 bytes from 45.55.44.56: seq=1 ttl=59 time=120.875 ms
+    > 64 bytes from 45.55.44.56: seq=2 ttl=59 time=130.981 ms
+    ```
+
+    
+4.  Reload the web application. It should load, without error from the backend:
+    
+    ```output
+        **Testing DEMO_API
+        STATUS: OK	
+        Message from the Backend
+        <Some Message>
+        The IP Address is
+        <IP_ADDRESS>**
+    ```
+
+    
+
+We have just blocked all traffic going to `k8sdemo-backend`, except the one coming from `k8sdemo` thus isolating and securing the communication.
+
+![K8s CNI](./../images/np5.png)
+
+In this Lab we have seen how NetworkPolicies enable us to isolate and control access to and from Pods in the Cluster.
+
+### Clean-up
+
+Delete the `NetworkPolicy` in order to go back to normal.
+
+```bash
+kubectl delete NetworkPolicy -n default k8sdemo-web-backend
+```    
+    

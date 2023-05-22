@@ -1,0 +1,254 @@
+---
+title: "Dynamic NFS provisioning"
+---
+
+
+# Dynamic NFS provisioning
+
+In this Lab we will install, configure and test a dynamic NFS provisioner.
+
+This is the easiest way of implementing dynamic provisioning into a cluster.
+
+There are many more solutions:
+
+*   [Rook/Ceph](https://rook.io/docs/rook/v1.3/ceph-quickstart.html)
+*   [GlusterFS](https://www.gluster.org/)
+*   …
+
+## Prepare Minikube to run dynamic NFS provisioning
+
+1.  Install the NFS server into the VM
+    
+    Copy
+    
+         
+        sudo apt install nfs-kernel-server -y
+        	
+        
+    
+        > Reading package lists... Done
+        > Building dependency tree       
+        > Reading state information... Done
+        ...
+        > Creating config file /etc/default/nfs-kernel-server with new version
+        > Processing triggers for systemd (245.4-4ubuntu3) ...
+        > Processing triggers for man-db (2.9.1-1) ...
+        > Processing triggers for libc-bin (2.31-0ubuntu9) ...
+        
+    
+2.  Create the directory for NFS storage
+    
+    Copy
+    
+         
+        sudo mkdir -p /storage/nfs
+        sudo chown -R nobody:nogroup /storage/nfs
+        sudo chmod 777 /storage/nfs
+        	
+        
+    
+    For production use, this directroy must be included in a backup strategy!
+    
+3.  Make the NFS storage available
+    
+    Copy
+    
+         
+        echo "/storage/nfs *(rw,sync,no_root_squash,no_subtree_check)" | sudo tee --append /etc/exports
+        sudo exportfs -a
+        sudo systemctl restart nfs-kernel-server
+        	
+        
+    
+    For this example we give full access to all IP addresses (\*). **For production use you should limit this!**
+    
+4.  Install the NFS client into the minikube VM
+    
+    Copy
+    
+         
+        minikube ssh "sudo apt update && sudo apt install nfs-common -y"
+        	
+        
+    
+        > Get:1 http://archive.ubuntu.com/ubuntu eoan InRelease [255 kB]
+        > Get:2 http://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/stable/xUbuntu_19.10  InRelease [1628 B]
+        ...
+        > running python post-rtupdate hooks for python3.7...
+        > Processing triggers for libc-bin (2.30-0ubuntu2) ...
+        > Processing triggers for systemd (242-7ubuntu3.7) ...
+        
+    
+5.  Make sure the minikube VM can access the NFS server on the host VM
+    
+    Copy
+    
+         
+        minikube ssh "echo '192.168.122.1   ubuntu' | sudo tee --append /etc/hosts"
+        	
+        
+    
+        > 192.168.122.1   ubuntu
+        
+    
+
+## Create the dynamic provisioner
+
+For this Lab we use the nfs-client dynamic provisioner from the kubernetes-incubator external-storage repository.
+
+nfs-client is an automatic provisioner that uses existing and already configured NFS servers to support dynamic provisioning of Kubernetes Persistent Volumes via Persistent Volume Claims.
+
+The Persistent volumes are provisioned as ${namespace}-${pvcName}-${pvName}.
+
+You can find more information here: [https://github.com/kubernetes-incubator/external-storage/tree/master/nfs-client](https://github.com/kubernetes-incubator/external-storage/tree/master/nfs-client)
+
+1.  Create the NFS dynamic provisioner
+    
+    Copy
+    
+         
+        kubectl apply -f ~/training/volumes/nfs-provisioner.yaml
+        	
+        
+    
+        > storageclass.storage.k8s.io/nfs-client created
+        > serviceaccount/release-name-nfs-client-provisioner created
+        > clusterrole.rbac.authorization.k8s.io/release-name-nfs-client-provisioner-runner created
+        > clusterrolebinding.rbac.authorization.k8s.io/run-release-name-nfs-client-provisioner created
+        > role.rbac.authorization.k8s.io/leader-locking-release-name-nfs-client-provisioner created
+        > rolebinding.rbac.authorization.k8s.io/leader-locking-release-name-nfs-client-provisioner created
+        > deployment.apps/release-name-nfs-client-provisioner created
+        
+        ...
+        
+    
+2.  Wait for the Pod to be in Ready state
+    
+    Copy
+    
+         
+        kubectl get pods
+        	
+        
+    
+        > NAME                                                   READY   STATUS    RESTARTS   AGE
+        > release-name-nfs-client-provisioner-59d648ddbf-gsv5w   1/1     Running   0          40m
+        ...
+        
+    
+3.  Create a test PVC
+    
+    Copy
+    
+         
+        kind: PersistentVolumeClaim
+        apiVersion: v1
+        metadata:
+        	name: test-claim
+        spec:
+        	storageClassName: nfs-client
+        	accessModes:
+        		- ReadWriteMany
+        	resources:
+        		requests:
+        			storage: 1Mi
+        
+        	
+        
+    
+    Copy
+    
+         
+        kubectl apply -f training/volumes/nfs-claim.yaml 
+        	
+        
+    
+        > persistentvolumeclaim/test-claim created
+        
+    
+4.  Check that the PVC is bound
+    
+    Copy
+    
+         
+        kubectl get pvc
+        	
+        
+    
+        > NAME             STATUS   VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS   AGE
+        > test-claim       Bound    pvc-bc0a9cbf-69f0-4461-8ccb-bc5e48cb3201   1Mi        RWX            nfs-client     22s
+        
+    
+
+## Create the application
+
+1.  Create the Wordpress deployment
+    
+    Copy
+    
+         
+        kubectl apply -f training/volumes/nfs-wordpress.yaml
+        	
+        
+    
+        > service/wordpress created
+        > persistentvolumeclaim/wp-pv-claim created
+        > deployment.apps/wordpress created
+        
+    
+2.  Create the MySQL deployment
+    
+    Copy
+    
+         
+        kubectl apply -f training/volumes/nfs-mysql.yaml 
+        	
+        
+    
+        > service/wordpress-mysql created
+        > persistentvolumeclaim/mysql-pv-claim created
+        > deployment.apps/wordpress-mysql created
+        
+    
+3.  Wait for the Pods to be in Ready state
+    
+    Copy
+    
+         
+        kubectl get pods
+        	
+        
+    
+        > NAME                                                   READY   STATUS    RESTARTS   AGE
+        > wordpress-5b886cf59b-6bvgr                             1/1     Running   0          31m
+        > wordpress-mysql-b9ddd6d4c-vjdhd                        1/1     Running   0          30m
+        
+        ...
+        
+    
+4.  Check that the PVC is bound
+    
+    Copy
+    
+         
+        kubectl get pvc
+        	
+        
+    
+        > NAME             STATUS   VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS   AGE
+        > mysql-pv-claim   Bound    pvc-fdd7df13-57b3-4661-b9c9-c27c63e2902e   20Gi       RWO            nfs-client     31m
+        > wp-pv-claim      Bound    pvc-d80af17a-b0d8-4970-b521-a19400e18d0f   20Gi       RWO            nfs-client     32m
+        ...
+        
+    
+5.  Open the app in Firefox
+    
+    Copy
+    
+         
+        minikube service wordpress
+        	
+        
+    
+
+> Congratulations!!! This concludes the Lab

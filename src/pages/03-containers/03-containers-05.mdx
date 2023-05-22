@@ -1,0 +1,58 @@
+---
+title: "Container Registry"
+---
+
+
+![K8s CNI](./../images/cont06.png)
+
+
+## 🚀 TASK: Create a private registry    
+
+1. To pursue this chapter you have to enable the registry in minikube by executing the following:
+
+    ```bash      
+    minikube addons enable registry
+    ```     
+
+
+
+## 🚀 TASK: Push the frontend Image to the registry
+
+
+1.  Let’s tag the image with the address of the local Docker registry (localhost:40451).
+    
+    
+    ```bash      
+    podman tag k8sdemo:lab $(minikube ip):5000/k8sdemo:lab
+    ```     
+        
+    
+2.  Expose the local Docker registry.
+    
+    First execute this in order to be able to access the private registry:
+    
+    
+    ```bash      
+    kubectl port-forward --namespace kube-system $(kubectl get po -n kube-system | grep -v registry-proxy |grep registry | \awk '{print $1;}') 40451:40451  > /dev/null&
+    ```     
+    
+    This exposes the Docker Registry to the Terminal we are using.
+    
+    <InlineNotification kind="info">
+    If you don’t get a command line prompt, press `enter` several times If you get an error stating that the address is already in use you can ignore it
+    </InlineNotification>
+    
+3.  And now push the image to the local registry:
+    
+    
+    ```bash      
+    podman push --tls-verify=false $(minikube ip):5000/k8sdemo:lab
+    ```     
+    
+
+<InlineNotification kind="info">
+
+Now the image is available to be aquired (pulled) from any machine that has access to the Docker registry.
+
+</InlineNotification>
+

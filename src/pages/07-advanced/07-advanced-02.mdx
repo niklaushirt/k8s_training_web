@@ -1,0 +1,220 @@
+---
+title: "Init Containers"
+---
+
+
+Init containers are specialized containers that run before or after app containers in a Pod. They can contain utilities or setup scripts not present in an app image.
+
+Init containers are exactly like regular containers, except:
+
+*   Init containers always run to completion.
+    
+*   Each init container must complete successfully before the next one starts.
+    
+*   If you specify multiple init containers for a Pod, Kubelet runs each init container sequentially.
+    
+*   If a Pod’s init container fails, Kubernetes repeatedly restarts the Pod until the init container succeeds.
+    
+*   Init containers support all the fields and features of app containers, including resource limits, volumes, and security settings, however they do not support lifecycle, livenessProbe, readinessProbe, or startupProbe for obvious reasons.
+    
+    ![](https://niklaushirt.github.io/images/init0.png)
+    
+
+## Init Containers Applied
+
+1.  Run a standard nginx container
+    
+    Copy
+    
+         
+        apiVersion: apps/v1
+        kind: Deployment
+        metadata:
+        	name: nginx-demo
+        	namespace: default
+        	labels:
+        		app: nginx-demo
+        spec:
+        	selector:
+        		matchLabels:
+        			app: nginx-demo
+        	replicas: 1
+        	template:
+        		metadata:
+        			labels:
+        				app: nginx-demo
+        		spec:
+        			containers:
+        			- name: nginx
+        				image: nginx
+        				imagePullPolicy: IfNotPresent 
+        				ports:
+        				- containerPort: 80
+        	
+        
+    
+    Copy
+    
+         
+        kubectl apply -f ./training/initContainers/container.yaml
+        	
+        
+    
+2.  Expose it with a service
+    
+    Copy
+    
+         
+        apiVersion: v1
+        kind: Service
+        metadata:
+        	name: nginx-demo-service
+        spec:
+        	selector:
+        		app: nginx-demo
+        	ports:
+        		- protocol: TCP
+        			port: 8000
+        			targetPort: 80
+        	type: NodePort
+        	
+        
+    
+    Copy
+    
+         
+        kubectl apply -f ./training/initContainers/service.yaml
+        	
+        
+    
+3.  Open the deployment in Firefox
+    
+    Copy
+    
+         
+        minikube service nginx-demo-service
+        	
+        
+    
+    You should see the default nginx welcome page.
+    
+
+TODO
+
+1.  Update the deployment with the init container
+    
+    Copy
+    
+         
+        apiVersion: apps/v1
+        kind: Deployment
+        metadata:
+        	name: nginx-demo-init
+        	namespace: default
+        	labels:
+        		app: nginx-demo
+        spec:
+        	selector:
+        		matchLabels:
+        			app: nginx-demo
+        	replicas: 1
+        	template:
+        		metadata:
+        			labels:
+        				app: nginx-demo
+        		spec:
+        			containers:
+        			- name: nginx
+        				image: nginx
+        				imagePullPolicy: IfNotPresent 
+        				ports:
+        				- containerPort: 80
+        				
+        			#Volume mapped into the nginx pod
+        			volumeMounts:
+        			- name: workdir
+        				mountPath: /usr/share/nginx/html
+        				
+        		#This container is run during pod initialization
+        		initContainers:
+        
+        		#Sleep for 2 Seconds
+        		- name: sleep-1
+        			image: busybox
+        			imagePullPolicy: IfNotPresent
+        			command: ['sh', '-c', 'echo sleep-1 start; sleep 2;echo sleep-1 complete;']
+        		
+        		#Sleep again for 2 Seconds
+        		- name: sleep-2
+        			image: busybox
+        			imagePullPolicy: IfNotPresent
+        			command: ['sh', '-c', 'echo sleep-2 start; sleep 2;echo sleep-2 complete;']
+        		- name: install
+        			image: busybox
+        			
+        		#Download index.html and store into work-dir
+        			command:
+        			- wget
+        			- "-O"
+        			- "/work-dir/index.html"
+        			- http://kubernetes.io
+        			volumeMounts:
+        			- name: workdir
+        				mountPath: "/work-dir"
+        		dnsPolicy: Default
+        		volumes:
+        		- name: workdir
+        			emptyDir: {}
+        	
+        
+    
+    To initialize nginx with some content:
+    
+    *   We create a local volume (work-dir)
+    *   This volume is mapped into the nginx container path (/usr/share/nginx/html) where nginx serves static HTML content from
+    *   An init container (install) that downloads the index.html file from the official Kubernetes webpage and stores it into the volume
+    
+    Copy
+    
+         
+        kubectl apply -f ./training/initContainers/init-container.yaml
+        	
+        
+    
+2.  Refresh the page in Firefox
+    
+    You should see the Kubernetes page that has been downloaded by the init container.
+    
+
+## Init Containers Examined
+
+Now let’s have a look at what has happened in the background.
+
+1.  Start `k9s` and select the nginx-demo-init Pod and hit enter
+    
+    ![](https://niklaushirt.github.io/images/init1.png)
+    
+2.  Select the install Container and hit enter
+    
+    ![](https://niklaushirt.github.io/images/init2.png)
+    
+3.  You can see that the shell command has downloaded the html code into the work-dir volume.
+    
+    ![](https://niklaushirt.github.io/images/init3.png)
+    
+4.  Hit `ESC` to go back and select the nginx Container and hit enter
+    
+    ![](https://niklaushirt.github.io/images/init5.png)
+    
+5.  Nginx is serving the index.html page from the work-dir volume.
+    
+    ![](https://niklaushirt.github.io/images/init4.png)
+    
+6.  If you go back with `ESC` you can also have a look at how the two other containers have slept ;-)
+    
+    ![](https://niklaushirt.github.io/images/init5.png)
+    
+7.  Quit k9s by hitting `Ctrl-C` several times
+    
+
+> Congratulations!!! This concludes the Lab

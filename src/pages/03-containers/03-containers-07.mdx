@@ -1,0 +1,49 @@
+---
+title: "Use Portainer"
+---
+## 🚀 TASK: Use Portainer
+
+Portainer Community Edition is a powerful, open-source management toolset that allows you to easily build, manage and maintain containers environments.
+
+1.  Start Portainer
+
+    ```bash
+    podman run -d -p 8000:8000 -p 9001:9000 --rm --name=portainer -v portainer_data:/data --privileged -v /run/podman/podman.sock:/var/run/docker.sock:Z portainer/portainer-ce:2.17.0-alpine 
+    ```
+
+    ```output   
+    >  Resolving "portainer/portainer-ce" using unqualified-search registries (/etc/containers/registries.conf.d/999-podman-machine.conf)
+    >  Trying to pull docker.io/portainer/portainer-ce:2.17.0-alpine...
+    >  Getting image source signatures
+    >  Copying blob sha256:1c3167974473c6834ececbae7112adc1a6c5f9e9fb3a92351c80c036bdc2eaf7
+    >  Copying blob sha256:a9eaa45ef418e883481a13c7d84fa9904f2ec56789c52a87ba5a9e6483f2b74f
+    >  Copying config sha256:1e1bda2ba49d558aa02c475ea99b4dcdda624749e8d6206a5337059c1010bd3b
+    >  Writing manifest to image destination
+    >  Storing signatures
+    >  09997a40c7a9cda69ada31377ed88df7390fa3fb0fd3e561fe587559dcbcb0e9
+    ```
+
+
+2.  Open Portainer on http://localhost:9001/ or by [clicking here](http://localhost:9001/) 
+
+3.  Define your admin Login
+
+4.  Click `Get Started`
+
+5.  Select `local` for our Endpoint
+    
+    ![K8s CNI](./../images/cont02.png)
+    
+    Now you get an overview of your local Docker instance.
+    
+4.  Select `Containers`
+    
+    ![K8s CNI](./../images/cont03.png)
+    
+5.  You get a list of all running containers and you can see our `k8sdemo-backend` container running.
+    
+    ![K8s CNI](./../images/cont03.1.png)
+    
+6.  Click on the PublishedPorts 3001:3000 to open the backend web interface.
+    
+7. From here you can access the logs of container, create a shell or just simply stop it

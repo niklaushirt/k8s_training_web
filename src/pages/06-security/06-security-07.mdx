@@ -1,0 +1,185 @@
+---
+title: "Image Scanning"
+---
+
+
+
+## Deploy Clair
+
+In this chapter we will deploy the Clair image scanner and scan an example image.
+
+[Clair](https://github.com/quay/clair) is an open source project for the static analysis of vulnerabilities in application containers (currently including appc and docker).
+
+1.  In regular intervals, Clair ingests vulnerability metadata from a configured set of sources and stores it in the database.
+2.  Clients use the Clair API to index their container images; this creates a list of features present in the image and stores them in the database.
+3.  Clients use the Clair API to query the database for vulnerabilities of a particular image; correlating vulnerabilities and features is done for each request, avoiding the need to rescan images.
+4.  When updates to vulnerability metadata occur, a notification can be sent to alert systems that a change has occurred.
+
+To make things easier we will use the [Klar](https://github.com/optiopay/klar) command line tool to interact with the Clair engine.
+
+### Install the Klar command line tool
+
+```bash
+#Linux
+wget https://github.com/optiopay/klar/releases/download/v2.4.0/klar-2.4.0-linux-amd64
+sudo chmod +x klar-2.4.0-linux-amd64
+sudo mv klar-2.4.0-linux-amd64 /usr/local/bin/klar
+
+#Mac
+wget https://github.com/optiopay/klar/releases/download/v2.4.0/klar-2.4.0-osx-amd64
+sudo chmod +x klar-2.4.0-osx-amd64
+sudo mv klar-2.4.0-osx-amd64 /usr/local/bin/klar
+```    
+
+​
+
+### Deploy Clair into the Kubernetes Cluster
+
+1.  Go to the directory with the clair resources
+    
+    ```bash
+    cd ~/training/clair
+    ```        	
+        
+    
+2.  Create the Secret that holds the Clair configuration
+    
+    ```bash
+    kubectl create secret generic clairsecret --from-file=./config.yaml
+    ```        	
+        
+    ```output
+    > from-file=./config.yaml
+    > secret/clairsecret created
+    ```        
+    
+3.  Deploy Clair
+    
+    ```bash
+    kubectl create -f clair-kubernetes.yaml
+    ```        	
+        
+    ```output
+    > service/clairsvc created
+    > replicationcontroller/clair created
+    > replicationcontroller/clair-postgres created
+    > service/postgres created
+    ```
+
+    
+4.  Wait for Clair to be running (Ready is 1/1)
+    
+    ```bash
+    kubectl get pods
+    ```        	
+        
+    ```output
+    > NAME                   READY   STATUS              RESTARTS   AGE
+    > clair-jcb6r            1/1     Running             0          17s
+    > clair-postgres-2rbgj   1/1     Running             0          17s
+    ```        
+    
+
+## Use Klar to scan an Image
+
+Klar is a simple tool to analyze images stored in a private or public Docker registry for security vulnerabilities using Clair. Klar is designed to be used integrated in other CI/CD tools. It’s a single binary which requires no dependencies.
+
+Klar returns:
+
+*   0 if the number of detected high severity vulnerabilities in an image is less than or equal to a threshold
+*   1 if there were more.
+*   2 if an error has prevented the image from being scanned
+
+1.  Get the Cluster IP (MY-CLUSTER-IP)
+        
+    
+    ```bash
+    minikube ip
+    ```        	
+        
+    
+        
+    
+2.  Execute the following command
+    
+    ```bash
+    CLAIR_ADDR=<MY-CLUSTER-IP>:30060 FORMAT_OUTPUT=table CLAIR_OUTPUT=High klar niklaushirt/k8sdemo:1.0.1 	
+    ```
+    
+    ```output
+    > clair timeout 1m0s
+    > docker timeout: 1m0s
+    > no whitelist file
+    > Analysing 14 layers
+    > Got results from Clair API v1
+    > Found 597 vulnerabilities
+    > Unknown: 176
+    > Negligible: 284
+    > Low: 135
+    > Medium: 2
+    ```output
+        
+    
+    We define several things here:
+    
+    *   `CLAIR_ADDR` : the address of the Clair server
+    *   `FORMAT_OUTPUT` : the format for the output (table in this example)
+    *   `CLAIR_OUTPUT` : output only vulnerabilities above or equal
+    
+    The output shows that there are no HIGH severity vulerabilities.
+    
+    > **Initialization of Clair takes some time!** If the output shows a completely different count than in this example you have to wait for Clair to ingest all security rules first.
+    
+3.  Now let’s execute it again with a lower OUTPUT (Medium)
+    
+    ```bash
+    CLAIR_ADDR=<MY-CLUSTER-IP>:30060 FORMAT_OUTPUT=table CLAIR_OUTPUT=Medium klar niklaushirt/k8sdemo:1.0.1
+    ```        	
+        
+    ```output
+    > clair timeout 1m0s
+    > docker timeout: 1m0s
+    > no whitelist file
+    > Analysing 14 layers
+    > Got results from Clair API v1
+    > Found 597 vulnerabilities
+    > Unknown: 176
+    > Negligible: 284
+    > Low: 135
+    > Medium: 2
+    
+    > +----------+---------------+-------------+----------------+---------+--------------------------------	> +-----------------------------------------------------------+
+    > | SEVERITY | NAME          | FEATURENAME | FEATUREVERSION | FIXEDBY | DESCRIPTION                    | LINK                                                      	> |
+    > +----------+---------------+-------------+----------------+---------+--------------------------------	> +-----------------------------------------------------------+
+    > | Medium   | CVE-2009-3546 | libwmf      | 0.2.8.4-10.6   |         | The _gdGetColors function      | https://security-tracker.debian.org/tracker/CVE-2009-3546 |
+    > |          |               |             |                |         | in gd_gd.c in PHP 5.2.11 and   |                                                           	> |
+    > |          |               |             |                |         | 5.3.x before 5.3.1, and the    |                                                           	> |
+    > |          |               |             |                |         | GD Graphics Library 2.x, does  |                                                           	> |
+    ...
+    > |          |               |             |                |         | from third party information.  |                                                           	> |
+    > +----------+---------------+-------------+----------------+---------+--------------------------------	> +-----------------------------------------------------------+
+    > | Medium   | CVE-2007-3996 | libwmf      | 0.2.8.4-10.6   |         | Multiple integer overflows     | https://security-tracker.debian.org/tracker/CVE-2007-3996 |
+    > |          |               |             |                |         | in libgd in PHP before 5.2.4   |                                                           	> |
+    > |          |               |             |                |         | allow remote attackers to      |                                                           	> |
+    ...
+    > |          |               |             |                |         | function.                      |                                                           	> |
+    > +----------+---------------+-------------+----------------+---------+--------------------------------	> +-----------------------------------------------------------+
+    ```    
+        
+    
+
+The output shows the detail for the two vulnerabilities with Medum severity.
+
+You can also output the result to JSON Format to be reused in a CI/CD tool.
+
+
+
+<InlineNotification kind="success">
+
+**You have successfully finished this Lab**
+
+You are now done with the chapter on Kubernetes Basics.
+
+Please continue to the next Lab.
+
+</InlineNotification>

@@ -1,0 +1,325 @@
+---
+title: "Stateful Deployments"
+---
+
+As you know a `Pod` is mortal, meaning it can be destroyed by Kubernetes anytime, and with it it’s local data, memory, etc. So it’s perfect for stateless applications. Of course, in the real world we need a way to store our data, and we need this data to be persistent in time.
+
+So let’s have a look on how how can we deploy a stateful application with a persistent storage in Kubernetes?
+
+For this Lab we will deploy a mysql application.
+
+## 🚀 TASK: Create Persistent Volumes
+
+As stated above, the state of a `Pod` is destroyed with it, so it’s lost. For a database we need to be able to keep the data between restarts of the `Pods`.
+
+That’s where the `PersistentVolume` comes in.
+
+As we have seen, a `Pod` as something that requests CPU & RAM.
+
+A `PersistentVolume` as something that provides a storage on disk. Kubernetes handles a lot of different kinds of volumes. From local disk storage to s3, over 25 types as of this writing.
+
+First we create the `PersistentVolume` where our mysql data will be stored. It is a piece of storage in the cluster that has been provisioned by a cluster administrator. It is a resource in the cluster just like a node is a resource of the cluster.
+
+```yaml
+    apiVersion: v1
+    kind: PersistentVolume
+    metadata:
+      name: mysql-pv-volume
+    spec:
+      capacity:
+        storage: 1Gi
+      accessModes:
+        - ReadWriteOnce
+      hostPath:
+        path: "/mnt/data"
+```    
+
+Let’s review some parameters:
+
+*   `capacity`: the capacity of the volume
+    *   `storage`: the volume size - here `1Gb`
+*   `accessModes`: how this volume will be accessed, here ReadWriteOnce
+    *   `ReadWriteOnce`: the volume can be mounted as read-write by a single node
+    *   `ReadOnlyMany`: the volume can be mounted read-only by many nodes
+    *   `ReadWriteMany`: the volume can be mounted as read-write by many nodes
+*   `hostPath`: where the storage will be stored on the host, here `/mnt/data` (this is specific to the storage type)
+
+We will use `hostPath` for this example, it is a simple type of `Volume` but you should **never ever** use it in production environements! Seriously!
+
+1.  Create the PersistentVolume
+    
+    ```bash
+    kubectl apply -f ./volumes/1-simple-mysql-pv.yaml
+    ```
+
+    ```output   
+    > persistentvolume/mysql-pv-volume created 
+    ```    
+    
+2.  Check that the Volume has been created
+    
+    ```bash
+    kubectl get pv
+    ```
+
+    ```output   
+    > NAME              CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS      CLAIM   STORAGECLASS   REASON   AGE
+    > mysql-pv-volume   1Gi        RWO            Retain           Available                                   4s
+    ```      
+    
+
+## 🚀 TASK: Create PersistentVolumeClaims
+
+Now that we have a storage, we need to claim it, make it available for our `Pods`. So we need a `PersistentVolumeClaim`. It is a request for storage by a user. It is similar to a pod. Pods consume node resources and `PersistentVolumeClaim` consume `PersistentVolume` resources.
+
+A `PersistentVolumeClaim` as something that requests a storage on disk and makes it available for the `Pod` think of it as an abstraction over the hard drives of the Kubernetes nodes - a fancy name for local hard drive.
+
+The manifest for the `PersistentVolumeClaim` is quite similar to the `PersistentVolume`:
+
+```yaml
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+    name: mysql-pv-claim
+spec:
+    accessModes:
+    - ReadWriteOnce
+    resources:
+    requests:
+        storage: 1Gi
+```    
+
+1.  Create the PersistentVolume
+    
+    ```bash
+    kubectl apply -f ./volumes/2-simple-mysql-pvc.yaml
+    ```
+
+    ```output   
+    > persistentvolumeclaim/mysql-pv-claim created
+    ```        
+    
+2.  Check that the Volume has been created. Make sure that the STATUS reads Bound!
+    
+    ```bash
+    kubectl get pvc
+    ```
+
+    ```output   
+    > NAME             STATUS   VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS   AGE
+    > mysql-pv-claim   Bound    pvc-918d5a94-06c7-11ea-80af-080027c4f0ca   1Gi        RWO            standard       5s
+    ```
+    
+
+## 🚀 TASK: Create the stateful deployment
+
+Now let’s create the stateful `deployment` for mysql.
+
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: mysql
+spec:
+    selector:
+    matchLabels:
+    app: mysql
+    template:
+    metadata:
+    labels:
+​    app: mysql
+    spec:
+    containers:
+​  - image: mysql:5.6
+​     name: mysql
+​     env:
+​      - name: MYSQL_ROOT_PASSWORD
+​       value: password
+​     ports:
+​      - containerPort: 3306
+​       name: mysql
+​     volumeMounts:
+​       - name: mysql-persistent-storage
+​       mountPath: /var/lib/mysql
+    volumes:
+​     - name: mysql-persistent-storage
+​     persistentVolumeClaim:
+​      claimName: mysql-pv-claim
+```    
+
+We define several things here:
+
+*   `env`: the list of environment variables to pass to the container
+    
+    *   `name`: the name of the env variable
+    *   `value`: the value of the env variable Here we pass the mysql root password to the container
+*   `volumeMounts`: the volumes, that will be mapped into the container
+    
+    *   `name`: the name of the volume to mount
+    *   `mountPath`: where in the container to mount the volume Here we map out the path where mysql stores its database files
+*   `volumes`: the volumes to request access to
+    
+    *   `name`: the name of the volume, same as `volumeMounts.name`
+    *   `persistentVolumeClaim`: the PersistentVolumeClaim we want
+        *   `claimName`: the name of the claim
+
+1.  Create the `Deployment` (this creates the deployment as well as the service to access the mysql container)
+    
+    ```bash
+    kubectl apply -f ./volumes/3-simple-mysql-deployment.yaml
+    ```
+
+    ```output   
+    > deployment.apps/mysql created
+    > service/mysql created
+    ```
+
+2.  Verify that the `Deployment` has been created and is running (READY must be 1/1)
+    
+    ```bash
+    kubectl get deployment
+    ```
+
+    ```output   
+    > NAME    READY   UP-TO-DATE   AVAILABLE   AGE
+    > mysql   0/1     1            0           8s
+    ```yaml
+    
+
+## 🚀 TASK: Access the mysql database
+
+1.  Now let’s access the mysql container by running a mysql client in a temporary container:
+    
+    ```bash
+    kubectl run -it --rm --image=mysql:8.0 --restart=Never mysql-client -- mysql -h mysql -ppassword
+    ```
+
+    If you don't see a command prompt, try pressing enter.
+    
+    ```bash
+    mysql> 
+    ```
+    
+2.  Create a new database in mysql:
+    
+    ```bash
+    mysql> CREATE DATABASE testing;
+    ```
+
+    ```output   
+    > Query OK, 1 row affected (0.01 sec)
+    ```
+
+    
+3.  Check that it has been created
+    
+    ```bash
+    mysql> show databases;
+    ```
+
+    ```output   
+    > +--------------------+
+    > | Database           |
+    > +--------------------+
+    > | information_schema |
+    > | mysql              |
+    > | performance_schema |
+    > | testing            |
+    > +--------------------+
+    > 4 rows in set (0.00 sec)
+    ```        
+    
+4.  Exit the mysql client
+    
+    ```bash
+    mysql> exit
+    ```
+
+    ```output   
+    > Bye
+    > pod "mysql-client" deleted
+    ```
+
+5.  Get the list of Pods
+    
+    ```bash
+    kubectl get pods
+    ```
+
+    ```output   
+    > NAME                     READY   STATUS    RESTARTS   AGE
+    > mysql-7b9b7999d8-v4r5l   1/1     Running   0          4m26s
+    ```
+
+6.  Delete the Pod (you’ll have to use the name of your Pod, which is dynamic)
+    
+    ```bash
+    kubectl delete pod mysql-7b9b7999d8-v4r5l
+    ```
+
+    ```output   
+    > pod "mysql-7b9b7999d8-v4r5l" deleted
+    ```
+
+7.  A new Pod has been spun up
+    
+    ```bash
+    kubectl get pods
+    ```
+
+    ```output   
+    > NAME                     READY   STATUS    RESTARTS   AGE
+    > mysql-7b9b7999d8-vqln7   1/1     Running   0          18s
+    ```
+
+8.  Recreate a mysql client
+    
+    ```bash
+    kubectl run -it --rm --image=mysql:5.6 --restart=Never mysql-client -- mysql -h mysql -ppassword
+    ```
+
+    If you don't see a command prompt, try pressing enter.
+    
+    ```bash
+    mysql> 
+    ```
+
+9.  Verify that the database testing is still there because it has been persisted in the PV through the PVC.
+    
+    ```bash
+    mysql> show databases;
+    ```
+
+    ```output   
+    > +--------------------+
+    > | Database           |
+    > +--------------------+
+    > | information_schema |
+    > | mysql              |
+    > | performance_schema |
+    > | testing            |
+    > +--------------------+
+    > 4 rows in set (0.00 sec)
+    ```
+
+    
+10.  Exit the mysql client
+    
+    ```bash
+    mysql> exit
+    ```
+
+    ```output   
+    > Bye
+    > pod "mysql-client" deleted
+    ```        
+    
+
+## Conclusion
+
+*   We have created a PersistentVolume that represents physical storage in the Kubernetes cluster.
+*   We have created a PersistentVolumeClaim that maps this volume like a virtual harddisk and makes it available to Pods
+*   We have created a mysql deployment that persists its data to the PersistentVolume
+*   We have connected to the mysql instance and created a new database within
+*   We have killed the mysql Pod, which would normally make it loose the data (the new database)
+*   We have reconnected to the mysql instance to verify that the newly created database is still present
