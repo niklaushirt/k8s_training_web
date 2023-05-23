@@ -10,7 +10,6 @@ const FirstRightText = () => (
   <p>
   <p> Welcome to my Kubernetes Training.</p>
 
-  <p> I have developed them over the last year and have held several online and in-person meetups to teach fellow geeks about the awesome world of containers and orchestration.</p>
   <p> </p>
 
   <p> ©2023 Niklaus Hirt</p>
@@ -30,6 +29,7 @@ const SecondRightText = () => (
   <li>Containers Basics</li>
   <li>Kubernetes Basics</li>
   <li>Mesh Networking</li>
+  <li>Kubernetes Security Basics</li>
   
   </p>
 );
