@@ -84,7 +84,7 @@ In this example we are going to create a PersistentVolumeClaim (PVC) that consum
     Copy
     
          
-        kubectl create -f ./training/volumes/simple-pvc.yaml
+        kubectl create -f ./volumes/simple-pvc.yaml
         	
         
     
@@ -126,7 +126,7 @@ In this example we are going to create a PersistentVolumeClaim (PVC) that consum
     Copy
     
          
-        kubectl delete pvc ./training/volumes/simple-pvc.yaml
+        kubectl delete pvc ./volumes/simple-pvc.yaml
         	
         
     
@@ -217,7 +217,7 @@ Minikube works with dynamic provisioning **out of the box.** And that the way 
     Copy
     
          
-        kubectl create -f ./training/volumes/simple-pvc.yaml
+        kubectl create -f ./volumes/simple-pvc.yaml
         	
         
     
@@ -243,7 +243,7 @@ Minikube works with dynamic provisioning **out of the box.** And that the way 
     Copy
     
          
-        kubectl delete pvc ./training/volumes/simple-pvc.yaml
+        kubectl delete pvc ./volumes/simple-pvc.yaml
         	
         
     
@@ -277,7 +277,7 @@ In this example we are going to create a custom StorageClass called `my-storage
     Copy
     
          
-        kubectl create -f ./training/volumes/storage-class.yaml
+        kubectl create -f ./volumes/storage-class.yaml
         	
         
     
@@ -359,7 +359,7 @@ First we create the MySQL Deployment.
     Copy
     
          
-        kubectl create -f ./training/volumes/mysql.yaml 
+        kubectl create -f ./volumes/mysql.yaml 
         	
         
     
@@ -441,7 +441,7 @@ Now let’s create the Wordpress Deployment.
     Copy
     
          
-        kubectl create -f ./training/volumes/wordpress.yaml 
+        kubectl create -f ./volumes/wordpress.yaml 
         	
         
     

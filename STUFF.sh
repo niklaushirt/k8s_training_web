@@ -11,7 +11,7 @@ tar xfvz istio-1.17.2-osx-arm64.tar.gz
 export PATH=./istio-1.17.2/bin:$PATH
      
 istioctl install --set profile=demo
-kubectl apply -f ./training/istio/samples/addons
+kubectl apply -f ./istio/samples/addons
 kubectl rollout status deployment/kiali -n istio-system
 
 
@@ -49,7 +49,7 @@ curl http://$(minikube ip):5000/v2/_catalog
 
 
 minikube start --memory=6000 --cpus=4  --kubernetes-version v1.25.3
-kubectl apply -f ./training/tools/kube-registry.yaml > /dev/null
+kubectl apply -f ./tools/kube-registry.yaml > /dev/null
 kubectl port-forward --namespace kube-system $(kubectl get po -n kube-system | grep kube-registry-v0 | \awk '{print $1;}') 5000:5000  > /dev/null &
 
 

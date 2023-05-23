@@ -4,12 +4,17 @@ title: "Installing Istio"
 
 In this module, you download and install Istio.
 
+<InlineNotification kind="warning">
+
+Make sure you are in the `training` directory!
+
+</InlineNotification>
+
 ## 🚀 TASK: Install Istio 
 
 1.  Execute the following command to get the latest ISTIO source:
     
     ```bash       
-    cd ~/training
     
     #Linux (Lab VM)
     wget https://github.com/istio/istio/releases/download/1.17.2/istio-1.17.2-linux-amd64.tar.gz
@@ -27,7 +32,7 @@ In this module, you download and install Istio.
 2.  Add the `istioctl` client to your executables.
     
     ```bash       
-    export PATH=./training/istio-1.17.2/bin:$PATH
+    export PATH=./istio-1.17.2/bin:$PATH
     ```        
         
     

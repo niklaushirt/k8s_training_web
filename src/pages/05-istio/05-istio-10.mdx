@@ -4,16 +4,16 @@ title: "Cleanup"
 
 
 
-*   To delete the BookInfo app and its route-rules: `./training/istio/samples/bookinfo/platform/kube/cleanup.sh`
+*   To delete the BookInfo app and its route-rules: `./istio/samples/bookinfo/platform/kube/cleanup.sh`
     
 *   To delete Istio from your cluster
     
     ```bash
-    kubectl delete -f ./training/istio/createTraffic.yaml
-    kubectl delete -f ./training/istio/samples/bookinfo/platform/kube/bookinfo.yaml
-    kubectl delete -f  ./training/istio/samples/bookinfo/networking/bookinfo-gateway.yaml
-    kubectl delete -f ./training/istio/samples/bookinfo/networking/destination-rule-reviews.yaml
-    kubectl delete -f ./training/istio/samples/bookinfo/networking/virtual-service-reviews-80-20.yaml
+    kubectl delete -f ./istio/createTraffic.yaml
+    kubectl delete -f ./istio/samples/bookinfo/platform/kube/bookinfo.yaml
+    kubectl delete -f ./istio/samples/bookinfo/networking/bookinfo-gateway.yaml
+    kubectl delete -f ./istio/samples/bookinfo/networking/destination-rule-reviews.yaml
+    kubectl delete -f ./istio/samples/bookinfo/networking/virtual-service-reviews-80-20.yaml
     
     istioctl manifest generate --set profile=demo | kubectl delete -f -
     

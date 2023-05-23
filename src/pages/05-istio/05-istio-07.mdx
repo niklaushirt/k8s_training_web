@@ -42,14 +42,14 @@ For this lab we use the test tokens from [https://raw.githubusercontent.com/ist
     minikube ip
     ```        
     
-        	
+        	$(minikube ip)
         
     
 2.  Try to access the productpage:
     
     ```bash
-    export INGRESS_HOST=http://MY-CLUSTER-IP:30762
-    curl $INGRESS_HOST/productpage -s -o /dev/null -w "%{http_code}\n"
+    export INGRESS_HOST=http://$(minikube ip):30762
+    curl localhost:8080/productpage -s -o /dev/null -w "%{http_code}\n"
     ```
         
     ```output
@@ -73,7 +73,7 @@ For this lab we use the test tokens from [https://raw.githubusercontent.com/ist
                 istio: ingressgateway
         jwtRules:
         - issuer: "testing@secure.istio.io"
-            jwksUri: "https://raw.githubusercontent.com/istio/istio/release-1.6/security/tools/jwt/samples/jwks.json"
+          jwksUri: "https://raw.githubusercontent.com/istio/istio/release-1.6/security/tools/jwt/samples/jwks.json"
     EOF
     ```        
     

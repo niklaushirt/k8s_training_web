@@ -4,15 +4,21 @@ title: "Prerequisites"
 
 # Preparation
 
+<InlineNotification kind="warning">
+
+Make sure you are in the `training` directory!
+
+</InlineNotification>
+
 1.  Open a Terminal window by clicking on the Termnial icon in the left sidebar - we will use this extensively later as well
     
 2.  Start the demo application
     
     ```bash
-    kubectl create -f ./training/deployment/demoapp.yaml
-    kubectl create -f ./training/deployment/demoapp-service.yaml
-    kubectl create -f ./training/deployment/demoapp-backend.yaml
-    kubectl create -f ./training/deployment/demoapp-backend-service.yaml
+    kubectl create -f ./deployment/demoapp.yaml
+    kubectl create -f ./deployment/demoapp-service.yaml
+    kubectl create -f ./deployment/demoapp-backend.yaml
+    kubectl create -f ./deployment/demoapp-backend-service.yaml
     ```
         
     

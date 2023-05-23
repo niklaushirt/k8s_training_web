@@ -38,7 +38,7 @@ This step shows you how to configure where you want your service requests to go 
 Before moving on, we have to define the destination rules. The destination rules tell Istio what versions (subsets in Istio terminology) are available for routing. This step is required before fine-grained traffic shaping is possible.
 
 ```bash
-kubectl apply -f ./training/istio/samples/bookinfo/networking/destination-rule-reviews.yaml
+kubectl apply -f ./istio/samples/bookinfo/networking/destination-rule-reviews.yaml
 ```
 
 ```output
@@ -60,7 +60,7 @@ Set Default Routes to `reviews-v1` for all microservices
 This would set all incoming routes on the services (indicated in the line `destination: <service>`) to the deployment with a tag `version: v1`. To set the default routes, run:
 
 ```bash
-kubectl create -f ./training/istio/samples/bookinfo/networking/virtual-service-all-v1.yaml
+kubectl create -f ./istio/samples/bookinfo/networking/virtual-service-all-v1.yaml
 ```
 
 ```output
@@ -100,7 +100,7 @@ This will direct/switch all incoming traffic to version v2 of the reviews micros
 Copy
 
      
-    kubectl apply -f ./training/istio/samples/bookinfo/networking/virtual-service-all-v2.yaml
+    kubectl apply -f ./istio/samples/bookinfo/networking/virtual-service-all-v2.yaml
       
     
 
@@ -141,7 +141,7 @@ This is indicated by the `weight: 80 and 20` in the yaml file.
 > Using `replace` should allow you to edit existing route-rules.
 
 ```bash
-kubectl apply -f ./training/istio/samples/bookinfo/networking/virtual-service-reviews-80-20.yaml
+kubectl apply -f ./istio/samples/bookinfo/networking/virtual-service-reviews-80-20.yaml
 ```
     
 
@@ -228,7 +228,7 @@ This would set the route for the user `jason` (You can login as _jason_ with
 Run:
 
 ```bash
-kubectl apply -f ./training/istio/samples/bookinfo/networking/virtual-service-reviews-jason-v2-v3.yaml
+kubectl apply -f ./istio/samples/bookinfo/networking/virtual-service-reviews-jason-v2-v3.yaml
 ```
     
 
