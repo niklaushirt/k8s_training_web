@@ -8,8 +8,15 @@ Portainer Community Edition is a powerful, open-source management toolset that a
 1.  Start Portainer
 
     ```bash
-    podman run -d -p 8000:8000 -p 9001:9000 --rm --name=portainer -v portainer_data:/data --privileged -v /run/podman/podman.sock:/var/run/docker.sock:Z portainer/portainer-ce:2.17.0-alpine 
+    podman run -d -p 8000:8000 -p 9001:9000 --rm --name=portainer -v portainer_data:/data --privileged -v /var/run/docker.sock:/var/run/docker.sock portainer/portainer-ce 
     ```
+
+    Or if you get an error try: 
+
+    ```bash
+    podman run -d -p 8000:8000 -p 9001:9000 --rm --name=portainer -v portainer_data:/data --privileged -v /run/podman/podman.sock:/var/run/docker.sock:Z portainer/portainer-ce
+    ```
+
 
     ```output   
     >  Resolving "portainer/portainer-ce" using unqualified-search registries (/etc/containers/registries.conf.d/999-podman-machine.conf)
