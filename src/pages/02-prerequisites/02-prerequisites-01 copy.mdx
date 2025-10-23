@@ -45,43 +45,20 @@ If Minikube is not an option you can use OpenShift Local or any other Kubernetes
     brew install kubernetes-cli
     ```
 
-2. Install Podman and Podman Desktop
+2. Install Podman
 
-    <a href="https://podman-desktop.io/downloads/macos" target="_blank" >🌏 Detailed Documentation for the Task</a>
-
-    Download the App and install manually or
+    <a href="https://podman.io/getting-started/installation" target="_blank" >🌏 Detailed Documentation for the Task</a>
 
     ```bash
-    brew install --cask podman-desktop
+    brew install podman
     ```
 
-3. Start Podman from the command line
+3. Start Podman
 
     ```bash
-    export CONTAINERS_MACHINE_PROVIDER=applehv
     podman machine init --cpus 4 --memory 6666
     podman machine start
     ```
-
-
-    <InlineNotification kind="warning">
-
-    If you get errors regarding 'krunkit' binary, make sure that you select the Apple Hypervisor as runtime.
-
-    </InlineNotification>
-
-
-3. Start Podman from the Podman Desktop
-
-    - Open Podman Desktop
-    - Go to **Settings** 
-    - Click **Create New** under Podman
-    - Make sure you select `Apple Hypervisor` under **Provider type**
-    - Hit **Create**
-
-
-    ![K8s CNI](./../images/podman1.png)
-
 
 
 4. Install Minikube
@@ -100,7 +77,6 @@ If Minikube is not an option you can use OpenShift Local or any other Kubernetes
         minikube start --driver=podman --container-runtime=containerd
         ```
 
-    or use the Podman Desktop.
 
 
 5. Install some addons we will need later

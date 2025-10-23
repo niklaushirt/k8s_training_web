@@ -17,22 +17,22 @@ Make sure you are in the `training` directory!
     ```bash       
     
     #Linux (Lab VM)
-    wget https://github.com/istio/istio/releases/download/1.17.2/istio-1.17.2-linux-amd64.tar.gz
-    tar xfvz istio-1.17.2-linux-amd64.tar.gz     
+    wget https://github.com/istio/istio/releases/download/1.27.3/istio-1.27.3-linux-amd64.tar.gz
+    tar xfvz istio-1.27.3-linux-amd64.tar.gz     
     
     #Mac
-    wget https://github.com/istio/istio/releases/download/1.17.2/istio-1.17.2-osx.tar.gz
-    tar xfvz istio-1.17.2-osx.tar.gz
+    wget https://github.com/istio/istio/releases/download/1.27.3/istio-1.27.3-osx.tar.gz
+    tar xfvz istio-1.27.3-osx.tar.gz
     
     #Windows
-    Download https://github.com/istio/istio/releases/download/1.17.2/istio-1.17.2-win.zip
+    Download https://github.com/istio/istio/releases/download/1.27.3/istio-1.27.3-win.zip
     ```      
         
     
 2.  Add the `istioctl` client to your executables.
     
     ```bash       
-    export PATH=./istio-1.17.2/bin:$PATH
+    export PATH=./istio-1.27.3/bin:$PATH
     ```        
         
     
@@ -44,7 +44,7 @@ Make sure you are in the `training` directory!
     ```
 
     ```output   
-    > This will install the Istio 1.17.2 demo profile with ["Istio core" "Istiod" "Ingress gateways" "Egress gateways"] components into the cluster. Proceed? (y/N) y
+    > This will install the Istio 1.27.3 demo profile with ["Istio core" "Istiod" "Ingress gateways" "Egress gateways"] components into the cluster. Proceed? (y/N) y
     > ✔ Istio core installed
     >  Processing resources for Istiod. Waiting for Deployment/istio-system/istiod
     > ...
@@ -82,19 +82,19 @@ Make sure you are in the `training` directory!
     
 ## 🚀 TASK: Install Addons
 
-1.  Run the following
+6.  Run the following
 
     ```shell script
-    kubectl apply -f ./istio-1.17.2/samples/addons/grafana.yaml
-    kubectl apply -f ./istio-1.17.2/samples/addons/prometheus.yaml
-    kubectl apply -f ./istio-1.17.2/samples/addons/jaeger.yaml
-    kubectl apply -f ./istio-1.17.2/samples/addons/kiali.yaml
+    kubectl apply -f ./istio-1.27.3/samples/addons/grafana.yaml
+    kubectl apply -f ./istio-1.27.3/samples/addons/prometheus.yaml
+    kubectl apply -f ./istio-1.27.3/samples/addons/jaeger.yaml
+    kubectl apply -f ./istio-1.27.3/samples/addons/kiali.yaml
 
     ```
 
 
 
-1.  Ensure the corresponding pods are all in **`Running`** state before you continue.
+7.  Ensure the corresponding pods are all in **`Running`** state before you continue.
     
     ```bash
     kubectl get pods -n istio-system
@@ -110,6 +110,16 @@ Make sure you are in the `training` directory!
     > kiali-6f457f5964-pvjw5                  1/1     Running   0          21m
     > prometheus-7f54ff69cd-lf4xz             2/2     Running   0          21m
     ```
+
+
+<InlineNotification kind="warning">
+
+If you get Image Inspection errors, please follow this solution:
+
+https://podman-desktop.io/docs/containers/registries#setting-up-a-registry-with-an-insecure-certificate
+
+</InlineNotification>
+
 
 ## 🚀 TASK: Make Istio Ingress available
 

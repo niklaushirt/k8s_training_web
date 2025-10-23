@@ -11,7 +11,7 @@ In this part, we will be using the sample BookInfo Application that comes as def
 Envoys are deployed as sidecars on each microservice. Injecting Envoy into your microservice means that the Envoy sidecar would manage the ingoing and outgoing calls for the service. To inject an Envoy sidecar to an existing microservice configuration, do:
 
 ```bash
-kubectl apply -f ./istio-1.17.2/samples/bookinfo/platform/kube/bookinfo.yaml
+kubectl apply -f ./istio-1.27.3/samples/bookinfo/platform/kube/bookinfo.yaml
 ```
 
 ```output   
@@ -47,7 +47,7 @@ An Ingress Gateway resource can be created to allow external requests through th
 Create an Istio ingress gateway to access your services over a public IP address.
     
 ```bash
-kubectl apply -f ./istio-1.17.2/samples/bookinfo/networking/bookinfo-gateway.yaml
+kubectl apply -f ./istio-1.27.3/samples/bookinfo/networking/bookinfo-gateway.yaml
 ```
 
 ```output   
